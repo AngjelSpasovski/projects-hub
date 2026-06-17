@@ -1,23 +1,152 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
+import { Dialog } from 'primeng/dialog';
+import { MultiSelect } from 'primeng/multiselect';
 
+import { LanguageService } from '../../core/services/language.service';
+import { PortfolioProject } from '../../core/models/project.model';
 import { PROJECTS } from '../projects/project-registry';
 
 type DashboardViewMode = 'big' | 'list' | 'detailed';
+type DashboardSortMode = 'title' | 'category' | 'status' | 'updated';
+
+interface FilterOption {
+  labelKey: string;
+  value: string;
+}
+
+interface TagOption {
+  label: string;
+  value: string;
+}
+
+const VIEW_MODE_STORAGE_KEY = 'projects-hub-dashboard-view-mode';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [RouterLink, TranslatePipe],
+  imports: [Dialog, FormsModule, MultiSelect, RouterLink, TranslatePipe],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
+  private readonly languageService = inject(LanguageService);
+  private readonly translate = inject(TranslateService);
+
   readonly projects = PROJECTS;
-  readonly viewMode = signal<DashboardViewMode>('big');
+  readonly searchTerm = signal('');
+  readonly selectedCategory = signal('all');
+  readonly selectedTags = signal<string[]>([]);
+  readonly sortMode = signal<DashboardSortMode>('title');
+  readonly viewMode = signal<DashboardViewMode>(this.getInitialViewMode());
+  readonly previewProject = signal<PortfolioProject | null>(null);
+
+  readonly categoryOptions = computed<FilterOption[]>(() => [
+    { labelKey: 'FILTERS.ALL_CATEGORIES', value: 'all' },
+    ...Array.from(new Set(this.projects.map((project) => project.categoryKey)))
+      .sort((first, second) => this.translateKey(first).localeCompare(this.translateKey(second)))
+      .map((categoryKey) => ({ labelKey: categoryKey, value: categoryKey }))
+  ]);
+
+  readonly tagOptions = computed<TagOption[]>(() =>
+    Array.from(new Set(this.projects.flatMap((project) => project.tags)))
+      .sort()
+      .map((tag) => ({ label: tag, value: tag }))
+  );
+
+  readonly filteredProjects = computed(() => {
+    this.languageService.activeLanguage();
+
+    const query = this.searchTerm().trim().toLowerCase();
+    const category = this.selectedCategory();
+    const selectedTags = this.selectedTags();
+    const sortMode = this.sortMode();
+
+    return [...this.projects]
+      .filter((project) => this.matchesSearch(project, query))
+      .filter((project) => category === 'all' || project.categoryKey === category)
+      .filter((project) => selectedTags.length === 0 || selectedTags.every((tag) => project.tags.includes(tag)))
+      .sort((first, second) => this.compareProjects(first, second, sortMode));
+  });
 
   setViewMode(viewMode: DashboardViewMode): void {
     this.viewMode.set(viewMode);
+    localStorage.setItem(VIEW_MODE_STORAGE_KEY, viewMode);
+  }
+
+  updateSearchTerm(value: string): void {
+    this.searchTerm.set(value);
+  }
+
+  updateSelectedCategory(value: string): void {
+    this.selectedCategory.set(value);
+  }
+
+  updateSelectedTags(value: string[]): void {
+    this.selectedTags.set(value);
+  }
+
+  updateSortMode(value: string): void {
+    this.sortMode.set(value as DashboardSortMode);
+  }
+
+  resetFilters(): void {
+    this.searchTerm.set('');
+    this.selectedCategory.set('all');
+    this.selectedTags.set([]);
+    this.sortMode.set('title');
+  }
+
+  openPreview(project: PortfolioProject): void {
+    this.previewProject.set(project);
+  }
+
+  closePreview(): void {
+    this.previewProject.set(null);
+  }
+
+  private getInitialViewMode(): DashboardViewMode {
+    const savedViewMode = localStorage.getItem(VIEW_MODE_STORAGE_KEY);
+    return savedViewMode === 'big' || savedViewMode === 'list' || savedViewMode === 'detailed' ? savedViewMode : 'big';
+  }
+
+  private matchesSearch(project: PortfolioProject, query: string): boolean {
+    if (!query) {
+      return true;
+    }
+
+    return [
+      this.translateKey(project.titleKey),
+      this.translateKey(project.summaryKey),
+      this.translateKey(project.categoryKey),
+      project.status,
+      ...project.tags
+    ]
+      .join(' ')
+      .toLowerCase()
+      .includes(query);
+  }
+
+  private compareProjects(first: PortfolioProject, second: PortfolioProject, sortMode: DashboardSortMode): number {
+    if (sortMode === 'updated') {
+      return second.updatedAt.localeCompare(first.updatedAt);
+    }
+
+    if (sortMode === 'status') {
+      return first.status.localeCompare(second.status);
+    }
+
+    if (sortMode === 'category') {
+      return this.translateKey(first.categoryKey).localeCompare(this.translateKey(second.categoryKey));
+    }
+
+    return this.translateKey(first.titleKey).localeCompare(this.translateKey(second.titleKey));
+  }
+
+  private translateKey(key: string): string {
+    return String(this.translate.instant(key));
   }
 }

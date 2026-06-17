@@ -1,0 +1,33 @@
+<section class="calculator-page surface-panel">
+  <div class="project-copy">
+    <p class="eyebrow">{{ 'PROJECTS.CALCULATOR.TITLE' | translate }}</p>
+    <h2>{{ 'CALCULATOR.TITLE' | translate }}</h2>
+    <p>{{ 'CALCULATOR.DESCRIPTION' | translate }}</p>
+
+    <ul>
+      <li>{{ 'CALCULATOR.FEATURES.ARITHMETIC' | translate }}</li>
+      <li>{{ 'CALCULATOR.FEATURES.KEYBOARD' | translate }}</li>
+      <li>{{ 'CALCULATOR.FEATURES.ERRORS' | translate }}</li>
+    </ul>
+  </div>
+
+  <div class="calculator" [attr.aria-label]="'CALCULATOR.TITLE' | translate">
+    <div class="display">
+      <div class="expression">{{ expression || 'CALCULATOR.READY' | translate }}</div>
+      <output>{{ displayValue }}</output>
+    </div>
+
+    <div class="keypad">
+      @for (button of buttons; track button.value) {
+        <button
+          type="button"
+          class="calculator-key"
+          [class]="button.className"
+          (click)="handleButton(button)"
+        >
+          {{ button.label }}
+        </button>
+      }
+    </div>
+  </div>
+</section>

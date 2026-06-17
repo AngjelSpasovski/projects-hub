@@ -20,22 +20,22 @@ This checklist tracks the path from the current skeleton to a portfolio-ready pr
 - [ ] Add polished active, hover, loading, and empty states.
 - [ ] Decide final typography, spacing scale, and color tokens.
 - [ ] Replace temporary SVG covers with final project screenshots or generated covers.
-- [ ] Add PrimeNG modal/dialog pattern for project previews.
+- [x] Add PrimeNG modal/dialog pattern for project previews.
 
 ## Project Catalog
 
-- [ ] Add search by project name, technology, and category.
-- [ ] Add category filters.
-- [ ] Add tag filters using PrimeNG MultiSelect.
-- [ ] Add sort options for name, status, category, and last updated.
-- [ ] Add metadata fields for GitHub link, live demo link, difficulty, and date.
-- [ ] Persist selected catalog view mode in localStorage.
+- [x] Add search by project name, technology, and category.
+- [x] Add category filters.
+- [x] Add tag filters using PrimeNG MultiSelect.
+- [x] Add sort options for name, status, category, and last updated.
+- [x] Add metadata fields for GitHub link, live demo link, difficulty, and date.
+- [x] Persist selected catalog view mode in localStorage.
 
 ## Project Migration
 
-- [ ] Define a repeatable folder template for each mini project.
+- [x] Define a repeatable folder template for each mini project.
 - [ ] Migrate Tic Tac Toe.
-- [ ] Migrate Calculator.
+- [x] Migrate Calculator.
 - [ ] Migrate Hang Man.
 - [ ] Migrate Weather App.
 - [ ] Migrate Music Event App.
@@ -46,7 +46,7 @@ This checklist tracks the path from the current skeleton to a portfolio-ready pr
 
 - [ ] Add shared UI components for page headers, project cards, badges, and modals.
 - [ ] Add shared form validation helpers.
-- [ ] Add route-level lazy loading for project components when the catalog grows.
+- [x] Add route-level lazy loading for project components when the catalog grows.
 - [ ] Add project detail routes with real project components.
 - [ ] Add error boundaries or fallback states for API-based projects.
 - [ ] Review bundle size and optimize Bootstrap/PrimeNG imports.
@@ -56,23 +56,23 @@ This checklist tracks the path from the current skeleton to a portfolio-ready pr
 - [x] Convert Macedonian translation to Cyrillic.
 - [x] Move visible project catalog text into translation files.
 - [ ] Add translation keys for every new component as it is created.
-- [ ] Add a missing-translation review before release.
+- [x] Add a missing-translation review before release.
 
 ## Testing
 
 - [x] Keep the root app unit test passing.
-- [ ] Add dashboard catalog unit tests.
-- [ ] Add theme service unit tests.
-- [ ] Add language service unit tests.
-- [ ] Add project registry validation tests.
+- [x] Add dashboard catalog unit tests.
+- [x] Add theme service unit tests.
+- [x] Add language service unit tests.
+- [x] Add project registry validation tests.
 - [ ] Add basic end-to-end smoke test for navigation and view switching.
 
 ## Git And Release
 
-- [ ] Make the initial commit.
-- [ ] Create the remote GitHub repository.
-- [ ] Push the main branch.
+- [x] Make the initial commit.
+- [x] Create the remote GitHub repository.
+- [x] Push the main branch.
 - [ ] Add repository description and topics on GitHub.
-- [ ] Add a polished root README.
+- [x] Add a polished root README.
 - [ ] Add deployment workflow when hosting is chosen.
 - [ ] Add the final repository link to the portfolio.

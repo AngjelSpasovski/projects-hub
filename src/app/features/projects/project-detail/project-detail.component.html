@@ -11,9 +11,54 @@
       <h2>{{ selectedProject.titleKey | translate }}</h2>
       <p>{{ selectedProject.summaryKey | translate }}</p>
 
+      <dl class="project-meta">
+        <div>
+          <dt>{{ 'PROJECT.META.STATUS' | translate }}</dt>
+          <dd>{{ ('PROJECT.STATUS.' + selectedProject.status.toUpperCase()) | translate }}</dd>
+        </div>
+        <div>
+          <dt>{{ 'PROJECT.META.DIFFICULTY' | translate }}</dt>
+          <dd>{{ ('PROJECT.DIFFICULTY.' + selectedProject.difficulty.toUpperCase()) | translate }}</dd>
+        </div>
+        <div>
+          <dt>{{ 'PROJECT.META.CREATED' | translate }}</dt>
+          <dd>{{ selectedProject.createdAt }}</dd>
+        </div>
+        <div>
+          <dt>{{ 'PROJECT.META.UPDATED' | translate }}</dt>
+          <dd>{{ selectedProject.updatedAt }}</dd>
+        </div>
+      </dl>
+
       <div class="tags">
         @for (tag of selectedProject.tags; track tag) {
           <span>{{ tag }}</span>
+        }
+      </div>
+
+      <div class="project-actions">
+        @if (selectedProject.repositoryUrl) {
+          <a class="btn btn-primary btn-sm" [href]="selectedProject.repositoryUrl" target="_blank" rel="noopener">
+            <i class="pi pi-github"></i>
+            <span>{{ 'PROJECT.REPOSITORY' | translate }}</span>
+          </a>
+        } @else {
+          <button type="button" class="btn btn-sm btn-icon" disabled>
+            <i class="pi pi-github"></i>
+            <span>{{ 'PROJECT.REPOSITORY_PENDING' | translate }}</span>
+          </button>
+        }
+
+        @if (selectedProject.demoUrl) {
+          <a class="btn btn-primary btn-sm" [href]="selectedProject.demoUrl" target="_blank" rel="noopener">
+            <i class="pi pi-desktop"></i>
+            <span>{{ 'PROJECT.DEMO' | translate }}</span>
+          </a>
+        } @else {
+          <button type="button" class="btn btn-sm btn-icon" disabled>
+            <i class="pi pi-desktop"></i>
+            <span>{{ 'PROJECT.DEMO_PENDING' | translate }}</span>
+          </button>
         }
       </div>
 

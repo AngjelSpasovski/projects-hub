@@ -25,6 +25,25 @@
     "TITLE": "Project Catalog",
     "VIEW_MODE": "View mode"
   },
+  "FILTERS": {
+    "ALL_CATEGORIES": "All categories",
+    "CATEGORY": "Category",
+    "EMPTY": "No options found",
+    "NO_RESULTS_TEXT": "Change the search, category, or tags to show projects again.",
+    "NO_RESULTS_TITLE": "No projects match these filters",
+    "RESET": "Reset",
+    "RESULTS": "{{count}} project(s)",
+    "SEARCH": "Search",
+    "SEARCH_PLACEHOLDER": "Search projects, tags, or categories",
+    "SORT": "Sort",
+    "SORT_CATEGORY": "Category",
+    "SORT_STATUS": "Status",
+    "SORT_TITLE": "Name",
+    "SORT_UPDATED": "Last updated",
+    "TAGS": "Tags",
+    "TAGS_PLACEHOLDER": "Select tags",
+    "TITLE": "Catalog filters"
+  },
   "CATEGORIES": {
     "API": "API",
     "EVENTS": "Events",
@@ -53,11 +72,37 @@
       "SUMMARY": "Event listing concept for modals, multi-select filters, and detailed list views."
     }
   },
+  "CALCULATOR": {
+    "DESCRIPTION": "A focused calculator project built as a standalone Angular component with keyboard support and safe arithmetic state.",
+    "FEATURES": {
+      "ARITHMETIC": "Addition, subtraction, multiplication, division, decimals, percent, and sign toggle.",
+      "ERRORS": "Division by zero is handled with a visible error state.",
+      "KEYBOARD": "Keyboard shortcuts work for digits, operators, Enter, Escape, decimal, and percent."
+    },
+    "READY": "Ready",
+    "TITLE": "Interactive Calculator"
+  },
   "PROJECT": {
     "BACK": "Back to catalog",
+    "DEMO": "Live demo",
+    "DEMO_PENDING": "Demo pending",
+    "DIFFICULTY": {
+      "ADVANCED": "Advanced",
+      "BEGINNER": "Beginner",
+      "INTERMEDIATE": "Intermediate"
+    },
+    "META": {
+      "CREATED": "Created",
+      "DIFFICULTY": "Difficulty",
+      "STATUS": "Status",
+      "UPDATED": "Updated"
+    },
     "NOT_FOUND": "Project not found",
     "OPEN": "Open",
     "PLACEHOLDER": "The real Angular component for this project will live here.",
+    "PREVIEW": "Preview",
+    "REPOSITORY": "Repository",
+    "REPOSITORY_PENDING": "Repo pending",
     "STATUS": {
       "MIGRATION": "Migration",
       "PLANNED": "Planned",

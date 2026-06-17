@@ -9,17 +9,27 @@ export const PROJECTS: PortfolioProject[] = [
     tags: ['Angular', 'TypeScript', 'State'],
     status: 'planned',
     image: 'assets/project-covers/tic-tac-toe.svg',
-    route: '/admin/projects/tic-tac-toe'
+    route: '/admin/projects/tic-tac-toe',
+    updatedAt: '2026-06-17',
+    createdAt: '2026-06-17',
+    difficulty: 'beginner',
+    repositoryUrl: null,
+    demoUrl: null
   },
   {
     id: 'calculator',
     titleKey: 'PROJECTS.CALCULATOR.TITLE',
     summaryKey: 'PROJECTS.CALCULATOR.SUMMARY',
     categoryKey: 'CATEGORIES.UTILITIES',
-    tags: ['Forms', 'SCSS', 'Validation'],
-    status: 'planned',
+    tags: ['Angular', 'TypeScript', 'Keyboard', 'SCSS'],
+    status: 'ready',
     image: 'assets/project-covers/calculator.svg',
-    route: '/admin/projects/calculator'
+    route: '/admin/projects/calculator',
+    updatedAt: '2026-06-17',
+    createdAt: '2026-06-17',
+    difficulty: 'beginner',
+    repositoryUrl: null,
+    demoUrl: null
   },
   {
     id: 'hang-man',
@@ -29,7 +39,12 @@ export const PROJECTS: PortfolioProject[] = [
     tags: ['Animations', 'i18n', 'Game UI'],
     status: 'planned',
     image: 'assets/project-covers/hang-man.svg',
-    route: '/admin/projects/hang-man'
+    route: '/admin/projects/hang-man',
+    updatedAt: '2026-06-17',
+    createdAt: '2026-06-17',
+    difficulty: 'intermediate',
+    repositoryUrl: null,
+    demoUrl: null
   },
   {
     id: 'weather',
@@ -39,7 +54,12 @@ export const PROJECTS: PortfolioProject[] = [
     tags: ['HTTP', 'Bootstrap', 'PrimeNG'],
     status: 'planned',
     image: 'assets/project-covers/weather.svg',
-    route: '/admin/projects/weather'
+    route: '/admin/projects/weather',
+    updatedAt: '2026-06-17',
+    createdAt: '2026-06-17',
+    difficulty: 'intermediate',
+    repositoryUrl: null,
+    demoUrl: null
   },
   {
     id: 'music-event',
@@ -49,6 +69,11 @@ export const PROJECTS: PortfolioProject[] = [
     tags: ['PrimeNG', 'Modals', 'Filters'],
     status: 'planned',
     image: 'assets/project-covers/music-event.svg',
-    route: '/admin/projects/music-event'
+    route: '/admin/projects/music-event',
+    updatedAt: '2026-06-17',
+    createdAt: '2026-06-17',
+    difficulty: 'intermediate',
+    repositoryUrl: null,
+    demoUrl: null
   }
 ];

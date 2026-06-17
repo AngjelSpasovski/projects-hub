@@ -41,6 +41,63 @@ h2 {
   white-space: nowrap;
 }
 
+.catalog-controls {
+  align-items: end;
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: minmax(14rem, 1.4fr) repeat(3, minmax(10rem, 1fr)) auto;
+  padding: 1rem;
+}
+
+.control-field {
+  display: grid;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.control-field > span:first-child {
+  color: var(--app-text-muted);
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.input-shell {
+  align-items: center;
+  display: flex;
+  position: relative;
+}
+
+.input-shell i {
+  color: var(--app-text-muted);
+  left: 0.8rem;
+  position: absolute;
+}
+
+.input-shell .form-control {
+  padding-left: 2.35rem;
+}
+
+.form-control,
+.form-select {
+  background-color: var(--app-surface);
+  border-color: var(--app-border);
+  color: var(--app-text);
+  min-height: 2.5rem;
+}
+
+.reset-filters {
+  align-self: end;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.result-count {
+  color: var(--app-text-muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
 .project-catalog {
   display: grid;
   gap: 1rem;
@@ -122,11 +179,47 @@ h3 {
   gap: 0.45rem;
 }
 
+.project-meta {
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+  margin: 0;
+}
+
+.project-meta div {
+  background: var(--app-surface-muted);
+  border: 1px solid var(--app-border);
+  border-radius: 8px;
+  padding: 0.55rem;
+}
+
+.project-meta dt {
+  color: var(--app-text-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.project-meta dd {
+  font-weight: 700;
+  margin: 0.15rem 0 0;
+}
+
+.project-card-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.project-card-actions .btn {
+  min-width: 0;
+}
+
 .open-project {
   align-items: center;
   display: inline-flex;
   gap: 0.4rem;
-  justify-self: start;
   white-space: nowrap;
 }
 
@@ -146,6 +239,97 @@ h3 {
   min-height: 8rem;
 }
 
+.empty-state {
+  align-items: center;
+  display: grid;
+  gap: 0.6rem;
+  grid-column: 1 / -1;
+  justify-items: center;
+  padding: 2rem;
+  text-align: center;
+}
+
+.empty-state i {
+  color: var(--app-accent);
+  font-size: 1.5rem;
+}
+
+.empty-state p {
+  color: var(--app-text-muted);
+  margin: 0;
+}
+
+:host ::ng-deep .tag-filter {
+  min-height: 2.5rem;
+  width: 100%;
+}
+
+:host ::ng-deep .project-preview-dialog {
+  border: 1px solid var(--app-border);
+  color: var(--app-text);
+  overflow: hidden;
+}
+
+:host ::ng-deep .project-preview-dialog .p-dialog-header,
+:host ::ng-deep .project-preview-dialog .p-dialog-content {
+  background: var(--app-surface);
+  color: var(--app-text);
+}
+
+:host ::ng-deep .project-preview-dialog .p-dialog-header {
+  border-bottom: 1px solid var(--app-border);
+  padding: 1rem 1.1rem;
+}
+
+:host ::ng-deep .project-preview-dialog .p-dialog-title {
+  font-size: 1.15rem;
+  overflow-wrap: anywhere;
+}
+
+:host ::ng-deep .project-preview-dialog .p-dialog-content {
+  padding: 0;
+}
+
+.preview-layout {
+  display: grid;
+  grid-template-columns: minmax(14rem, 0.9fr) minmax(0, 1.1fr);
+}
+
+.preview-cover {
+  background: var(--app-surface-muted);
+  height: 100%;
+  min-height: 20rem;
+  object-fit: cover;
+  width: 100%;
+}
+
+.preview-content {
+  display: grid;
+  gap: 0.9rem;
+  min-width: 0;
+  padding: 1.15rem;
+}
+
+.preview-heading {
+  align-items: flex-start;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.preview-heading > div {
+  min-width: 0;
+}
+
+.preview-meta {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.preview-actions {
+  padding-top: 0.15rem;
+}
+
 @media (max-width: 720px) {
   .dashboard-header {
     align-items: stretch;
@@ -156,8 +340,24 @@ h3 {
     justify-content: flex-start;
   }
 
+  .catalog-controls {
+    grid-template-columns: 1fr;
+  }
+
   .list-view .project-card,
   .detailed-view .project-card {
+    grid-template-columns: 1fr;
+  }
+
+  .preview-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .preview-cover {
+    min-height: 13rem;
+  }
+
+  .preview-meta {
     grid-template-columns: 1fr;
   }
 }

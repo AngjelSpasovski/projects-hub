@@ -22,8 +22,71 @@
     </div>
   </div>
 
+  <section class="catalog-controls surface-panel" [attr.aria-label]="'FILTERS.TITLE' | translate">
+    <label class="control-field search-field">
+      <span>{{ 'FILTERS.SEARCH' | translate }}</span>
+      <span class="input-shell">
+        <i class="pi pi-search"></i>
+        <input
+          type="search"
+          class="form-control"
+          [ngModel]="searchTerm()"
+          (ngModelChange)="updateSearchTerm($event)"
+          [placeholder]="'FILTERS.SEARCH_PLACEHOLDER' | translate"
+        />
+      </span>
+    </label>
+
+    <label class="control-field">
+      <span>{{ 'FILTERS.CATEGORY' | translate }}</span>
+      <select class="form-select" [ngModel]="selectedCategory()" (ngModelChange)="updateSelectedCategory($event)">
+        @for (category of categoryOptions(); track category.value) {
+          <option [value]="category.value">{{ category.labelKey | translate }}</option>
+        }
+      </select>
+    </label>
+
+    <label class="control-field">
+      <span>{{ 'FILTERS.TAGS' | translate }}</span>
+      <p-multiselect
+        styleClass="tag-filter"
+        [options]="tagOptions()"
+        [ngModel]="selectedTags()"
+        (ngModelChange)="updateSelectedTags($event)"
+        optionLabel="label"
+        optionValue="value"
+        display="chip"
+        [filter]="true"
+        [showToggleAll]="false"
+        [showClear]="true"
+        [placeholder]="'FILTERS.TAGS_PLACEHOLDER' | translate"
+        [emptyMessage]="'FILTERS.EMPTY' | translate"
+        [emptyFilterMessage]="'FILTERS.EMPTY' | translate"
+      />
+    </label>
+
+    <label class="control-field">
+      <span>{{ 'FILTERS.SORT' | translate }}</span>
+      <select class="form-select" [ngModel]="sortMode()" (ngModelChange)="updateSortMode($event)">
+        <option value="title">{{ 'FILTERS.SORT_TITLE' | translate }}</option>
+        <option value="category">{{ 'FILTERS.SORT_CATEGORY' | translate }}</option>
+        <option value="status">{{ 'FILTERS.SORT_STATUS' | translate }}</option>
+        <option value="updated">{{ 'FILTERS.SORT_UPDATED' | translate }}</option>
+      </select>
+    </label>
+
+    <button type="button" class="btn btn-icon reset-filters" (click)="resetFilters()">
+      <i class="pi pi-filter-slash"></i>
+      <span>{{ 'FILTERS.RESET' | translate }}</span>
+    </button>
+  </section>
+
+  <div class="result-count">
+    {{ 'FILTERS.RESULTS' | translate:{ count: filteredProjects().length } }}
+  </div>
+
   <div class="project-catalog" [class.list-view]="viewMode() === 'list'" [class.detailed-view]="viewMode() === 'detailed'">
-    @for (project of projects; track project.id) {
+    @for (project of filteredProjects(); track project.id) {
       <article class="project-card surface-panel">
         <a [routerLink]="project.route" class="cover" [attr.aria-label]="project.titleKey | translate">
           <img [src]="project.image" [alt]="project.titleKey | translate" />
@@ -43,6 +106,17 @@
           }
 
           @if (viewMode() === 'detailed') {
+            <dl class="project-meta">
+              <div>
+                <dt>{{ 'PROJECT.META.DIFFICULTY' | translate }}</dt>
+                <dd>{{ ('PROJECT.DIFFICULTY.' + project.difficulty.toUpperCase()) | translate }}</dd>
+              </div>
+              <div>
+                <dt>{{ 'PROJECT.META.UPDATED' | translate }}</dt>
+                <dd>{{ project.updatedAt }}</dd>
+              </div>
+            </dl>
+
             <div class="tags">
               @for (tag of project.tags; track tag) {
                 <span>{{ tag }}</span>
@@ -50,12 +124,98 @@
             </div>
           }
 
-          <a class="btn btn-primary btn-sm open-project" [routerLink]="project.route">
-            <i class="pi pi-external-link"></i>
-            <span>{{ 'PROJECT.OPEN' | translate }}</span>
-          </a>
+          <div class="project-card-actions">
+            <button type="button" class="btn btn-sm btn-icon" (click)="openPreview(project)">
+              <i class="pi pi-eye"></i>
+              <span>{{ 'PROJECT.PREVIEW' | translate }}</span>
+            </button>
+
+            <a class="btn btn-primary btn-sm open-project" [routerLink]="project.route">
+              <i class="pi pi-external-link"></i>
+              <span>{{ 'PROJECT.OPEN' | translate }}</span>
+            </a>
+          </div>
         </div>
       </article>
+    } @empty {
+      <section class="empty-state surface-panel">
+        <i class="pi pi-search"></i>
+        <h3>{{ 'FILTERS.NO_RESULTS_TITLE' | translate }}</h3>
+        <p>{{ 'FILTERS.NO_RESULTS_TEXT' | translate }}</p>
+        <button type="button" class="btn btn-primary btn-sm" (click)="resetFilters()">
+          {{ 'FILTERS.RESET' | translate }}
+        </button>
+      </section>
     }
   </div>
+
+  <p-dialog
+    styleClass="project-preview-dialog"
+    [header]="(previewProject()?.titleKey ?? '') | translate"
+    [modal]="true"
+    [visible]="previewProject() !== null"
+    [dismissableMask]="true"
+    [draggable]="false"
+    [breakpoints]="{ '760px': '94vw' }"
+    [style]="{ width: 'min(46rem, 94vw)' }"
+    (visibleChange)="closePreview()"
+  >
+    @if (previewProject(); as selectedProject) {
+      <div class="preview-layout">
+        <img class="preview-cover" [src]="selectedProject.image" [alt]="selectedProject.titleKey | translate" />
+
+        <div class="preview-content">
+          <div class="preview-heading">
+            <div>
+              <p class="category">{{ selectedProject.categoryKey | translate }}</p>
+              <h3>{{ selectedProject.titleKey | translate }}</h3>
+            </div>
+            <span class="status">{{ ('PROJECT.STATUS.' + selectedProject.status.toUpperCase()) | translate }}</span>
+          </div>
+
+          <p class="summary">{{ selectedProject.summaryKey | translate }}</p>
+
+          <dl class="project-meta preview-meta">
+            <div>
+              <dt>{{ 'PROJECT.META.DIFFICULTY' | translate }}</dt>
+              <dd>{{ ('PROJECT.DIFFICULTY.' + selectedProject.difficulty.toUpperCase()) | translate }}</dd>
+            </div>
+            <div>
+              <dt>{{ 'PROJECT.META.CREATED' | translate }}</dt>
+              <dd>{{ selectedProject.createdAt }}</dd>
+            </div>
+            <div>
+              <dt>{{ 'PROJECT.META.UPDATED' | translate }}</dt>
+              <dd>{{ selectedProject.updatedAt }}</dd>
+            </div>
+          </dl>
+
+          <div class="tags">
+            @for (tag of selectedProject.tags; track tag) {
+              <span>{{ tag }}</span>
+            }
+          </div>
+
+          <div class="project-card-actions preview-actions">
+            <a class="btn btn-primary btn-sm open-project" [routerLink]="selectedProject.route" (click)="closePreview()">
+              <i class="pi pi-external-link"></i>
+              <span>{{ 'PROJECT.OPEN' | translate }}</span>
+            </a>
+
+            @if (selectedProject.repositoryUrl) {
+              <a class="btn btn-sm btn-icon" [href]="selectedProject.repositoryUrl" target="_blank" rel="noopener">
+                <i class="pi pi-github"></i>
+                <span>{{ 'PROJECT.REPOSITORY' | translate }}</span>
+              </a>
+            } @else {
+              <button type="button" class="btn btn-sm btn-icon" disabled>
+                <i class="pi pi-github"></i>
+                <span>{{ 'PROJECT.REPOSITORY_PENDING' | translate }}</span>
+              </button>
+            }
+          </div>
+        </div>
+      </div>
+    }
+  </p-dialog>
 </section>

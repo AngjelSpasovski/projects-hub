@@ -1,27 +1,125 @@
-# ProjectsHub
+# Projects Hub
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.8.
+Projects Hub is an Angular portfolio workspace for collecting small frontend projects in one maintainable application.
 
-## Development server
+The app opens directly into an admin-style dashboard where projects are browsed from the sidebar and catalog. Each mini project can be migrated into its own standalone Angular component while keeping shared layout, themes, translations, metadata, and tests consistent.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Current Features
 
-## Code scaffolding
+- Admin shell with header, sidebar, main content, and footer
+- Project catalog with big, list, and detailed views
+- Search by project name, description, category, status, and tags
+- Category filter
+- PrimeNG MultiSelect tag filter
+- Sorting by name, category, status, and last updated date
+- Light, dark, and blue themes
+- Macedonian and English translations with `ngx-translate`
+- Project metadata: status, difficulty, dates, repository link, live demo link
+- Lazy-loaded Calculator mini project
+- Unit tests for app shell, dashboard logic, registry metadata, shared services, and calculator behavior
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Tech Stack
 
-## Build
+- Angular 21
+- TypeScript
+- Bootstrap 5
+- SCSS
+- PrimeNG
+- PrimeIcons
+- ngx-translate
+- Karma and Jasmine
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Exact installed versions are tracked in [DEPENDENCIES.md](./DEPENDENCIES.md).
 
-## Running unit tests
+## Project Status
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+| Project | Status | Notes |
+| --- | --- | --- |
+| Calculator | Ready | Migrated as a standalone Angular component with keyboard support and tests. |
+| Tic Tac Toe | Planned | Pending migration. |
+| Hang Man | Planned | Pending migration. |
+| Weather App | Planned | Pending migration. |
+| Music Event App | Planned | Pending migration. |
 
-## Running end-to-end tests
+The implementation roadmap is tracked in [TASKS.md](./TASKS.md).
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Getting Started
 
-## Further help
+Install dependencies:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```bash
+npm install
+```
+
+Run the development server:
+
+```bash
+npm start
+```
+
+Open:
+
+```text
+http://localhost:4200/
+```
+
+Build the application:
+
+```bash
+npm run build
+```
+
+Run unit tests once:
+
+```bash
+npm run test -- --watch=false
+```
+
+## Folder Structure
+
+```text
+src/app/
+  core/
+    models/
+    services/
+  features/
+    dashboard/
+    projects/
+      calculator/
+      project-detail/
+      project-registry.ts
+  layout/
+    admin-shell/
+src/assets/
+  i18n/
+  project-covers/
+docs/
+  MINI_PROJECT_TEMPLATE.md
+```
+
+## Adding A Mini Project
+
+Use [docs/MINI_PROJECT_TEMPLATE.md](./docs/MINI_PROJECT_TEMPLATE.md) as the checklist for every new mini project.
+
+Minimum flow:
+
+1. Create `src/app/features/projects/<project-id>/`.
+2. Add the standalone component files.
+3. Add project metadata in `project-registry.ts`.
+4. Add Macedonian and English translation keys.
+5. Add a cover asset in `src/assets/project-covers/`.
+6. Add tests for the project logic.
+7. Run `npm run build` and `npm run test -- --watch=false`.
+
+## Quality Rules
+
+- Keep visible UI text in translation files.
+- Macedonian translations use Cyrillic.
+- Do not use `eval` for project logic.
+- Keep each mini project isolated unless logic is truly shared.
+- Update `TASKS.md` when a task is completed.
+- Update `DEPENDENCIES.md` when dependencies change.
+
+## Purpose
+
+This repository is intended to be linked from a developer portfolio so companies can inspect code quality, Angular structure, UI decisions, testing practices, and the evolution of multiple small frontend projects over time.

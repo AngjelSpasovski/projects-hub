@@ -1,7 +1,5 @@
 import { Routes } from '@angular/router';
 
-import { DashboardComponent } from './features/dashboard/dashboard.component';
-import { ProjectDetailComponent } from './features/projects/project-detail/project-detail.component';
 import { AdminShellComponent } from './layout/admin-shell/admin-shell.component';
 
 export const routes: Routes = [
@@ -21,11 +19,20 @@ export const routes: Routes = [
       },
       {
         path: 'dashboard',
-        component: DashboardComponent
+        loadComponent: () =>
+          import('./features/dashboard/dashboard.component').then((component) => component.DashboardComponent)
+      },
+      {
+        path: 'projects/calculator',
+        loadComponent: () =>
+          import('./features/projects/calculator/calculator.component').then((component) => component.CalculatorComponent)
       },
       {
         path: 'projects/:projectId',
-        component: ProjectDetailComponent
+        loadComponent: () =>
+          import('./features/projects/project-detail/project-detail.component').then(
+            (component) => component.ProjectDetailComponent
+          )
       }
     ]
   },
