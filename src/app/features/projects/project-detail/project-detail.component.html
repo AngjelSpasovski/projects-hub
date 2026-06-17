@@ -1,0 +1,31 @@
+@if (project(); as selectedProject) {
+  <section class="project-detail surface-panel">
+    <img [src]="selectedProject.image" [alt]="selectedProject.titleKey | translate" />
+
+    <div>
+      <a routerLink="/admin/dashboard" class="back-link">
+        <i class="pi pi-arrow-left"></i>
+        <span>{{ 'PROJECT.BACK' | translate }}</span>
+      </a>
+      <p class="category">{{ selectedProject.categoryKey | translate }}</p>
+      <h2>{{ selectedProject.titleKey | translate }}</h2>
+      <p>{{ selectedProject.summaryKey | translate }}</p>
+
+      <div class="tags">
+        @for (tag of selectedProject.tags; track tag) {
+          <span>{{ tag }}</span>
+        }
+      </div>
+
+      <div class="placeholder">
+        <i class="pi pi-code"></i>
+        <span>{{ 'PROJECT.PLACEHOLDER' | translate }}</span>
+      </div>
+    </div>
+  </section>
+} @else {
+  <section class="surface-panel missing-project">
+    <h2>{{ 'PROJECT.NOT_FOUND' | translate }}</h2>
+    <a routerLink="/admin/dashboard" class="btn btn-primary">{{ 'PROJECT.BACK' | translate }}</a>
+  </section>
+}

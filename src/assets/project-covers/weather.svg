@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-label="Weather cover">
+  <rect width="640" height="400" fill="#dbeafe"/>
+  <circle cx="438" cy="118" r="58" fill="#facc15"/>
+  <path d="M188 260c-48 0-86-34-86-78s38-78 86-78c22 0 42 7 57 19 21-35 61-59 107-59 70 0 127 53 127 118 0 4 0 8-1 12 35 8 60 34 60 66 0 39-38 70-84 70H188c-48 0-86-31-86-70z" fill="#fff"/>
+  <g stroke="#2f6fed" stroke-width="14" stroke-linecap="round">
+    <path d="M230 342l-22 34M314 342l-22 34M398 342l-22 34"/>
+  </g>
+</svg>

@@ -1,0 +1,28 @@
+<aside class="app-sidebar">
+  <a class="brand" routerLink="/admin/dashboard">
+    <span class="brand-mark">PH</span>
+    <span>
+      <strong>Projects Hub</strong>
+      <small>{{ 'APP.PORTFOLIO_REPO' | translate }}</small>
+    </span>
+  </a>
+
+  <nav class="sidebar-nav" [attr.aria-label]="'NAV.MAIN' | translate">
+    <a routerLink="/admin/dashboard" routerLinkActive="active">
+      <i class="pi pi-th-large"></i>
+      <span>{{ 'NAV.DASHBOARD' | translate }}</span>
+    </a>
+  </nav>
+
+  <div class="sidebar-section">
+    <p>{{ 'NAV.PROJECTS' | translate }}</p>
+    <nav class="sidebar-nav project-links" [attr.aria-label]="'NAV.PROJECTS' | translate">
+      @for (project of projects; track project.id) {
+        <a [routerLink]="project.route" routerLinkActive="active">
+          <i class="pi pi-folder"></i>
+          <span>{{ project.titleKey | translate }}</span>
+        </a>
+      }
+    </nav>
+  </div>
+</aside>

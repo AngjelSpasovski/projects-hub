@@ -1,0 +1,163 @@
+.dashboard {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.dashboard-header {
+  align-items: flex-end;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.eyebrow,
+.category {
+  color: var(--app-text-muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size: 1.65rem;
+  margin: 0.15rem 0 0.35rem;
+}
+
+.dashboard-header p:last-child {
+  color: var(--app-text-muted);
+  margin: 0;
+}
+
+.view-switcher {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.view-switcher .btn {
+  white-space: nowrap;
+}
+
+.project-catalog {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18.5rem), 1fr));
+}
+
+.project-card {
+  display: grid;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.cover {
+  aspect-ratio: 16 / 10;
+  background: var(--app-surface-muted);
+  display: block;
+}
+
+.cover img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.project-content {
+  display: grid;
+  gap: 0.8rem;
+  min-width: 0;
+  padding: 1rem;
+}
+
+.project-title-row {
+  align-items: flex-start;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.project-title-row > div {
+  min-width: 0;
+}
+
+h3 {
+  font-size: 1.12rem;
+  margin: 0.1rem 0 0;
+  overflow-wrap: anywhere;
+}
+
+.summary {
+  color: var(--app-text-muted);
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.status,
+.tags span {
+  background: var(--app-surface-muted);
+  border: 1px solid var(--app-border);
+  border-radius: 999px;
+  color: var(--app-text-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.55rem;
+  white-space: nowrap;
+}
+
+.status {
+  flex: 0 0 auto;
+  max-width: 8.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.open-project {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.4rem;
+  justify-self: start;
+  white-space: nowrap;
+}
+
+.list-view,
+.detailed-view {
+  grid-template-columns: 1fr;
+}
+
+.list-view .project-card,
+.detailed-view .project-card {
+  grid-template-columns: 11rem minmax(0, 1fr);
+}
+
+.list-view .cover,
+.detailed-view .cover {
+  aspect-ratio: auto;
+  min-height: 8rem;
+}
+
+@media (max-width: 720px) {
+  .dashboard-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .view-switcher {
+    justify-content: flex-start;
+  }
+
+  .list-view .project-card,
+  .detailed-view .project-card {
+    grid-template-columns: 1fr;
+  }
+}

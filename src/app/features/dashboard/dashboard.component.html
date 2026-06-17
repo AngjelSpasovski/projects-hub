@@ -1,0 +1,61 @@
+<section class="dashboard">
+  <div class="dashboard-header">
+    <div>
+      <p class="eyebrow">{{ 'DASHBOARD.EYEBROW' | translate }}</p>
+      <h2>{{ 'DASHBOARD.TITLE' | translate }}</h2>
+      <p>{{ 'DASHBOARD.SUBTITLE' | translate }}</p>
+    </div>
+
+    <div class="view-switcher" role="group" [attr.aria-label]="'DASHBOARD.VIEW_MODE' | translate">
+      <button type="button" class="btn btn-icon" [class.active]="viewMode() === 'big'" (click)="setViewMode('big')">
+        <i class="pi pi-table"></i>
+        <span>{{ 'DASHBOARD.BIG' | translate }}</span>
+      </button>
+      <button type="button" class="btn btn-icon" [class.active]="viewMode() === 'list'" (click)="setViewMode('list')">
+        <i class="pi pi-list"></i>
+        <span>{{ 'DASHBOARD.LIST' | translate }}</span>
+      </button>
+      <button type="button" class="btn btn-icon" [class.active]="viewMode() === 'detailed'" (click)="setViewMode('detailed')">
+        <i class="pi pi-align-left"></i>
+        <span>{{ 'DASHBOARD.DETAILED' | translate }}</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="project-catalog" [class.list-view]="viewMode() === 'list'" [class.detailed-view]="viewMode() === 'detailed'">
+    @for (project of projects; track project.id) {
+      <article class="project-card surface-panel">
+        <a [routerLink]="project.route" class="cover" [attr.aria-label]="project.titleKey | translate">
+          <img [src]="project.image" [alt]="project.titleKey | translate" />
+        </a>
+
+        <div class="project-content">
+          <div class="project-title-row">
+            <div>
+              <p class="category">{{ project.categoryKey | translate }}</p>
+              <h3>{{ project.titleKey | translate }}</h3>
+            </div>
+            <span class="status">{{ ('PROJECT.STATUS.' + project.status.toUpperCase()) | translate }}</span>
+          </div>
+
+          @if (viewMode() !== 'list') {
+            <p class="summary">{{ project.summaryKey | translate }}</p>
+          }
+
+          @if (viewMode() === 'detailed') {
+            <div class="tags">
+              @for (tag of project.tags; track tag) {
+                <span>{{ tag }}</span>
+              }
+            </div>
+          }
+
+          <a class="btn btn-primary btn-sm open-project" [routerLink]="project.route">
+            <i class="pi pi-external-link"></i>
+            <span>{{ 'PROJECT.OPEN' | translate }}</span>
+          </a>
+        </div>
+      </article>
+    }
+  </div>
+</section>

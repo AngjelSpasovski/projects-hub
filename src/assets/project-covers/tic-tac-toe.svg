@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-label="Tic Tac Toe cover">
+  <rect width="640" height="400" fill="#17212b"/>
+  <g stroke="#7dd3fc" stroke-width="18" stroke-linecap="round">
+    <path d="M250 80v240M390 80v240M160 160h320M160 240h320"/>
+  </g>
+  <g fill="none" stroke="#f8fafc" stroke-width="18" stroke-linecap="round">
+    <path d="M190 105l60 60M250 105l-60 60M415 260l60 60M475 260l-60 60"/>
+    <circle cx="445" cy="135" r="38"/>
+    <circle cx="220" cy="290" r="38"/>
+  </g>
+</svg>

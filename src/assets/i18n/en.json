@@ -1,0 +1,67 @@
+{
+  "APP": {
+    "ADMIN": "Admin workspace",
+    "LANGUAGE": "Language",
+    "PORTFOLIO_REPO": "Portfolio repository",
+    "THEME": "Theme",
+    "TITLE": "Projects Hub"
+  },
+  "NAV": {
+    "DASHBOARD": "Dashboard",
+    "MAIN": "Main navigation",
+    "PROJECTS": "Projects"
+  },
+  "THEMES": {
+    "BLUE": "Blue",
+    "DARK": "Dark",
+    "LIGHT": "White"
+  },
+  "DASHBOARD": {
+    "BIG": "Big",
+    "DETAILED": "Detailed",
+    "EYEBROW": "Catalog",
+    "LIST": "List",
+    "SUBTITLE": "Overview of the small apps that will be migrated and added to this repo.",
+    "TITLE": "Project Catalog",
+    "VIEW_MODE": "View mode"
+  },
+  "CATEGORIES": {
+    "API": "API",
+    "EVENTS": "Events",
+    "GAMES": "Games",
+    "UTILITIES": "Utilities"
+  },
+  "PROJECTS": {
+    "TIC_TAC_TOE": {
+      "TITLE": "Tic Tac Toe",
+      "SUMMARY": "Classic grid game prepared as the first Angular migration target."
+    },
+    "CALCULATOR": {
+      "TITLE": "Calculator",
+      "SUMMARY": "Utility app for forms, keyboard events, validation, and clean component state."
+    },
+    "HANG_MAN": {
+      "TITLE": "Hang Man",
+      "SUMMARY": "Word game candidate for animations, reactive state, and multilingual labels."
+    },
+    "WEATHER": {
+      "TITLE": "Weather App",
+      "SUMMARY": "API-driven project shell for cards, filters, loading states, and error handling."
+    },
+    "MUSIC_EVENT": {
+      "TITLE": "Music Event App",
+      "SUMMARY": "Event listing concept for modals, multi-select filters, and detailed list views."
+    }
+  },
+  "PROJECT": {
+    "BACK": "Back to catalog",
+    "NOT_FOUND": "Project not found",
+    "OPEN": "Open",
+    "PLACEHOLDER": "The real Angular component for this project will live here.",
+    "STATUS": {
+      "MIGRATION": "Migration",
+      "PLANNED": "Planned",
+      "READY": "Ready"
+    }
+  }
+}
