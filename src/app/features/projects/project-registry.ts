@@ -7,7 +7,7 @@ export const PROJECTS: PortfolioProject[] = [
     summaryKey: 'PROJECTS.TIC_TAC_TOE.SUMMARY',
     categoryKey: 'CATEGORIES.GAMES',
     tags: ['Angular', 'TypeScript', 'State'],
-    status: 'planned',
+    status: 'ready',
     image: 'assets/project-covers/tic-tac-toe.svg',
     route: '/admin/projects/tic-tac-toe',
     updatedAt: '2026-06-17',

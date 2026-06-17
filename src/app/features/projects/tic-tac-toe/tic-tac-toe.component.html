@@ -1,0 +1,47 @@
+<section class="tic-tac-toe-page surface-panel">
+  <div class="project-copy">
+    <p class="eyebrow">{{ 'PROJECTS.TIC_TAC_TOE.TITLE' | translate }}</p>
+    <h2>{{ 'TIC_TAC_TOE.TITLE' | translate }}</h2>
+    <p>{{ 'TIC_TAC_TOE.DESCRIPTION' | translate }}</p>
+
+    <ul>
+      <li>{{ 'TIC_TAC_TOE.FEATURES.TURNS' | translate }}</li>
+      <li>{{ 'TIC_TAC_TOE.FEATURES.WINNER' | translate }}</li>
+      <li>{{ 'TIC_TAC_TOE.FEATURES.RESET' | translate }}</li>
+    </ul>
+  </div>
+
+  <div class="game-shell" [attr.aria-label]="'TIC_TAC_TOE.TITLE' | translate">
+    <div class="game-status">
+      @if (winningLine(); as line) {
+        <span>{{ 'TIC_TAC_TOE.STATUS.WINNER' | translate:{ player: line.player } }}</span>
+      } @else if (isDraw()) {
+        <span>{{ 'TIC_TAC_TOE.STATUS.DRAW' | translate }}</span>
+      } @else {
+        <span>{{ 'TIC_TAC_TOE.STATUS.TURN' | translate:{ player: currentPlayer() } }}</span>
+      }
+    </div>
+
+    <div class="board" role="grid" [attr.aria-label]="'TIC_TAC_TOE.BOARD' | translate">
+      @for (cell of board(); track $index) {
+        <button
+          type="button"
+          class="cell"
+          role="gridcell"
+          [class.x]="cell === 'X'"
+          [class.o]="cell === 'O'"
+          [class.winner]="isWinningCell($index)"
+          [disabled]="cell !== null || isGameOver()"
+          (click)="play($index)"
+        >
+          {{ cell || '' }}
+        </button>
+      }
+    </div>
+
+    <button type="button" class="btn btn-primary reset-game" (click)="resetGame()">
+      <i class="pi pi-refresh"></i>
+      <span>{{ 'TIC_TAC_TOE.RESET' | translate }}</span>
+    </button>
+  </div>
+</section>

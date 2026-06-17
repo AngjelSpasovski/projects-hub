@@ -72,6 +72,22 @@
       "SUMMARY": "Event listing concept for modals, multi-select filters, and detailed list views."
     }
   },
+  "TIC_TAC_TOE": {
+    "BOARD": "Tic Tac Toe board",
+    "DESCRIPTION": "A compact two-player grid game rebuilt as a standalone Angular component with signal-based state.",
+    "FEATURES": {
+      "RESET": "The board can be reset instantly after a win or a draw.",
+      "TURNS": "Players alternate local turns between X and O.",
+      "WINNER": "Rows, columns, diagonals, and draw states are detected automatically."
+    },
+    "RESET": "Restart game",
+    "STATUS": {
+      "DRAW": "Draw game",
+      "TURN": "{{player}} turn",
+      "WINNER": "{{player}} wins"
+    },
+    "TITLE": "Interactive Tic Tac Toe"
+  },
   "CALCULATOR": {
     "DESCRIPTION": "A focused calculator project built as a standalone Angular component with keyboard support and safe arithmetic state.",
     "FEATURES": {

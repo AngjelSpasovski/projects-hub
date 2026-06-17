@@ -15,8 +15,8 @@ The app opens directly into an admin-style dashboard where projects are browsed 
 - Light, dark, and blue themes
 - Macedonian and English translations with `ngx-translate`
 - Project metadata: status, difficulty, dates, repository link, live demo link
-- Lazy-loaded Calculator mini project
-- Unit tests for app shell, dashboard logic, registry metadata, shared services, and calculator behavior
+- Lazy-loaded Calculator and Tic Tac Toe mini projects
+- Unit tests for app shell, dashboard logic, registry metadata, shared services, and mini project behavior
 
 ## Tech Stack
 
@@ -36,7 +36,7 @@ Exact installed versions are tracked in [DEPENDENCIES.md](./DEPENDENCIES.md).
 | Project | Status | Notes |
 | --- | --- | --- |
 | Calculator | Ready | Migrated as a standalone Angular component with keyboard support and tests. |
-| Tic Tac Toe | Planned | Pending migration. |
+| Tic Tac Toe | Ready | Migrated as a standalone Angular component with signal-based game state and tests. |
 | Hang Man | Planned | Pending migration. |
 | Weather App | Planned | Pending migration. |
 | Music Event App | Planned | Pending migration. |
@@ -86,6 +86,7 @@ src/app/
     dashboard/
     projects/
       calculator/
+      tic-tac-toe/
       project-detail/
       project-registry.ts
   layout/

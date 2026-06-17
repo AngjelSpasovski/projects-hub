@@ -23,6 +23,13 @@ export const routes: Routes = [
           import('./features/dashboard/dashboard.component').then((component) => component.DashboardComponent)
       },
       {
+        path: 'projects/tic-tac-toe',
+        loadComponent: () =>
+          import('./features/projects/tic-tac-toe/tic-tac-toe.component').then(
+            (component) => component.TicTacToeComponent
+          )
+      },
+      {
         path: 'projects/calculator',
         loadComponent: () =>
           import('./features/projects/calculator/calculator.component').then((component) => component.CalculatorComponent)
