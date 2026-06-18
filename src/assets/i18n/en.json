@@ -98,6 +98,53 @@
     "READY": "Ready",
     "TITLE": "Interactive Calculator"
   },
+  "HANG_MAN": {
+    "ATTEMPTS": "Remaining attempts",
+    "DESCRIPTION": "A focused word-guessing game rebuilt with Angular signals, keyboard input, and clear win/loss state.",
+    "FEATURES": {
+      "KEYBOARD": "Letters can be selected on screen or from the physical keyboard.",
+      "RESET": "A new round clears guesses and loads the next word.",
+      "STATE": "Correct letters, wrong letters, remaining attempts, and game result are derived from component state."
+    },
+    "KEYBOARD": "Letter keyboard",
+    "RESET": "New word",
+    "STATUS": {
+      "LOST": "Round over. The word was {{word}}.",
+      "PLAYING": "{{count}} attempt(s) left",
+      "WON": "You found the word"
+    },
+    "TITLE": "Interactive Hang Man",
+    "WORD": "Hidden word",
+    "WRONG_LETTERS": "Wrong letters"
+  },
+  "WEATHER": {
+    "AVERAGE": "Average temperature",
+    "CONDITION": {
+      "ALL": "All conditions",
+      "CLOUDY": "Cloudy",
+      "RAINY": "Rainy",
+      "SUNNY": "Sunny"
+    },
+    "DESCRIPTION": "An API-style weather dashboard with simulated loading, filters, summaries, and fallback states.",
+    "EMPTY_TEXT": "Select another weather condition to show city cards.",
+    "EMPTY_TITLE": "No cities for this filter",
+    "ERROR_TEXT": "The simulated API request failed. Retry to reload the local forecast data.",
+    "ERROR_TITLE": "Weather data unavailable",
+    "FEATURES": {
+      "ERRORS": "Error and retry states are visible without needing a real API failure.",
+      "FILTERS": "Condition filters and summaries update from the loaded data.",
+      "LOADING": "A simulated fetch shows loading skeletons before cards render."
+    },
+    "FILTER": "Condition",
+    "HUMIDITY": "Humidity",
+    "LOADING": "Loading weather cards",
+    "REFRESH": "Refresh",
+    "RETRY": "Retry",
+    "SHOW_ERROR": "Show error",
+    "TITLE": "Weather Dashboard",
+    "UPDATED": "Updated",
+    "WIND": "Wind"
+  },
   "PROJECT": {
     "BACK": "Back to catalog",
     "DEMO": "Live demo",

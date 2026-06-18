@@ -36,8 +36,8 @@ This checklist tracks the path from the current skeleton to a portfolio-ready pr
 - [x] Define a repeatable folder template for each mini project.
 - [x] Migrate Tic Tac Toe.
 - [x] Migrate Calculator.
-- [ ] Migrate Hang Man.
-- [ ] Migrate Weather App.
+- [x] Migrate Hang Man.
+- [x] Migrate Weather App.
 - [ ] Migrate Music Event App.
 - [ ] Review older JavaScript projects and choose the next migration batch.
 - [ ] Add a README section per migrated project.

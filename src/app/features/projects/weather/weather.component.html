@@ -1,0 +1,95 @@
+<section class="weather-page surface-panel">
+  <div class="project-copy">
+    <p class="eyebrow">{{ 'PROJECTS.WEATHER.TITLE' | translate }}</p>
+    <h2>{{ 'WEATHER.TITLE' | translate }}</h2>
+    <p>{{ 'WEATHER.DESCRIPTION' | translate }}</p>
+
+    <ul>
+      <li>{{ 'WEATHER.FEATURES.LOADING' | translate }}</li>
+      <li>{{ 'WEATHER.FEATURES.FILTERS' | translate }}</li>
+      <li>{{ 'WEATHER.FEATURES.ERRORS' | translate }}</li>
+    </ul>
+  </div>
+
+  <div class="weather-shell" [attr.aria-label]="'WEATHER.TITLE' | translate">
+    <div class="toolbar">
+      <label>
+        <span>{{ 'WEATHER.FILTER' | translate }}</span>
+        <select class="form-select" [ngModel]="filter()" (ngModelChange)="updateFilter($event)">
+          <option value="all">{{ 'WEATHER.CONDITION.ALL' | translate }}</option>
+          <option value="sunny">{{ 'WEATHER.CONDITION.SUNNY' | translate }}</option>
+          <option value="cloudy">{{ 'WEATHER.CONDITION.CLOUDY' | translate }}</option>
+          <option value="rainy">{{ 'WEATHER.CONDITION.RAINY' | translate }}</option>
+        </select>
+      </label>
+
+      <div class="actions">
+        <button type="button" class="btn btn-sm btn-icon" (click)="showError()">
+          <i class="pi pi-exclamation-triangle"></i>
+          <span>{{ 'WEATHER.SHOW_ERROR' | translate }}</span>
+        </button>
+        <button type="button" class="btn btn-primary btn-sm" (click)="loadWeather()">
+          <i class="pi pi-refresh"></i>
+          <span>{{ 'WEATHER.REFRESH' | translate }}</span>
+        </button>
+      </div>
+    </div>
+
+    @if (loadState() === 'loading') {
+      <div class="loading-grid" [attr.aria-label]="'WEATHER.LOADING' | translate">
+        @for (_ of [1, 2, 3]; track _) {
+          <div class="weather-card skeleton"></div>
+        }
+      </div>
+    } @else if (loadState() === 'error') {
+      <section class="state-panel error-state">
+        <i class="pi pi-wifi"></i>
+        <h3>{{ 'WEATHER.ERROR_TITLE' | translate }}</h3>
+        <p>{{ 'WEATHER.ERROR_TEXT' | translate }}</p>
+        <button type="button" class="btn btn-primary btn-sm" (click)="loadWeather()">
+          {{ 'WEATHER.RETRY' | translate }}
+        </button>
+      </section>
+    } @else {
+      <div class="summary-row">
+        <div>
+          <span>{{ 'WEATHER.AVERAGE' | translate }}</span>
+          <strong>{{ averageTemperature() }}°C</strong>
+        </div>
+        <div>
+          <span>{{ 'WEATHER.UPDATED' | translate }}</span>
+          <strong>{{ lastUpdated() || '-' }}</strong>
+        </div>
+      </div>
+
+      <div class="weather-grid">
+        @for (city of filteredCities(); track city.city) {
+          <article class="weather-card">
+            <div class="card-head">
+              <i [class]="conditionIcon(city.condition)"></i>
+              <span>{{ ('WEATHER.CONDITION.' + city.condition.toUpperCase()) | translate }}</span>
+            </div>
+            <h3>{{ city.city }}</h3>
+            <strong>{{ city.temperature }}°C</strong>
+            <dl>
+              <div>
+                <dt>{{ 'WEATHER.HUMIDITY' | translate }}</dt>
+                <dd>{{ city.humidity }}%</dd>
+              </div>
+              <div>
+                <dt>{{ 'WEATHER.WIND' | translate }}</dt>
+                <dd>{{ city.wind }} km/h</dd>
+              </div>
+            </dl>
+          </article>
+        } @empty {
+          <section class="state-panel">
+            <i class="pi pi-filter-slash"></i>
+            <h3>{{ 'WEATHER.EMPTY_TITLE' | translate }}</h3>
+            <p>{{ 'WEATHER.EMPTY_TEXT' | translate }}</p>
+          </section>
+        }
+      </div>
+    }
+  </div>
+</section>

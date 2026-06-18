@@ -1,0 +1,62 @@
+<section class="hang-man-page surface-panel">
+  <div class="project-copy">
+    <p class="eyebrow">{{ 'PROJECTS.HANG_MAN.TITLE' | translate }}</p>
+    <h2>{{ 'HANG_MAN.TITLE' | translate }}</h2>
+    <p>{{ 'HANG_MAN.DESCRIPTION' | translate }}</p>
+
+    <ul>
+      <li>{{ 'HANG_MAN.FEATURES.KEYBOARD' | translate }}</li>
+      <li>{{ 'HANG_MAN.FEATURES.STATE' | translate }}</li>
+      <li>{{ 'HANG_MAN.FEATURES.RESET' | translate }}</li>
+    </ul>
+  </div>
+
+  <div class="game-shell" [attr.aria-label]="'HANG_MAN.TITLE' | translate">
+    <div class="game-status">
+      @if (hasWon()) {
+        <span>{{ 'HANG_MAN.STATUS.WON' | translate }}</span>
+      } @else if (hasLost()) {
+        <span>{{ 'HANG_MAN.STATUS.LOST' | translate:{ word: currentWord() } }}</span>
+      } @else {
+        <span>{{ 'HANG_MAN.STATUS.PLAYING' | translate:{ count: remainingGuesses() } }}</span>
+      }
+    </div>
+
+    <div class="word" [attr.aria-label]="'HANG_MAN.WORD' | translate">
+      @for (letter of maskedWord(); track $index) {
+        <span class="letter-tile">{{ letter || '' }}</span>
+      }
+    </div>
+
+    <div class="attempt-meter" [attr.aria-label]="'HANG_MAN.ATTEMPTS' | translate">
+      @for (_ of [].constructor(maxWrongGuesses); track $index) {
+        <span [class.used]="$index < wrongGuesses().length"></span>
+      }
+    </div>
+
+    <div class="wrong-letters">
+      <span>{{ 'HANG_MAN.WRONG_LETTERS' | translate }}</span>
+      <strong>{{ wrongGuesses().join(', ') || '-' }}</strong>
+    </div>
+
+    <div class="keyboard" [attr.aria-label]="'HANG_MAN.KEYBOARD' | translate">
+      @for (letter of alphabet; track letter) {
+        <button
+          type="button"
+          class="letter-key"
+          [class.correct]="isCorrectGuess(letter)"
+          [class.wrong]="isWrongGuess(letter)"
+          [disabled]="guessedLetters().includes(letter) || isGameOver()"
+          (click)="guessLetter(letter)"
+        >
+          {{ letter }}
+        </button>
+      }
+    </div>
+
+    <button type="button" class="btn btn-primary reset-game" (click)="resetGame()">
+      <i class="pi pi-refresh"></i>
+      <span>{{ 'HANG_MAN.RESET' | translate }}</span>
+    </button>
+  </div>
+</section>

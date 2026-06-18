@@ -35,6 +35,16 @@ export const routes: Routes = [
           import('./features/projects/calculator/calculator.component').then((component) => component.CalculatorComponent)
       },
       {
+        path: 'projects/hang-man',
+        loadComponent: () =>
+          import('./features/projects/hang-man/hang-man.component').then((component) => component.HangManComponent)
+      },
+      {
+        path: 'projects/weather',
+        loadComponent: () =>
+          import('./features/projects/weather/weather.component').then((component) => component.WeatherComponent)
+      },
+      {
         path: 'projects/:projectId',
         loadComponent: () =>
           import('./features/projects/project-detail/project-detail.component').then(
