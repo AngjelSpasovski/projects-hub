@@ -44,6 +44,48 @@ Exact installed versions are tracked in [DEPENDENCIES.md](./DEPENDENCIES.md).
 
 The implementation roadmap is tracked in [TASKS.md](./TASKS.md).
 
+## Migrated Projects
+
+### Calculator
+
+Folder: [`src/app/features/projects/calculator`](./src/app/features/projects/calculator)
+
+Calculator is a compact utility project focused on component-local state, keyboard input, and safe arithmetic behavior. It supports basic arithmetic, decimal input, percentage conversion, sign toggling, reset, keyboard shortcuts, and a visible error state for invalid operations such as division by zero.
+
+Angular coverage: standalone component, host keyboard listener, template-driven button rendering, component-local state, and unit tests for calculator behavior.
+
+### Tic Tac Toe
+
+Folder: [`src/app/features/projects/tic-tac-toe`](./src/app/features/projects/tic-tac-toe)
+
+Tic Tac Toe is a local two-player game built to demonstrate signal-based state and derived game outcomes. It includes alternating turns, winner detection for rows, columns, and diagonals, draw detection, winning-cell highlighting, reset flow, and responsive board layout.
+
+Angular coverage: standalone component, signals, computed state, template control flow, button grid rendering, and unit tests for game rules.
+
+### Hang Man
+
+Folder: [`src/app/features/projects/hang-man`](./src/app/features/projects/hang-man)
+
+Hang Man is a word-guessing game focused on derived UI state and keyboard interactions. It includes hidden word rendering, on-screen letter keyboard, physical keyboard support, wrong guess tracking, remaining attempts, win/loss states, and reset with a new word.
+
+Angular coverage: standalone component, signals, computed state, host keyboard listener, template control flow, and unit tests for game behavior.
+
+### Weather App
+
+Folder: [`src/app/features/projects/weather`](./src/app/features/projects/weather)
+
+Weather App is an API-style dashboard that demonstrates async-like frontend states without requiring an external API key. It includes simulated loading, local weather data, condition filters, average temperature summary, last updated metadata, manual error state, retry flow, and empty states.
+
+Angular coverage: standalone component, signals, computed filters, template-driven form control, conditional loading/error/empty rendering, and unit tests with fake timers.
+
+### Music Event App
+
+Folder: [`src/app/features/projects/music-event`](./src/app/features/projects/music-event)
+
+Music Event App is an event catalog focused on richer UI controls and detail views. It includes category filtering, PrimeNG MultiSelect tag filtering, result and seat summaries, detailed list rows, PrimeNG Dialog event details, empty state, and filter reset flow.
+
+Angular coverage: standalone component, signals, computed filters, template-driven forms, PrimeNG MultiSelect, PrimeNG Dialog, and unit tests for filtering and modal state.
+
 ## Getting Started
 
 Install dependencies:
@@ -82,6 +124,12 @@ Run end-to-end smoke tests:
 npm run test:e2e
 ```
 
+Regenerate project cover screenshots:
+
+```bash
+npm run covers
+```
+
 ## Folder Structure
 
 ```text
@@ -118,7 +166,7 @@ Minimum flow:
 2. Add the standalone component files.
 3. Add project metadata in `project-registry.ts`.
 4. Add Macedonian and English translation keys.
-5. Add a cover asset in `src/assets/project-covers/`.
+5. Run `npm run covers` to generate the project cover screenshot in `src/assets/project-covers/`.
 6. Add tests for the project logic.
 7. Run `npm run build` and `npm run test -- --watch=false`.
 

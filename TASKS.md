@@ -19,7 +19,7 @@ This checklist tracks the path from the current skeleton to a portfolio-ready pr
 - [x] Refine responsive behavior for mobile and tablet sidebar navigation.
 - [x] Add polished active, hover, loading, and empty states.
 - [x] Decide final typography, spacing scale, and color tokens.
-- [ ] Replace temporary SVG covers with final project screenshots or generated covers.
+- [x] Replace temporary SVG covers with final project screenshots or generated covers.
 - [x] Add PrimeNG modal/dialog pattern for project previews.
 
 ## Project Catalog
@@ -40,16 +40,16 @@ This checklist tracks the path from the current skeleton to a portfolio-ready pr
 - [x] Migrate Weather App.
 - [x] Migrate Music Event App.
 - [ ] Review older JavaScript projects and choose the next migration batch.
-- [ ] Add a README section per migrated project.
+- [x] Add a README section per migrated project.
 
 ## Angular Quality
 
 - [ ] Add shared UI components for page headers, project cards, badges, and modals.
 - [ ] Add shared form validation helpers.
 - [x] Add route-level lazy loading for project components when the catalog grows.
-- [ ] Add project detail routes with real project components.
+- [x] Add project detail routes with real project components.
 - [ ] Add error boundaries or fallback states for API-based projects.
-- [ ] Review bundle size and optimize Bootstrap/PrimeNG imports.
+- [x] Review bundle size and optimize Bootstrap/PrimeNG imports.
 
 ## Internationalization
 

@@ -25,7 +25,7 @@ describe('PROJECTS registry', () => {
       expect(project.titleKey).toMatch(/^PROJECTS\.[A-Z0-9_]+\.TITLE$/);
       expect(project.summaryKey).toMatch(/^PROJECTS\.[A-Z0-9_]+\.SUMMARY$/);
       expect(project.categoryKey).toMatch(/^CATEGORIES\.[A-Z0-9_]+$/);
-      expect(project.image).toMatch(/^assets\/project-covers\/.+\.svg$/);
+      expect(project.image).toMatch(/^assets\/project-covers\/.+\.png$/);
       expect(project.tags.length).toBeGreaterThan(0);
     });
   });

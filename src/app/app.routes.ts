@@ -23,35 +23,6 @@ export const routes: Routes = [
           import('./features/dashboard/dashboard.component').then((component) => component.DashboardComponent)
       },
       {
-        path: 'projects/tic-tac-toe',
-        loadComponent: () =>
-          import('./features/projects/tic-tac-toe/tic-tac-toe.component').then(
-            (component) => component.TicTacToeComponent
-          )
-      },
-      {
-        path: 'projects/calculator',
-        loadComponent: () =>
-          import('./features/projects/calculator/calculator.component').then((component) => component.CalculatorComponent)
-      },
-      {
-        path: 'projects/hang-man',
-        loadComponent: () =>
-          import('./features/projects/hang-man/hang-man.component').then((component) => component.HangManComponent)
-      },
-      {
-        path: 'projects/weather',
-        loadComponent: () =>
-          import('./features/projects/weather/weather.component').then((component) => component.WeatherComponent)
-      },
-      {
-        path: 'projects/music-event',
-        loadComponent: () =>
-          import('./features/projects/music-event/music-event.component').then(
-            (component) => component.MusicEventComponent
-          )
-      },
-      {
         path: 'projects/:projectId',
         loadComponent: () =>
           import('./features/projects/project-detail/project-detail.component').then(

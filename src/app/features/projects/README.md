@@ -25,7 +25,7 @@ Minimum required work:
 
 1. Add a folder under `src/app/features/projects/<project-id>/`.
 2. Add the standalone component files.
-3. Add a cover asset under `src/assets/project-covers/`.
+3. Run `npm run covers` after the component is reachable to generate a PNG cover under `src/assets/project-covers/`.
 4. Add registry metadata in `project-registry.ts`.
 5. Add English and Macedonian translation keys.
 6. Run build and tests.

@@ -1,4 +1,3 @@
-@use "bootstrap/scss/bootstrap";
 @import "primeicons/primeicons.css";
 
 :root {
@@ -95,17 +94,92 @@ a {
 }
 
 .btn {
+  align-items: center;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--app-radius-md);
   color: var(--app-text);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: inherit;
+  font-size: var(--app-font-size-md);
+  font-weight: 600;
+  gap: var(--app-space-2);
+  justify-content: center;
+  line-height: 1.35;
+  min-width: 0;
+  padding: 0.48rem 0.85rem;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color var(--app-transition-fast), border-color var(--app-transition-fast),
+    box-shadow var(--app-transition-fast), color var(--app-transition-fast);
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
 }
 
 .btn:not(.btn-primary) {
+  border-color: var(--app-border);
   background: var(--app-surface);
+}
+
+.btn:not(:disabled):hover {
+  border-color: color-mix(in srgb, var(--app-accent) 45%, var(--app-border));
 }
 
 .btn.active {
   background: var(--app-accent);
   border-color: var(--app-accent);
   color: #fff;
+}
+
+.btn-primary {
+  background: var(--app-accent);
+  border-color: var(--app-accent);
+  color: #fff;
+}
+
+.btn-primary:not(:disabled):hover {
+  background: var(--app-accent-strong);
+  border-color: var(--app-accent-strong);
+  color: #fff;
+}
+
+.btn-sm {
+  font-size: var(--app-font-size-sm);
+  min-height: 2rem;
+  padding: 0.35rem 0.65rem;
+}
+
+.btn:disabled,
+.btn.disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+  pointer-events: none;
+}
+
+.btn-group {
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+.btn-group > .btn {
+  border-radius: 0;
+  flex: 1 1 auto;
+}
+
+.btn-group > .btn:first-child {
+  border-bottom-left-radius: var(--app-radius-md);
+  border-top-left-radius: var(--app-radius-md);
+}
+
+.btn-group > .btn:last-child {
+  border-bottom-right-radius: var(--app-radius-md);
+  border-top-right-radius: var(--app-radius-md);
+}
+
+.btn-group > .btn + .btn {
+  margin-left: -1px;
 }
 
 .btn-icon {
@@ -124,6 +198,47 @@ button:focus-visible,
 input:focus-visible {
   box-shadow: var(--app-focus-ring);
   outline: 0;
+}
+
+.form-control,
+.form-select {
+  appearance: none;
+  background-color: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-md);
+  color: var(--app-text);
+  display: block;
+  font-family: inherit;
+  font-size: var(--app-font-size-md);
+  line-height: 1.35;
+  min-height: var(--app-control-height);
+  padding: 0.48rem 0.75rem;
+  transition: border-color var(--app-transition-fast), box-shadow var(--app-transition-fast);
+  width: 100%;
+}
+
+.form-control::placeholder {
+  color: var(--app-text-muted);
+  opacity: 1;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--app-accent);
+  box-shadow: var(--app-focus-ring);
+  outline: 0;
+}
+
+.form-select {
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--app-text-muted) 50%),
+    linear-gradient(135deg, var(--app-text-muted) 50%, transparent 50%);
+  background-position:
+    calc(100% - 1rem) 50%,
+    calc(100% - 0.72rem) 50%;
+  background-repeat: no-repeat;
+  background-size: 0.32rem 0.32rem, 0.32rem 0.32rem;
+  padding-right: 2.25rem;
 }
 
 .surface-panel {

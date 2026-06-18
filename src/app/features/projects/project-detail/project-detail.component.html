@@ -1,6 +1,6 @@
 @if (project(); as selectedProject) {
   <section class="project-detail surface-panel">
-    <img [src]="selectedProject.image" [alt]="selectedProject.titleKey | translate" />
+    <img class="project-cover" [src]="selectedProject.image" [alt]="selectedProject.titleKey | translate" />
 
     <div>
       <a routerLink="/admin/dashboard" class="back-link">
@@ -62,11 +62,17 @@
         }
       </div>
 
-      <div class="placeholder">
-        <i class="pi pi-code"></i>
-        <span>{{ 'PROJECT.PLACEHOLDER' | translate }}</span>
-      </div>
     </div>
+  </section>
+
+  <section class="project-live">
+    @if (projectComponent(); as component) {
+      <ng-container *ngComponentOutlet="component" />
+    } @else if (isComponentLoading()) {
+      <div class="project-component-loading surface-panel" aria-busy="true">
+        <i class="pi pi-spin pi-spinner"></i>
+      </div>
+    }
   </section>
 } @else {
   <section class="surface-panel missing-project">
