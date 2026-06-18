@@ -45,6 +45,13 @@ export const routes: Routes = [
           import('./features/projects/weather/weather.component').then((component) => component.WeatherComponent)
       },
       {
+        path: 'projects/music-event',
+        loadComponent: () =>
+          import('./features/projects/music-event/music-event.component').then(
+            (component) => component.MusicEventComponent
+          )
+      },
+      {
         path: 'projects/:projectId',
         loadComponent: () =>
           import('./features/projects/project-detail/project-detail.component').then(

@@ -1,0 +1,138 @@
+<section class="music-event-page surface-panel">
+  <div class="project-copy">
+    <p class="eyebrow">{{ 'PROJECTS.MUSIC_EVENT.TITLE' | translate }}</p>
+    <h2>{{ 'MUSIC_EVENT.TITLE' | translate }}</h2>
+    <p>{{ 'MUSIC_EVENT.DESCRIPTION' | translate }}</p>
+
+    <ul>
+      <li>{{ 'MUSIC_EVENT.FEATURES.FILTERS' | translate }}</li>
+      <li>{{ 'MUSIC_EVENT.FEATURES.MODAL' | translate }}</li>
+      <li>{{ 'MUSIC_EVENT.FEATURES.EMPTY' | translate }}</li>
+    </ul>
+  </div>
+
+  <div class="event-shell" [attr.aria-label]="'MUSIC_EVENT.TITLE' | translate">
+    <div class="filters">
+      <label>
+        <span>{{ 'MUSIC_EVENT.CATEGORY' | translate }}</span>
+        <select class="form-select" [ngModel]="selectedCategory()" (ngModelChange)="updateCategory($event)">
+          <option value="all">{{ 'MUSIC_EVENT.CATEGORIES.ALL' | translate }}</option>
+          <option value="concert">{{ 'MUSIC_EVENT.CATEGORIES.CONCERT' | translate }}</option>
+          <option value="festival">{{ 'MUSIC_EVENT.CATEGORIES.FESTIVAL' | translate }}</option>
+          <option value="workshop">{{ 'MUSIC_EVENT.CATEGORIES.WORKSHOP' | translate }}</option>
+        </select>
+      </label>
+
+      <label>
+        <span>{{ 'MUSIC_EVENT.TAGS' | translate }}</span>
+        <p-multiselect
+          styleClass="event-tag-filter"
+          [options]="tagOptions()"
+          [ngModel]="selectedTags()"
+          (ngModelChange)="updateTags($event)"
+          optionLabel="label"
+          optionValue="value"
+          display="chip"
+          [showToggleAll]="false"
+          [showClear]="true"
+          [placeholder]="'MUSIC_EVENT.TAGS_PLACEHOLDER' | translate"
+          [emptyMessage]="'FILTERS.EMPTY' | translate"
+          [emptyFilterMessage]="'FILTERS.EMPTY' | translate"
+        />
+      </label>
+
+      <button type="button" class="btn btn-sm btn-icon reset-filters" (click)="resetFilters()">
+        <i class="pi pi-filter-slash"></i>
+        <span>{{ 'FILTERS.RESET' | translate }}</span>
+      </button>
+    </div>
+
+    <div class="event-summary">
+      <div>
+        <span>{{ 'MUSIC_EVENT.RESULTS' | translate }}</span>
+        <strong>{{ filteredEvents().length }}</strong>
+      </div>
+      <div>
+        <span>{{ 'MUSIC_EVENT.SEATS_LEFT' | translate }}</span>
+        <strong>{{ totalSeatsLeft() }}</strong>
+      </div>
+    </div>
+
+    <div class="event-list">
+      @for (event of filteredEvents(); track event.id) {
+        <article class="event-row">
+          <div>
+            <p>{{ ('MUSIC_EVENT.CATEGORIES.' + event.category.toUpperCase()) | translate }}</p>
+            <h3>{{ event.title }}</h3>
+            <span>{{ event.date }} · {{ event.venue }}, {{ event.city }}</span>
+          </div>
+
+          <div class="event-meta">
+            <strong>{{ event.price }} EUR</strong>
+            <span>{{ 'MUSIC_EVENT.SEATS_LEFT_VALUE' | translate:{ count: event.seatsLeft } }}</span>
+          </div>
+
+          <button type="button" class="btn btn-primary btn-sm" (click)="openEvent(event)">
+            <i class="pi pi-ticket"></i>
+            <span>{{ 'MUSIC_EVENT.DETAILS' | translate }}</span>
+          </button>
+        </article>
+      } @empty {
+        <section class="empty-state">
+          <i class="pi pi-calendar-times"></i>
+          <h3>{{ 'MUSIC_EVENT.EMPTY_TITLE' | translate }}</h3>
+          <p>{{ 'MUSIC_EVENT.EMPTY_TEXT' | translate }}</p>
+          <button type="button" class="btn btn-primary btn-sm" (click)="resetFilters()">
+            {{ 'FILTERS.RESET' | translate }}
+          </button>
+        </section>
+      }
+    </div>
+  </div>
+
+  <p-dialog
+    styleClass="event-detail-dialog"
+    [header]="selectedEvent()?.title ?? ''"
+    [modal]="true"
+    [visible]="selectedEvent() !== null"
+    [dismissableMask]="true"
+    [draggable]="false"
+    [breakpoints]="{ '680px': '94vw' }"
+    [style]="{ width: 'min(34rem, 94vw)' }"
+    (visibleChange)="closeEvent()"
+  >
+    @if (selectedEvent(); as event) {
+      <div class="event-detail">
+        <div class="detail-hero">
+          <i class="pi pi-music"></i>
+          <span>{{ ('MUSIC_EVENT.CATEGORIES.' + event.category.toUpperCase()) | translate }}</span>
+        </div>
+
+        <dl>
+          <div>
+            <dt>{{ 'MUSIC_EVENT.DATE' | translate }}</dt>
+            <dd>{{ event.date }}</dd>
+          </div>
+          <div>
+            <dt>{{ 'MUSIC_EVENT.VENUE' | translate }}</dt>
+            <dd>{{ event.venue }}, {{ event.city }}</dd>
+          </div>
+          <div>
+            <dt>{{ 'MUSIC_EVENT.PRICE' | translate }}</dt>
+            <dd>{{ event.price }} EUR</dd>
+          </div>
+          <div>
+            <dt>{{ 'MUSIC_EVENT.SEATS_LEFT' | translate }}</dt>
+            <dd>{{ event.seatsLeft }}</dd>
+          </div>
+        </dl>
+
+        <div class="tags">
+          @for (tag of event.tags; track tag) {
+            <span>{{ tag }}</span>
+          }
+        </div>
+      </div>
+    }
+  </p-dialog>
+</section>

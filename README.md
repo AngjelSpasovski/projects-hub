@@ -15,8 +15,9 @@ The app opens directly into an admin-style dashboard where projects are browsed 
 - Light, dark, and blue themes
 - Macedonian and English translations with `ngx-translate`
 - Project metadata: status, difficulty, dates, repository link, live demo link
-- Lazy-loaded Calculator, Tic Tac Toe, Hang Man, and Weather mini projects
+- Lazy-loaded Calculator, Tic Tac Toe, Hang Man, Weather, and Music Event mini projects
 - Unit tests for app shell, dashboard logic, registry metadata, shared services, and mini project behavior
+- Playwright smoke tests for catalog navigation, view switching, and language switching
 
 ## Tech Stack
 
@@ -39,7 +40,7 @@ Exact installed versions are tracked in [DEPENDENCIES.md](./DEPENDENCIES.md).
 | Tic Tac Toe | Ready | Migrated as a standalone Angular component with signal-based game state and tests. |
 | Hang Man | Ready | Migrated as a standalone Angular component with word-guessing state and tests. |
 | Weather App | Ready | Migrated as a standalone Angular component with simulated API states and tests. |
-| Music Event App | Planned | Pending migration. |
+| Music Event App | Ready | Migrated as a standalone Angular component with PrimeNG filters, dialog details, and tests. |
 
 The implementation roadmap is tracked in [TASKS.md](./TASKS.md).
 
@@ -75,6 +76,12 @@ Run unit tests once:
 npm run test -- --watch=false
 ```
 
+Run end-to-end smoke tests:
+
+```bash
+npm run test:e2e
+```
+
 ## Folder Structure
 
 ```text
@@ -89,6 +96,7 @@ src/app/
       hang-man/
       tic-tac-toe/
       weather/
+      music-event/
       project-detail/
       project-registry.ts
   layout/

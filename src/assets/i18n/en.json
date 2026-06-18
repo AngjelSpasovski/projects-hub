@@ -145,6 +145,33 @@
     "UPDATED": "Updated",
     "WIND": "Wind"
   },
+  "MUSIC_EVENT": {
+    "CATEGORIES": {
+      "ALL": "All categories",
+      "CONCERT": "Concert",
+      "FESTIVAL": "Festival",
+      "WORKSHOP": "Workshop"
+    },
+    "CATEGORY": "Category",
+    "DATE": "Date",
+    "DESCRIPTION": "A compact event catalog with PrimeNG tag filters, detailed list rows, summaries, and modal event details.",
+    "DETAILS": "Details",
+    "EMPTY_TEXT": "Change the category or selected tags to show events again.",
+    "EMPTY_TITLE": "No events match these filters",
+    "FEATURES": {
+      "EMPTY": "The list includes an empty state and reset path for narrow filter results.",
+      "FILTERS": "Category and tag filters update the event list and summary metrics.",
+      "MODAL": "Each event opens in a PrimeNG dialog with the key details."
+    },
+    "PRICE": "Price",
+    "RESULTS": "Events",
+    "SEATS_LEFT": "Seats left",
+    "SEATS_LEFT_VALUE": "{{count}} seats left",
+    "TAGS": "Tags",
+    "TAGS_PLACEHOLDER": "Select event tags",
+    "TITLE": "Music Event Catalog",
+    "VENUE": "Venue"
+  },
   "PROJECT": {
     "BACK": "Back to catalog",
     "DEMO": "Live demo",

@@ -47,8 +47,9 @@ describe('DashboardComponent', () => {
   it('should sort projects by status', () => {
     component.updateSortMode('status');
 
-    expect(component.filteredProjects()[0].status).toBe('planned');
-    expect(component.filteredProjects().at(-1)?.status).toBe('ready');
+    const statuses = component.filteredProjects().map((project) => project.status);
+
+    expect(statuses).toEqual([...statuses].sort());
   });
 
   it('should reset filters and sorting', () => {

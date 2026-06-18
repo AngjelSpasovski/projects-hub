@@ -38,7 +38,7 @@ This checklist tracks the path from the current skeleton to a portfolio-ready pr
 - [x] Migrate Calculator.
 - [x] Migrate Hang Man.
 - [x] Migrate Weather App.
-- [ ] Migrate Music Event App.
+- [x] Migrate Music Event App.
 - [ ] Review older JavaScript projects and choose the next migration batch.
 - [ ] Add a README section per migrated project.
 
@@ -65,7 +65,7 @@ This checklist tracks the path from the current skeleton to a portfolio-ready pr
 - [x] Add theme service unit tests.
 - [x] Add language service unit tests.
 - [x] Add project registry validation tests.
-- [ ] Add basic end-to-end smoke test for navigation and view switching.
+- [x] Add basic end-to-end smoke test for navigation and view switching.
 
 ## Git And Release
 

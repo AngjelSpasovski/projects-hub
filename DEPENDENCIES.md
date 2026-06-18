@@ -2,7 +2,7 @@
 
 This file records the main project libraries and the exact installed versions from `package-lock.json`.
 
-Last updated: 2026-06-17
+Last updated: 2026-06-18
 
 ## Runtime
 
@@ -32,6 +32,7 @@ Last updated: 2026-06-17
 | `@angular-devkit/build-angular` | `^21.2.16` | `21.2.16` |
 | `@angular/cli` | `^21.2.16` | `21.2.16` |
 | `@angular/compiler-cli` | `^21.2.16` | `21.2.17` |
+| `@playwright/test` | `^1.61.0` | `1.61.0` |
 | `@types/jasmine` | `~5.1.0` | `5.1.15` |
 | `jasmine-core` | `~5.1.0` | `5.1.2` |
 | `karma` | `~6.4.0` | `6.4.4` |
