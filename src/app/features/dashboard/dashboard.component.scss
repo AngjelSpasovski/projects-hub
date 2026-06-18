@@ -78,8 +78,7 @@ h2 {
   padding-left: 2.35rem;
 }
 
-.form-control,
-.form-select {
+.form-control {
   background-color: var(--app-surface);
   border-color: var(--app-border);
   color: var(--app-text);
@@ -101,11 +100,13 @@ h2 {
 .project-catalog {
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18.5rem), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 18.5rem), 24rem));
+  justify-content: start;
 }
 
 .project-card {
   display: grid;
+  inline-size: 100%;
   min-width: 0;
   overflow: hidden;
 }
@@ -259,9 +260,52 @@ h3 {
   margin: 0;
 }
 
+:host ::ng-deep .catalog-dropdown,
 :host ::ng-deep .tag-filter {
+  align-items: center;
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: 8px;
+  color: var(--app-text);
+  display: flex;
   min-height: 2.5rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
   width: 100%;
+}
+
+:host ::ng-deep .catalog-dropdown:not(.p-disabled):hover,
+:host ::ng-deep .tag-filter:not(.p-disabled):hover {
+  border-color: color-mix(in srgb, var(--app-accent) 45%, var(--app-border));
+}
+
+:host ::ng-deep .catalog-dropdown.p-focus,
+:host ::ng-deep .tag-filter.p-focus {
+  border-color: var(--app-accent);
+  box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--app-accent) 18%, transparent);
+}
+
+:host ::ng-deep .catalog-dropdown .p-select-label,
+:host ::ng-deep .tag-filter .p-multiselect-label {
+  color: var(--app-text);
+  line-height: 1.35;
+  min-width: 0;
+  padding: 0.48rem 0.75rem;
+}
+
+:host ::ng-deep .tag-filter .p-multiselect-label {
+  align-items: center;
+  display: flex;
+  gap: 0.35rem;
+}
+
+:host ::ng-deep .catalog-dropdown .p-select-dropdown,
+:host ::ng-deep .tag-filter .p-multiselect-dropdown {
+  align-items: center;
+  color: var(--app-text-muted);
+  display: flex;
+  flex: 0 0 2.5rem;
+  justify-content: center;
+  width: 2.5rem;
 }
 
 :host ::ng-deep .project-preview-dialog {

@@ -16,7 +16,7 @@ This checklist tracks the path from the current skeleton to a portfolio-ready pr
 
 ## Design And Layout
 
-- [ ] Refine responsive behavior for mobile and tablet sidebar navigation.
+- [x] Refine responsive behavior for mobile and tablet sidebar navigation.
 - [ ] Add polished active, hover, loading, and empty states.
 - [ ] Decide final typography, spacing scale, and color tokens.
 - [ ] Replace temporary SVG covers with final project screenshots or generated covers.

@@ -5,6 +5,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Dialog } from 'primeng/dialog';
 import { MultiSelect } from 'primeng/multiselect';
+import { Select } from 'primeng/select';
 
 import { LanguageService } from '../../core/services/language.service';
 import { PortfolioProject } from '../../core/models/project.model';
@@ -14,7 +15,7 @@ type DashboardViewMode = 'big' | 'list' | 'detailed';
 type DashboardSortMode = 'title' | 'category' | 'status' | 'updated';
 
 interface FilterOption {
-  labelKey: string;
+  label: string;
   value: string;
 }
 
@@ -28,7 +29,7 @@ const VIEW_MODE_STORAGE_KEY = 'projects-hub-dashboard-view-mode';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [Dialog, FormsModule, MultiSelect, RouterLink, TranslatePipe],
+  imports: [Dialog, FormsModule, MultiSelect, RouterLink, Select, TranslatePipe],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
@@ -44,12 +45,27 @@ export class DashboardComponent {
   readonly viewMode = signal<DashboardViewMode>(this.getInitialViewMode());
   readonly previewProject = signal<PortfolioProject | null>(null);
 
-  readonly categoryOptions = computed<FilterOption[]>(() => [
-    { labelKey: 'FILTERS.ALL_CATEGORIES', value: 'all' },
-    ...Array.from(new Set(this.projects.map((project) => project.categoryKey)))
-      .sort((first, second) => this.translateKey(first).localeCompare(this.translateKey(second)))
-      .map((categoryKey) => ({ labelKey: categoryKey, value: categoryKey }))
-  ]);
+  readonly categoryOptions = computed<FilterOption[]>(() => {
+    this.languageService.activeLanguage();
+
+    return [
+      { label: this.translateKey('FILTERS.ALL_CATEGORIES'), value: 'all' },
+      ...Array.from(new Set(this.projects.map((project) => project.categoryKey)))
+        .sort((first, second) => this.translateKey(first).localeCompare(this.translateKey(second)))
+        .map((categoryKey) => ({ label: this.translateKey(categoryKey), value: categoryKey }))
+    ];
+  });
+
+  readonly sortOptions = computed<FilterOption[]>(() => {
+    this.languageService.activeLanguage();
+
+    return [
+      { label: this.translateKey('FILTERS.SORT_TITLE'), value: 'title' },
+      { label: this.translateKey('FILTERS.SORT_CATEGORY'), value: 'category' },
+      { label: this.translateKey('FILTERS.SORT_STATUS'), value: 'status' },
+      { label: this.translateKey('FILTERS.SORT_UPDATED'), value: 'updated' }
+    ];
+  });
 
   readonly tagOptions = computed<TagOption[]>(() =>
     Array.from(new Set(this.projects.flatMap((project) => project.tags)))

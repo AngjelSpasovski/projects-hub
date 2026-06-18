@@ -99,3 +99,141 @@ a {
   border-radius: 8px;
   box-shadow: var(--app-shadow);
 }
+
+.p-multiselect-overlay,
+.p-select-overlay,
+.p-overlay,
+.p-overlaypanel {
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: 8px;
+  box-shadow: var(--app-shadow);
+  color: var(--app-text);
+  margin-top: 0.2rem;
+  overflow: hidden;
+  z-index: 1200 !important;
+}
+
+.p-select-list,
+.p-multiselect-list {
+  list-style: none;
+  margin: 0 !important;
+  padding: 0.45rem !important;
+}
+
+.p-select-list-container,
+.p-multiselect-list-container {
+  background: var(--app-surface);
+  color: var(--app-text);
+}
+
+.p-select-option,
+.p-multiselect-option {
+  align-items: center;
+  border-radius: 6px !important;
+  color: var(--app-text) !important;
+  cursor: pointer;
+  display: flex;
+  gap: 0.55rem;
+  font-size: 0.98rem;
+  line-height: 1.25;
+  margin: 0.1rem 0;
+  min-height: 2.35rem;
+  padding: 0.58rem 0.8rem !important;
+  transition: background-color 0.14s ease, color 0.14s ease;
+}
+
+.p-select-option:not(.p-disabled):hover,
+.p-multiselect-option:not(.p-disabled):hover {
+  background: var(--app-surface-muted) !important;
+  color: var(--app-text) !important;
+}
+
+.p-select-option.p-focus,
+.p-select-option.p-select-option-selected,
+.p-select-option[aria-selected='true'],
+.p-multiselect-option.p-focus,
+.p-multiselect-option.p-multiselect-option-selected,
+.p-multiselect-option[aria-selected='true'] {
+  background: var(--app-accent) !important;
+  color: #fff !important;
+}
+
+.p-select-option.p-focus .p-checkbox-box,
+.p-select-option.p-select-option-selected .p-checkbox-box,
+.p-select-option[aria-selected='true'] .p-checkbox-box,
+.p-multiselect-option.p-focus .p-checkbox-box,
+.p-multiselect-option.p-multiselect-option-selected .p-checkbox-box,
+.p-multiselect-option[aria-selected='true'] .p-checkbox-box {
+  border-color: #fff;
+}
+
+.p-select-option-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.p-multiselect-header {
+  align-items: center;
+  background: var(--app-surface);
+  border-bottom: 1px solid var(--app-border);
+  color: var(--app-text);
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.65rem !important;
+}
+
+.p-multiselect-filter-container {
+  flex: 1 1 auto;
+  min-width: 0;
+  position: relative;
+}
+
+.p-multiselect-filter {
+  background: var(--app-surface) !important;
+  border: 1px solid var(--app-border) !important;
+  border-radius: 8px !important;
+  color: var(--app-text) !important;
+  font-size: 0.95rem;
+  line-height: 1.25;
+  min-height: 2.35rem;
+  outline: 0;
+  padding: 0.5rem 0.75rem 0.5rem 2.25rem !important;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  width: 100% !important;
+}
+
+.p-multiselect-filter::placeholder {
+  color: var(--app-text-muted);
+  opacity: 1;
+}
+
+.p-multiselect-filter:focus {
+  border-color: var(--app-accent) !important;
+  box-shadow: 0 0 0 0.18rem color-mix(in srgb, var(--app-accent) 16%, transparent) !important;
+}
+
+.p-multiselect-filter-icon {
+  color: var(--app-text-muted) !important;
+  height: 1rem;
+  left: 0.75rem !important;
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1rem;
+  z-index: 1;
+}
+
+.p-multiselect-filter-container svg[data-p-icon='search'] {
+  color: var(--app-text-muted) !important;
+  height: 1rem;
+  left: 0.75rem !important;
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1rem;
+  z-index: 1;
+}

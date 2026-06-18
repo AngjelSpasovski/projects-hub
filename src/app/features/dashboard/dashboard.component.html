@@ -39,11 +39,16 @@
 
     <label class="control-field">
       <span>{{ 'FILTERS.CATEGORY' | translate }}</span>
-      <select class="form-select" [ngModel]="selectedCategory()" (ngModelChange)="updateSelectedCategory($event)">
-        @for (category of categoryOptions(); track category.value) {
-          <option [value]="category.value">{{ category.labelKey | translate }}</option>
-        }
-      </select>
+      <p-select
+        styleClass="catalog-dropdown"
+        panelStyleClass="catalog-dropdown-panel"
+        [options]="categoryOptions()"
+        [ngModel]="selectedCategory()"
+        (ngModelChange)="updateSelectedCategory($event)"
+        optionLabel="label"
+        optionValue="value"
+        appendTo="body"
+      />
     </label>
 
     <label class="control-field">
@@ -59,7 +64,9 @@
         [filter]="true"
         [showToggleAll]="false"
         [showClear]="true"
+        appendTo="body"
         [placeholder]="'FILTERS.TAGS_PLACEHOLDER' | translate"
+        [filterPlaceHolder]="'FILTERS.SEARCH' | translate"
         [emptyMessage]="'FILTERS.EMPTY' | translate"
         [emptyFilterMessage]="'FILTERS.EMPTY' | translate"
       />
@@ -67,12 +74,16 @@
 
     <label class="control-field">
       <span>{{ 'FILTERS.SORT' | translate }}</span>
-      <select class="form-select" [ngModel]="sortMode()" (ngModelChange)="updateSortMode($event)">
-        <option value="title">{{ 'FILTERS.SORT_TITLE' | translate }}</option>
-        <option value="category">{{ 'FILTERS.SORT_CATEGORY' | translate }}</option>
-        <option value="status">{{ 'FILTERS.SORT_STATUS' | translate }}</option>
-        <option value="updated">{{ 'FILTERS.SORT_UPDATED' | translate }}</option>
-      </select>
+      <p-select
+        styleClass="catalog-dropdown"
+        panelStyleClass="catalog-dropdown-panel"
+        [options]="sortOptions()"
+        [ngModel]="sortMode()"
+        (ngModelChange)="updateSortMode($event)"
+        optionLabel="label"
+        optionValue="value"
+        appendTo="body"
+      />
     </label>
 
     <button type="button" class="btn btn-icon reset-filters" (click)="resetFilters()">

@@ -4,7 +4,9 @@
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  min-height: 100vh;
+  height: 100vh;
+  min-height: 0;
+  overflow: hidden;
   padding: 1rem;
 }
 
@@ -85,16 +87,14 @@
 
 @media (max-width: 900px) {
   .app-sidebar {
-    min-height: auto;
+    box-shadow: var(--app-shadow);
+    height: 100vh;
+    min-height: 0;
   }
 
   .project-links {
-    display: flex;
-    max-height: none;
+    display: grid;
+    max-height: calc(100vh - 13rem);
     overflow: auto;
-  }
-
-  .project-links a {
-    flex: 0 0 auto;
   }
 }

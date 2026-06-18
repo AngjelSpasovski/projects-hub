@@ -2,6 +2,8 @@
   "APP": {
     "ADMIN": "Admin workspace",
     "LANGUAGE": "Language",
+    "CLOSE_MENU": "Close navigation",
+    "OPEN_MENU": "Open navigation",
     "PORTFOLIO_REPO": "Portfolio repository",
     "THEME": "Theme",
     "TITLE": "Projects Hub"

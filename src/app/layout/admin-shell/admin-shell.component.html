@@ -1,5 +1,22 @@
-<div class="admin-shell">
-  <app-sidebar />
+<div class="admin-shell" [class.sidebar-open]="isSidebarOpen()">
+  <button
+    type="button"
+    class="mobile-menu-button"
+    [attr.aria-label]="'APP.OPEN_MENU' | translate"
+    [attr.aria-expanded]="isSidebarOpen()"
+    (click)="openSidebar()"
+  >
+    <i class="pi pi-bars"></i>
+  </button>
+
+  <button
+    type="button"
+    class="sidebar-backdrop"
+    [attr.aria-label]="'APP.CLOSE_MENU' | translate"
+    (click)="closeSidebar()"
+  ></button>
+
+  <app-sidebar class="sidebar-panel" />
 
   <section class="admin-workspace">
     <app-header />
