@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, OnDestroy, OnInit, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -33,11 +33,14 @@ const VIEW_MODE_STORAGE_KEY = 'projects-hub-dashboard-view-mode';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit, OnDestroy {
   private readonly languageService = inject(LanguageService);
   private readonly translate = inject(TranslateService);
+  private loadingTimer: number | undefined;
 
   readonly projects = PROJECTS;
+  readonly skeletonCards = Array.from({ length: 5 }, (_, index) => index);
+  readonly isCatalogLoading = signal(true);
   readonly searchTerm = signal('');
   readonly selectedCategory = signal('all');
   readonly selectedTags = signal<string[]>([]);
@@ -87,6 +90,14 @@ export class DashboardComponent {
       .filter((project) => selectedTags.length === 0 || selectedTags.every((tag) => project.tags.includes(tag)))
       .sort((first, second) => this.compareProjects(first, second, sortMode));
   });
+
+  ngOnInit(): void {
+    this.loadingTimer = window.setTimeout(() => this.isCatalogLoading.set(false), 250);
+  }
+
+  ngOnDestroy(): void {
+    window.clearTimeout(this.loadingTimer);
+  }
 
   setViewMode(viewMode: DashboardViewMode): void {
     this.viewMode.set(viewMode);

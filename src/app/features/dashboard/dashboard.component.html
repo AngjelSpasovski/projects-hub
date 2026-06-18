@@ -92,12 +92,44 @@
     </button>
   </section>
 
-  <div class="result-count">
-    {{ 'FILTERS.RESULTS' | translate:{ count: filteredProjects().length } }}
+  <div class="result-count" [class.loading]="isCatalogLoading()">
+    @if (isCatalogLoading()) {
+      <span class="skeleton-line result-skeleton"></span>
+    } @else {
+      {{ 'FILTERS.RESULTS' | translate:{ count: filteredProjects().length } }}
+    }
   </div>
 
-  <div class="project-catalog" [class.list-view]="viewMode() === 'list'" [class.detailed-view]="viewMode() === 'detailed'">
-    @for (project of filteredProjects(); track project.id) {
+  <div
+    class="project-catalog"
+    [class.loading-catalog]="isCatalogLoading()"
+    [class.list-view]="viewMode() === 'list'"
+    [class.detailed-view]="viewMode() === 'detailed'"
+    [attr.aria-busy]="isCatalogLoading()"
+  >
+    @if (isCatalogLoading()) {
+      @for (skeleton of skeletonCards; track skeleton) {
+        <article class="project-card skeleton-card surface-panel" aria-hidden="true">
+          <div class="cover skeleton-block"></div>
+          <div class="project-content">
+            <div class="project-title-row">
+              <div>
+                <span class="skeleton-line skeleton-eyebrow"></span>
+                <span class="skeleton-line skeleton-title"></span>
+              </div>
+              <span class="skeleton-pill"></span>
+            </div>
+            <span class="skeleton-line skeleton-summary"></span>
+            <span class="skeleton-line skeleton-summary short"></span>
+            <div class="project-card-actions">
+              <span class="skeleton-button"></span>
+              <span class="skeleton-button primary"></span>
+            </div>
+          </div>
+        </article>
+      }
+    } @else {
+      @for (project of filteredProjects(); track project.id) {
       <article class="project-card surface-panel">
         <a [routerLink]="project.route" class="cover" [attr.aria-label]="project.titleKey | translate">
           <img [src]="project.image" [alt]="project.titleKey | translate" />
@@ -148,7 +180,7 @@
           </div>
         </div>
       </article>
-    } @empty {
+      } @empty {
       <section class="empty-state surface-panel">
         <i class="pi pi-search"></i>
         <h3>{{ 'FILTERS.NO_RESULTS_TITLE' | translate }}</h3>
@@ -157,6 +189,7 @@
           {{ 'FILTERS.RESET' | translate }}
         </button>
       </section>
+      }
     }
   </div>
 
