@@ -3,6 +3,25 @@
 
 :root {
   color-scheme: light;
+  --app-font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+  --app-font-size-xs: 0.72rem;
+  --app-font-size-sm: 0.78rem;
+  --app-font-size-md: 0.95rem;
+  --app-font-size-lg: 1.15rem;
+  --app-font-size-xl: 1.35rem;
+  --app-font-size-2xl: 1.65rem;
+  --app-space-1: 0.25rem;
+  --app-space-2: 0.45rem;
+  --app-space-3: 0.75rem;
+  --app-space-4: 1rem;
+  --app-space-5: 1.25rem;
+  --app-space-6: 1.5rem;
+  --app-radius-sm: 6px;
+  --app-radius-md: 8px;
+  --app-radius-pill: 999px;
+  --app-control-height: 2.5rem;
+  --app-control-height-sm: 2.35rem;
+  --app-transition-fast: 0.15s ease;
   --app-bg: #f4f6f8;
   --app-surface: #ffffff;
   --app-surface-muted: #eef2f6;
@@ -15,6 +34,8 @@
   --app-sidebar-text: #eef4fb;
   --app-sidebar-muted: #95a3b3;
   --app-shadow: 0 16px 42px rgba(20, 31, 43, 0.12);
+  --app-shadow-hover: 0 18px 46px rgba(47, 111, 237, 0.14);
+  --app-focus-ring: 0 0 0 0.2rem color-mix(in srgb, var(--app-accent) 22%, transparent);
 }
 
 [data-theme='dark'] {
@@ -31,6 +52,7 @@
   --app-sidebar-text: #f3f7fb;
   --app-sidebar-muted: #91a0af;
   --app-shadow: 0 18px 46px rgba(0, 0, 0, 0.34);
+  --app-shadow-hover: 0 18px 46px rgba(98, 165, 255, 0.18);
 }
 
 [data-theme='blue'] {
@@ -47,6 +69,7 @@
   --app-sidebar-text: #f4f9ff;
   --app-sidebar-muted: #a9c8e8;
   --app-shadow: 0 16px 42px rgba(20, 83, 145, 0.16);
+  --app-shadow-hover: 0 18px 46px rgba(20, 105, 200, 0.18);
 }
 
 * {
@@ -61,7 +84,9 @@ body {
 body {
   background: var(--app-bg);
   color: var(--app-text);
-  font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+  font-family: var(--app-font-family);
+  font-size: 16px;
+  line-height: 1.5;
   margin: 0;
 }
 
@@ -86,17 +111,25 @@ a {
 .btn-icon {
   align-items: center;
   border: 1px solid var(--app-border);
-  border-radius: 8px;
+  border-radius: var(--app-radius-md);
   display: inline-flex;
-  gap: 0.45rem;
-  min-height: 2.35rem;
+  gap: var(--app-space-2);
+  min-height: var(--app-control-height-sm);
   min-width: 0;
+}
+
+.btn:focus-visible,
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  box-shadow: var(--app-focus-ring);
+  outline: 0;
 }
 
 .surface-panel {
   background: var(--app-surface);
   border: 1px solid var(--app-border);
-  border-radius: 8px;
+  border-radius: var(--app-radius-md);
   box-shadow: var(--app-shadow);
 }
 
@@ -106,7 +139,7 @@ a {
 .p-overlaypanel {
   background: var(--app-surface);
   border: 1px solid var(--app-border);
-  border-radius: 8px;
+  border-radius: var(--app-radius-md);
   box-shadow: var(--app-shadow);
   color: var(--app-text);
   margin-top: 0.2rem;
@@ -118,7 +151,7 @@ a {
 .p-multiselect-list {
   list-style: none;
   margin: 0 !important;
-  padding: 0.45rem !important;
+  padding: var(--app-space-2) !important;
 }
 
 .p-select-list-container,
@@ -130,15 +163,15 @@ a {
 .p-select-option,
 .p-multiselect-option {
   align-items: center;
-  border-radius: 6px !important;
+  border-radius: var(--app-radius-sm) !important;
   color: var(--app-text) !important;
   cursor: pointer;
   display: flex;
   gap: 0.55rem;
-  font-size: 0.98rem;
+  font-size: var(--app-font-size-md);
   line-height: 1.25;
   margin: 0.1rem 0;
-  min-height: 2.35rem;
+  min-height: var(--app-control-height-sm);
   padding: 0.58rem 0.8rem !important;
   transition: background-color 0.14s ease, color 0.14s ease;
 }
@@ -193,11 +226,11 @@ a {
 .p-multiselect-filter {
   background: var(--app-surface) !important;
   border: 1px solid var(--app-border) !important;
-  border-radius: 8px !important;
+  border-radius: var(--app-radius-md) !important;
   color: var(--app-text) !important;
-  font-size: 0.95rem;
+  font-size: var(--app-font-size-md);
   line-height: 1.25;
-  min-height: 2.35rem;
+  min-height: var(--app-control-height-sm);
   outline: 0;
   padding: 0.5rem 0.75rem 0.5rem 2.25rem !important;
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
@@ -211,7 +244,7 @@ a {
 
 .p-multiselect-filter:focus {
   border-color: var(--app-accent) !important;
-  box-shadow: 0 0 0 0.18rem color-mix(in srgb, var(--app-accent) 16%, transparent) !important;
+  box-shadow: var(--app-focus-ring) !important;
 }
 
 .p-multiselect-filter-icon {

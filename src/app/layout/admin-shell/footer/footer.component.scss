@@ -3,8 +3,8 @@
   border-top: 1px solid var(--app-border);
   color: var(--app-text-muted);
   display: flex;
-  font-size: 0.85rem;
+  font-size: var(--app-font-size-md);
   justify-content: space-between;
   min-height: 3.25rem;
-  padding: 0.7rem 1.25rem;
+  padding: 0.7rem var(--app-space-5);
 }

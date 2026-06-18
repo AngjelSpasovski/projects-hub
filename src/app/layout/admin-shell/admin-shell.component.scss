@@ -22,7 +22,7 @@
 .admin-main {
   min-height: 0;
   overflow: auto;
-  padding: 1.25rem;
+  padding: var(--app-space-5);
 }
 
 @media (max-width: 900px) {
@@ -34,7 +34,7 @@
     align-items: center;
     background: var(--app-accent);
     border: 0;
-    border-radius: 8px;
+    border-radius: var(--app-radius-md);
     box-shadow: var(--app-shadow);
     color: #fff;
     display: inline-flex;
@@ -89,7 +89,7 @@
   }
 
   .admin-main {
-    padding: 1rem;
+    padding: var(--app-space-4);
   }
 }
 

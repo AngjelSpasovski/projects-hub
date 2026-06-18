@@ -1,19 +1,19 @@
 .dashboard {
   display: grid;
-  gap: 1.25rem;
+  gap: var(--app-space-5);
 }
 
 .dashboard-header {
   align-items: flex-end;
   display: flex;
-  gap: 1rem;
+  gap: var(--app-space-4);
   justify-content: space-between;
 }
 
 .eyebrow,
 .category {
   color: var(--app-text-muted);
-  font-size: 0.78rem;
+  font-size: var(--app-font-size-sm);
   font-weight: 700;
   letter-spacing: 0;
   margin: 0;
@@ -21,7 +21,7 @@
 }
 
 h2 {
-  font-size: 1.65rem;
+  font-size: var(--app-font-size-2xl);
   margin: 0.15rem 0 0.35rem;
 }
 
@@ -46,7 +46,7 @@ h2 {
   display: grid;
   gap: 0.85rem;
   grid-template-columns: minmax(14rem, 1.4fr) repeat(3, minmax(10rem, 1fr)) auto;
-  padding: 1rem;
+  padding: var(--app-space-4);
 }
 
 .control-field {
@@ -57,7 +57,7 @@ h2 {
 
 .control-field > span:first-child {
   color: var(--app-text-muted);
-  font-size: 0.76rem;
+  font-size: var(--app-font-size-xs);
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -93,7 +93,7 @@ h2 {
 
 .result-count {
   color: var(--app-text-muted);
-  font-size: 0.9rem;
+  font-size: var(--app-font-size-md);
   font-weight: 700;
   min-height: 1.25rem;
 }
@@ -105,7 +105,7 @@ h2 {
 
 .project-catalog {
   display: grid;
-  gap: 1rem;
+  gap: var(--app-space-4);
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 18.5rem), 24rem));
   justify-content: start;
 }
@@ -121,7 +121,7 @@ h2 {
 .project-card:not(.skeleton-card):hover,
 .project-card:not(.skeleton-card):focus-within {
   border-color: color-mix(in srgb, var(--app-accent) 45%, var(--app-border));
-  box-shadow: 0 18px 46px color-mix(in srgb, var(--app-accent) 14%, transparent);
+  box-shadow: var(--app-shadow-hover);
   transform: translateY(-2px);
 }
 
@@ -149,7 +149,7 @@ h2 {
   display: grid;
   gap: 0.8rem;
   min-width: 0;
-  padding: 1rem;
+  padding: var(--app-space-4);
 }
 
 .project-title-row {
@@ -165,7 +165,7 @@ h2 {
 }
 
 h3 {
-  font-size: 1.12rem;
+  font-size: var(--app-font-size-lg);
   margin: 0.1rem 0 0;
   overflow-wrap: anywhere;
 }
@@ -182,7 +182,7 @@ h3 {
   border: 1px solid var(--app-border);
   border-radius: 999px;
   color: var(--app-text-muted);
-  font-size: 0.75rem;
+  font-size: var(--app-font-size-xs);
   font-weight: 700;
   padding: 0.25rem 0.55rem;
   white-space: nowrap;
@@ -211,13 +211,13 @@ h3 {
 .project-meta div {
   background: var(--app-surface-muted);
   border: 1px solid var(--app-border);
-  border-radius: 8px;
+  border-radius: var(--app-radius-md);
   padding: 0.55rem;
 }
 
 .project-meta dt {
   color: var(--app-text-muted);
-  font-size: 0.72rem;
+  font-size: var(--app-font-size-xs);
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -241,7 +241,7 @@ h3 {
 .project-card-actions .btn:focus-visible,
 .open-project:focus-visible,
 .empty-state .btn:focus-visible {
-  box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--app-accent) 24%, transparent);
+  box-shadow: var(--app-focus-ring);
   outline: 0;
 }
 
@@ -283,7 +283,7 @@ h3 {
   align-items: center;
   background: color-mix(in srgb, var(--app-accent) 12%, var(--app-surface));
   border: 1px solid color-mix(in srgb, var(--app-accent) 24%, var(--app-border));
-  border-radius: 999px;
+  border-radius: var(--app-radius-pill);
   color: var(--app-accent);
   display: inline-flex;
   font-size: 1.4rem;
@@ -321,7 +321,7 @@ h3 {
 }
 
 .skeleton-line {
-  border-radius: 999px;
+  border-radius: var(--app-radius-pill);
   display: block;
   height: 0.8rem;
 }
@@ -358,7 +358,7 @@ h3 {
 }
 
 .skeleton-button {
-  border-radius: 8px;
+  border-radius: var(--app-radius-md);
   height: 2rem;
   width: 5.25rem;
 }
@@ -382,10 +382,10 @@ h3 {
   align-items: center;
   background: var(--app-surface);
   border: 1px solid var(--app-border);
-  border-radius: 8px;
+  border-radius: var(--app-radius-md);
   color: var(--app-text);
   display: flex;
-  min-height: 2.5rem;
+  min-height: var(--app-control-height);
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
   width: 100%;
 }
@@ -398,7 +398,7 @@ h3 {
 :host ::ng-deep .catalog-dropdown.p-focus,
 :host ::ng-deep .tag-filter.p-focus {
   border-color: var(--app-accent);
-  box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--app-accent) 18%, transparent);
+  box-shadow: var(--app-focus-ring);
 }
 
 :host ::ng-deep .catalog-dropdown .p-select-label,
@@ -443,7 +443,7 @@ h3 {
 }
 
 :host ::ng-deep .project-preview-dialog .p-dialog-title {
-  font-size: 1.15rem;
+  font-size: var(--app-font-size-lg);
   overflow-wrap: anywhere;
 }
 

@@ -18,7 +18,7 @@ This checklist tracks the path from the current skeleton to a portfolio-ready pr
 
 - [x] Refine responsive behavior for mobile and tablet sidebar navigation.
 - [x] Add polished active, hover, loading, and empty states.
-- [ ] Decide final typography, spacing scale, and color tokens.
+- [x] Decide final typography, spacing scale, and color tokens.
 - [ ] Replace temporary SVG covers with final project screenshots or generated covers.
 - [x] Add PrimeNG modal/dialog pattern for project previews.
 
