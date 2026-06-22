@@ -1,15 +1,10 @@
 <section class="weather-page surface-panel">
-  <div class="project-copy">
-    <p class="eyebrow">{{ 'PROJECTS.WEATHER.TITLE' | translate }}</p>
-    <h2>{{ 'WEATHER.TITLE' | translate }}</h2>
-    <p>{{ 'WEATHER.DESCRIPTION' | translate }}</p>
-
-    <ul>
-      <li>{{ 'WEATHER.FEATURES.LOADING' | translate }}</li>
-      <li>{{ 'WEATHER.FEATURES.FILTERS' | translate }}</li>
-      <li>{{ 'WEATHER.FEATURES.ERRORS' | translate }}</li>
-    </ul>
-  </div>
+  <app-page-header
+    eyebrowKey="PROJECTS.WEATHER.TITLE"
+    titleKey="WEATHER.TITLE"
+    descriptionKey="WEATHER.DESCRIPTION"
+    [featureKeys]="['WEATHER.FEATURES.LOADING', 'WEATHER.FEATURES.FILTERS', 'WEATHER.FEATURES.ERRORS']"
+  />
 
   <div class="weather-shell" [attr.aria-label]="'WEATHER.TITLE' | translate">
     <div class="toolbar">
@@ -42,14 +37,14 @@
         }
       </div>
     } @else if (loadState() === 'error') {
-      <section class="state-panel error-state">
-        <i class="pi pi-wifi"></i>
-        <h3>{{ 'WEATHER.ERROR_TITLE' | translate }}</h3>
-        <p>{{ 'WEATHER.ERROR_TEXT' | translate }}</p>
-        <button type="button" class="btn btn-primary btn-sm" (click)="loadWeather()">
-          {{ 'WEATHER.RETRY' | translate }}
-        </button>
-      </section>
+      <app-async-state-panel
+        icon="pi pi-wifi"
+        titleKey="WEATHER.ERROR_TITLE"
+        messageKey="WEATHER.ERROR_TEXT"
+        actionKey="WEATHER.RETRY"
+        tone="error"
+        (action)="loadWeather()"
+      />
     } @else {
       <div class="summary-row">
         <div>
@@ -83,11 +78,11 @@
             </dl>
           </article>
         } @empty {
-          <section class="state-panel">
-            <i class="pi pi-filter-slash"></i>
-            <h3>{{ 'WEATHER.EMPTY_TITLE' | translate }}</h3>
-            <p>{{ 'WEATHER.EMPTY_TEXT' | translate }}</p>
-          </section>
+          <app-async-state-panel
+            icon="pi pi-filter-slash"
+            titleKey="WEATHER.EMPTY_TITLE"
+            messageKey="WEATHER.EMPTY_TEXT"
+          />
         }
       </div>
     }

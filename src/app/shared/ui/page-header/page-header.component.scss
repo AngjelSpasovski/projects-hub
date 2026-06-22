@@ -1,0 +1,40 @@
+:host {
+  align-content: start;
+  display: grid;
+  min-width: 0;
+}
+
+.page-header {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.eyebrow {
+  color: var(--app-text-muted);
+  font-size: var(--app-font-size-xs);
+  font-weight: 700;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size: 1.6rem;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+p,
+li {
+  color: var(--app-text-muted);
+}
+
+p {
+  margin: 0;
+}
+
+ul {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0;
+  padding-left: 1.15rem;
+}

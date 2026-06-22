@@ -1,0 +1,13 @@
+<header class="page-header">
+  <p class="eyebrow">{{ eyebrowKey() | translate }}</p>
+  <h2>{{ titleKey() | translate }}</h2>
+  <p>{{ descriptionKey() | translate }}</p>
+
+  @if (featureKeys().length) {
+    <ul>
+      @for (featureKey of featureKeys(); track featureKey) {
+        <li>{{ featureKey | translate }}</li>
+      }
+    </ul>
+  }
+</header>

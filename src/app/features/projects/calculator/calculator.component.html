@@ -1,15 +1,10 @@
 <section class="calculator-page surface-panel">
-  <div class="project-copy">
-    <p class="eyebrow">{{ 'PROJECTS.CALCULATOR.TITLE' | translate }}</p>
-    <h2>{{ 'CALCULATOR.TITLE' | translate }}</h2>
-    <p>{{ 'CALCULATOR.DESCRIPTION' | translate }}</p>
-
-    <ul>
-      <li>{{ 'CALCULATOR.FEATURES.ARITHMETIC' | translate }}</li>
-      <li>{{ 'CALCULATOR.FEATURES.KEYBOARD' | translate }}</li>
-      <li>{{ 'CALCULATOR.FEATURES.ERRORS' | translate }}</li>
-    </ul>
-  </div>
+  <app-page-header
+    eyebrowKey="PROJECTS.CALCULATOR.TITLE"
+    titleKey="CALCULATOR.TITLE"
+    descriptionKey="CALCULATOR.DESCRIPTION"
+    [featureKeys]="['CALCULATOR.FEATURES.ARITHMETIC', 'CALCULATOR.FEATURES.KEYBOARD', 'CALCULATOR.FEATURES.ERRORS']"
+  />
 
   <div class="calculator" [attr.aria-label]="'CALCULATOR.TITLE' | translate">
     <div class="display">

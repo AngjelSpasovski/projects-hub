@@ -1,0 +1,49 @@
+<article class="project-card surface-panel" [class.horizontal]="viewMode() !== 'big'">
+  <a [routerLink]="project().route" class="cover" [attr.aria-label]="project().titleKey | translate">
+    <img [src]="project().image" [alt]="project().titleKey | translate" />
+  </a>
+
+  <div class="project-content">
+    <div class="project-title-row">
+      <div>
+        <p class="category">{{ project().categoryKey | translate }}</p>
+        <h3>{{ project().titleKey | translate }}</h3>
+      </div>
+      <app-project-status-badge [status]="project().status" />
+    </div>
+
+    @if (viewMode() !== 'list') {
+      <p class="summary">{{ project().summaryKey | translate }}</p>
+    }
+
+    @if (viewMode() === 'detailed') {
+      <dl class="project-meta">
+        <div>
+          <dt>{{ 'PROJECT.META.DIFFICULTY' | translate }}</dt>
+          <dd>{{ ('PROJECT.DIFFICULTY.' + project().difficulty.toUpperCase()) | translate }}</dd>
+        </div>
+        <div>
+          <dt>{{ 'PROJECT.META.UPDATED' | translate }}</dt>
+          <dd>{{ project().updatedAt }}</dd>
+        </div>
+      </dl>
+
+      <div class="tags">
+        @for (tag of project().tags; track tag) {
+          <span>{{ tag }}</span>
+        }
+      </div>
+    }
+
+    <div class="project-card-actions">
+      <button type="button" class="btn btn-sm btn-icon" (click)="preview.emit(project())">
+        <i class="pi pi-eye"></i>
+        <span>{{ 'PROJECT.PREVIEW' | translate }}</span>
+      </button>
+      <a class="btn btn-primary btn-sm open-project" [routerLink]="project().route">
+        <i class="pi pi-external-link"></i>
+        <span>{{ 'PROJECT.OPEN' | translate }}</span>
+      </a>
+    </div>
+  </div>
+</article>

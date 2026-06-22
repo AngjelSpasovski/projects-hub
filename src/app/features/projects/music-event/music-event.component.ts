@@ -1,6 +1,7 @@
 import { Component, computed, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
+import { PageHeaderComponent } from '../../../shared/ui/page-header/page-header.component';
 import { Dialog } from 'primeng/dialog';
 import { MultiSelect } from 'primeng/multiselect';
 
@@ -74,7 +75,7 @@ const EVENTS: MusicEvent[] = [
 @Component({
   selector: 'app-music-event',
   standalone: true,
-  imports: [Dialog, FormsModule, MultiSelect, TranslatePipe],
+  imports: [Dialog, FormsModule, MultiSelect, PageHeaderComponent, TranslatePipe],
   templateUrl: './music-event.component.html',
   styleUrl: './music-event.component.scss'
 })

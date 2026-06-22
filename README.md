@@ -2,6 +2,8 @@
 
 Projects Hub is an Angular portfolio workspace for collecting small frontend projects in one maintainable application.
 
+[Live application](https://angjelspasovski.github.io/projects-hub/) | [Source repository](https://github.com/AngjelSpasovski/projects-hub)
+
 The app opens directly into an admin-style dashboard where projects are browsed from the sidebar and catalog. Each mini project can be migrated into its own standalone Angular component while keeping shared layout, themes, translations, metadata, and tests consistent.
 
 ## Current Features
@@ -149,11 +151,18 @@ src/app/
       project-registry.ts
   layout/
     admin-shell/
+  shared/
+    ui/
+    validation/
 src/assets/
   i18n/
   project-covers/
 docs/
+  GITHUB_REPOSITORY_SETTINGS.md
+  I18N.md
   MINI_PROJECT_TEMPLATE.md
+  NEXT_MIGRATION_BATCH.md
+  PORTFOLIO_ENTRY.md
 ```
 
 ## Adding A Mini Project
@@ -169,6 +178,8 @@ Minimum flow:
 5. Run `npm run covers` to generate the project cover screenshot in `src/assets/project-covers/`.
 6. Add tests for the project logic.
 7. Run `npm run build` and `npm run test -- --watch=false`.
+
+The reviewed follow-up projects and their order are documented in [docs/NEXT_MIGRATION_BATCH.md](./docs/NEXT_MIGRATION_BATCH.md).
 
 ## Quality Rules
 

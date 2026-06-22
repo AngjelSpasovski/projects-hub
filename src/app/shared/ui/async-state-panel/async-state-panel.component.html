@@ -1,0 +1,10 @@
+<section class="state-panel" [class.error]="tone() === 'error'" role="status">
+  <i [class]="icon()"></i>
+  <h3>{{ titleKey() | translate }}</h3>
+  <p>{{ messageKey() | translate }}</p>
+  @if (actionKey()) {
+    <button type="button" class="btn btn-primary btn-sm" (click)="action.emit()">
+      {{ actionKey()! | translate }}
+    </button>
+  }
+</section>

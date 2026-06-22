@@ -1,15 +1,10 @@
 <section class="hang-man-page surface-panel">
-  <div class="project-copy">
-    <p class="eyebrow">{{ 'PROJECTS.HANG_MAN.TITLE' | translate }}</p>
-    <h2>{{ 'HANG_MAN.TITLE' | translate }}</h2>
-    <p>{{ 'HANG_MAN.DESCRIPTION' | translate }}</p>
-
-    <ul>
-      <li>{{ 'HANG_MAN.FEATURES.KEYBOARD' | translate }}</li>
-      <li>{{ 'HANG_MAN.FEATURES.STATE' | translate }}</li>
-      <li>{{ 'HANG_MAN.FEATURES.RESET' | translate }}</li>
-    </ul>
-  </div>
+  <app-page-header
+    eyebrowKey="PROJECTS.HANG_MAN.TITLE"
+    titleKey="HANG_MAN.TITLE"
+    descriptionKey="HANG_MAN.DESCRIPTION"
+    [featureKeys]="['HANG_MAN.FEATURES.KEYBOARD', 'HANG_MAN.FEATURES.STATE', 'HANG_MAN.FEATURES.RESET']"
+  />
 
   <div class="game-shell" [attr.aria-label]="'HANG_MAN.TITLE' | translate">
     <div class="game-status">

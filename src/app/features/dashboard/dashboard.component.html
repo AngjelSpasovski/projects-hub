@@ -130,56 +130,7 @@
       }
     } @else {
       @for (project of filteredProjects(); track project.id) {
-      <article class="project-card surface-panel">
-        <a [routerLink]="project.route" class="cover" [attr.aria-label]="project.titleKey | translate">
-          <img [src]="project.image" [alt]="project.titleKey | translate" />
-        </a>
-
-        <div class="project-content">
-          <div class="project-title-row">
-            <div>
-              <p class="category">{{ project.categoryKey | translate }}</p>
-              <h3>{{ project.titleKey | translate }}</h3>
-            </div>
-            <span class="status">{{ ('PROJECT.STATUS.' + project.status.toUpperCase()) | translate }}</span>
-          </div>
-
-          @if (viewMode() !== 'list') {
-            <p class="summary">{{ project.summaryKey | translate }}</p>
-          }
-
-          @if (viewMode() === 'detailed') {
-            <dl class="project-meta">
-              <div>
-                <dt>{{ 'PROJECT.META.DIFFICULTY' | translate }}</dt>
-                <dd>{{ ('PROJECT.DIFFICULTY.' + project.difficulty.toUpperCase()) | translate }}</dd>
-              </div>
-              <div>
-                <dt>{{ 'PROJECT.META.UPDATED' | translate }}</dt>
-                <dd>{{ project.updatedAt }}</dd>
-              </div>
-            </dl>
-
-            <div class="tags">
-              @for (tag of project.tags; track tag) {
-                <span>{{ tag }}</span>
-              }
-            </div>
-          }
-
-          <div class="project-card-actions">
-            <button type="button" class="btn btn-sm btn-icon" (click)="openPreview(project)">
-              <i class="pi pi-eye"></i>
-              <span>{{ 'PROJECT.PREVIEW' | translate }}</span>
-            </button>
-
-            <a class="btn btn-primary btn-sm open-project" [routerLink]="project.route">
-              <i class="pi pi-external-link"></i>
-              <span>{{ 'PROJECT.OPEN' | translate }}</span>
-            </a>
-          </div>
-        </div>
-      </article>
+        <app-project-card [project]="project" [viewMode]="viewMode()" (preview)="openPreview($event)" />
       } @empty {
       <section class="empty-state surface-panel">
         <i class="pi pi-search"></i>
@@ -193,73 +144,5 @@
     }
   </div>
 
-  <p-dialog
-    styleClass="project-preview-dialog"
-    [header]="(previewProject()?.titleKey ?? '') | translate"
-    [modal]="true"
-    [visible]="previewProject() !== null"
-    [dismissableMask]="true"
-    [draggable]="false"
-    [breakpoints]="{ '760px': '94vw' }"
-    [style]="{ width: 'min(46rem, 94vw)' }"
-    (visibleChange)="closePreview()"
-  >
-    @if (previewProject(); as selectedProject) {
-      <div class="preview-layout">
-        <img class="preview-cover" [src]="selectedProject.image" [alt]="selectedProject.titleKey | translate" />
-
-        <div class="preview-content">
-          <div class="preview-heading">
-            <div>
-              <p class="category">{{ selectedProject.categoryKey | translate }}</p>
-              <h3>{{ selectedProject.titleKey | translate }}</h3>
-            </div>
-            <span class="status">{{ ('PROJECT.STATUS.' + selectedProject.status.toUpperCase()) | translate }}</span>
-          </div>
-
-          <p class="summary">{{ selectedProject.summaryKey | translate }}</p>
-
-          <dl class="project-meta preview-meta">
-            <div>
-              <dt>{{ 'PROJECT.META.DIFFICULTY' | translate }}</dt>
-              <dd>{{ ('PROJECT.DIFFICULTY.' + selectedProject.difficulty.toUpperCase()) | translate }}</dd>
-            </div>
-            <div>
-              <dt>{{ 'PROJECT.META.CREATED' | translate }}</dt>
-              <dd>{{ selectedProject.createdAt }}</dd>
-            </div>
-            <div>
-              <dt>{{ 'PROJECT.META.UPDATED' | translate }}</dt>
-              <dd>{{ selectedProject.updatedAt }}</dd>
-            </div>
-          </dl>
-
-          <div class="tags">
-            @for (tag of selectedProject.tags; track tag) {
-              <span>{{ tag }}</span>
-            }
-          </div>
-
-          <div class="project-card-actions preview-actions">
-            <a class="btn btn-primary btn-sm open-project" [routerLink]="selectedProject.route" (click)="closePreview()">
-              <i class="pi pi-external-link"></i>
-              <span>{{ 'PROJECT.OPEN' | translate }}</span>
-            </a>
-
-            @if (selectedProject.repositoryUrl) {
-              <a class="btn btn-sm btn-icon" [href]="selectedProject.repositoryUrl" target="_blank" rel="noopener">
-                <i class="pi pi-github"></i>
-                <span>{{ 'PROJECT.REPOSITORY' | translate }}</span>
-              </a>
-            } @else {
-              <button type="button" class="btn btn-sm btn-icon" disabled>
-                <i class="pi pi-github"></i>
-                <span>{{ 'PROJECT.REPOSITORY_PENDING' | translate }}</span>
-              </button>
-            }
-          </div>
-        </div>
-      </div>
-    }
-  </p-dialog>
+  <app-project-preview-dialog [project]="previewProject()" (closed)="closePreview()" />
 </section>

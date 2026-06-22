@@ -1,0 +1,132 @@
+:host ::ng-deep .project-preview-dialog {
+  border: 1px solid var(--app-border);
+  color: var(--app-text);
+  overflow: hidden;
+}
+
+:host ::ng-deep .project-preview-dialog .p-dialog-header,
+:host ::ng-deep .project-preview-dialog .p-dialog-content {
+  background: var(--app-surface);
+  color: var(--app-text);
+}
+
+:host ::ng-deep .project-preview-dialog .p-dialog-header {
+  border-bottom: 1px solid var(--app-border);
+  padding: 1rem 1.1rem;
+}
+
+:host ::ng-deep .project-preview-dialog .p-dialog-title {
+  font-size: var(--app-font-size-lg);
+  overflow-wrap: anywhere;
+}
+
+:host ::ng-deep .project-preview-dialog .p-dialog-content {
+  padding: 0;
+}
+
+.preview-layout {
+  display: grid;
+  grid-template-columns: minmax(14rem, 0.9fr) minmax(0, 1.1fr);
+}
+
+.preview-cover {
+  background: var(--app-surface-muted);
+  height: 100%;
+  min-height: 20rem;
+  object-fit: cover;
+  width: 100%;
+}
+
+.preview-content {
+  display: grid;
+  gap: 0.9rem;
+  min-width: 0;
+  padding: 1.15rem;
+}
+
+.preview-heading {
+  align-items: flex-start;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: space-between;
+}
+
+.category {
+  color: var(--app-text-muted);
+  font-size: var(--app-font-size-sm);
+  font-weight: 700;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+h3 {
+  font-size: var(--app-font-size-lg);
+  margin: 0.1rem 0 0;
+  overflow-wrap: anywhere;
+}
+
+.summary {
+  color: var(--app-text-muted);
+  margin: 0;
+}
+
+.project-meta {
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+}
+
+.project-meta div {
+  background: var(--app-surface-muted);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-md);
+  padding: 0.55rem;
+}
+
+.project-meta dt {
+  color: var(--app-text-muted);
+  font-size: var(--app-font-size-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.project-meta dd {
+  font-weight: 700;
+  margin: 0.15rem 0 0;
+}
+
+.tags,
+.preview-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.tags span {
+  background: var(--app-surface-muted);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-pill);
+  color: var(--app-text-muted);
+  font-size: var(--app-font-size-xs);
+  font-weight: 700;
+  padding: 0.25rem 0.55rem;
+}
+
+.preview-actions .btn {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.4rem;
+}
+
+@media (max-width: 720px) {
+  .preview-layout,
+  .project-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .preview-cover {
+    min-height: 13rem;
+  }
+}

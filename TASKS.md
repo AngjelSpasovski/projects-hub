@@ -39,23 +39,23 @@ This checklist tracks the path from the current skeleton to a portfolio-ready pr
 - [x] Migrate Hang Man.
 - [x] Migrate Weather App.
 - [x] Migrate Music Event App.
-- [ ] Review older JavaScript projects and choose the next migration batch.
+- [x] Review older JavaScript projects and choose the next migration batch.
 - [x] Add a README section per migrated project.
 
 ## Angular Quality
 
-- [ ] Add shared UI components for page headers, project cards, badges, and modals.
-- [ ] Add shared form validation helpers.
+- [x] Add shared UI components for page headers, project cards, badges, and modals.
+- [x] Add shared form validation helpers.
 - [x] Add route-level lazy loading for project components when the catalog grows.
 - [x] Add project detail routes with real project components.
-- [ ] Add error boundaries or fallback states for API-based projects.
+- [x] Add error boundaries or fallback states for API-based projects.
 - [x] Review bundle size and optimize Bootstrap/PrimeNG imports.
 
 ## Internationalization
 
 - [x] Convert Macedonian translation to Cyrillic.
 - [x] Move visible project catalog text into translation files.
-- [ ] Add translation keys for every new component as it is created.
+- [x] Add translation keys for every new component as it is created.
 - [x] Add a missing-translation review before release.
 
 ## Testing
@@ -74,5 +74,5 @@ This checklist tracks the path from the current skeleton to a portfolio-ready pr
 - [x] Push the main branch.
 - [ ] Add repository description and topics on GitHub.
 - [x] Add a polished root README.
-- [ ] Add deployment workflow when hosting is chosen.
-- [ ] Add the final repository link to the portfolio.
+- [x] Add deployment workflow when hosting is chosen.
+- [x] Add the final repository link to the portfolio.

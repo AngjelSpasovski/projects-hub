@@ -1,15 +1,10 @@
 <section class="tic-tac-toe-page surface-panel">
-  <div class="project-copy">
-    <p class="eyebrow">{{ 'PROJECTS.TIC_TAC_TOE.TITLE' | translate }}</p>
-    <h2>{{ 'TIC_TAC_TOE.TITLE' | translate }}</h2>
-    <p>{{ 'TIC_TAC_TOE.DESCRIPTION' | translate }}</p>
-
-    <ul>
-      <li>{{ 'TIC_TAC_TOE.FEATURES.TURNS' | translate }}</li>
-      <li>{{ 'TIC_TAC_TOE.FEATURES.WINNER' | translate }}</li>
-      <li>{{ 'TIC_TAC_TOE.FEATURES.RESET' | translate }}</li>
-    </ul>
-  </div>
+  <app-page-header
+    eyebrowKey="PROJECTS.TIC_TAC_TOE.TITLE"
+    titleKey="TIC_TAC_TOE.TITLE"
+    descriptionKey="TIC_TAC_TOE.DESCRIPTION"
+    [featureKeys]="['TIC_TAC_TOE.FEATURES.TURNS', 'TIC_TAC_TOE.FEATURES.WINNER', 'TIC_TAC_TOE.FEATURES.RESET']"
+  />
 
   <div class="game-shell" [attr.aria-label]="'TIC_TAC_TOE.TITLE' | translate">
     <div class="game-status">

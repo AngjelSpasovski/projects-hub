@@ -1,6 +1,8 @@
 import { Component, OnDestroy, computed, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
+import { PageHeaderComponent } from '../../../shared/ui/page-header/page-header.component';
+import { AsyncStatePanelComponent } from '../../../shared/ui/async-state-panel/async-state-panel.component';
 
 type WeatherCondition = 'sunny' | 'cloudy' | 'rainy';
 type WeatherFilter = 'all' | WeatherCondition;
@@ -24,7 +26,7 @@ const WEATHER_DATA: WeatherCity[] = [
 @Component({
   selector: 'app-weather',
   standalone: true,
-  imports: [FormsModule, TranslatePipe],
+  imports: [AsyncStatePanelComponent, FormsModule, PageHeaderComponent, TranslatePipe],
   templateUrl: './weather.component.html',
   styleUrl: './weather.component.scss'
 })

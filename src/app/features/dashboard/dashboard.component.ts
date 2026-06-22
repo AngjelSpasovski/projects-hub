@@ -1,17 +1,16 @@
 import { Component, OnDestroy, OnInit, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Dialog } from 'primeng/dialog';
 import { MultiSelect } from 'primeng/multiselect';
 import { Select } from 'primeng/select';
 
 import { LanguageService } from '../../core/services/language.service';
 import { PortfolioProject } from '../../core/models/project.model';
 import { PROJECTS } from '../projects/project-registry';
+import { ProjectCardComponent, ProjectCardViewMode } from '../../shared/ui/project-card/project-card.component';
+import { ProjectPreviewDialogComponent } from '../../shared/ui/project-preview-dialog/project-preview-dialog.component';
 
-type DashboardViewMode = 'big' | 'list' | 'detailed';
 type DashboardSortMode = 'title' | 'category' | 'status' | 'updated';
 
 interface FilterOption {
@@ -29,7 +28,7 @@ const VIEW_MODE_STORAGE_KEY = 'projects-hub-dashboard-view-mode';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [Dialog, FormsModule, MultiSelect, RouterLink, Select, TranslatePipe],
+  imports: [FormsModule, MultiSelect, ProjectCardComponent, ProjectPreviewDialogComponent, Select, TranslatePipe],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
@@ -45,7 +44,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   readonly selectedCategory = signal('all');
   readonly selectedTags = signal<string[]>([]);
   readonly sortMode = signal<DashboardSortMode>('title');
-  readonly viewMode = signal<DashboardViewMode>(this.getInitialViewMode());
+  readonly viewMode = signal<ProjectCardViewMode>(this.getInitialViewMode());
   readonly previewProject = signal<PortfolioProject | null>(null);
 
   readonly categoryOptions = computed<FilterOption[]>(() => {
@@ -99,7 +98,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     window.clearTimeout(this.loadingTimer);
   }
 
-  setViewMode(viewMode: DashboardViewMode): void {
+  setViewMode(viewMode: ProjectCardViewMode): void {
     this.viewMode.set(viewMode);
     localStorage.setItem(VIEW_MODE_STORAGE_KEY, viewMode);
   }
@@ -135,7 +134,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.previewProject.set(null);
   }
 
-  private getInitialViewMode(): DashboardViewMode {
+  private getInitialViewMode(): ProjectCardViewMode {
     const savedViewMode = localStorage.getItem(VIEW_MODE_STORAGE_KEY);
     return savedViewMode === 'big' || savedViewMode === 'list' || savedViewMode === 'detailed' ? savedViewMode : 'big';
   }

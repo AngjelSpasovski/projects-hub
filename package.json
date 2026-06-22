@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:pages": "ng build --base-href /projects-hub/ && node scripts/prepare-pages.mjs",
     "covers": "node scripts/generate-project-covers.mjs",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
