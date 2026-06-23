@@ -2,6 +2,7 @@ import { PortfolioProject } from '../../core/models/project.model';
 
 export const PROJECTS: PortfolioProject[] = [
   {
+    order: 10,
     id: 'tic-tac-toe',
     titleKey: 'PROJECTS.TIC_TAC_TOE.TITLE',
     summaryKey: 'PROJECTS.TIC_TAC_TOE.SUMMARY',
@@ -17,6 +18,7 @@ export const PROJECTS: PortfolioProject[] = [
     demoUrl: null
   },
   {
+    order: 20,
     id: 'calculator',
     titleKey: 'PROJECTS.CALCULATOR.TITLE',
     summaryKey: 'PROJECTS.CALCULATOR.SUMMARY',
@@ -32,6 +34,7 @@ export const PROJECTS: PortfolioProject[] = [
     demoUrl: null
   },
   {
+    order: 30,
     id: 'hang-man',
     titleKey: 'PROJECTS.HANG_MAN.TITLE',
     summaryKey: 'PROJECTS.HANG_MAN.SUMMARY',
@@ -47,6 +50,7 @@ export const PROJECTS: PortfolioProject[] = [
     demoUrl: null
   },
   {
+    order: 40,
     id: 'weather',
     titleKey: 'PROJECTS.WEATHER.TITLE',
     summaryKey: 'PROJECTS.WEATHER.SUMMARY',
@@ -62,6 +66,7 @@ export const PROJECTS: PortfolioProject[] = [
     demoUrl: null
   },
   {
+    order: 50,
     id: 'music-event',
     titleKey: 'PROJECTS.MUSIC_EVENT.TITLE',
     summaryKey: 'PROJECTS.MUSIC_EVENT.SUMMARY',
@@ -72,6 +77,22 @@ export const PROJECTS: PortfolioProject[] = [
     route: '/admin/projects/music-event',
     updatedAt: '2026-06-17',
     createdAt: '2026-06-17',
+    difficulty: 'intermediate',
+    repositoryUrl: null,
+    demoUrl: null
+  },
+  {
+    order: 60,
+    id: 'javascript-quiz',
+    titleKey: 'PROJECTS.JAVASCRIPT_QUIZ.TITLE',
+    summaryKey: 'PROJECTS.JAVASCRIPT_QUIZ.SUMMARY',
+    categoryKey: 'CATEGORIES.GAMES',
+    tags: ['Angular', 'TypeScript', 'Quiz', 'Timer'],
+    status: 'ready',
+    image: 'assets/project-covers/javascript-quiz.png',
+    route: '/admin/projects/javascript-quiz',
+    updatedAt: '2026-06-22',
+    createdAt: '2026-06-22',
     difficulty: 'intermediate',
     repositoryUrl: null,
     demoUrl: null

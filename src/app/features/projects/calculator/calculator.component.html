@@ -1,11 +1,4 @@
-<section class="calculator-page surface-panel">
-  <app-page-header
-    eyebrowKey="PROJECTS.CALCULATOR.TITLE"
-    titleKey="CALCULATOR.TITLE"
-    descriptionKey="CALCULATOR.DESCRIPTION"
-    [featureKeys]="['CALCULATOR.FEATURES.ARITHMETIC', 'CALCULATOR.FEATURES.KEYBOARD', 'CALCULATOR.FEATURES.ERRORS']"
-  />
-
+<section class="calculator-page">
   <div class="calculator" [attr.aria-label]="'CALCULATOR.TITLE' | translate">
     <div class="display">
       <div class="expression">{{ expression || 'CALCULATOR.READY' | translate }}</div>

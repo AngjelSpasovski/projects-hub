@@ -1,5 +1,7 @@
 # Next Migration Batch
 
+> Historical source review. The active migration order is maintained in [`docs/tasks/LEGACY_MIGRATIONS.md`](./tasks/LEGACY_MIGRATIONS.md).
+
 The older workspace was reviewed by source files, feature scope, and migration value. Generated admin templates, course lecture snippets, duplicate Angular shells, and vendor code are not migration targets.
 
 ## Selected Projects

@@ -12,7 +12,7 @@ test('dashboard catalog supports view switching and project navigation', async (
   await page.getByRole('button', { name: 'EN' }).click();
 
   await expect(page.getByRole('heading', { name: 'Project Catalog' })).toBeVisible();
-  await expect(page.getByText('5 project(s)')).toBeVisible();
+  await expect(page.getByText('6 project(s)')).toBeVisible();
 
   await page.getByRole('button', { name: /Detailed/ }).click();
   await expect(page.getByText('Difficulty').first()).toBeVisible();
@@ -21,7 +21,11 @@ test('dashboard catalog supports view switching and project navigation', async (
   await expect(page.getByRole('button', { name: /List/ })).toHaveClass(/active/);
 
   await page.getByRole('link', { name: 'Calculator', exact: true }).click();
-  await expect(page.getByRole('heading', { name: 'Interactive Calculator' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Calculator', exact: true })).toBeVisible();
+  await expect(page.locator('.project-workspace')).toBeVisible();
+  await expect(page.locator('.project-workspace > .project-detail')).toBeVisible();
+  await expect(page.locator('.project-workspace > .project-live .calculator-page')).toBeVisible();
+  await expect(page.locator('.project-workspace .project-live .surface-panel')).toHaveCount(0);
 
   await page.getByRole('link', { name: /Dashboard/ }).click();
   await expect(page.getByRole('heading', { name: 'Project Catalog' })).toBeVisible();
@@ -51,7 +55,7 @@ test('mobile sidebar opens and closes after navigation', async ({ page }) => {
 
   await page.getByRole('complementary').getByRole('link', { name: /Weather App/ }).click();
 
-  await expect(page.getByRole('heading', { name: 'Weather Dashboard' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Weather App', exact: true })).toBeVisible();
   await expect(menuButton).toHaveAttribute('aria-expanded', 'false');
 });
 
@@ -113,4 +117,53 @@ test('admin shell keeps chrome fixed while main content scrolls', async ({ page 
   await expect.poll(async () => footer.evaluate((element) => Math.round(window.innerHeight - element.getBoundingClientRect().bottom))).toBe(
     Math.round(footerBottom ?? 0)
   );
+});
+
+test('desktop catalog and project workspaces fit without nested scrollbars', async ({ page }) => {
+  await page.setViewportSize({ width: 1920, height: 1080 });
+  await page.goto('/');
+  await page.getByRole('button', { name: 'EN', exact: true }).click();
+  await expect(page.getByText('6 project(s)')).toBeVisible();
+
+  expect(await page.locator('.admin-main').evaluate((element) => element.scrollHeight <= element.clientHeight + 1)).toBe(true);
+
+  const routes = ['tic-tac-toe', 'calculator', 'hang-man', 'weather', 'music-event', 'javascript-quiz'];
+
+  for (const route of routes) {
+    await page.goto(`/admin/projects/${route}`);
+    await expect(page.locator('.project-live')).toBeVisible();
+    expect(
+      await page.locator('.project-live').evaluate((element) => ({
+        fits: element.scrollHeight <= element.clientHeight + 1,
+        clientHeight: element.clientHeight,
+        scrollHeight: element.scrollHeight
+      }))
+    ).toMatchObject({ fits: true });
+  }
+});
+
+test('JavaScript Quiz completes a randomized workflow and answer review', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'EN', exact: true }).click();
+  await page.getByRole('link', { name: 'JavaScript Quiz', exact: true }).click();
+
+  await expect(page.getByRole('heading', { name: 'JavaScript Quiz', exact: true })).toBeVisible();
+  await expect(page.locator('.project-cover')).toBeVisible();
+  expect(await page.locator('.project-cover').evaluate((image: HTMLImageElement) => image.complete && image.naturalWidth > 0)).toBe(
+    true
+  );
+  expect(await page.locator('.admin-main').evaluate((element) => element.scrollHeight <= element.clientHeight + 1)).toBe(true);
+  await page.getByRole('button', { name: 'Start quiz' }).click();
+  expect(await page.locator('.project-live').evaluate((element) => element.scrollHeight <= element.clientHeight + 1)).toBe(true);
+
+  for (let question = 0; question < 6; question += 1) {
+    await page.locator('.answer-option').first().click();
+    await page.getByRole('button', { name: /Next question|Finish quiz/ }).click();
+  }
+
+  await expect(page.getByRole('heading', { name: 'Quiz complete' })).toBeVisible();
+  await expect(page.getByText(/You answered \d of 6 questions correctly\./)).toBeVisible();
+  await page.getByRole('button', { name: 'Review answers' }).click();
+  await expect(page.getByRole('heading', { name: 'Answer review' })).toBeVisible();
+  await expect(page.locator('.review-item')).toHaveCount(6);
 });

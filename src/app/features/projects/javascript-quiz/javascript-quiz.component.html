@@ -1,0 +1,116 @@
+<section class="quiz-page" [attr.aria-label]="'JAVASCRIPT_QUIZ.ARIA_LABEL' | translate">
+  @if (phase() === 'intro') {
+    <div class="quiz-intro">
+      <span class="intro-icon"><i class="pi pi-code"></i></span>
+      <p class="eyebrow">{{ 'JAVASCRIPT_QUIZ.EYEBROW' | translate }}</p>
+      <h3>{{ 'JAVASCRIPT_QUIZ.INTRO_TITLE' | translate }}</h3>
+      <p>{{ 'JAVASCRIPT_QUIZ.INTRO_TEXT' | translate:{ count: questionCount, total: questionBankSize, seconds: questionTime } }}</p>
+      <button type="button" class="btn btn-primary" (click)="startQuiz()">
+        <i class="pi pi-play"></i>
+        <span>{{ 'JAVASCRIPT_QUIZ.START' | translate }}</span>
+      </button>
+    </div>
+  } @else if (phase() === 'playing') {
+    <div class="quiz-shell">
+      <div class="quiz-toolbar">
+        <span>{{ 'JAVASCRIPT_QUIZ.PROGRESS' | translate:{ current: currentIndex() + 1, total: questions().length } }}</span>
+        <span class="timer" [class.warning]="secondsRemaining() <= 5">
+          <i class="pi pi-clock"></i>
+          {{ 'JAVASCRIPT_QUIZ.TIME_LEFT' | translate:{ seconds: secondsRemaining() } }}
+        </span>
+      </div>
+
+      <div class="progress-track" role="progressbar" [attr.aria-valuenow]="progress()" aria-valuemin="0" aria-valuemax="100">
+        <span [style.width.%]="progress()"></span>
+      </div>
+
+      <div class="question-block">
+        <p class="eyebrow">{{ 'JAVASCRIPT_QUIZ.QUESTION' | translate:{ number: currentIndex() + 1 } }}</p>
+        <h3>{{ currentQuestion().questionKey | translate }}</h3>
+      </div>
+
+      <div class="answer-grid">
+        @for (optionKey of currentQuestion().optionKeys; track optionKey; let optionIndex = $index) {
+          <button
+            type="button"
+            class="answer-option"
+            [class.selected]="currentAnswer() === optionIndex"
+            [attr.aria-pressed]="currentAnswer() === optionIndex"
+            (click)="selectAnswer(optionIndex)"
+          >
+            <span>{{ ['A', 'B', 'C', 'D'][optionIndex] }}</span>
+            {{ optionKey | translate }}
+          </button>
+        }
+      </div>
+
+      <div class="quiz-actions">
+        <span>{{ currentAnswer() === null ? ('JAVASCRIPT_QUIZ.SELECT_ANSWER' | translate) : '' }}</span>
+        <button type="button" class="btn btn-primary" [disabled]="currentAnswer() === null" (click)="nextQuestion()">
+          {{ (currentIndex() === questions().length - 1 ? 'JAVASCRIPT_QUIZ.FINISH' : 'JAVASCRIPT_QUIZ.NEXT') | translate }}
+          <i class="pi pi-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  } @else if (phase() === 'results') {
+    <div class="quiz-results">
+      <span class="score-ring">{{ scorePercentage() }}%</span>
+      <p class="eyebrow">{{ 'JAVASCRIPT_QUIZ.RESULTS' | translate }}</p>
+      <h3>{{ 'JAVASCRIPT_QUIZ.RESULT_TITLE' | translate }}</h3>
+      <p>{{ 'JAVASCRIPT_QUIZ.SCORE' | translate:{ score: score(), total: questions().length } }}</p>
+      <div class="result-actions">
+        <button type="button" class="btn" (click)="showReview()">
+          <i class="pi pi-list-check"></i>
+          {{ 'JAVASCRIPT_QUIZ.REVIEW' | translate }}
+        </button>
+        <button type="button" class="btn btn-primary" (click)="startQuiz()">
+          <i class="pi pi-refresh"></i>
+          {{ 'JAVASCRIPT_QUIZ.RESTART' | translate }}
+        </button>
+      </div>
+    </div>
+  } @else {
+    <div class="review-shell">
+      <div class="review-header">
+        <div>
+          <p class="eyebrow">{{ 'JAVASCRIPT_QUIZ.REVIEW' | translate }}</p>
+          <h3>{{ 'JAVASCRIPT_QUIZ.REVIEW_TITLE' | translate }}</h3>
+        </div>
+        <button type="button" class="btn btn-sm" (click)="showResults()">
+          <i class="pi pi-arrow-left"></i>
+          {{ 'JAVASCRIPT_QUIZ.BACK_TO_RESULTS' | translate }}
+        </button>
+      </div>
+
+      <div class="review-list">
+        @for (question of questions(); track question.id; let questionIndex = $index) {
+          <article class="review-item" [class.correct]="isCorrect(question, questionIndex)" [class.incorrect]="!isCorrect(question, questionIndex)">
+            <div class="review-status">
+              <i [class]="isCorrect(question, questionIndex) ? 'pi pi-check-circle' : 'pi pi-times-circle'"></i>
+              <strong>{{ 'JAVASCRIPT_QUIZ.QUESTION' | translate:{ number: questionIndex + 1 } }}</strong>
+            </div>
+            <h4>{{ question.questionKey | translate }}</h4>
+            <p>
+              <strong>{{ 'JAVASCRIPT_QUIZ.YOUR_ANSWER' | translate }}:</strong>
+              @if (selectedAnswerKey(question, questionIndex); as answerKey) {
+                {{ answerKey | translate }}
+              } @else {
+                {{ 'JAVASCRIPT_QUIZ.UNANSWERED' | translate }}
+              }
+            </p>
+            <p>
+              <strong>{{ 'JAVASCRIPT_QUIZ.CORRECT_ANSWER' | translate }}:</strong>
+              {{ question.optionKeys[question.correctOption] | translate }}
+            </p>
+            <p class="explanation">{{ question.explanationKey | translate }}</p>
+          </article>
+        }
+      </div>
+
+      <button type="button" class="btn btn-primary restart-review" (click)="startQuiz()">
+        <i class="pi pi-refresh"></i>
+        {{ 'JAVASCRIPT_QUIZ.RESTART' | translate }}
+      </button>
+    </div>
+  }
+</section>

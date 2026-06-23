@@ -2,6 +2,7 @@ export type ProjectStatus = 'ready' | 'planned' | 'migration';
 export type ProjectDifficulty = 'beginner' | 'intermediate' | 'advanced';
 
 export interface PortfolioProject {
+  order: number;
   id: string;
   titleKey: string;
   summaryKey: string;

@@ -17,7 +17,9 @@ The app opens directly into an admin-style dashboard where projects are browsed 
 - Light, dark, and blue themes
 - Macedonian and English translations with `ngx-translate`
 - Project metadata: status, difficulty, dates, repository link, live demo link
-- Lazy-loaded Calculator, Tic Tac Toe, Hang Man, Weather, and Music Event mini projects
+- Distinctive illustrated catalog covers with separate live-project screenshots for documentation
+- Unified project workspace containing metadata and the interactive application
+- Lazy-loaded Calculator, Tic Tac Toe, Hang Man, Weather, Music Event, and JavaScript Quiz mini projects
 - Unit tests for app shell, dashboard logic, registry metadata, shared services, and mini project behavior
 - Playwright smoke tests for catalog navigation, view switching, and language switching
 
@@ -43,8 +45,13 @@ Exact installed versions are tracked in [DEPENDENCIES.md](./DEPENDENCIES.md).
 | Hang Man | Ready | Migrated as a standalone Angular component with word-guessing state and tests. |
 | Weather App | Ready | Migrated as a standalone Angular component with simulated API states and tests. |
 | Music Event App | Ready | Migrated as a standalone Angular component with PrimeNG filters, dialog details, and tests. |
+| JavaScript Quiz | Ready | Six randomized questions per round from a reviewed 26-question bank, with timer, review, translations, and tests. |
 
-The implementation roadmap is tracked in [TASKS.md](./TASKS.md).
+The master roadmap is tracked in [TASKS.md](./TASKS.md). Detailed batches, project backlogs, and completion rules live in [docs/tasks](./docs/tasks/README.md).
+
+## Next Work
+
+The next product priority is the To-Do List with LocalStorage, followed by Expense Tracker and Technical Documentation. Legacy migrations start with Project Planner, Odd/Even, and Dev Logger.
 
 ## Migrated Projects
 
@@ -88,6 +95,14 @@ Music Event App is an event catalog focused on richer UI controls and detail vie
 
 Angular coverage: standalone component, signals, computed filters, template-driven forms, PrimeNG MultiSelect, PrimeNG Dialog, and unit tests for filtering and modal state.
 
+### JavaScript Quiz
+
+Folder: [`src/app/features/projects/javascript-quiz`](./src/app/features/projects/javascript-quiz)
+
+JavaScript Quiz is a timed multiple-choice challenge built from reviewed JavaScript learning material. Every round draws six questions from a typed bank of 26 and randomizes the answer positions. It includes a per-question countdown, automatic timeout progression, score calculation, translated explanations, answer review, and restart flow.
+
+Angular coverage: standalone component, signals, computed score and progress, timer cleanup, translated typed question data, lazy loading, unit tests, and an end-to-end completion workflow.
+
 ## Getting Started
 
 Install dependencies:
@@ -126,7 +141,7 @@ Run end-to-end smoke tests:
 npm run test:e2e
 ```
 
-Regenerate project cover screenshots:
+Regenerate live project screenshots for documentation and the future gallery:
 
 ```bash
 npm run covers
@@ -144,6 +159,7 @@ src/app/
     projects/
       calculator/
       hang-man/
+      javascript-quiz/
       tic-tac-toe/
       weather/
       music-event/
@@ -157,7 +173,14 @@ src/app/
 src/assets/
   i18n/
   project-covers/
+  project-screenshots/
 docs/
+  tasks/
+    DASHBOARD_WIDGETS.md
+    DEFINITION_OF_DONE.md
+    LEGACY_MIGRATIONS.md
+    NEW_PROJECTS_BACKLOG.md
+    UI_REFINEMENTS.md
   GITHUB_REPOSITORY_SETTINGS.md
   I18N.md
   MINI_PROJECT_TEMPLATE.md
@@ -175,11 +198,11 @@ Minimum flow:
 2. Add the standalone component files.
 3. Add project metadata in `project-registry.ts`.
 4. Add Macedonian and English translation keys.
-5. Run `npm run covers` to generate the project cover screenshot in `src/assets/project-covers/`.
+5. Add a distinctive illustrated catalog cover in `src/assets/project-covers/`.
 6. Add tests for the project logic.
 7. Run `npm run build` and `npm run test -- --watch=false`.
 
-The reviewed follow-up projects and their order are documented in [docs/NEXT_MIGRATION_BATCH.md](./docs/NEXT_MIGRATION_BATCH.md).
+The full work order is documented in [docs/tasks](./docs/tasks/README.md). Legacy sources are mapped in [LEGACY_MIGRATIONS.md](./docs/tasks/LEGACY_MIGRATIONS.md), while new ideas are prioritized in [NEW_PROJECTS_BACKLOG.md](./docs/tasks/NEW_PROJECTS_BACKLOG.md).
 
 ## Quality Rules
 
@@ -188,6 +211,7 @@ The reviewed follow-up projects and their order are documented in [docs/NEXT_MIG
 - Do not use `eval` for project logic.
 - Keep each mini project isolated unless logic is truly shared.
 - Update `TASKS.md` when a task is completed.
+- Complete [Definition of Done](./docs/tasks/DEFINITION_OF_DONE.md) before changing a project status to `ready`.
 - Update `DEPENDENCIES.md` when dependencies change.
 
 ## Purpose

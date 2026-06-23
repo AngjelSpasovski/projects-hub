@@ -1,6 +1,6 @@
 <article class="project-card surface-panel" [class.horizontal]="viewMode() !== 'big'">
   <a [routerLink]="project().route" class="cover" [attr.aria-label]="project().titleKey | translate">
-    <img [src]="project().image" [alt]="project().titleKey | translate" />
+    <img [src]="project().image" [alt]="project().titleKey | translate" loading="lazy" decoding="async" />
   </a>
 
   <div class="project-content">

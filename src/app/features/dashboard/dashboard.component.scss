@@ -1,6 +1,6 @@
 .dashboard {
   display: grid;
-  gap: var(--app-space-5);
+  gap: var(--app-space-4);
 }
 
 .dashboard-header {
@@ -46,7 +46,7 @@ h2 {
   display: grid;
   gap: 0.85rem;
   grid-template-columns: minmax(14rem, 1.4fr) repeat(3, minmax(10rem, 1fr)) auto;
-  padding: var(--app-space-4);
+  padding: var(--app-space-3);
 }
 
 .control-field {
@@ -105,8 +105,8 @@ h2 {
 
 .project-catalog {
   display: grid;
-  gap: var(--app-space-4);
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 18.5rem), 24rem));
+  gap: var(--app-space-3);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
   justify-content: start;
 }
 
@@ -126,7 +126,7 @@ h2 {
 }
 
 .cover {
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 8.5;
   background: var(--app-surface-muted);
   display: block;
   overflow: hidden;
@@ -147,9 +147,9 @@ h2 {
 
 .project-content {
   display: grid;
-  gap: 0.8rem;
+  gap: 0.6rem;
   min-width: 0;
-  padding: var(--app-space-4);
+  padding: var(--app-space-3);
 }
 
 .project-title-row {

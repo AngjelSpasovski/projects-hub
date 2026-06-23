@@ -11,7 +11,7 @@ import { PROJECTS } from '../projects/project-registry';
 import { ProjectCardComponent, ProjectCardViewMode } from '../../shared/ui/project-card/project-card.component';
 import { ProjectPreviewDialogComponent } from '../../shared/ui/project-preview-dialog/project-preview-dialog.component';
 
-type DashboardSortMode = 'title' | 'category' | 'status' | 'updated';
+type DashboardSortMode = 'order' | 'title' | 'category' | 'status' | 'updated';
 
 interface FilterOption {
   label: string;
@@ -43,7 +43,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   readonly searchTerm = signal('');
   readonly selectedCategory = signal('all');
   readonly selectedTags = signal<string[]>([]);
-  readonly sortMode = signal<DashboardSortMode>('title');
+  readonly sortMode = signal<DashboardSortMode>('order');
   readonly viewMode = signal<ProjectCardViewMode>(this.getInitialViewMode());
   readonly previewProject = signal<PortfolioProject | null>(null);
 
@@ -62,6 +62,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.languageService.activeLanguage();
 
     return [
+      { label: this.translateKey('FILTERS.SORT_ORDER'), value: 'order' },
       { label: this.translateKey('FILTERS.SORT_TITLE'), value: 'title' },
       { label: this.translateKey('FILTERS.SORT_CATEGORY'), value: 'category' },
       { label: this.translateKey('FILTERS.SORT_STATUS'), value: 'status' },
@@ -123,7 +124,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.searchTerm.set('');
     this.selectedCategory.set('all');
     this.selectedTags.set([]);
-    this.sortMode.set('title');
+    this.sortMode.set('order');
   }
 
   openPreview(project: PortfolioProject): void {
@@ -157,6 +158,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   private compareProjects(first: PortfolioProject, second: PortfolioProject, sortMode: DashboardSortMode): number {
+    if (sortMode === 'order') {
+      return first.order - second.order;
+    }
+
     if (sortMode === 'updated') {
       return second.updatedAt.localeCompare(first.updatedAt);
     }

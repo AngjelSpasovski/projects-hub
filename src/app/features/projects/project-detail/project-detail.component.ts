@@ -12,7 +12,9 @@ const PROJECT_COMPONENT_LOADERS: Record<string, () => Promise<Type<unknown>>> = 
   calculator: () => import('../calculator/calculator.component').then((component) => component.CalculatorComponent),
   'hang-man': () => import('../hang-man/hang-man.component').then((component) => component.HangManComponent),
   weather: () => import('../weather/weather.component').then((component) => component.WeatherComponent),
-  'music-event': () => import('../music-event/music-event.component').then((component) => component.MusicEventComponent)
+  'music-event': () => import('../music-event/music-event.component').then((component) => component.MusicEventComponent),
+  'javascript-quiz': () =>
+    import('../javascript-quiz/javascript-quiz.component').then((component) => component.JavaScriptQuizComponent)
 };
 
 @Component({

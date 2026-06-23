@@ -1,39 +1,6 @@
 .tic-tac-toe-page {
   display: grid;
-  gap: 1.5rem;
-  grid-template-columns: minmax(16rem, 1fr) minmax(19rem, 24rem);
-  padding: 1.25rem;
-}
-
-.project-copy {
-  align-content: start;
-  display: grid;
-  gap: 0.9rem;
-}
-
-.eyebrow {
-  color: var(--app-text-muted);
-  font-size: 0.78rem;
-  font-weight: 700;
-  margin: 0;
-  text-transform: uppercase;
-}
-
-h2 {
-  font-size: 1.6rem;
-  margin: 0;
-}
-
-p,
-li {
-  color: var(--app-text-muted);
-}
-
-ul {
-  display: grid;
-  gap: 0.45rem;
-  margin: 0;
-  padding-left: 1.15rem;
+  justify-items: center;
 }
 
 .game-shell {
@@ -43,8 +10,9 @@ ul {
   box-shadow: var(--app-shadow);
   color: #f8fafc;
   display: grid;
-  gap: 1rem;
-  padding: 1rem;
+  gap: 0.65rem;
+  padding: 0.75rem;
+  width: min(100%, 18rem);
 }
 
 .game-status {
@@ -54,14 +22,14 @@ ul {
   display: flex;
   font-weight: 800;
   justify-content: center;
-  min-height: 3.4rem;
-  padding: 0.75rem;
+  min-height: 2.6rem;
+  padding: 0.5rem;
   text-align: center;
 }
 
 .board {
   display: grid;
-  gap: 0.55rem;
+  gap: 0.4rem;
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
@@ -71,7 +39,7 @@ ul {
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
   color: #f8fafc;
-  font-size: 2.6rem;
+  font-size: 2rem;
   font-weight: 900;
   line-height: 1;
 }

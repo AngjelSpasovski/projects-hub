@@ -59,13 +59,14 @@ Add the project to `src/app/features/projects/project-registry.ts`.
 
 ```ts
 {
+  order: 70,
   id: 'project-id',
   titleKey: 'PROJECTS.PROJECT_ID.TITLE',
   summaryKey: 'PROJECTS.PROJECT_ID.SUMMARY',
   categoryKey: 'CATEGORIES.UTILITIES',
   tags: ['Angular', 'TypeScript'],
   status: 'migration',
-  image: 'assets/project-covers/project-id.svg',
+  image: 'assets/project-covers/project-id.png',
   route: '/admin/projects/project-id',
   updatedAt: '2026-06-17',
   createdAt: '2026-06-17',
@@ -77,6 +78,7 @@ Add the project to `src/app/features/projects/project-registry.ts`.
 
 Allowed values:
 
+- `order`: unique positive number that controls the default catalog and sidebar position
 - `status`: `planned`, `migration`, `ready`
 - `difficulty`: `beginner`, `intermediate`, `advanced`
 
@@ -112,10 +114,10 @@ When a project is migrated to a real component, add a child route for it and ren
 Add a cover image in:
 
 ```text
-src/assets/project-covers/<project-id>.svg
+src/assets/project-covers/<project-id>.png
 ```
 
-Temporary SVG covers are acceptable during migration. Replace them with project screenshots before final portfolio release.
+Temporary covers are acceptable during migration. Before release, add a distinctive illustrated cover that identifies the project in the catalog. Keep live-component screenshots in the project README or gallery rather than using them as the primary catalog cover.
 
 ## Project README
 
@@ -134,7 +136,8 @@ Run these commands after adding or changing a project:
 
 ```bash
 npm run build
-npm run test -- --watch=false
+npm run test -- --watch=false --browsers=ChromeHeadless
+npm run test:e2e -- --workers=1
 ```
 
 Before pushing, manually check:

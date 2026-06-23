@@ -1,8 +1,27 @@
+:host {
+  display: block;
+  height: 100%;
+  min-height: 0;
+}
+
+.project-workspace {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
 .project-detail {
   display: grid;
-  gap: var(--app-space-5);
-  grid-template-columns: minmax(16rem, 24rem) minmax(0, 1fr);
-  padding: var(--app-space-4);
+  flex: 0 0 auto;
+  gap: var(--app-space-4);
+  grid-template-columns: 10rem minmax(0, 1fr);
+  padding: var(--app-space-3);
+}
+
+.project-summary {
+  min-width: 0;
 }
 
 .project-cover {
@@ -20,7 +39,7 @@
   color: var(--app-accent-strong);
   display: inline-flex;
   gap: var(--app-space-2);
-  margin-bottom: var(--app-space-4);
+  margin-bottom: var(--app-space-2);
   text-decoration: none;
 }
 
@@ -34,32 +53,43 @@
 }
 
 h2 {
-  margin: 0.2rem 0 0.5rem;
+  font-size: 1.45rem;
+  margin: 0.15rem 0 0.3rem;
 }
 
 p {
   color: var(--app-text-muted);
+  margin: 0;
 }
 
 .tags {
   display: flex;
   flex-wrap: wrap;
   gap: var(--app-space-2);
-  margin: var(--app-space-4) 0;
+  margin: 0;
+}
+
+.project-footer-row {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--app-space-3);
+  justify-content: space-between;
+  margin-top: var(--app-space-2);
 }
 
 .project-meta {
   display: grid;
   gap: var(--app-space-3);
   grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
-  margin: var(--app-space-5) 0 0;
+  margin: var(--app-space-2) 0 0;
 }
 
 .project-meta div {
   background: var(--app-surface-muted);
   border: 1px solid var(--app-border);
   border-radius: var(--app-radius-md);
-  padding: var(--app-space-3);
+  padding: 0.4rem 0.6rem;
 }
 
 .project-meta dt {
@@ -97,8 +127,11 @@ p {
 }
 
 .project-live {
-  display: block;
-  margin-top: var(--app-space-5);
+  border-top: 1px solid var(--app-border);
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  padding: var(--app-space-2);
 }
 
 .project-component-loading {
@@ -107,7 +140,7 @@ p {
   display: flex;
   justify-content: center;
   min-height: 16rem;
-  padding: var(--app-space-5);
+  padding: var(--app-space-6);
 }
 
 .project-component-loading i {
@@ -119,7 +152,22 @@ p {
 }
 
 @media (max-width: 820px) {
+  :host,
+  .project-workspace {
+    height: auto;
+  }
+
   .project-detail {
     grid-template-columns: 1fr;
+    padding: var(--app-space-4);
+  }
+
+  .project-live {
+    overflow: visible;
+    padding: var(--app-space-4);
+  }
+
+  .project-cover {
+    max-width: 24rem;
   }
 }

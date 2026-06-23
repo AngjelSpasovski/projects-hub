@@ -38,6 +38,7 @@
     "SEARCH": "Search",
     "SEARCH_PLACEHOLDER": "Search projects, tags, or categories",
     "SORT": "Sort",
+    "SORT_ORDER": "Project order",
     "SORT_CATEGORY": "Category",
     "SORT_STATUS": "Status",
     "SORT_TITLE": "Name",
@@ -72,6 +73,10 @@
     "MUSIC_EVENT": {
       "TITLE": "Music Event App",
       "SUMMARY": "Event listing concept for modals, multi-select filters, and detailed list views."
+    },
+    "JAVASCRIPT_QUIZ": {
+      "TITLE": "JavaScript Quiz",
+      "SUMMARY": "Randomized JavaScript challenge with a growing question bank, timer, score tracking, and answer review."
     }
   },
   "TIC_TAC_TOE": {
@@ -173,6 +178,191 @@
     "TAGS_PLACEHOLDER": "Select event tags",
     "TITLE": "Music Event Catalog",
     "VENUE": "Venue"
+  },
+  "JAVASCRIPT_QUIZ": {
+    "ARIA_LABEL": "Interactive JavaScript quiz",
+    "BACK_TO_RESULTS": "Back to results",
+    "CORRECT_ANSWER": "Correct answer",
+    "EYEBROW": "JavaScript challenge",
+    "FINISH": "Finish quiz",
+    "INTRO_TEXT": "Each round draws {{count}} random questions from a bank of {{total}}. You have {{seconds}} seconds for each question.",
+    "INTRO_TITLE": "Test your JavaScript fundamentals",
+    "NEXT": "Next question",
+    "PROGRESS": "Question {{current}} of {{total}}",
+    "QUESTION": "Question {{number}}",
+    "RESTART": "Restart quiz",
+    "RESULTS": "Results",
+    "RESULT_TITLE": "Quiz complete",
+    "REVIEW": "Review answers",
+    "REVIEW_TITLE": "Answer review",
+    "SCORE": "You answered {{score}} of {{total}} questions correctly.",
+    "SELECT_ANSWER": "Select an answer to continue.",
+    "START": "Start quiz",
+    "TIME_LEFT": "{{seconds}} seconds left",
+    "UNANSWERED": "Not answered",
+    "YOUR_ANSWER": "Your answer",
+    "QUESTIONS": {
+      "ASSIGNMENT": {
+        "TEXT": "In a classic non-strict browser script, what does console.log(y) print after var x = window.y = 5;?",
+        "OPTIONS": {
+          "A": "ReferenceError",
+          "B": "5",
+          "C": "undefined",
+          "D": "The string y"
+        },
+        "EXPLANATION": "The chained assignment writes 5 to window.y, and var x receives the same value."
+      },
+      "RETURN_OBJECT": {
+        "TEXT": "What does a function return when return is followed by a line break and then an object literal?",
+        "OPTIONS": {
+          "A": "undefined",
+          "B": "An empty object",
+          "C": "A syntax error",
+          "D": "The object literal"
+        },
+        "EXPLANATION": "Automatic semicolon insertion ends the return statement at the line break, so the function returns undefined."
+      },
+      "THIS_CONTEXT": {
+        "TEXT": "Why can a detached method return a different value than the same method called through its object?",
+        "OPTIONS": {
+          "A": "The compiler clones the object",
+          "B": "Closures disable this",
+          "C": "this is determined by the call site",
+          "D": "Detached methods become asynchronous"
+        },
+        "EXPLANATION": "For a regular function, the value of this depends on how the function is called, not where it was defined."
+      },
+      "REVERSE_ARRAY": {
+        "TEXT": "After const arr2 = arr1.reverse(), what relationship is true?",
+        "OPTIONS": {
+          "A": "arr2 is an independent copy",
+          "B": "Both variables reference the same reversed array",
+          "C": "arr1 remains unchanged",
+          "D": "arr2 is converted to a string"
+        },
+        "EXPLANATION": "reverse() mutates the original array and returns a reference to that same array."
+      },
+      "CLOSURE": {
+        "TEXT": "Which statement best defines a JavaScript closure?",
+        "OPTIONS": {
+          "A": "A function without parameters",
+          "B": "The global object",
+          "C": "A loop-specific scope",
+          "D": "A function that retains access to its lexical outer scope"
+        },
+        "EXPLANATION": "A closure keeps access to bindings from its lexical environment even after the outer function has finished."
+      },
+      "FIBONACCI": {
+        "TEXT": "Which number comes next in 0, 1, 1, 2, 3, 5, 8, 13?",
+        "OPTIONS": {
+          "A": "18",
+          "B": "20",
+          "C": "21",
+          "D": "26"
+        },
+        "EXPLANATION": "Each Fibonacci number is the sum of the previous two numbers, so 8 + 13 equals 21."
+      },
+      "VARIABLE_NAME": {
+        "TEXT": "Which name is a valid JavaScript variable identifier?",
+        "OPTIONS": { "A": "2cars", "B": "car-name", "C": "_carCount", "D": "class" },
+        "EXPLANATION": "Identifiers may start with a letter, underscore, or dollar sign, and they cannot be reserved words."
+      },
+      "NULL_UNDEFINED": {
+        "TEXT": "Which statement correctly compares null and undefined?",
+        "OPTIONS": { "A": "They are the same value and type", "B": "Both represent missing values, but they are different types", "C": "null is a number", "D": "undefined is an object" },
+        "EXPLANATION": "Both are nullish values, but null is explicitly assigned while undefined commonly means no value was assigned."
+      },
+      "REMAINDER": {
+        "TEXT": "What is the result of 15 % 10?",
+        "OPTIONS": { "A": "5", "B": "1.5", "C": "10", "D": "0" },
+        "EXPLANATION": "The remainder operator returns what remains after integer division, which is 5."
+      },
+      "PUSH_POP": {
+        "TEXT": "Which statement about push() and pop() is correct?",
+        "OPTIONS": { "A": "Both work at the start", "B": "Both create a new array", "C": "push removes and pop adds", "D": "push adds to the end and pop removes from the end" },
+        "EXPLANATION": "push() appends one or more items, while pop() removes and returns the last item."
+      },
+      "SHIFT_UNSHIFT": {
+        "TEXT": "What do shift() and unshift() do?",
+        "OPTIONS": { "A": "They sort an array", "B": "They remove from and add to the start of an array", "C": "They work only with strings", "D": "They copy an array" },
+        "EXPLANATION": "shift() removes the first item and unshift() adds items to the beginning."
+      },
+      "SLICE": {
+        "TEXT": "What is a key property of Array.prototype.slice()?",
+        "OPTIONS": { "A": "It always sorts", "B": "It deletes the source array", "C": "It returns a selected shallow copy without mutating the source", "D": "It adds an item" },
+        "EXPLANATION": "slice() returns a shallow copy of the selected range and leaves the original array unchanged."
+      },
+      "SPLICE": {
+        "TEXT": "Which array method can remove or insert items by mutating the original array?",
+        "OPTIONS": { "A": "splice()", "B": "concat()", "C": "slice()", "D": "map()" },
+        "EXPLANATION": "splice() changes the original array by removing, replacing, or inserting elements."
+      },
+      "CALL_APPLY": {
+        "TEXT": "What is the traditional difference between call() and apply()?",
+        "OPTIONS": { "A": "apply cannot set this", "B": "call works only on arrays", "C": "apply is asynchronous", "D": "call accepts separate arguments, while apply accepts an array-like argument list" },
+        "EXPLANATION": "Both invoke a function with an explicit this value; their classic difference is how arguments are supplied."
+      },
+      "MISSING_PROPERTY": {
+        "TEXT": "What is returned when reading an object property that does not exist?",
+        "OPTIONS": { "A": "null", "B": "undefined", "C": "false", "D": "A syntax error" },
+        "EXPLANATION": "Reading a missing property normally evaluates to undefined."
+      },
+      "JSON_SYNTAX": {
+        "TEXT": "Which rule is required by valid JSON?",
+        "OPTIONS": { "A": "Functions are allowed as values", "B": "Comments are allowed", "C": "Object property names use double quotes", "D": "Trailing commas are required" },
+        "EXPLANATION": "JSON requires double-quoted property names and does not support functions, comments, or trailing commas."
+      },
+      "FUNCTION_EXPRESSION": {
+        "TEXT": "What usually happens when a var-assigned function expression is called before its assignment executes?",
+        "OPTIONS": { "A": "A TypeError occurs because the variable is undefined", "B": "It runs normally", "C": "It returns null", "D": "It becomes an arrow function" },
+        "EXPLANATION": "The var declaration is hoisted as undefined, but the function value is assigned only when execution reaches the assignment."
+      },
+      "FIRST_CLASS_FUNCTIONS": {
+        "TEXT": "What does it mean that JavaScript has first-class functions?",
+        "OPTIONS": { "A": "Functions must have names", "B": "Functions run before variables", "C": "Functions cannot be nested", "D": "Functions can be stored, passed, and returned like other values" },
+        "EXPLANATION": "Functions are values, so they can be assigned to variables, passed as arguments, and returned from other functions."
+      },
+      "PROTOTYPE_CHAIN": {
+        "TEXT": "Where does JavaScript continue looking when a property is not found directly on an object?",
+        "OPTIONS": { "A": "In localStorage", "B": "Along the object's prototype chain", "C": "In the DOM", "D": "In every global variable" },
+        "EXPLANATION": "Property lookup follows the prototype chain until the property is found or the chain ends."
+      },
+      "SPREAD_ARRAY": {
+        "TEXT": "What does array spread syntax commonly do in [...first, ...second]?",
+        "OPTIONS": { "A": "Mutates both source arrays", "B": "Deletes duplicates automatically", "C": "Creates a new array containing values from both sources", "D": "Converts arrays to strings" },
+        "EXPLANATION": "Spread expands iterable values into a new array and does not mutate the source arrays by itself."
+      },
+      "REST_PARAMETERS": {
+        "TEXT": "What does a rest parameter such as ...values collect?",
+        "OPTIONS": { "A": "Remaining arguments into an array", "B": "Only the first argument", "C": "Object prototype properties", "D": "Rejected promises" },
+        "EXPLANATION": "A rest parameter gathers the remaining function arguments into a real array."
+      },
+      "DESTRUCTURING": {
+        "TEXT": "What is destructuring used for?",
+        "OPTIONS": { "A": "Deleting an object", "B": "Freezing an array", "C": "Changing a prototype", "D": "Extracting values from arrays or properties from objects into variables" },
+        "EXPLANATION": "Destructuring provides concise syntax for unpacking array values and object properties."
+      },
+      "MAP": {
+        "TEXT": "What kind of collection is a JavaScript Map?",
+        "OPTIONS": { "A": "A list restricted to numbers", "B": "A key-value collection whose keys can be any value", "C": "A unique-value-only list", "D": "A DOM-only collection" },
+        "EXPLANATION": "Map stores key-value pairs and permits values of any type as keys."
+      },
+      "SET": {
+        "TEXT": "What is the defining behavior of a JavaScript Set?",
+        "OPTIONS": { "A": "It sorts every value", "B": "It stores key-value pairs", "C": "It stores unique values", "D": "It accepts only strings" },
+        "EXPLANATION": "Set is a collection in which each stored value can occur only once."
+      },
+      "VAR_HOISTING": {
+        "TEXT": "What value is observed when a var variable is read before its assignment in the same scope?",
+        "OPTIONS": { "A": "undefined", "B": "null", "C": "0", "D": "The assigned value" },
+        "EXPLANATION": "The var declaration is hoisted and initialized with undefined; the later assignment is not hoisted."
+      },
+      "STRICT_MODE": {
+        "TEXT": "What is one benefit of JavaScript strict mode?",
+        "OPTIONS": { "A": "It makes every function asynchronous", "B": "It disables exceptions", "C": "It converts var to const", "D": "It turns some silent mistakes, such as accidental globals, into errors" },
+        "EXPLANATION": "Strict mode applies safer semantics and reports several error-prone operations instead of silently accepting them."
+      }
+    }
   },
   "PROJECT": {
     "BACK": "Back to catalog",

@@ -1,39 +1,6 @@
 .calculator-page {
   display: grid;
-  gap: 1.5rem;
-  grid-template-columns: minmax(16rem, 1fr) minmax(19rem, 24rem);
-  padding: 1.25rem;
-}
-
-.project-copy {
-  align-content: start;
-  display: grid;
-  gap: 0.9rem;
-}
-
-.eyebrow {
-  color: var(--app-text-muted);
-  font-size: 0.78rem;
-  font-weight: 700;
-  margin: 0;
-  text-transform: uppercase;
-}
-
-h2 {
-  font-size: 1.6rem;
-  margin: 0;
-}
-
-p,
-li {
-  color: var(--app-text-muted);
-}
-
-ul {
-  display: grid;
-  gap: 0.45rem;
-  margin: 0;
-  padding-left: 1.15rem;
+  justify-items: center;
 }
 
 .calculator {
@@ -43,8 +10,9 @@ ul {
   box-shadow: var(--app-shadow);
   color: #f8fafc;
   display: grid;
-  gap: 1rem;
-  padding: 1rem;
+  gap: 0.65rem;
+  padding: 0.75rem;
+  width: min(100%, 18rem);
 }
 
 .display {
@@ -52,8 +20,8 @@ ul {
   border-radius: 8px;
   display: grid;
   gap: 0.25rem;
-  min-height: 6.2rem;
-  padding: 1rem;
+  min-height: 4.5rem;
+  padding: 0.65rem;
   text-align: right;
 }
 
@@ -63,7 +31,7 @@ ul {
 }
 
 output {
-  font-size: 2.45rem;
+  font-size: 1.8rem;
   font-weight: 800;
   line-height: 1.1;
   overflow-wrap: anywhere;
@@ -71,7 +39,7 @@ output {
 
 .keypad {
   display: grid;
-  gap: 0.55rem;
+  gap: 0.4rem;
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
@@ -82,7 +50,7 @@ output {
   color: #f8fafc;
   font-size: 1.15rem;
   font-weight: 800;
-  min-height: 3.35rem;
+  min-height: 2.35rem;
 }
 
 .calculator-key:hover {

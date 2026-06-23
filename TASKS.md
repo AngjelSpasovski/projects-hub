@@ -2,6 +2,19 @@
 
 This checklist tracks the path from the current skeleton to a portfolio-ready product.
 
+Detailed active work is tracked in [`docs/tasks/`](./docs/tasks/README.md). A project is marked ready only after completing the shared [Definition of Done](./docs/tasks/DEFINITION_OF_DONE.md).
+
+## Next Product Cycle
+
+- [x] Complete the catalog cover redesign.
+- [x] Merge project detail and live application into one workspace surface.
+- [x] Remove duplicated project headers and nested surfaces.
+- [x] Build the JavaScript Quiz from the reviewed question material.
+- [ ] Build the To-Do List with LocalStorage.
+- [ ] Build the Expense Tracker with Chart.js.
+- [ ] Add Digital Clock and weather dashboard widgets.
+- [ ] Start legacy migrations with Project Planner, Odd/Even, and Dev Logger.
+
 ## Foundation
 
 - [x] Create a clean Angular project.
@@ -19,7 +32,7 @@ This checklist tracks the path from the current skeleton to a portfolio-ready pr
 - [x] Refine responsive behavior for mobile and tablet sidebar navigation.
 - [x] Add polished active, hover, loading, and empty states.
 - [x] Decide final typography, spacing scale, and color tokens.
-- [x] Replace temporary SVG covers with final project screenshots or generated covers.
+- [x] Replace temporary SVG covers with generated component covers. Superseded by the illustrated-cover redesign in the next product cycle.
 - [x] Add PrimeNG modal/dialog pattern for project previews.
 
 ## Project Catalog

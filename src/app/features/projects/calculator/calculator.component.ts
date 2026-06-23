@@ -1,6 +1,5 @@
 import { Component, HostListener } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
-import { PageHeaderComponent } from '../../../shared/ui/page-header/page-header.component';
 
 type CalculatorOperator = 'add' | 'subtract' | 'multiply' | 'divide';
 type CalculatorAction = 'clear' | 'sign' | 'percent' | 'decimal' | 'equals';
@@ -19,7 +18,7 @@ const MAX_DISPLAY_LENGTH = 12;
 @Component({
   selector: 'app-calculator',
   standalone: true,
-  imports: [PageHeaderComponent, TranslatePipe],
+  imports: [TranslatePipe],
   templateUrl: './calculator.component.html',
   styleUrl: './calculator.component.scss'
 })

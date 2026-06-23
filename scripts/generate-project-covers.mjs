@@ -5,7 +5,7 @@ import { join } from 'node:path';
 
 const port = 4302;
 const baseUrl = `http://127.0.0.1:${port}`;
-const outputDir = join(process.cwd(), 'src', 'assets', 'project-covers');
+const outputDir = join(process.cwd(), 'src', 'assets', 'project-screenshots');
 
 const projects = [
   { id: 'tic-tac-toe', route: '/admin/projects/tic-tac-toe' },

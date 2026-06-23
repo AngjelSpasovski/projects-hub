@@ -1,6 +1,5 @@
 import { Component, HostListener, computed, signal } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
-import { PageHeaderComponent } from '../../../shared/ui/page-header/page-header.component';
 
 const WORDS = ['ANGULAR', 'TYPESCRIPT', 'BOOTSTRAP', 'COMPONENT', 'SIGNALS'];
 const MAX_WRONG_GUESSES = 6;
@@ -8,7 +7,7 @@ const MAX_WRONG_GUESSES = 6;
 @Component({
   selector: 'app-hang-man',
   standalone: true,
-  imports: [PageHeaderComponent, TranslatePipe],
+  imports: [TranslatePipe],
   templateUrl: './hang-man.component.html',
   styleUrl: './hang-man.component.scss'
 })

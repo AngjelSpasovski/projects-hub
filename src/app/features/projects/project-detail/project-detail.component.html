@@ -1,17 +1,18 @@
 @if (project(); as selectedProject) {
-  <section class="project-detail surface-panel">
-    <img class="project-cover" [src]="selectedProject.image" [alt]="selectedProject.titleKey | translate" />
+  <section class="project-workspace surface-panel">
+    <div class="project-detail">
+      <img class="project-cover" [src]="selectedProject.image" [alt]="selectedProject.titleKey | translate" decoding="async" />
 
-    <div>
-      <a routerLink="/admin/dashboard" class="back-link">
-        <i class="pi pi-arrow-left"></i>
-        <span>{{ 'PROJECT.BACK' | translate }}</span>
-      </a>
-      <p class="category">{{ selectedProject.categoryKey | translate }}</p>
-      <h2>{{ selectedProject.titleKey | translate }}</h2>
-      <p>{{ selectedProject.summaryKey | translate }}</p>
+      <div class="project-summary">
+        <a routerLink="/admin/dashboard" class="back-link">
+          <i class="pi pi-arrow-left"></i>
+          <span>{{ 'PROJECT.BACK' | translate }}</span>
+        </a>
+        <p class="category">{{ selectedProject.categoryKey | translate }}</p>
+        <h2>{{ selectedProject.titleKey | translate }}</h2>
+        <p>{{ selectedProject.summaryKey | translate }}</p>
 
-      <dl class="project-meta">
+        <dl class="project-meta">
         <div>
           <dt>{{ 'PROJECT.META.STATUS' | translate }}</dt>
           <dd>{{ ('PROJECT.STATUS.' + selectedProject.status.toUpperCase()) | translate }}</dd>
@@ -28,15 +29,16 @@
           <dt>{{ 'PROJECT.META.UPDATED' | translate }}</dt>
           <dd>{{ selectedProject.updatedAt }}</dd>
         </div>
-      </dl>
+        </dl>
 
-      <div class="tags">
-        @for (tag of selectedProject.tags; track tag) {
-          <span>{{ tag }}</span>
-        }
-      </div>
+        <div class="project-footer-row">
+          <div class="tags">
+          @for (tag of selectedProject.tags; track tag) {
+            <span>{{ tag }}</span>
+          }
+          </div>
 
-      <div class="project-actions">
+          <div class="project-actions">
         @if (selectedProject.repositoryUrl) {
           <a class="btn btn-primary btn-sm" [href]="selectedProject.repositoryUrl" target="_blank" rel="noopener">
             <i class="pi pi-github"></i>
@@ -59,20 +61,21 @@
             <i class="pi pi-desktop"></i>
             <span>{{ 'PROJECT.DEMO_PENDING' | translate }}</span>
           </button>
-        }
+          }
+          </div>
+        </div>
       </div>
-
     </div>
-  </section>
 
-  <section class="project-live">
-    @if (projectComponent(); as component) {
-      <ng-container *ngComponentOutlet="component" />
-    } @else if (isComponentLoading()) {
-      <div class="project-component-loading surface-panel" aria-busy="true">
-        <i class="pi pi-spin pi-spinner"></i>
-      </div>
-    }
+    <div class="project-live">
+      @if (projectComponent(); as component) {
+        <ng-container *ngComponentOutlet="component" />
+      } @else if (isComponentLoading()) {
+        <div class="project-component-loading" aria-busy="true">
+          <i class="pi pi-spin pi-spinner"></i>
+        </div>
+      }
+    </div>
   </section>
 } @else {
   <section class="surface-panel missing-project">

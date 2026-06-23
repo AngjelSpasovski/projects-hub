@@ -4,6 +4,7 @@ import { provideTranslateService } from '@ngx-translate/core';
 
 import { DashboardComponent } from './dashboard.component';
 import { PROJECTS } from '../projects/project-registry';
+import { LanguageService } from '../../core/services/language.service';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -35,7 +36,22 @@ describe('DashboardComponent', () => {
   it('should filter projects by category', () => {
     component.updateSelectedCategory('CATEGORIES.GAMES');
 
-    expect(component.filteredProjects().map((project) => project.id)).toEqual(['hang-man', 'tic-tac-toe']);
+    expect(component.filteredProjects().map((project) => project.id)).toEqual([
+      'tic-tac-toe',
+      'hang-man',
+      'javascript-quiz'
+    ]);
+  });
+
+  it('should keep registry order stable across languages', () => {
+    const expectedOrder = PROJECTS.map((project) => project.id);
+    const languageService = TestBed.inject(LanguageService);
+
+    languageService.setLanguage('en');
+    expect(component.filteredProjects().map((project) => project.id)).toEqual(expectedOrder);
+
+    languageService.setLanguage('mk');
+    expect(component.filteredProjects().map((project) => project.id)).toEqual(expectedOrder);
   });
 
   it('should filter projects by selected tags', () => {
@@ -63,7 +79,7 @@ describe('DashboardComponent', () => {
     expect(component.searchTerm()).toBe('');
     expect(component.selectedCategory()).toBe('all');
     expect(component.selectedTags()).toEqual([]);
-    expect(component.sortMode()).toBe('title');
+    expect(component.sortMode()).toBe('order');
   });
 
   it('should persist selected view mode', () => {

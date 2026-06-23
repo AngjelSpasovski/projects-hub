@@ -1,11 +1,4 @@
-<section class="tic-tac-toe-page surface-panel">
-  <app-page-header
-    eyebrowKey="PROJECTS.TIC_TAC_TOE.TITLE"
-    titleKey="TIC_TAC_TOE.TITLE"
-    descriptionKey="TIC_TAC_TOE.DESCRIPTION"
-    [featureKeys]="['TIC_TAC_TOE.FEATURES.TURNS', 'TIC_TAC_TOE.FEATURES.WINNER', 'TIC_TAC_TOE.FEATURES.RESET']"
-  />
-
+<section class="tic-tac-toe-page">
   <div class="game-shell" [attr.aria-label]="'TIC_TAC_TOE.TITLE' | translate">
     <div class="game-status">
       @if (winningLine(); as line) {

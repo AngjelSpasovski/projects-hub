@@ -8,9 +8,12 @@ describe('PROJECTS registry', () => {
   it('should contain unique project ids and routes', () => {
     const ids = PROJECTS.map((project) => project.id);
     const routes = PROJECTS.map((project) => project.route);
+    const orders = PROJECTS.map((project) => project.order);
 
     expect(new Set(ids).size).toBe(ids.length);
     expect(new Set(routes).size).toBe(routes.length);
+    expect(new Set(orders).size).toBe(orders.length);
+    expect(orders).toEqual([...orders].sort((first, second) => first - second));
   });
 
   it('should keep project routes aligned with ids', () => {
@@ -26,6 +29,7 @@ describe('PROJECTS registry', () => {
       expect(project.summaryKey).toMatch(/^PROJECTS\.[A-Z0-9_]+\.SUMMARY$/);
       expect(project.categoryKey).toMatch(/^CATEGORIES\.[A-Z0-9_]+$/);
       expect(project.image).toMatch(/^assets\/project-covers\/.+\.png$/);
+      expect(project.order).toBeGreaterThan(0);
       expect(project.tags.length).toBeGreaterThan(0);
     });
   });

@@ -1,6 +1,5 @@
 import { Component, computed, signal } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
-import { PageHeaderComponent } from '../../../shared/ui/page-header/page-header.component';
 
 type Player = 'X' | 'O';
 type CellValue = Player | null;
@@ -24,7 +23,7 @@ const WINNING_LINES: Array<[number, number, number]> = [
 @Component({
   selector: 'app-tic-tac-toe',
   standalone: true,
-  imports: [PageHeaderComponent, TranslatePipe],
+  imports: [TranslatePipe],
   templateUrl: './tic-tac-toe.component.html',
   styleUrl: './tic-tac-toe.component.scss'
 })

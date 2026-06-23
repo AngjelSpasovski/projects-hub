@@ -1,11 +1,4 @@
-<section class="hang-man-page surface-panel">
-  <app-page-header
-    eyebrowKey="PROJECTS.HANG_MAN.TITLE"
-    titleKey="HANG_MAN.TITLE"
-    descriptionKey="HANG_MAN.DESCRIPTION"
-    [featureKeys]="['HANG_MAN.FEATURES.KEYBOARD', 'HANG_MAN.FEATURES.STATE', 'HANG_MAN.FEATURES.RESET']"
-  />
-
+<section class="hang-man-page">
   <div class="game-shell" [attr.aria-label]="'HANG_MAN.TITLE' | translate">
     <div class="game-status">
       @if (hasWon()) {
