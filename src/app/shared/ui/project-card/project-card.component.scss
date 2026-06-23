@@ -20,7 +20,7 @@
 }
 
 .project-card.horizontal {
-  grid-template-columns: 11rem minmax(0, 1fr);
+  grid-template-columns: 14rem minmax(0, 1fr);
 }
 
 .cover {
@@ -32,7 +32,7 @@
 
 .horizontal .cover {
   aspect-ratio: auto;
-  min-height: 8rem;
+  min-height: 7.5rem;
 }
 
 .cover img {
@@ -41,6 +41,11 @@
   object-fit: cover;
   transition: transform 0.18s ease;
   width: 100%;
+}
+
+.horizontal .cover img {
+  object-fit: contain;
+  padding: 0.45rem;
 }
 
 .project-card:hover .cover img,
@@ -53,6 +58,11 @@
   gap: 0.6rem;
   min-width: 0;
   padding: var(--app-space-3);
+}
+
+.horizontal .project-content {
+  gap: 0.5rem;
+  padding: 0.9rem 1rem;
 }
 
 .project-title-row {
@@ -123,7 +133,7 @@ h3 {
   background: var(--app-surface-muted);
   border: 1px solid var(--app-border);
   border-radius: var(--app-radius-md);
-  padding: 0.55rem;
+  padding: 0.45rem 0.55rem;
 }
 
 .project-meta dt {

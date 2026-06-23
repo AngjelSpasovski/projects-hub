@@ -53,7 +53,7 @@
           <div>
             <p>{{ ('MUSIC_EVENT.CATEGORIES.' + event.category.toUpperCase()) | translate }}</p>
             <h3>{{ event.title }}</h3>
-            <span>{{ event.date }} · {{ event.venue }}, {{ event.city }}</span>
+            <span>{{ event.date }} - {{ event.venue }}, {{ event.city }}</span>
           </div>
 
           <div class="event-meta">
@@ -87,14 +87,19 @@
     [dismissableMask]="true"
     [draggable]="false"
     [breakpoints]="{ '680px': '94vw' }"
-    [style]="{ width: 'min(34rem, 94vw)' }"
+    [style]="{ width: 'min(36rem, 94vw)' }"
     (visibleChange)="closeEvent()"
   >
     @if (selectedEvent(); as event) {
       <div class="event-detail">
         <div class="detail-hero">
-          <i class="pi pi-music"></i>
-          <span>{{ ('MUSIC_EVENT.CATEGORIES.' + event.category.toUpperCase()) | translate }}</span>
+          <div class="detail-icon">
+            <i class="pi pi-music"></i>
+          </div>
+          <div>
+            <span>{{ ('MUSIC_EVENT.CATEGORIES.' + event.category.toUpperCase()) | translate }}</span>
+            <strong>{{ event.venue }}, {{ event.city }}</strong>
+          </div>
         </div>
 
         <dl>
@@ -121,6 +126,10 @@
             <span>{{ tag }}</span>
           }
         </div>
+
+        <button type="button" class="btn btn-primary btn-sm close-detail" (click)="closeEvent()">
+          {{ 'MUSIC_EVENT.CLOSE' | translate }}
+        </button>
       </div>
     }
   </p-dialog>

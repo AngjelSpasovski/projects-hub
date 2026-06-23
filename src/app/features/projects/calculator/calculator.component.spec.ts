@@ -51,4 +51,28 @@ describe('CalculatorComponent', () => {
 
     expect(component.displayValue).toBe('Error');
   });
+
+  it('should calculate square root and square operations', () => {
+    component.inputDigit('9');
+    component.applySquareRoot();
+
+    expect(component.displayValue).toBe('3');
+
+    component.applySquare();
+
+    expect(component.displayValue).toBe('9');
+  });
+
+  it('should calculate percentages relative to the stored value', () => {
+    component.inputDigit('2');
+    component.inputDigit('0');
+    component.inputDigit('0');
+    component.chooseOperator('add');
+    component.inputDigit('1');
+    component.inputDigit('0');
+    component.applyPercent();
+    component.calculate();
+
+    expect(component.displayValue).toBe('220');
+  });
 });

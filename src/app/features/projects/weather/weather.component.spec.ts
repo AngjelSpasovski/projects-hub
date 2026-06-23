@@ -52,8 +52,8 @@ describe('WeatherComponent', () => {
     expect(component.averageTemperature()).toBe(30);
   }));
 
-  it('should show an error state', fakeAsync(() => {
-    component.showError();
+  it('should simulate an API failure state', fakeAsync(() => {
+    component.simulateApiFailure();
 
     expect(component.loadState()).toBe('error');
     expect(component.cities()).toEqual([]);

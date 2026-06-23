@@ -1,23 +1,40 @@
-import { Component, HostListener, computed, signal } from '@angular/core';
+import { Component, HostListener, OnDestroy, computed, inject, signal } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
+import { Dialog } from 'primeng/dialog';
+import { AppLanguage, LanguageService } from '../../../core/services/language.service';
 
-const WORDS = ['ANGULAR', 'TYPESCRIPT', 'BOOTSTRAP', 'COMPONENT', 'SIGNALS'];
+const WORDS: Record<AppLanguage, string[]> = {
+  en: ['ANGULAR', 'TYPESCRIPT', 'BOOTSTRAP', 'COMPONENT', 'SIGNALS'],
+  mk: ['АНГУЛАР', 'КОМПОНЕНТА', 'ПРОЕКТ', 'ТАСТАТУРА', 'СОСТОЈБА']
+};
+const ALPHABETS: Record<AppLanguage, string[]> = {
+  en: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
+  mk: 'АБВГДЃЕЖЗЅИЈКЛЉМНЊОПРСТЌУФХЦЧЏШ'.split('')
+};
 const MAX_WRONG_GUESSES = 6;
 
 @Component({
   selector: 'app-hang-man',
   standalone: true,
-  imports: [TranslatePipe],
+  imports: [Dialog, TranslatePipe],
   templateUrl: './hang-man.component.html',
   styleUrl: './hang-man.component.scss'
 })
-export class HangManComponent {
-  readonly alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+export class HangManComponent implements OnDestroy {
+  private readonly languageService = inject(LanguageService);
+  private readonly unregisterLanguageGuard = this.languageService.registerLanguageChangeGuard((language) =>
+    this.handleLanguageChangeRequest(language)
+  );
+  private readonly wordIndexes: Record<AppLanguage, number> = { en: 1, mk: 1 };
+
   readonly maxWrongGuesses = MAX_WRONG_GUESSES;
-  readonly currentWord = signal(WORDS[0]);
+  readonly pendingLanguage = signal<AppLanguage | null>(null);
+  readonly languageConfirmVisible = signal(false);
+  readonly currentLanguage = this.languageService.activeLanguage;
+  readonly currentWord = signal(this.wordsForCurrentLanguage()[0]);
   readonly guessedLetters = signal<string[]>([]);
 
-  private nextWordIndex = 1;
+  readonly alphabet = computed(() => ALPHABETS[this.currentLanguage()]);
 
   readonly wrongGuesses = computed(() =>
     this.guessedLetters().filter((letter) => !this.currentWord().includes(letter))
@@ -34,11 +51,15 @@ export class HangManComponent {
   readonly isGameOver = computed(() => this.hasWon() || this.hasLost());
   readonly remainingGuesses = computed(() => MAX_WRONG_GUESSES - this.wrongGuesses().length);
 
+  ngOnDestroy(): void {
+    this.unregisterLanguageGuard();
+  }
+
   @HostListener('window:keydown', ['$event'])
   handleKeyboard(event: KeyboardEvent): void {
     const letter = event.key.toUpperCase();
 
-    if (/^[A-Z]$/.test(letter)) {
+    if (this.alphabet().includes(letter)) {
       event.preventDefault();
       this.guessLetter(letter);
     }
@@ -55,9 +76,34 @@ export class HangManComponent {
   }
 
   resetGame(): void {
-    this.currentWord.set(WORDS[this.nextWordIndex]);
-    this.nextWordIndex = (this.nextWordIndex + 1) % WORDS.length;
+    const language = this.currentLanguage();
+    const words = this.wordsForCurrentLanguage();
+    const nextWordIndex = this.wordIndexes[language];
+
+    this.currentWord.set(words[nextWordIndex]);
+    this.wordIndexes[language] = (nextWordIndex + 1) % words.length;
     this.guessedLetters.set([]);
+  }
+
+  confirmLanguageChange(): void {
+    const language = this.pendingLanguage();
+
+    this.pendingLanguage.set(null);
+    this.languageConfirmVisible.set(false);
+
+    if (!language) {
+      return;
+    }
+
+    this.languageService.setLanguage(language, true);
+    this.currentWord.set(this.wordsForCurrentLanguage()[0]);
+    this.wordIndexes[language] = 1;
+    this.guessedLetters.set([]);
+  }
+
+  cancelLanguageChange(): void {
+    this.pendingLanguage.set(null);
+    this.languageConfirmVisible.set(false);
   }
 
   isCorrectGuess(letter: string): boolean {
@@ -66,5 +112,23 @@ export class HangManComponent {
 
   isWrongGuess(letter: string): boolean {
     return this.guessedLetters().includes(letter) && !this.currentWord().includes(letter);
+  }
+
+  private handleLanguageChangeRequest(language: AppLanguage): boolean {
+    if (this.guessedLetters().length === 0 || this.isGameOver()) {
+      this.languageService.setLanguage(language, true);
+      this.currentWord.set(this.wordsForCurrentLanguage()[0]);
+      this.wordIndexes[language] = 1;
+      this.guessedLetters.set([]);
+      return false;
+    }
+
+    this.pendingLanguage.set(language);
+    this.languageConfirmVisible.set(true);
+    return false;
+  }
+
+  private wordsForCurrentLanguage(): string[] {
+    return WORDS[this.currentLanguage()];
   }
 }

@@ -28,7 +28,7 @@
     </div>
 
     <div class="keyboard" [attr.aria-label]="'HANG_MAN.KEYBOARD' | translate">
-      @for (letter of alphabet; track letter) {
+      @for (letter of alphabet(); track letter) {
         <button
           type="button"
           class="letter-key"
@@ -47,4 +47,27 @@
       <span>{{ 'HANG_MAN.RESET' | translate }}</span>
     </button>
   </div>
+
+  <p-dialog
+    styleClass="language-reset-dialog"
+    [header]="'HANG_MAN.LANGUAGE_CONFIRM_TITLE' | translate"
+    [modal]="true"
+    [visible]="languageConfirmVisible()"
+    [dismissableMask]="true"
+    [draggable]="false"
+    [style]="{ width: 'min(28rem, 94vw)' }"
+    (visibleChange)="cancelLanguageChange()"
+  >
+    <div class="language-reset-content">
+      <p>{{ 'HANG_MAN.LANGUAGE_CONFIRM_TEXT' | translate }}</p>
+      <div class="dialog-actions">
+        <button type="button" class="btn btn-sm btn-icon" (click)="cancelLanguageChange()">
+          {{ 'HANG_MAN.LANGUAGE_CANCEL' | translate }}
+        </button>
+        <button type="button" class="btn btn-primary btn-sm" (click)="confirmLanguageChange()">
+          {{ 'HANG_MAN.LANGUAGE_CONFIRM' | translate }}
+        </button>
+      </div>
+    </div>
+  </p-dialog>
 </section>

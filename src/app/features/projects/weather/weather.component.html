@@ -12,9 +12,9 @@
       </label>
 
       <div class="actions">
-        <button type="button" class="btn btn-sm btn-icon" (click)="showError()">
+        <button type="button" class="btn btn-sm btn-icon" (click)="simulateApiFailure()">
           <i class="pi pi-exclamation-triangle"></i>
-          <span>{{ 'WEATHER.SHOW_ERROR' | translate }}</span>
+          <span>{{ 'WEATHER.SIMULATE_FAILURE' | translate }}</span>
         </button>
         <button type="button" class="btn btn-primary btn-sm" (click)="loadWeather()">
           <i class="pi pi-refresh"></i>

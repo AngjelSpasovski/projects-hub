@@ -49,6 +49,7 @@ describe('TicTacToeComponent', () => {
     expect(component.winningLine()?.player).toBe('X');
     expect(component.isWinningCell(1)).toBeTrue();
     expect(component.isGameOver()).toBeTrue();
+    expect(component.score().X).toBe(1);
   });
 
   it('should detect a draw', () => {
@@ -56,6 +57,7 @@ describe('TicTacToeComponent', () => {
 
     expect(component.isDraw()).toBeTrue();
     expect(component.isGameOver()).toBeTrue();
+    expect(component.score().draws).toBe(1);
   });
 
   it('should reset the board', () => {
@@ -65,5 +67,33 @@ describe('TicTacToeComponent', () => {
 
     expect(component.board().every((cell) => cell === null)).toBeTrue();
     expect(component.currentPlayer()).toBe('X');
+  });
+
+  it('should declare a match winner after ten wins', () => {
+    for (let index = 0; index < component.targetScore; index++) {
+      component.play(0);
+      component.play(3);
+      component.play(1);
+      component.play(4);
+      component.play(2);
+      component.resetGame();
+    }
+
+    expect(component.score().X).toBe(10);
+    expect(component.matchWinner()).toBe('X');
+  });
+
+  it('should reset score and board', () => {
+    component.play(0);
+    component.play(3);
+    component.play(1);
+    component.play(4);
+    component.play(2);
+
+    component.resetScore();
+
+    expect(component.score()).toEqual({ X: 0, O: 0, draws: 0 });
+    expect(component.matchWinner()).toBeNull();
+    expect(component.board().every((cell) => cell === null)).toBeTrue();
   });
 });

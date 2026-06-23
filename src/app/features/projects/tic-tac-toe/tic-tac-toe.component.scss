@@ -27,6 +27,33 @@
   text-align: center;
 }
 
+.scoreboard {
+  display: grid;
+  gap: 0.4rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.scoreboard div {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  display: grid;
+  gap: 0.1rem;
+  justify-items: center;
+  padding: 0.4rem;
+}
+
+.scoreboard span {
+  color: #aab7c8;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.scoreboard strong {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
 .board {
   display: grid;
   gap: 0.4rem;
@@ -66,11 +93,60 @@
   color: #fff;
 }
 
+.game-actions,
 .reset-game {
   align-items: center;
   display: inline-flex;
   gap: 0.45rem;
   justify-content: center;
+}
+
+.game-actions {
+  flex-wrap: wrap;
+}
+
+.game-actions .btn {
+  flex: 1 1 8rem;
+}
+
+:host ::ng-deep .match-winner-dialog {
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-lg);
+  box-shadow: var(--app-shadow-hover);
+  overflow: hidden;
+}
+
+:host ::ng-deep .match-winner-dialog .p-dialog-header,
+:host ::ng-deep .match-winner-dialog .p-dialog-content {
+  background: var(--app-surface);
+  color: var(--app-text);
+}
+
+:host ::ng-deep .match-winner-dialog .p-dialog-header {
+  border-bottom: 1px solid var(--app-border);
+  padding: 0.9rem 1rem;
+}
+
+:host ::ng-deep .match-winner-dialog .p-dialog-content {
+  padding: 1rem;
+}
+
+.match-winner-content {
+  align-items: center;
+  display: grid;
+  gap: 0.9rem;
+  justify-items: center;
+  text-align: center;
+}
+
+.match-winner-content i {
+  color: #facc15;
+  font-size: 2.2rem;
+}
+
+.match-winner-content p {
+  color: var(--app-text-muted);
+  margin: 0;
 }
 
 @media (max-width: 860px) {

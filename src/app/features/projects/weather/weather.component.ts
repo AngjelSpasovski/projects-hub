@@ -76,7 +76,7 @@ export class WeatherComponent implements OnDestroy {
     }, delay);
   }
 
-  showError(): void {
+  simulateApiFailure(): void {
     this.clearTimer();
     this.cities.set([]);
     this.loadState.set('error');

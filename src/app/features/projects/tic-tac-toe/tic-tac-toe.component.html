@@ -1,5 +1,20 @@
 <section class="tic-tac-toe-page">
   <div class="game-shell" [attr.aria-label]="'TIC_TAC_TOE.TITLE' | translate">
+    <div class="scoreboard" [attr.aria-label]="'TIC_TAC_TOE.SCOREBOARD' | translate">
+      <div>
+        <span>X</span>
+        <strong>{{ score().X }}</strong>
+      </div>
+      <div>
+        <span>O</span>
+        <strong>{{ score().O }}</strong>
+      </div>
+      <div>
+        <span>{{ 'TIC_TAC_TOE.DRAWS' | translate }}</span>
+        <strong>{{ score().draws }}</strong>
+      </div>
+    </div>
+
     <div class="game-status">
       @if (winningLine(); as line) {
         <span>{{ 'TIC_TAC_TOE.STATUS.WINNER' | translate:{ player: line.player } }}</span>
@@ -27,9 +42,33 @@
       }
     </div>
 
-    <button type="button" class="btn btn-primary reset-game" (click)="resetGame()">
-      <i class="pi pi-refresh"></i>
-      <span>{{ 'TIC_TAC_TOE.RESET' | translate }}</span>
-    </button>
+    <div class="game-actions">
+      <button type="button" class="btn btn-primary reset-game" (click)="resetGame()">
+        <i class="pi pi-refresh"></i>
+        <span>{{ 'TIC_TAC_TOE.RESET' | translate }}</span>
+      </button>
+      <button type="button" class="btn btn-sm btn-icon reset-game" (click)="resetScore()">
+        <i class="pi pi-undo"></i>
+        <span>{{ 'TIC_TAC_TOE.RESET_SCORE' | translate }}</span>
+      </button>
+    </div>
   </div>
+
+  <p-dialog
+    styleClass="match-winner-dialog"
+    [header]="'TIC_TAC_TOE.MATCH_WINNER_TITLE' | translate"
+    [modal]="true"
+    [visible]="matchWinner() !== null"
+    [closable]="false"
+    [draggable]="false"
+    [style]="{ width: 'min(28rem, 94vw)' }"
+  >
+    <div class="match-winner-content">
+      <i class="pi pi-trophy"></i>
+      <p>{{ 'TIC_TAC_TOE.MATCH_WINNER_TEXT' | translate:{ player: matchWinner(), target: targetScore } }}</p>
+      <button type="button" class="btn btn-primary btn-sm" (click)="resetScore()">
+        {{ 'TIC_TAC_TOE.NEW_MATCH' | translate }}
+      </button>
+    </div>
+  </p-dialog>
 </section>

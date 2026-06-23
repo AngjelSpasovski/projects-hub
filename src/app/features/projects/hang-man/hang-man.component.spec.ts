@@ -1,13 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideTranslateService } from '@ngx-translate/core';
+import { LanguageService } from '../../../core/services/language.service';
 
 import { HangManComponent } from './hang-man.component';
 
 describe('HangManComponent', () => {
   let component: HangManComponent;
   let fixture: ComponentFixture<HangManComponent>;
+  let languageService: LanguageService;
 
   beforeEach(async () => {
+    localStorage.setItem('projects-hub-language', 'en');
+
     await TestBed.configureTestingModule({
       imports: [HangManComponent],
       providers: [provideTranslateService({ lang: 'en', fallbackLang: 'en' })]
@@ -15,6 +19,7 @@ describe('HangManComponent', () => {
 
     fixture = TestBed.createComponent(HangManComponent);
     component = fixture.componentInstance;
+    languageService = TestBed.inject(LanguageService);
     fixture.detectChanges();
   });
 
@@ -64,6 +69,22 @@ describe('HangManComponent', () => {
     component.resetGame();
 
     expect(component.currentWord()).toBe('TYPESCRIPT');
+    expect(component.guessedLetters()).toEqual([]);
+  });
+
+  it('should use Macedonian words and alphabet after confirmed language change', () => {
+    component.guessLetter('A');
+
+    const changed = languageService.setLanguage('mk');
+
+    expect(changed).toBeFalse();
+    expect(component.languageConfirmVisible()).toBeTrue();
+
+    component.confirmLanguageChange();
+
+    expect(languageService.activeLanguage()).toBe('mk');
+    expect(component.currentWord()).toBe('АНГУЛАР');
+    expect(component.alphabet()).toContain('Ѓ');
     expect(component.guessedLetters()).toEqual([]);
   });
 });

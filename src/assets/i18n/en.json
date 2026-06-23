@@ -88,6 +88,12 @@
       "WINNER": "Rows, columns, diagonals, and draw states are detected automatically."
     },
     "RESET": "Restart game",
+    "DRAWS": "Draws",
+    "MATCH_WINNER_TEXT": "{{player}} wins the match with {{target}} victories.",
+    "MATCH_WINNER_TITLE": "Match winner",
+    "NEW_MATCH": "New match",
+    "RESET_SCORE": "Reset score",
+    "SCOREBOARD": "Match scoreboard",
     "STATUS": {
       "DRAW": "Draw game",
       "TURN": "{{player}} turn",
@@ -114,6 +120,10 @@
       "STATE": "Correct letters, wrong letters, remaining attempts, and game result are derived from component state."
     },
     "KEYBOARD": "Letter keyboard",
+    "LANGUAGE_CANCEL": "Keep playing",
+    "LANGUAGE_CONFIRM": "Change language",
+    "LANGUAGE_CONFIRM_TEXT": "Changing the language will restart the current round. Are you sure?",
+    "LANGUAGE_CONFIRM_TITLE": "Restart round?",
     "RESET": "New word",
     "STATUS": {
       "LOST": "Round over. The word was {{word}}.",
@@ -148,6 +158,7 @@
     "REFRESH": "Refresh",
     "RETRY": "Retry",
     "SHOW_ERROR": "Show error",
+    "SIMULATE_FAILURE": "Simulate API failure",
     "TITLE": "Weather Dashboard",
     "UPDATED": "Updated",
     "WIND": "Wind"
@@ -160,6 +171,7 @@
       "WORKSHOP": "Workshop"
     },
     "CATEGORY": "Category",
+    "CLOSE": "Close",
     "DATE": "Date",
     "DESCRIPTION": "A compact event catalog with PrimeNG tag filters, detailed list rows, summaries, and modal event details.",
     "DETAILS": "Details",

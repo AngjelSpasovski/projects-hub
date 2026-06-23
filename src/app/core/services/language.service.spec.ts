@@ -51,10 +51,26 @@ describe('LanguageService', () => {
   it('should update the active language and persist it', () => {
     const service = TestBed.inject(LanguageService);
 
-    service.setLanguage('en');
+    const changed = service.setLanguage('en');
 
+    expect(changed).toBeTrue();
     expect(service.activeLanguage()).toBe('en');
     expect(translateService.use).toHaveBeenCalledWith('en');
     expect(localStorage.getItem('projects-hub-language')).toBe('en');
+  });
+
+  it('should allow registered guards to block language changes', () => {
+    const service = TestBed.inject(LanguageService);
+    const unregister = service.registerLanguageChangeGuard(() => false);
+
+    const changed = service.setLanguage('en');
+
+    expect(changed).toBeFalse();
+    expect(service.activeLanguage()).toBe('mk');
+
+    unregister();
+
+    expect(service.setLanguage('en')).toBeTrue();
+    expect(service.activeLanguage()).toBe('en');
   });
 });

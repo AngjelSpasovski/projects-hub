@@ -2,7 +2,7 @@ import { Component, HostListener } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 
 type CalculatorOperator = 'add' | 'subtract' | 'multiply' | 'divide';
-type CalculatorAction = 'clear' | 'sign' | 'percent' | 'decimal' | 'equals';
+type CalculatorAction = 'backspace' | 'clear' | 'decimal' | 'equals' | 'percent' | 'sign' | 'square' | 'squareRoot';
 
 interface CalculatorButton {
   label: string;
@@ -31,6 +31,9 @@ export class CalculatorComponent {
 
   readonly buttons: CalculatorButton[] = [
     { label: 'C', value: 'clear', type: 'action', action: 'clear', className: 'utility' },
+    { label: '⌫', value: 'backspace', type: 'action', action: 'backspace', className: 'utility' },
+    { label: '√', value: 'squareRoot', type: 'action', action: 'squareRoot', className: 'utility' },
+    { label: 'x²', value: 'square', type: 'action', action: 'square', className: 'utility' },
     { label: '+/-', value: 'sign', type: 'action', action: 'sign', className: 'utility' },
     { label: '%', value: 'percent', type: 'action', action: 'percent', className: 'utility' },
     { label: '÷', value: 'divide', type: 'operator', operator: 'divide', className: 'operator' },
@@ -93,6 +96,12 @@ export class CalculatorComponent {
     if (event.key === '%') {
       event.preventDefault();
       this.applyPercent();
+      return;
+    }
+
+    if (event.key === 'Backspace') {
+      event.preventDefault();
+      this.backspace();
     }
   }
 
@@ -113,6 +122,12 @@ export class CalculatorComponent {
       this.toggleSign();
     } else if (button.action === 'percent') {
       this.applyPercent();
+    } else if (button.action === 'squareRoot') {
+      this.applySquareRoot();
+    } else if (button.action === 'square') {
+      this.applySquare();
+    } else if (button.action === 'backspace') {
+      this.backspace();
     } else if (button.action === 'decimal') {
       this.inputDecimal();
     } else if (button.action === 'equals') {
@@ -222,7 +237,53 @@ export class CalculatorComponent {
       return;
     }
 
-    this.displayValue = this.formatNumber(Number(this.displayValue) / 100);
+    const inputValue = Number(this.displayValue);
+    const percentValue =
+      this.storedValue !== null && this.activeOperator ? this.storedValue * (inputValue / 100) : inputValue / 100;
+
+    this.displayValue = this.formatNumber(percentValue);
+  }
+
+  applySquareRoot(): void {
+    if (this.isErrorState()) {
+      return;
+    }
+
+    const inputValue = Number(this.displayValue);
+
+    if (inputValue < 0) {
+      this.setError();
+      return;
+    }
+
+    this.expression = `√(${this.formatNumber(inputValue)})`;
+    this.displayValue = this.formatNumber(Math.sqrt(inputValue));
+    this.waitingForOperand = true;
+  }
+
+  applySquare(): void {
+    if (this.isErrorState()) {
+      return;
+    }
+
+    const inputValue = Number(this.displayValue);
+    this.expression = `${this.formatNumber(inputValue)}²`;
+    this.displayValue = this.formatNumber(inputValue * inputValue);
+    this.waitingForOperand = true;
+  }
+
+  backspace(): void {
+    if (this.isErrorState()) {
+      this.clear();
+      return;
+    }
+
+    if (this.waitingForOperand) {
+      return;
+    }
+
+    const nextValue = this.displayValue.length > 1 ? this.displayValue.slice(0, -1) : '0';
+    this.displayValue = nextValue === '-' ? '0' : nextValue;
   }
 
   private performCalculation(first: number, second: number, operator: CalculatorOperator): number | null {
