@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Movie search project cover</title>
+  <desc id="desc">A movie card, search loupe, film strip, and rating markers.</desc>
+  <rect width="960" height="540" fill="#eef5ff"/>
+  <rect x="132" y="92" width="696" height="356" rx="18" fill="#ffffff" stroke="#b9cff5" stroke-width="4"/>
+  <rect x="162" y="128" width="260" height="292" rx="14" fill="#151c2a"/>
+  <rect x="192" y="162" width="200" height="28" rx="8" fill="#5a74e8"/>
+  <circle cx="214" cy="228" r="20" fill="#ffffff"/>
+  <rect x="252" y="210" width="128" height="18" rx="9" fill="#e8eefb"/>
+  <circle cx="214" cy="286" r="20" fill="#ffffff"/>
+  <rect x="252" y="268" width="128" height="18" rx="9" fill="#e8eefb"/>
+  <circle cx="214" cy="344" r="20" fill="#ffffff"/>
+  <rect x="252" y="326" width="128" height="18" rx="9" fill="#e8eefb"/>
+  <rect x="470" y="160" width="230" height="44" rx="22" fill="#edf3ff" stroke="#9ebcf0" stroke-width="4"/>
+  <circle cx="506" cy="182" r="15" fill="none" stroke="#1f2937" stroke-width="6"/>
+  <path d="m518 194 22 22" stroke="#1f2937" stroke-width="6" stroke-linecap="round"/>
+  <rect x="470" y="246" width="280" height="120" rx="14" fill="#e8eefb" stroke="#b9cff5" stroke-width="4"/>
+  <path d="M492 284h236M492 328h190" stroke="#1f2937" stroke-width="10" stroke-linecap="round"/>
+  <path d="M520 392h160" stroke="#5a74e8" stroke-width="18" stroke-linecap="round"/>
+  <circle cx="726" cy="184" r="18" fill="#f5d94d"/>
+  <path d="m754 152 18-18M768 184h32M754 216l18 18" stroke="#1f2937" stroke-width="6" stroke-linecap="round"/>
+  <g fill="#6b83f2">
+    <circle cx="106" cy="132" r="7"/>
+    <circle cx="106" cy="172" r="7"/>
+    <circle cx="106" cy="212" r="7"/>
+    <circle cx="854" cy="328" r="7"/>
+    <circle cx="854" cy="368" r="7"/>
+    <circle cx="854" cy="408" r="7"/>
+  </g>
+  <g stroke="#78cbb0" stroke-width="6" stroke-linecap="round">
+    <path d="M104 400h38"/>
+    <path d="M123 381v38"/>
+    <path d="M830 110h38"/>
+    <path d="M849 91v38"/>
+  </g>
+</svg>

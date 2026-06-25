@@ -1,0 +1,179 @@
+<section class="grocery-page">
+  <div class="grocery-shell" [attr.aria-label]="'GROCERY_LIST.TITLE' | translate">
+    <form class="grocery-form" (ngSubmit)="submitItem()" novalidate>
+      <div class="panel-heading">
+        <div>
+          <span>{{ 'GROCERY_LIST.FORM.EYEBROW' | translate }}</span>
+          <h3>{{ (editingId() ? 'GROCERY_LIST.FORM.EDIT_TITLE' : 'GROCERY_LIST.FORM.ADD_TITLE') | translate }}</h3>
+        </div>
+        @if (editingId()) {
+          <button type="button" class="btn btn-sm btn-icon" (click)="cancelEdit()">
+            {{ 'GROCERY_LIST.FORM.CANCEL' | translate }}
+          </button>
+        }
+      </div>
+
+      <label>
+        <span>{{ 'GROCERY_LIST.FORM.NAME' | translate }}</span>
+        <input
+          type="text"
+          class="form-control"
+          [class.invalid]="isNameInvalid()"
+          [ngModel]="draftName()"
+          (ngModelChange)="updateName($event)"
+          (blur)="nameTouched.set(true)"
+          name="name"
+          [attr.maxlength]="nameMaxLength"
+          [placeholder]="'GROCERY_LIST.FORM.NAME_PLACEHOLDER' | translate"
+        />
+        <small [class.error]="isNameInvalid()">
+          @if (isNameInvalid()) {
+            {{ 'GROCERY_LIST.FORM.NAME_REQUIRED' | translate }}
+          } @else {
+            {{ 'GROCERY_LIST.FORM.CHARACTERS' | translate:{ count: draftName().length, max: nameMaxLength } }}
+          }
+        </small>
+      </label>
+
+      <div class="form-grid">
+        <label>
+          <span>{{ 'GROCERY_LIST.FORM.QUANTITY' | translate }}</span>
+          <input
+            type="number"
+            min="1"
+            max="99"
+            class="form-control"
+            [class.invalid]="isQuantityInvalid()"
+            [ngModel]="draftQuantity()"
+            (ngModelChange)="updateQuantity($event)"
+            name="quantity"
+          />
+          @if (isQuantityInvalid()) {
+            <small class="error">{{ 'GROCERY_LIST.FORM.QUANTITY_REQUIRED' | translate }}</small>
+          }
+        </label>
+
+        <label>
+          <span>{{ 'GROCERY_LIST.FORM.CATEGORY' | translate }}</span>
+          <select class="form-select" [ngModel]="draftCategory()" (ngModelChange)="updateCategory($event)" name="category">
+            @for (category of categories; track category) {
+              <option [value]="category">{{ categoryKey(category) | translate }}</option>
+            }
+          </select>
+        </label>
+      </div>
+
+      <button type="submit" class="btn btn-primary submit-item">
+        <i class="pi pi-check"></i>
+        <span>{{ (editingId() ? 'GROCERY_LIST.FORM.SAVE' : 'GROCERY_LIST.FORM.ADD') | translate }}</span>
+      </button>
+    </form>
+
+    <div class="grocery-board">
+      <div class="grocery-stats">
+        <article>
+          <span>{{ 'GROCERY_LIST.STATS.TOTAL' | translate }}</span>
+          <strong>{{ items().length }}</strong>
+        </article>
+        <article>
+          <span>{{ 'GROCERY_LIST.STATS.ACTIVE' | translate }}</span>
+          <strong>{{ activeCount() }}</strong>
+        </article>
+        <article>
+          <span>{{ 'GROCERY_LIST.STATS.PURCHASED' | translate }}</span>
+          <strong>{{ purchasedCount() }}</strong>
+        </article>
+        <article>
+          <span>{{ 'GROCERY_LIST.STATS.QUANTITY' | translate }}</span>
+          <strong>{{ totalQuantity() }}</strong>
+        </article>
+      </div>
+
+      <div class="board-toolbar">
+        <div class="filter-tabs" role="group" [attr.aria-label]="'GROCERY_LIST.FILTERS.TITLE' | translate">
+          <button type="button" class="btn btn-sm" [class.active]="filter() === 'all'" (click)="updateFilter('all')">
+            {{ 'GROCERY_LIST.FILTERS.ALL' | translate }}
+          </button>
+          <button type="button" class="btn btn-sm" [class.active]="filter() === 'active'" (click)="updateFilter('active')">
+            {{ 'GROCERY_LIST.FILTERS.ACTIVE' | translate }}
+          </button>
+          <button
+            type="button"
+            class="btn btn-sm"
+            [class.active]="filter() === 'purchased'"
+            (click)="updateFilter('purchased')"
+          >
+            {{ 'GROCERY_LIST.FILTERS.PURCHASED' | translate }}
+          </button>
+        </div>
+
+        <label class="category-filter">
+          <span>{{ 'GROCERY_LIST.FILTERS.CATEGORY' | translate }}</span>
+          <select class="form-select" [ngModel]="categoryFilter()" (ngModelChange)="updateCategoryFilter($event)" name="categoryFilter">
+            <option value="all">{{ 'GROCERY_LIST.FILTERS.ALL_CATEGORIES' | translate }}</option>
+            @for (category of categories; track category) {
+              <option [value]="category">{{ categoryKey(category) | translate }}</option>
+            }
+          </select>
+        </label>
+
+        <div class="board-actions">
+          <button type="button" class="btn btn-sm btn-icon" [disabled]="purchasedCount() === 0" (click)="clearPurchased()">
+            <i class="pi pi-trash"></i>
+            <span>{{ 'GROCERY_LIST.ACTIONS.CLEAR_PURCHASED' | translate }}</span>
+          </button>
+          <button type="button" class="btn btn-sm btn-icon" (click)="resetDemo()">
+            <i class="pi pi-refresh"></i>
+            <span>{{ 'GROCERY_LIST.ACTIONS.RESET_DEMO' | translate }}</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="grocery-list">
+        @for (item of filteredItems(); track item.id) {
+          <article class="grocery-item" [class.purchased]="item.purchased">
+            <button
+              type="button"
+              class="item-toggle"
+              [class.done]="item.purchased"
+              [attr.aria-label]="
+                (item.purchased ? 'GROCERY_LIST.ACTIONS.MARK_ACTIVE' : 'GROCERY_LIST.ACTIONS.MARK_PURCHASED') | translate
+              "
+              (click)="togglePurchased(item.id)"
+            >
+              <i [class]="item.purchased ? 'pi pi-check' : 'pi pi-circle'"></i>
+            </button>
+
+            <div class="item-content">
+              <div class="item-title-line">
+                <h4>{{ item.name }}</h4>
+                <span>{{ categoryKey(item.category) | translate }}</span>
+              </div>
+              <p>
+                {{ 'GROCERY_LIST.META.QUANTITY' | translate }} {{ item.quantity }} ·
+                {{ 'GROCERY_LIST.META.CREATED' | translate }} {{ item.createdAt }}
+              </p>
+            </div>
+
+            <div class="item-actions">
+              <button type="button" class="btn btn-sm btn-icon edit-action" (click)="editItem(item)">
+                <i class="pi pi-pencil"></i>
+                <span>{{ 'GROCERY_LIST.ACTIONS.EDIT' | translate }}</span>
+              </button>
+              <button type="button" class="btn btn-sm btn-icon delete-action" (click)="deleteItem(item.id)">
+                <i class="pi pi-times"></i>
+                <span>{{ 'GROCERY_LIST.ACTIONS.DELETE' | translate }}</span>
+              </button>
+            </div>
+          </article>
+        } @empty {
+          <section class="empty-state">
+            <i class="pi pi-shopping-bag"></i>
+            <h3>{{ 'GROCERY_LIST.EMPTY.TITLE' | translate }}</h3>
+            <p>{{ 'GROCERY_LIST.EMPTY.TEXT' | translate }}</p>
+          </section>
+        }
+      </div>
+    </div>
+  </div>
+</section>

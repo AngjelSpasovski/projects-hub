@@ -1,0 +1,104 @@
+<section class="quotes-page" [attr.aria-label]="'QUOTES_API.TITLE' | translate">
+  <div class="quotes-shell">
+    <div class="quotes-toolbar">
+      <div>
+        <span class="eyebrow">{{ 'QUOTES_API.EYEBROW' | translate }}</span>
+        <h2>{{ 'QUOTES_API.TITLE' | translate }}</h2>
+      </div>
+
+      <div class="toolbar-actions">
+        <button class="btn btn-outline-danger btn-sm" type="button" (click)="simulateApiFailure()">
+          {{ 'QUOTES_API.TEST_ERROR' | translate }}
+        </button>
+        <button class="btn btn-primary btn-sm" type="button" (click)="loadQuotes()">
+          {{ 'QUOTES_API.REFRESH' | translate }}
+        </button>
+      </div>
+    </div>
+
+    @if (loadState() === 'loading') {
+      <div class="quote-loading" aria-live="polite">
+        <span>{{ 'QUOTES_API.LOADING' | translate }}</span>
+      </div>
+    } @else if (loadState() === 'error') {
+      <app-async-state-panel
+        icon="pi pi-comment"
+        titleKey="QUOTES_API.ERROR_TITLE"
+        messageKey="QUOTES_API.ERROR_TEXT"
+        actionKey="QUOTES_API.RETRY"
+        tone="error"
+        (action)="loadQuotes()"
+      />
+    } @else {
+      <div class="quote-stats" aria-live="polite">
+        <article>
+          <span>{{ 'QUOTES_API.STATS.TOTAL' | translate }}</span>
+          <strong>{{ quotes().length }}</strong>
+        </article>
+        <article>
+          <span>{{ 'QUOTES_API.STATS.FAVORITES' | translate }}</span>
+          <strong>{{ favoriteIds().length }}</strong>
+        </article>
+        <article>
+          <span>{{ 'QUOTES_API.STATS.POSITION' | translate }}</span>
+          <strong>{{ quotePosition() || '-' }} / {{ quotes().length || '-' }}</strong>
+        </article>
+      </div>
+
+      <div class="quote-layout">
+        @if (selectedQuote(); as quote) {
+          <article class="quote-card">
+            <span class="quote-tone">{{ toneKey(quote.tone) | translate }}</span>
+            <blockquote>
+              <span aria-live="polite">{{ typedText() }}</span>
+              <i aria-hidden="true"></i>
+            </blockquote>
+            <footer>
+              <strong>{{ quote.author }}</strong>
+              <span>{{ quote.source }}</span>
+            </footer>
+
+            <div class="quote-actions">
+              <button class="btn btn-primary" type="button" (click)="nextQuote()">
+                {{ 'QUOTES_API.NEXT_QUOTE' | translate }}
+              </button>
+              <button class="btn btn-outline-primary" type="button" (click)="toggleFavorite()">
+                {{ (isFavorite() ? 'QUOTES_API.REMOVE_FAVORITE' : 'QUOTES_API.ADD_FAVORITE') | translate }}
+              </button>
+            </div>
+          </article>
+        }
+
+        <aside class="favorites-panel" [attr.aria-label]="'QUOTES_API.FAVORITES' | translate">
+          <div class="favorites-header">
+            <div>
+              <span class="eyebrow">{{ 'QUOTES_API.FAVORITES' | translate }}</span>
+              <h3>{{ 'QUOTES_API.SAVED_QUOTES' | translate }}</h3>
+            </div>
+            <button
+              class="btn btn-outline-danger btn-sm"
+              type="button"
+              (click)="clearFavorites()"
+              [disabled]="favoriteIds().length === 0"
+            >
+              {{ 'QUOTES_API.CLEAR' | translate }}
+            </button>
+          </div>
+
+          @if (favoriteQuotes().length === 0) {
+            <p class="empty-favorites">{{ 'QUOTES_API.NO_FAVORITES' | translate }}</p>
+          } @else {
+            <div class="favorite-list">
+              @for (quote of favoriteQuotes(); track quote.id) {
+                <button type="button" class="favorite-item" (click)="selectFavorite(quote)">
+                  <strong>{{ quote.author }}</strong>
+                  <span>{{ quote.text }}</span>
+                </button>
+              }
+            </div>
+          }
+        </aside>
+      </div>
+    }
+  </div>
+</section>

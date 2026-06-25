@@ -21,7 +21,19 @@ const PROJECT_COMPONENT_LOADERS: Record<string, () => Promise<Type<unknown>>> = 
   'technical-documentation': () =>
     import('../technical-documentation/technical-documentation.component').then(
       (component) => component.TechnicalDocumentationComponent
-    )
+    ),
+  'movie-search': () => import('../movie-search/movie-search.component').then((component) => component.MovieSearchComponent),
+  'rest-countries': () =>
+    import('../rest-countries/rest-countries.component').then((component) => component.RestCountriesComponent),
+  'currency-converter': () =>
+    import('../currency-converter/currency-converter.component').then(
+      (component) => component.CurrencyConverterComponent
+    ),
+  'quotes-api': () => import('../quotes-api/quotes-api.component').then((component) => component.QuotesApiComponent),
+  'sticky-notes': () =>
+    import('../sticky-notes/sticky-notes.component').then((component) => component.StickyNotesComponent),
+  'grocery-list': () =>
+    import('../grocery-list/grocery-list.component').then((component) => component.GroceryListComponent)
 };
 
 @Component({

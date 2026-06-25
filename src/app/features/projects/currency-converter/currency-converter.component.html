@@ -1,0 +1,106 @@
+<section class="currency-page" [attr.aria-label]="'CURRENCY_CONVERTER.TITLE' | translate">
+  <div class="currency-shell">
+    @if (loadState() === 'loading') {
+      <div class="currency-loading" aria-live="polite">
+        <span>{{ 'CURRENCY_CONVERTER.LOADING' | translate }}</span>
+      </div>
+    } @else if (loadState() === 'error') {
+      <app-async-state-panel
+        icon="pi pi-exclamation-triangle"
+        titleKey="CURRENCY_CONVERTER.ERROR_TITLE"
+        messageKey="CURRENCY_CONVERTER.ERROR_TEXT"
+        actionKey="CURRENCY_CONVERTER.RETRY"
+        tone="error"
+        (action)="loadRates()"
+      />
+    } @else {
+      <div class="converter-grid">
+        <section class="converter-form">
+          <div class="form-heading">
+            <span>{{ 'CURRENCY_CONVERTER.FORM_EYEBROW' | translate }}</span>
+            <h3>{{ 'CURRENCY_CONVERTER.FORM_TITLE' | translate }}</h3>
+          </div>
+
+          <label class="field amount-field">
+            <span>{{ 'CURRENCY_CONVERTER.AMOUNT' | translate }}</span>
+            <input
+              type="number"
+              min="0"
+              step="0.01"
+              [ngModel]="amount()"
+              (ngModelChange)="updateAmount($event)"
+              [class.invalid]="amountError()"
+            />
+          </label>
+
+          @if (amountError(); as errorKey) {
+            <p class="validation-message">{{ errorKey | translate }}</p>
+          }
+
+          <div class="currency-row">
+            <label class="field">
+              <span>{{ 'CURRENCY_CONVERTER.FROM' | translate }}</span>
+              <select [ngModel]="fromCurrency()" (ngModelChange)="updateFromCurrency($event)">
+                @for (currency of currencies; track currency.code) {
+                  <option [value]="currency.code">{{ currency.code }} · {{ currency.nameKey | translate }}</option>
+                }
+              </select>
+            </label>
+
+            <button class="swap-button" type="button" (click)="swapCurrencies()">
+              {{ 'CURRENCY_CONVERTER.SWAP' | translate }}
+            </button>
+
+            <label class="field">
+              <span>{{ 'CURRENCY_CONVERTER.TO' | translate }}</span>
+              <select [ngModel]="toCurrency()" (ngModelChange)="updateToCurrency($event)">
+                @for (currency of currencies; track currency.code) {
+                  <option [value]="currency.code">{{ currency.code }} · {{ currency.nameKey | translate }}</option>
+                }
+              </select>
+            </label>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn-outline-danger btn-sm" type="button" (click)="simulateApiFailure()">
+              {{ 'CURRENCY_CONVERTER.TEST_ERROR' | translate }}
+            </button>
+            <button class="btn btn-outline-primary btn-sm" type="button" (click)="markStale()">
+              {{ 'CURRENCY_CONVERTER.MARK_STALE' | translate }}
+            </button>
+            <button class="btn btn-primary btn-sm" type="button" (click)="loadRates()">
+              {{ 'CURRENCY_CONVERTER.REFRESH' | translate }}
+            </button>
+          </div>
+        </section>
+
+        <section class="conversion-result">
+          <span class="result-label">{{ 'CURRENCY_CONVERTER.RESULT' | translate }}</span>
+          <strong>{{ formatCurrency(convertedAmount(), toCurrency()) }}</strong>
+          <p>
+            {{ amount() }} {{ fromCurrency() }} =
+            {{ formatCurrency(convertedAmount(), toCurrency()) }}
+          </p>
+          <div class="rate-grid">
+            <article>
+              <span>{{ 'CURRENCY_CONVERTER.RATE' | translate }}</span>
+              <strong>1 {{ fromCurrency() }} = {{ formatRate(exchangeRate()) }} {{ toCurrency() }}</strong>
+            </article>
+            <article>
+              <span>{{ 'CURRENCY_CONVERTER.INVERSE_RATE' | translate }}</span>
+              <strong>1 {{ toCurrency() }} = {{ formatRate(inverseRate()) }} {{ fromCurrency() }}</strong>
+            </article>
+            <article>
+              <span>{{ 'CURRENCY_CONVERTER.UPDATED' | translate }}</span>
+              <strong>{{ lastUpdated() ? (lastUpdated() | date: 'shortTime') : '-' }}</strong>
+            </article>
+            <article [class.stale]="stale()">
+              <span>{{ 'CURRENCY_CONVERTER.STATE' | translate }}</span>
+              <strong>{{ (stale() ? 'CURRENCY_CONVERTER.STALE' : 'CURRENCY_CONVERTER.FRESH') | translate }}</strong>
+            </article>
+          </div>
+        </section>
+      </div>
+    }
+  </div>
+</section>

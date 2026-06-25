@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Currency converter project cover</title>
+  <desc id="desc">Currency cards with swap arrows and exchange symbols.</desc>
+  <rect width="960" height="540" fill="#eef5ff"/>
+  <rect x="128" y="90" width="704" height="360" rx="22" fill="#fff" stroke="#b9cff5" stroke-width="4"/>
+  <rect x="188" y="160" width="260" height="180" rx="18" fill="#151c2a"/>
+  <rect x="512" y="160" width="260" height="180" rx="18" fill="#edf3ff" stroke="#b9cff5" stroke-width="4"/>
+  <text x="226" y="238" fill="#fff" font-family="Arial, sans-serif" font-size="54" font-weight="800">€125</text>
+  <text x="548" y="238" fill="#1f2937" font-family="Arial, sans-serif" font-size="54" font-weight="800">ден</text>
+  <text x="548" y="294" fill="#5a74e8" font-family="Arial, sans-serif" font-size="42" font-weight="800">7688</text>
+  <path d="M454 208h52l-20-20M506 300h-52l20 20" fill="none" stroke="#5a74e8" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="220" y="374" width="520" height="34" rx="17" fill="#dbeafe"/>
+  <path d="M250 391h420" stroke="#5a74e8" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="726" cy="391" r="14" fill="#78cbb0"/>
+  <g fill="#5a74e8">
+    <circle cx="104" cy="142" r="7"/>
+    <circle cx="104" cy="182" r="7"/>
+    <circle cx="104" cy="222" r="7"/>
+    <circle cx="856" cy="318" r="7"/>
+    <circle cx="856" cy="358" r="7"/>
+    <circle cx="856" cy="398" r="7"/>
+  </g>
+  <path d="M138 414h38M157 395v38M804 118h38M823 99v38" stroke="#78cbb0" stroke-width="6" stroke-linecap="round"/>
+</svg>

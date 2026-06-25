@@ -12,7 +12,7 @@ test('dashboard catalog supports view switching and project navigation', async (
   await page.getByRole('button', { name: 'EN' }).click();
 
   await expect(page.getByRole('heading', { name: 'Project Catalog' })).toBeVisible();
-  await expect(page.getByText('9 project(s)')).toBeVisible();
+  await expect(page.getByText('15 project(s)')).toBeVisible();
 
   await page.getByRole('button', { name: /Detailed/ }).click();
   await expect(page.getByText('Difficulty').first()).toBeVisible();
@@ -146,7 +146,7 @@ test('desktop catalog and project workspaces fit without nested scrollbars', asy
   await page.setViewportSize({ width: 1920, height: 1080 });
   await page.goto('/');
   await page.getByRole('button', { name: 'EN', exact: true }).click();
-  await expect(page.getByText('9 project(s)')).toBeVisible();
+  await expect(page.getByText('15 project(s)')).toBeVisible();
 
   const routes = [
     'tic-tac-toe',
@@ -157,7 +157,13 @@ test('desktop catalog and project workspaces fit without nested scrollbars', asy
     'javascript-quiz',
     'todo-list',
     'expense-tracker',
-    'technical-documentation'
+    'technical-documentation',
+    'movie-search',
+    'rest-countries',
+    'currency-converter',
+    'quotes-api',
+    'sticky-notes',
+    'grocery-list'
   ];
 
   for (const route of routes) {
@@ -325,4 +331,187 @@ test('Technical Documentation filters architecture guidance', async ({ page }) =
   await expect(page.getByText('No documentation sections found')).toBeVisible();
   await page.getByRole('button', { name: 'Clear search' }).click();
   await expect(page.getByRole('heading', { name: 'Application architecture' })).toBeVisible();
+});
+
+test('Movie Search supports search, pagination, selection, and retry state', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'EN', exact: true }).click();
+  await page.getByRole('link', { name: 'Movie Search', exact: true }).click();
+
+  await expect(page.getByRole('heading', { name: 'Movie Search', exact: true })).toBeVisible();
+  await expect(page.locator('.movie-card')).toHaveCount(4);
+
+  await page.getByPlaceholder('Search title, director, or cast').fill('orbit');
+  await expect(page.getByRole('button', { name: /Orbit Nine/ })).toBeVisible();
+  await expect(page.getByText('Selected movie')).toBeVisible();
+
+  await page.getByPlaceholder('Search title, director, or cast').fill('');
+  await page.getByRole('button', { name: 'Next' }).click();
+  await expect(page.getByRole('button', { name: /Harbor Code/ })).toBeVisible();
+
+  await page.getByRole('button', { name: 'Test error' }).click();
+  await expect(page.getByRole('heading', { name: 'Movie data unavailable' })).toBeVisible();
+  await page.getByRole('button', { name: 'Retry' }).click();
+  await expect(page.getByRole('heading', { name: 'Movie data unavailable' })).toBeHidden();
+  await expect(page.locator('.movie-card')).toHaveCount(4);
+});
+
+test('REST Countries supports search, region filters, favorites, and retry state', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'EN', exact: true }).click();
+  await page.getByRole('link', { name: 'REST Countries', exact: true }).click();
+
+  await expect(page.getByRole('heading', { name: 'REST Countries', exact: true })).toBeVisible();
+  await expect(page.locator('.country-card')).toHaveCount(8);
+
+  await page.getByPlaceholder('Search country, capital, or code').fill('tokyo');
+  await expect(page.getByRole('button', { name: /Japan/ })).toBeVisible();
+  await expect(page.getByText('Japanese yen')).toBeVisible();
+
+  await page.getByRole('button', { name: 'Add favorite' }).click();
+  await expect(page.getByRole('button', { name: 'Remove favorite' })).toBeVisible();
+  await expect.poll(async () => page.evaluate(() => localStorage.getItem('projects-hub-rest-countries-favorites'))).toContain(
+    'JPN'
+  );
+
+  await page.getByPlaceholder('Search country, capital, or code').fill('');
+  await page.getByLabel('Region').selectOption('africa');
+  await expect(page.locator('.country-card')).toHaveCount(2);
+
+  await page.getByRole('button', { name: 'Test error' }).click();
+  await expect(page.getByRole('heading', { name: 'Country data unavailable' })).toBeVisible();
+  await page.getByRole('button', { name: 'Retry' }).click();
+  await expect(page.getByRole('heading', { name: 'Country data unavailable' })).toBeHidden();
+});
+
+test('Currency Converter supports validation, swap, stale, and retry state', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'EN', exact: true }).click();
+  await page.getByRole('link', { name: 'Currency Converter', exact: true }).click();
+
+  await expect(page.getByRole('heading', { name: 'Currency Converter', exact: true })).toBeVisible();
+  await expect(page.locator('.conversion-result > strong')).toHaveText('MKD\u00a07,688');
+
+  await page.getByLabel('Amount').fill('10');
+  await page.getByLabel('To').selectOption('USD');
+  await expect(page.locator('.conversion-result > strong')).toHaveText('$10.80');
+
+  await page.getByRole('button', { name: 'Swap' }).click();
+  await expect(page.getByText('1 USD =')).toBeVisible();
+
+  await page.getByLabel('Amount').fill('0');
+  await expect(page.getByText('Enter an amount greater than zero.')).toBeVisible();
+
+  await page.getByRole('button', { name: 'Mark stale' }).click();
+  await expect(page.locator('.rate-grid article.stale strong')).toHaveText('Stale');
+
+  await page.getByRole('button', { name: 'Test error' }).click();
+  await expect(page.getByRole('heading', { name: 'Exchange rates unavailable' })).toBeVisible();
+  await page.getByRole('button', { name: 'Retry' }).click();
+  await expect(page.getByRole('heading', { name: 'Exchange rates unavailable' })).toBeHidden();
+});
+
+test('Quotes API supports typewriter quotes, favorites, and retry state', async ({ page }) => {
+  await page.addInitScript(() => {
+    window.matchMedia = () =>
+      ({
+        addEventListener: () => undefined,
+        addListener: () => undefined,
+        dispatchEvent: () => false,
+        matches: true,
+        media: '(prefers-reduced-motion: reduce)',
+        onchange: null,
+        removeEventListener: () => undefined,
+        removeListener: () => undefined
+      }) as MediaQueryList;
+  });
+  await page.goto('/');
+  await page.getByRole('button', { name: 'EN', exact: true }).click();
+  await page.getByRole('link', { name: 'Quotes API', exact: true }).click();
+
+  await expect(page.getByRole('heading', { name: 'Quotes API', exact: true })).toBeVisible();
+  await expect(page.locator('blockquote span')).not.toBeEmpty();
+
+  await page.getByRole('button', { name: 'Add favorite' }).click();
+  await expect(page.getByRole('button', { name: 'Remove favorite' })).toBeVisible();
+  await expect.poll(async () => page.evaluate(() => localStorage.getItem('projects-hub-quotes-api-favorites'))).toContain('[');
+
+  const firstQuote = await page.locator('blockquote span').innerText();
+  await page.getByRole('button', { name: 'Next quote' }).click();
+  await expect.poll(async () => page.locator('blockquote span').innerText()).not.toBe(firstQuote);
+
+  await page.getByRole('button', { name: 'Test error' }).click();
+  await expect(page.getByRole('heading', { name: 'Quotes unavailable' })).toBeVisible();
+  await page.getByRole('button', { name: 'Retry' }).click();
+  await expect(page.getByRole('heading', { name: 'Quotes unavailable' })).toBeHidden();
+});
+
+test('Sticky Notes supports create, search, pin, edit, delete, and persistence', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'EN', exact: true }).click();
+  await page.getByRole('link', { name: 'Sticky Notes', exact: true }).click();
+
+  await expect(page.getByRole('heading', { name: 'Sticky Notes', exact: true })).toBeVisible();
+  await expect(page.locator('.note-card')).toHaveCount(3);
+
+  await page.getByPlaceholder('Example: portfolio idea').fill('Portfolio checklist');
+  await page.getByPlaceholder('Add a short note or reminder').fill('Add the unique sticky marker to the portfolio notes.');
+  await page.getByRole('button', { name: 'Rose note' }).click();
+  await page.getByRole('button', { name: 'Add note' }).click();
+
+  await expect(page.getByRole('heading', { name: 'Portfolio checklist' })).toBeVisible();
+  await expect.poll(async () => page.evaluate(() => localStorage.getItem('projects-hub-sticky-notes'))).toContain(
+    'Portfolio checklist'
+  );
+
+  await page.getByPlaceholder('Search notes').fill('unique sticky marker');
+  await expect(page.locator('.note-card')).toHaveCount(1);
+
+  await page.getByRole('button', { name: 'Pin' }).click();
+  await expect(page.getByRole('button', { name: 'Unpin' })).toBeVisible();
+
+  await page.getByRole('button', { name: 'Edit' }).click();
+  await page.getByPlaceholder('Example: portfolio idea').fill('Updated portfolio checklist');
+  await page.getByRole('button', { name: 'Save changes' }).click();
+  await expect(page.getByRole('heading', { name: 'Updated portfolio checklist' })).toBeVisible();
+
+  await page.getByRole('button', { name: 'Delete' }).click();
+  await expect(page.getByRole('heading', { name: 'Updated portfolio checklist' })).toBeHidden();
+});
+
+test('Grocery List supports quantities, categories, filters, and persistence', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'EN', exact: true }).click();
+  await page.getByRole('link', { name: 'Grocery List', exact: true }).click();
+
+  await expect(page.getByRole('heading', { name: 'Grocery List', exact: true })).toBeVisible();
+  await expect(page.locator('.grocery-item')).toHaveCount(3);
+
+  await page.getByPlaceholder('Example: coffee beans').fill('Almond milk');
+  await page.getByLabel('Quantity').fill('3');
+  await page.getByLabel('Category').first().selectOption('dairy');
+  await page.getByRole('button', { name: 'Add item' }).click();
+
+  await expect(page.getByRole('heading', { name: 'Almond milk' })).toBeVisible();
+  await expect.poll(async () => page.evaluate(() => localStorage.getItem('projects-hub-grocery-list'))).toContain(
+    'Almond milk'
+  );
+
+  await page.getByLabel('Grocery filters').getByRole('button', { name: 'Active' }).click();
+  await expect(page.getByRole('heading', { name: 'Almond milk' })).toBeVisible();
+
+  await page.getByLabel('Category').nth(1).selectOption('dairy');
+  await expect(page.locator('.grocery-item')).toHaveCount(2);
+
+  await page.getByRole('button', { name: 'Mark item purchased' }).first().click();
+  await page.getByLabel('Grocery filters').getByRole('button', { name: 'Purchased', exact: true }).click();
+  await expect(page.locator('.grocery-item.purchased')).toHaveCount(1);
+
+  await page.getByRole('button', { name: 'Edit' }).first().click();
+  await page.getByPlaceholder('Example: coffee beans').fill('Updated almond milk');
+  await page.getByRole('button', { name: 'Save changes' }).click();
+  await expect(page.getByRole('heading', { name: 'Updated almond milk' })).toBeVisible();
+
+  await page.getByRole('button', { name: 'Delete' }).first().click();
+  await expect(page.getByRole('heading', { name: 'Updated almond milk' })).toBeHidden();
 });

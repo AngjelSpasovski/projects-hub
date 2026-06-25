@@ -90,6 +90,30 @@
     "TECHNICAL_DOCUMENTATION": {
       "TITLE": "Technical Documentation",
       "SUMMARY": "Searchable guide for the Projects Hub architecture, contribution flow, translations, and quality checks."
+    },
+    "MOVIE_SEARCH": {
+      "TITLE": "Movie Search",
+      "SUMMARY": "API-style movie search with genre filters, pagination, selected details, and loading, empty, and error states."
+    },
+    "REST_COUNTRIES": {
+      "TITLE": "REST Countries",
+      "SUMMARY": "REST Countries style explorer with search, region filters, selected details, favorites, and theme-aware states."
+    },
+    "CURRENCY_CONVERTER": {
+      "TITLE": "Currency Converter",
+      "SUMMARY": "Rates API style converter with amount validation, currency swap, loading, stale, and retry states."
+    },
+    "QUOTES_API": {
+      "TITLE": "Quotes API",
+      "SUMMARY": "Quotes API style reader with random quote loading, favorites, retry states, and typewriter animation."
+    },
+    "STICKY_NOTES": {
+      "TITLE": "Sticky Notes",
+      "SUMMARY": "Sticky note board with create, edit, color, pin, delete, search, and LocalStorage persistence."
+    },
+    "GROCERY_LIST": {
+      "TITLE": "Grocery List",
+      "SUMMARY": "Grocery planner with quantities, categories, purchased state, filters, and LocalStorage persistence."
     }
   },
   "TECHNICAL_DOCS": {
@@ -675,6 +699,279 @@
       "PLANNED": "Planned",
       "READY": "Ready"
     }
+  },
+  "MOVIE_SEARCH": {
+    "AVERAGE_RATING": "Average rating",
+    "CAST": "Cast",
+    "CLEAR_FILTERS": "Clear filters",
+    "DESCRIPTION": "A compact movie explorer that simulates API loading, search, filters, pagination, and selected movie details.",
+    "DETAILS": "Movie details",
+    "DIRECTOR": "Director",
+    "EMPTY_TEXT": "Clear the search or choose another genre to show movies again.",
+    "EMPTY_TITLE": "No movies match these filters",
+    "ERROR_TEXT": "The simulated movie API request failed. Retry to reload the local movie data.",
+    "ERROR_TITLE": "Movie data unavailable",
+    "FEATURES": {
+      "DETAILS": "Selecting a movie updates a focused detail panel without changing routes.",
+      "FILTERS": "Search and genre filters work together with paginated result cards.",
+      "STATES": "Loading, empty, and error states are available without requiring an external API key."
+    },
+    "GENRE": "Genre",
+    "GENRES": {
+      "ACTION": "Action",
+      "ALL": "All genres",
+      "ANIMATION": "Animation",
+      "DRAMA": "Drama",
+      "SCI_FI": "Sci-Fi"
+    },
+    "LOADING": "Loading movies",
+    "MINUTES": "min",
+    "NEWEST": "Newest",
+    "NEXT": "Next",
+    "PAGE": "Page {{current}} of {{total}}",
+    "PREVIOUS": "Previous",
+    "REFRESH": "Refresh",
+    "RESULTS": "Results",
+    "RETRY": "Retry",
+    "RUNTIME": "Runtime",
+    "SEARCH": "Search",
+    "SEARCH_PLACEHOLDER": "Search title, director, or cast",
+    "SELECTED_MOVIE": "Selected movie",
+    "TEST_ERROR": "Test error",
+    "TITLE": "Movie Search",
+    "YEAR": "Year"
+  },
+  "REST_COUNTRIES": {
+    "ADD_FAVORITE": "Add favorite",
+    "AREA": "Area",
+    "BORDERS": "Borders",
+    "CAPITAL": "Capital",
+    "CLEAR_FILTERS": "Clear filters",
+    "CURRENCY": "Currency",
+    "DESCRIPTION": "A REST Countries style explorer with simulated API loading, region filters, selected details, and persistent favorites.",
+    "DETAILS": "Country details",
+    "EMPTY_TEXT": "Clear the search or select another region to show countries again.",
+    "EMPTY_TITLE": "No countries match these filters",
+    "ERROR_TEXT": "The simulated countries API request failed. Retry to reload the local country data.",
+    "ERROR_TITLE": "Country data unavailable",
+    "FAVORITES": "Favorites",
+    "FEATURES": {
+      "DETAILS": "Selecting a country shows capital, population, area, currency, languages, and borders.",
+      "FAVORITES": "Favorite country codes are persisted in LocalStorage.",
+      "FILTERS": "Search and region filters model the REST Countries API browsing workflow."
+    },
+    "LANGUAGES": "Languages",
+    "LOADING": "Loading countries",
+    "NO_BORDERS": "No land borders",
+    "POPULATION": "Population",
+    "REFRESH": "Refresh",
+    "REGION": "Region",
+    "REGIONS": {
+      "AFRICA": "Africa",
+      "ALL": "All regions",
+      "AMERICAS": "Americas",
+      "ASIA": "Asia",
+      "EUROPE": "Europe",
+      "OCEANIA": "Oceania"
+    },
+    "REMOVE_FAVORITE": "Remove favorite",
+    "RESULTS": "Results",
+    "RETRY": "Retry",
+    "SEARCH": "Search",
+    "SEARCH_PLACEHOLDER": "Search country, capital, or code",
+    "TEST_ERROR": "Test error",
+    "TITLE": "REST Countries"
+  },
+  "CURRENCY_CONVERTER": {
+    "AMOUNT": "Amount",
+    "CURRENCIES": {
+      "CHF": "Swiss franc",
+      "EUR": "Euro",
+      "GBP": "British pound",
+      "JPY": "Japanese yen",
+      "MKD": "Macedonian denar",
+      "USD": "US dollar"
+    },
+    "DESCRIPTION": "A rates API style converter with validation, swap controls, direct and inverse rates, and stale data handling.",
+    "ERRORS": {
+      "AMOUNT_LIMIT": "Use an amount below 1,000,000.",
+      "AMOUNT_POSITIVE": "Enter an amount greater than zero."
+    },
+    "ERROR_TEXT": "The simulated rates API request failed. Retry to reload the local exchange rates.",
+    "ERROR_TITLE": "Exchange rates unavailable",
+    "FEATURES": {
+      "REFRESH": "Refresh and stale states model the lifecycle of external exchange-rate data.",
+      "SWAP": "The source and target currencies can be swapped instantly.",
+      "VALIDATION": "The amount field protects the conversion from invalid values."
+    },
+    "FORM_EYEBROW": "Rates form",
+    "FORM_TITLE": "Convert currency",
+    "FRESH": "Fresh",
+    "FROM": "From",
+    "INVERSE_RATE": "Inverse rate",
+    "LOADING": "Loading exchange rates",
+    "MARK_STALE": "Mark stale",
+    "RATE": "Rate",
+    "REFRESH": "Refresh",
+    "RESULT": "Converted amount",
+    "RETRY": "Retry",
+    "STALE": "Stale",
+    "STATE": "State",
+    "SWAP": "Swap",
+    "TEST_ERROR": "Test error",
+    "TITLE": "Currency Converter",
+    "TO": "To",
+    "UPDATED": "Updated"
+  },
+  "QUOTES_API": {
+    "ADD_FAVORITE": "Add favorite",
+    "CLEAR": "Clear",
+    "DESCRIPTION": "A quotes API style reader with loading, retry, favorites, LocalStorage persistence, and reduced-motion friendly typewriter text.",
+    "ERROR_TEXT": "The simulated quotes API request failed. Retry to reload the local quote bank.",
+    "ERROR_TITLE": "Quotes unavailable",
+    "EYEBROW": "Quote stream",
+    "FAVORITES": "Favorites",
+    "FEATURES": {
+      "FAVORITES": "Favorite quotes are persisted locally for quick reuse.",
+      "STATES": "Loading, error, and retry flows model a small API integration.",
+      "TYPEWRITER": "The selected quote is revealed with a typewriter animation that respects reduced-motion settings."
+    },
+    "LOADING": "Loading quotes",
+    "NEXT_QUOTE": "Next quote",
+    "NO_FAVORITES": "No saved quotes yet.",
+    "REFRESH": "Refresh",
+    "REMOVE_FAVORITE": "Remove favorite",
+    "RETRY": "Retry",
+    "SAVED_QUOTES": "Saved quotes",
+    "STATS": {
+      "FAVORITES": "Favorites",
+      "POSITION": "Current",
+      "TOTAL": "Quotes"
+    },
+    "TEST_ERROR": "Test error",
+    "TITLE": "Quotes API",
+    "TONES": {
+      "CRAFT": "Craft",
+      "FOCUS": "Focus",
+      "MINDSET": "Mindset"
+    }
+  },
+  "STICKY_NOTES": {
+    "ACTIONS": {
+      "CLEAR_SEARCH": "Clear search",
+      "DELETE": "Delete",
+      "EDIT": "Edit",
+      "PIN": "Pin",
+      "RESET_DEMO": "Reset demo",
+      "UNPIN": "Unpin"
+    },
+    "COLORS": {
+      "BLUE": "Blue note",
+      "GREEN": "Green note",
+      "ROSE": "Rose note",
+      "YELLOW": "Yellow note"
+    },
+    "DESCRIPTION": "A sticky note board for quick ideas, with colors, pinned ordering, search, editing, deletion, and LocalStorage persistence.",
+    "EMPTY": {
+      "TEXT": "Clear the search or create a new note to continue.",
+      "TITLE": "No notes in this view"
+    },
+    "EMPTY_BODY": "No note body yet.",
+    "FEATURES": {
+      "COLORS": "Color swatches make notes easier to scan.",
+      "PINNING": "Pinned notes stay first in the board.",
+      "STORAGE": "LocalStorage keeps notes available after reloads."
+    },
+    "FORM": {
+      "ADD": "Add note",
+      "ADD_TITLE": "New note",
+      "BODY": "Body",
+      "BODY_PLACEHOLDER": "Add a short note or reminder",
+      "CANCEL": "Cancel",
+      "CHARACTERS": "{{count}} / {{max}} characters",
+      "COLOR": "Color",
+      "EDIT_TITLE": "Edit note",
+      "EYEBROW": "Note form",
+      "SAVE": "Save changes",
+      "TITLE": "Title",
+      "TITLE_PLACEHOLDER": "Example: portfolio idea",
+      "TITLE_REQUIRED": "Note title is required"
+    },
+    "META": {
+      "PINNED": "Pinned",
+      "UNPINNED": "Normal"
+    },
+    "SEARCH": {
+      "LABEL": "Search",
+      "PLACEHOLDER": "Search notes"
+    },
+    "STATS": {
+      "PINNED": "Pinned",
+      "TOTAL": "Notes",
+      "VISIBLE": "Visible"
+    },
+    "TITLE": "Sticky Notes"
+  },
+  "GROCERY_LIST": {
+    "ACTIONS": {
+      "CLEAR_PURCHASED": "Clear purchased",
+      "DELETE": "Delete",
+      "EDIT": "Edit",
+      "MARK_ACTIVE": "Mark item active",
+      "MARK_PURCHASED": "Mark item purchased",
+      "RESET_DEMO": "Reset demo"
+    },
+    "CATEGORIES": {
+      "BAKERY": "Bakery",
+      "DAIRY": "Dairy",
+      "HOUSEHOLD": "Household",
+      "PANTRY": "Pantry",
+      "PRODUCE": "Produce"
+    },
+    "DESCRIPTION": "A grocery planner focused on quantities, categories, purchased state, filtering, and local persistence.",
+    "EMPTY": {
+      "TEXT": "Change the filter or add a grocery item to continue.",
+      "TITLE": "No grocery items in this view"
+    },
+    "FEATURES": {
+      "CATEGORIES": "Category filters keep shopping sections easy to scan.",
+      "PURCHASED": "Items can be marked as purchased and cleared in one action.",
+      "STORAGE": "LocalStorage keeps the grocery list available after reloads."
+    },
+    "FILTERS": {
+      "ACTIVE": "Active",
+      "ALL": "All",
+      "ALL_CATEGORIES": "All categories",
+      "CATEGORY": "Category",
+      "PURCHASED": "Purchased",
+      "TITLE": "Grocery filters"
+    },
+    "FORM": {
+      "ADD": "Add item",
+      "ADD_TITLE": "New item",
+      "CANCEL": "Cancel",
+      "CATEGORY": "Category",
+      "CHARACTERS": "{{count}} / {{max}} characters",
+      "EDIT_TITLE": "Edit item",
+      "EYEBROW": "Grocery form",
+      "NAME": "Item",
+      "NAME_PLACEHOLDER": "Example: coffee beans",
+      "NAME_REQUIRED": "Item name is required",
+      "QUANTITY": "Quantity",
+      "QUANTITY_REQUIRED": "Use a quantity greater than zero",
+      "SAVE": "Save changes"
+    },
+    "META": {
+      "CREATED": "Created",
+      "QUANTITY": "Quantity"
+    },
+    "STATS": {
+      "ACTIVE": "Active",
+      "PURCHASED": "Purchased",
+      "QUANTITY": "Quantity",
+      "TOTAL": "Items"
+    },
+    "TITLE": "Grocery List"
   },
   "EXPENSE_TRACKER": {
     "ACTIONS": {

@@ -14,15 +14,15 @@ Duplicate ideas are consolidated. `To-Do List` appears once, and `Find the Word`
 ## Batch 2: API Projects
 
 - [x] Upgrade Weather App with OpenWeather-ready state, search, filters, loading, retry, empty, stale, and error states.
-- [ ] Movie Search: API search, filters, pagination, details, loading, empty, and error states.
-- [ ] REST Countries: search, region filters, details, favorites, and theme integration.
-- [ ] Currency Converter: rates API, amount validation, swap currencies, loading, and stale-data handling.
-- [ ] Quotes API: quote loading, retry, favorites, and typewriter animation with reduced-motion support.
+- [x] Movie Search: API search, filters, pagination, details, loading, empty, and error states.
+- [x] REST Countries: search, region filters, details, favorites, and theme integration.
+- [x] Currency Converter: rates API, amount validation, swap currencies, loading, and stale-data handling.
+- [x] Quotes API: quote loading, retry, favorites, and typewriter animation with reduced-motion support.
 
 ## Batch 3: LocalStorage And Productivity
 
-- [ ] Sticky Notes: create, edit, color, pin, delete, search, and LocalStorage persistence.
-- [ ] Grocery List: quantities, categories, purchased state, filtering, and persistence.
+- [x] Sticky Notes: create, edit, color, pin, delete, search, and LocalStorage persistence.
+- [x] Grocery List: quantities, categories, purchased state, filtering, and persistence.
 - [ ] Flashcards: decks, cards, reveal, progress, shuffle, and LocalStorage persistence.
 - [ ] Timer: countdown, presets, pause/resume, reset, and completion notification.
 - [ ] Digital Clock: time, date, 12/24-hour mode, timezone selection, and persistence.

@@ -1,0 +1,138 @@
+<section class="countries-page" [attr.aria-label]="'REST_COUNTRIES.TITLE' | translate">
+  <div class="countries-shell">
+    <div class="countries-toolbar">
+      <label class="field search-field">
+        <span>{{ 'REST_COUNTRIES.SEARCH' | translate }}</span>
+        <input
+          type="search"
+          [ngModel]="searchTerm()"
+          (ngModelChange)="updateSearchTerm($event)"
+          [placeholder]="'REST_COUNTRIES.SEARCH_PLACEHOLDER' | translate"
+        />
+      </label>
+
+      <label class="field">
+        <span>{{ 'REST_COUNTRIES.REGION' | translate }}</span>
+        <select [ngModel]="selectedRegion()" (ngModelChange)="updateRegion($event)">
+          <option value="all">{{ 'REST_COUNTRIES.REGIONS.ALL' | translate }}</option>
+          <option value="africa">{{ 'REST_COUNTRIES.REGIONS.AFRICA' | translate }}</option>
+          <option value="americas">{{ 'REST_COUNTRIES.REGIONS.AMERICAS' | translate }}</option>
+          <option value="asia">{{ 'REST_COUNTRIES.REGIONS.ASIA' | translate }}</option>
+          <option value="europe">{{ 'REST_COUNTRIES.REGIONS.EUROPE' | translate }}</option>
+          <option value="oceania">{{ 'REST_COUNTRIES.REGIONS.OCEANIA' | translate }}</option>
+        </select>
+      </label>
+
+      <div class="toolbar-actions">
+        <button class="btn btn-outline-danger btn-sm" type="button" (click)="simulateApiFailure()">
+          {{ 'REST_COUNTRIES.TEST_ERROR' | translate }}
+        </button>
+        <button class="btn btn-primary btn-sm" type="button" (click)="loadCountries()">
+          {{ 'REST_COUNTRIES.REFRESH' | translate }}
+        </button>
+      </div>
+    </div>
+
+    @if (loadState() === 'loading') {
+      <div class="countries-loading" aria-live="polite">
+        <span>{{ 'REST_COUNTRIES.LOADING' | translate }}</span>
+      </div>
+    } @else if (loadState() === 'error') {
+      <app-async-state-panel
+        icon="pi pi-globe"
+        titleKey="REST_COUNTRIES.ERROR_TITLE"
+        messageKey="REST_COUNTRIES.ERROR_TEXT"
+        actionKey="REST_COUNTRIES.RETRY"
+        tone="error"
+        (action)="loadCountries()"
+      />
+    } @else {
+      <div class="countries-stats">
+        <article>
+          <span>{{ 'REST_COUNTRIES.RESULTS' | translate }}</span>
+          <strong>{{ filteredCountries().length }}</strong>
+        </article>
+        <article>
+          <span>{{ 'REST_COUNTRIES.POPULATION' | translate }}</span>
+          <strong>{{ formatNumber(totalPopulation()) }}</strong>
+        </article>
+        <article>
+          <span>{{ 'REST_COUNTRIES.FAVORITES' | translate }}</span>
+          <strong>{{ favoriteCountries().length }}</strong>
+        </article>
+      </div>
+
+      @if (filteredCountries().length === 0) {
+        <app-async-state-panel
+          icon="pi pi-search"
+          titleKey="REST_COUNTRIES.EMPTY_TITLE"
+          messageKey="REST_COUNTRIES.EMPTY_TEXT"
+          actionKey="REST_COUNTRIES.CLEAR_FILTERS"
+          (action)="clearFilters()"
+        />
+      } @else {
+        <div class="countries-layout">
+          <div class="country-list">
+            @for (country of filteredCountries(); track country.code) {
+              <button
+                class="country-card"
+                type="button"
+                [class.active]="selectedCountry()?.code === country.code"
+                (click)="selectCountry(country)"
+              >
+                <span class="flag">{{ country.flag }}</span>
+                <span class="country-card-copy">
+                  <span class="country-name">{{ country.name }}</span>
+                  <span>{{ country.capital }} · {{ regionKey(country.region) | translate }}</span>
+                </span>
+                <span class="country-code">{{ country.code }}</span>
+              </button>
+            }
+          </div>
+
+          @if (selectedCountry(); as country) {
+            <aside class="country-details" [attr.aria-label]="'REST_COUNTRIES.DETAILS' | translate">
+              <div class="details-header">
+                <span class="flag large">{{ country.flag }}</span>
+                <div>
+                  <span class="details-eyebrow">{{ regionKey(country.region) | translate }}</span>
+                  <h3>{{ country.name }}</h3>
+                </div>
+                <button class="favorite-button" type="button" (click)="toggleFavorite(country)">
+                  {{ (isFavorite(country) ? 'REST_COUNTRIES.REMOVE_FAVORITE' : 'REST_COUNTRIES.ADD_FAVORITE') | translate }}
+                </button>
+              </div>
+
+              <dl>
+                <div>
+                  <dt>{{ 'REST_COUNTRIES.CAPITAL' | translate }}</dt>
+                  <dd>{{ country.capital }}</dd>
+                </div>
+                <div>
+                  <dt>{{ 'REST_COUNTRIES.POPULATION' | translate }}</dt>
+                  <dd>{{ formatNumber(country.population) }}</dd>
+                </div>
+                <div>
+                  <dt>{{ 'REST_COUNTRIES.AREA' | translate }}</dt>
+                  <dd>{{ formatNumber(country.area) }} km2</dd>
+                </div>
+                <div>
+                  <dt>{{ 'REST_COUNTRIES.CURRENCY' | translate }}</dt>
+                  <dd>{{ country.currency }}</dd>
+                </div>
+                <div>
+                  <dt>{{ 'REST_COUNTRIES.LANGUAGES' | translate }}</dt>
+                  <dd>{{ country.languages.join(', ') }}</dd>
+                </div>
+                <div>
+                  <dt>{{ 'REST_COUNTRIES.BORDERS' | translate }}</dt>
+                  <dd>{{ country.borders.length ? country.borders.join(', ') : ('REST_COUNTRIES.NO_BORDERS' | translate) }}</dd>
+                </div>
+              </dl>
+            </aside>
+          }
+        </div>
+      }
+    }
+  </div>
+</section>

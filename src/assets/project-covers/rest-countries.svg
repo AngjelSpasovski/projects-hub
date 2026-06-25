@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">REST Countries project cover</title>
+  <desc id="desc">A globe, country cards, and region markers.</desc>
+  <rect width="960" height="540" fill="#eef5ff"/>
+  <rect x="118" y="82" width="724" height="376" rx="22" fill="#fff" stroke="#b9cff5" stroke-width="4"/>
+  <circle cx="356" cy="270" r="132" fill="#dbeafe" stroke="#1f2937" stroke-width="8"/>
+  <path d="M224 270h264M356 138c-58 64-58 200 0 264M356 138c58 64 58 200 0 264" fill="none" stroke="#1f2937" stroke-width="8" stroke-linecap="round"/>
+  <path d="M254 206c50 22 154 22 204 0M254 334c50-22 154-22 204 0" fill="none" stroke="#5a74e8" stroke-width="8" stroke-linecap="round"/>
+  <rect x="540" y="156" width="230" height="64" rx="14" fill="#151c2a"/>
+  <rect x="566" y="176" width="124" height="12" rx="6" fill="#fff"/>
+  <rect x="566" y="198" width="82" height="10" rx="5" fill="#88c5ef"/>
+  <circle cx="728" cy="188" r="18" fill="#f5d94d"/>
+  <rect x="540" y="244" width="230" height="64" rx="14" fill="#edf3ff" stroke="#b9cff5" stroke-width="4"/>
+  <rect x="566" y="264" width="112" height="12" rx="6" fill="#1f2937"/>
+  <rect x="566" y="286" width="96" height="10" rx="5" fill="#5a74e8"/>
+  <rect x="540" y="332" width="230" height="64" rx="14" fill="#edf3ff" stroke="#b9cff5" stroke-width="4"/>
+  <rect x="566" y="352" width="132" height="12" rx="6" fill="#1f2937"/>
+  <rect x="566" y="374" width="74" height="10" rx="5" fill="#78cbb0"/>
+  <g fill="#5a74e8">
+    <circle cx="104" cy="142" r="7"/>
+    <circle cx="104" cy="182" r="7"/>
+    <circle cx="104" cy="222" r="7"/>
+    <circle cx="856" cy="318" r="7"/>
+    <circle cx="856" cy="358" r="7"/>
+    <circle cx="856" cy="398" r="7"/>
+  </g>
+  <path d="M144 410h38M163 391v38M806 112h38M825 93v38" stroke="#78cbb0" stroke-width="6" stroke-linecap="round"/>
+</svg>

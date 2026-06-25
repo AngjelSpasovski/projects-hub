@@ -1,0 +1,137 @@
+<section class="movie-search-page" [attr.aria-label]="'MOVIE_SEARCH.TITLE' | translate">
+  <div class="movie-shell">
+    <div class="movie-toolbar">
+      <label class="field search-field">
+        <span>{{ 'MOVIE_SEARCH.SEARCH' | translate }}</span>
+        <input
+          type="search"
+          [ngModel]="searchTerm()"
+          (ngModelChange)="updateSearchTerm($event)"
+          [placeholder]="'MOVIE_SEARCH.SEARCH_PLACEHOLDER' | translate"
+        />
+      </label>
+
+      <label class="field">
+        <span>{{ 'MOVIE_SEARCH.GENRE' | translate }}</span>
+        <select [ngModel]="selectedGenre()" (ngModelChange)="updateGenre($event)">
+          <option value="all">{{ 'MOVIE_SEARCH.GENRES.ALL' | translate }}</option>
+          <option value="action">{{ 'MOVIE_SEARCH.GENRES.ACTION' | translate }}</option>
+          <option value="drama">{{ 'MOVIE_SEARCH.GENRES.DRAMA' | translate }}</option>
+          <option value="sci-fi">{{ 'MOVIE_SEARCH.GENRES.SCI_FI' | translate }}</option>
+          <option value="animation">{{ 'MOVIE_SEARCH.GENRES.ANIMATION' | translate }}</option>
+        </select>
+      </label>
+
+      <div class="toolbar-actions">
+        <button class="btn btn-outline-danger btn-sm" type="button" (click)="simulateApiFailure()">
+          {{ 'MOVIE_SEARCH.TEST_ERROR' | translate }}
+        </button>
+        <button class="btn btn-primary btn-sm" type="button" (click)="loadMovies()">
+          {{ 'MOVIE_SEARCH.REFRESH' | translate }}
+        </button>
+      </div>
+    </div>
+
+    @if (loadState() === 'loading') {
+      <div class="movie-loading" aria-live="polite">
+        <span>{{ 'MOVIE_SEARCH.LOADING' | translate }}</span>
+      </div>
+    } @else if (loadState() === 'error') {
+      <app-async-state-panel
+        icon="pi pi-wifi"
+        titleKey="MOVIE_SEARCH.ERROR_TITLE"
+        messageKey="MOVIE_SEARCH.ERROR_TEXT"
+        actionKey="MOVIE_SEARCH.RETRY"
+        tone="error"
+        (action)="loadMovies()"
+      />
+    } @else {
+      <div class="movie-stats" aria-live="polite">
+        <article>
+          <span>{{ 'MOVIE_SEARCH.RESULTS' | translate }}</span>
+          <strong>{{ filteredMovies().length }}</strong>
+        </article>
+        <article>
+          <span>{{ 'MOVIE_SEARCH.AVERAGE_RATING' | translate }}</span>
+          <strong>{{ averageRating() || '-' }}</strong>
+        </article>
+        <article>
+          <span>{{ 'MOVIE_SEARCH.NEWEST' | translate }}</span>
+          <strong>{{ newestMovie()?.year || '-' }}</strong>
+        </article>
+      </div>
+
+      @if (filteredMovies().length === 0) {
+        <app-async-state-panel
+          icon="pi pi-search"
+          titleKey="MOVIE_SEARCH.EMPTY_TITLE"
+          messageKey="MOVIE_SEARCH.EMPTY_TEXT"
+          actionKey="MOVIE_SEARCH.CLEAR_FILTERS"
+          (action)="clearFilters()"
+        />
+      } @else {
+        <div class="movie-layout">
+          <div class="movie-results">
+            @for (movie of pagedMovies(); track movie.id) {
+              <button
+                class="movie-card"
+                type="button"
+                [class.active]="selectedMovie()?.id === movie.id"
+                (click)="selectMovie(movie)"
+              >
+                <span class="movie-card-meta">
+                  <span>{{ genreKey(movie.genre) | translate }}</span>
+                  <strong>{{ movie.rating }}</strong>
+                </span>
+                <span class="movie-card-title">{{ movie.title }}</span>
+                <span class="movie-card-summary">{{ movie.summary }}</span>
+              </button>
+            }
+          </div>
+
+          @if (selectedMovie(); as movie) {
+            <aside class="movie-details" [attr.aria-label]="'MOVIE_SEARCH.DETAILS' | translate">
+              <span class="details-eyebrow">{{ 'MOVIE_SEARCH.SELECTED_MOVIE' | translate }}</span>
+              <h3>{{ movie.title }}</h3>
+              <p>{{ movie.summary }}</p>
+
+              <dl>
+                <div>
+                  <dt>{{ 'MOVIE_SEARCH.YEAR' | translate }}</dt>
+                  <dd>{{ movie.year }}</dd>
+                </div>
+                <div>
+                  <dt>{{ 'MOVIE_SEARCH.RUNTIME' | translate }}</dt>
+                  <dd>{{ movie.runtime }} {{ 'MOVIE_SEARCH.MINUTES' | translate }}</dd>
+                </div>
+                <div>
+                  <dt>{{ 'MOVIE_SEARCH.DIRECTOR' | translate }}</dt>
+                  <dd>{{ movie.director }}</dd>
+                </div>
+                <div>
+                  <dt>{{ 'MOVIE_SEARCH.CAST' | translate }}</dt>
+                  <dd>{{ movie.cast.join(', ') }}</dd>
+                </div>
+              </dl>
+            </aside>
+          }
+        </div>
+
+        <div class="pagination-row">
+          <button class="btn btn-outline-primary btn-sm" type="button" (click)="previousPage()" [disabled]="currentPage() === 1">
+            {{ 'MOVIE_SEARCH.PREVIOUS' | translate }}
+          </button>
+          <span>{{ 'MOVIE_SEARCH.PAGE' | translate: { current: currentPage(), total: totalPages() } }}</span>
+          <button
+            class="btn btn-outline-primary btn-sm"
+            type="button"
+            (click)="nextPage()"
+            [disabled]="currentPage() === totalPages()"
+          >
+            {{ 'MOVIE_SEARCH.NEXT' | translate }}
+          </button>
+        </div>
+      }
+    }
+  </div>
+</section>

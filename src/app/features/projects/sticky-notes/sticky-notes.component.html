@@ -1,0 +1,151 @@
+<section class="sticky-page">
+  <div class="sticky-shell" [attr.aria-label]="'STICKY_NOTES.TITLE' | translate">
+    <form class="note-form" (ngSubmit)="submitNote()" novalidate>
+      <div class="panel-heading">
+        <div>
+          <span>{{ 'STICKY_NOTES.FORM.EYEBROW' | translate }}</span>
+          <h3>{{ (editingId() ? 'STICKY_NOTES.FORM.EDIT_TITLE' : 'STICKY_NOTES.FORM.ADD_TITLE') | translate }}</h3>
+        </div>
+        @if (editingId()) {
+          <button type="button" class="btn btn-sm btn-icon" (click)="cancelEdit()">
+            {{ 'STICKY_NOTES.FORM.CANCEL' | translate }}
+          </button>
+        }
+      </div>
+
+      <label>
+        <span>{{ 'STICKY_NOTES.FORM.TITLE' | translate }}</span>
+        <input
+          type="text"
+          class="form-control"
+          [class.invalid]="isTitleInvalid()"
+          [ngModel]="draftTitle()"
+          (ngModelChange)="updateTitle($event)"
+          (blur)="titleTouched.set(true)"
+          name="title"
+          [attr.maxlength]="titleMaxLength"
+          [placeholder]="'STICKY_NOTES.FORM.TITLE_PLACEHOLDER' | translate"
+        />
+        <small [class.error]="isTitleInvalid()">
+          @if (isTitleInvalid()) {
+            {{ 'STICKY_NOTES.FORM.TITLE_REQUIRED' | translate }}
+          } @else {
+            {{ 'STICKY_NOTES.FORM.CHARACTERS' | translate:{ count: draftTitle().length, max: titleMaxLength } }}
+          }
+        </small>
+      </label>
+
+      <label>
+        <span>{{ 'STICKY_NOTES.FORM.BODY' | translate }}</span>
+        <textarea
+          class="form-control"
+          rows="4"
+          [ngModel]="draftBody()"
+          (ngModelChange)="updateBody($event)"
+          name="body"
+          [attr.maxlength]="bodyMaxLength"
+          [placeholder]="'STICKY_NOTES.FORM.BODY_PLACEHOLDER' | translate"
+        ></textarea>
+        <small>{{ 'STICKY_NOTES.FORM.CHARACTERS' | translate:{ count: draftBody().length, max: bodyMaxLength } }}</small>
+      </label>
+
+      <fieldset class="color-picker">
+        <legend>{{ 'STICKY_NOTES.FORM.COLOR' | translate }}</legend>
+        @for (color of colors; track color) {
+          <button
+            type="button"
+            class="color-swatch"
+            [class]="color"
+            [class.active]="draftColor() === color"
+            [attr.aria-label]="colorKey(color) | translate"
+            (click)="updateColor(color)"
+          ></button>
+        }
+      </fieldset>
+
+      <button type="submit" class="btn btn-primary submit-note">
+        <i class="pi pi-check"></i>
+        <span>{{ (editingId() ? 'STICKY_NOTES.FORM.SAVE' : 'STICKY_NOTES.FORM.ADD') | translate }}</span>
+      </button>
+    </form>
+
+    <div class="notes-board">
+      <div class="board-header">
+        <div class="note-stats">
+          <article>
+            <span>{{ 'STICKY_NOTES.STATS.TOTAL' | translate }}</span>
+            <strong>{{ notes().length }}</strong>
+          </article>
+          <article>
+            <span>{{ 'STICKY_NOTES.STATS.PINNED' | translate }}</span>
+            <strong>{{ pinnedCount() }}</strong>
+          </article>
+          <article>
+            <span>{{ 'STICKY_NOTES.STATS.VISIBLE' | translate }}</span>
+            <strong>{{ filteredNotes().length }}</strong>
+          </article>
+        </div>
+
+        <div class="search-row">
+          <label>
+            <span>{{ 'STICKY_NOTES.SEARCH.LABEL' | translate }}</span>
+            <input
+              type="search"
+              class="form-control"
+              [ngModel]="searchTerm()"
+              (ngModelChange)="updateSearchTerm($event)"
+              name="search"
+              [placeholder]="'STICKY_NOTES.SEARCH.PLACEHOLDER' | translate"
+            />
+          </label>
+          <button type="button" class="btn btn-sm btn-icon" (click)="clearSearch()" [disabled]="!searchTerm()">
+            <i class="pi pi-times"></i>
+            <span>{{ 'STICKY_NOTES.ACTIONS.CLEAR_SEARCH' | translate }}</span>
+          </button>
+          <button type="button" class="btn btn-sm btn-icon" (click)="resetDemo()">
+            <i class="pi pi-refresh"></i>
+            <span>{{ 'STICKY_NOTES.ACTIONS.RESET_DEMO' | translate }}</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="notes-grid">
+        @for (note of filteredNotes(); track note.id) {
+          <article class="note-card" [class]="note.color" [class.pinned]="note.pinned">
+            <div class="note-card-header">
+              <span class="pin-state">
+                <i [class]="note.pinned ? 'pi pi-star-fill' : 'pi pi-star'"></i>
+                {{ (note.pinned ? 'STICKY_NOTES.META.PINNED' : 'STICKY_NOTES.META.UNPINNED') | translate }}
+              </span>
+              <span>{{ note.updatedAt }}</span>
+            </div>
+
+            <h4>{{ note.title }}</h4>
+            <p>{{ note.body || ('STICKY_NOTES.EMPTY_BODY' | translate) }}</p>
+
+            <div class="note-actions">
+              <button type="button" class="btn btn-sm btn-icon" (click)="togglePin(note.id)">
+                <i [class]="note.pinned ? 'pi pi-star-fill' : 'pi pi-star'"></i>
+                <span>{{ (note.pinned ? 'STICKY_NOTES.ACTIONS.UNPIN' : 'STICKY_NOTES.ACTIONS.PIN') | translate }}</span>
+              </button>
+              <button type="button" class="btn btn-sm btn-icon" (click)="editNote(note)">
+                <i class="pi pi-pencil"></i>
+                <span>{{ 'STICKY_NOTES.ACTIONS.EDIT' | translate }}</span>
+              </button>
+              <button type="button" class="btn btn-sm btn-icon delete-action" (click)="deleteNote(note.id)">
+                <i class="pi pi-times"></i>
+                <span>{{ 'STICKY_NOTES.ACTIONS.DELETE' | translate }}</span>
+              </button>
+            </div>
+          </article>
+        } @empty {
+          <section class="empty-state">
+            <i class="pi pi-sticky-note"></i>
+            <h3>{{ 'STICKY_NOTES.EMPTY.TITLE' | translate }}</h3>
+            <p>{{ 'STICKY_NOTES.EMPTY.TEXT' | translate }}</p>
+          </section>
+        }
+      </div>
+    </div>
+  </div>
+</section>
