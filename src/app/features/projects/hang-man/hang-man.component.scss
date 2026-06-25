@@ -122,36 +122,53 @@
   justify-content: center;
 }
 
-:host ::ng-deep .language-reset-dialog {
+:host ::ng-deep .hang-man-dialog {
   border: 1px solid var(--app-border);
   border-radius: var(--app-radius-lg);
   box-shadow: var(--app-shadow-hover);
   overflow: hidden;
 }
 
-:host ::ng-deep .language-reset-dialog .p-dialog-header,
-:host ::ng-deep .language-reset-dialog .p-dialog-content {
+:host ::ng-deep .hang-man-dialog .p-dialog-header,
+:host ::ng-deep .hang-man-dialog .p-dialog-content {
   background: var(--app-surface);
   color: var(--app-text);
 }
 
-:host ::ng-deep .language-reset-dialog .p-dialog-header {
+:host ::ng-deep .hang-man-dialog .p-dialog-header {
   border-bottom: 1px solid var(--app-border);
   padding: 0.9rem 1rem;
 }
 
-:host ::ng-deep .language-reset-dialog .p-dialog-content {
+:host ::ng-deep .hang-man-dialog .p-dialog-content {
   padding: 1rem;
 }
 
-.language-reset-content {
+.dialog-content {
   display: grid;
   gap: 1rem;
 }
 
-.language-reset-content p {
+.dialog-content p {
   color: var(--app-text-muted);
   margin: 0;
+}
+
+.result-content {
+  justify-items: center;
+  text-align: center;
+}
+
+.result-icon {
+  font-size: 2.4rem;
+}
+
+.result-icon.won {
+  color: #22c55e;
+}
+
+.result-icon.lost {
+  color: #ef4444;
 }
 
 .dialog-actions {

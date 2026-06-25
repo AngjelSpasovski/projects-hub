@@ -12,7 +12,7 @@
   display: grid;
   gap: 0.65rem;
   padding: 0.75rem;
-  width: min(100%, 21rem);
+  width: min(100%, 21.5rem);
 }
 
 .display {
@@ -41,6 +41,12 @@ output {
   display: grid;
   gap: 0.4rem;
   grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-areas:
+    "clear back percent root divide"
+    "seven eight nine square multiply"
+    "four five six sign subtract"
+    "one two three equals add"
+    "zero zero decimal equals add";
 }
 
 .calculator-key {
@@ -48,9 +54,10 @@ output {
   border: 0;
   border-radius: 8px;
   color: #f8fafc;
-  font-size: 1.15rem;
+  font-size: 1.08rem;
   font-weight: 800;
   min-height: 2.35rem;
+  padding: 0.35rem;
 }
 
 .calculator-key:hover {
@@ -64,6 +71,10 @@ output {
 .operator,
 .equals {
   background: var(--app-accent);
+}
+
+.tall {
+  min-height: 5.1rem;
 }
 
 .zero {

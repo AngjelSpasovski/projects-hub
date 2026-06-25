@@ -96,5 +96,53 @@ export const PROJECTS: PortfolioProject[] = [
     difficulty: 'intermediate',
     repositoryUrl: null,
     demoUrl: null
+  },
+  {
+    order: 70,
+    id: 'todo-list',
+    titleKey: 'PROJECTS.TODO_LIST.TITLE',
+    summaryKey: 'PROJECTS.TODO_LIST.SUMMARY',
+    categoryKey: 'CATEGORIES.UTILITIES',
+    tags: ['Angular', 'TypeScript', 'Forms', 'LocalStorage'],
+    status: 'ready',
+    image: 'assets/project-covers/todo-list.svg',
+    route: '/admin/projects/todo-list',
+    updatedAt: '2026-06-24',
+    createdAt: '2026-06-24',
+    difficulty: 'beginner',
+    repositoryUrl: null,
+    demoUrl: null
+  },
+  {
+    order: 80,
+    id: 'expense-tracker',
+    titleKey: 'PROJECTS.EXPENSE_TRACKER.TITLE',
+    summaryKey: 'PROJECTS.EXPENSE_TRACKER.SUMMARY',
+    categoryKey: 'CATEGORIES.UTILITIES',
+    tags: ['Angular', 'TypeScript', 'Chart.js', 'LocalStorage'],
+    status: 'ready',
+    image: 'assets/project-covers/expense-tracker.svg',
+    route: '/admin/projects/expense-tracker',
+    updatedAt: '2026-06-24',
+    createdAt: '2026-06-24',
+    difficulty: 'intermediate',
+    repositoryUrl: null,
+    demoUrl: null
+  },
+  {
+    order: 90,
+    id: 'technical-documentation',
+    titleKey: 'PROJECTS.TECHNICAL_DOCUMENTATION.TITLE',
+    summaryKey: 'PROJECTS.TECHNICAL_DOCUMENTATION.SUMMARY',
+    categoryKey: 'CATEGORIES.DOCUMENTATION',
+    tags: ['Angular', 'TypeScript', 'Docs', 'Architecture'],
+    status: 'ready',
+    image: 'assets/project-covers/technical-documentation.svg',
+    route: '/admin/projects/technical-documentation',
+    updatedAt: '2026-06-25',
+    createdAt: '2026-06-25',
+    difficulty: 'beginner',
+    repositoryUrl: null,
+    demoUrl: null
   }
 ];

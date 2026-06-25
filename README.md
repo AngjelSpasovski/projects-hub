@@ -19,7 +19,7 @@ The app opens directly into an admin-style dashboard where projects are browsed 
 - Project metadata: status, difficulty, dates, repository link, live demo link
 - Distinctive illustrated catalog covers with separate live-project screenshots for documentation
 - Unified project workspace containing metadata and the interactive application
-- Lazy-loaded Calculator, Tic Tac Toe, Hang Man, Weather, Music Event, and JavaScript Quiz mini projects
+- Lazy-loaded Calculator, Tic Tac Toe, Hang Man, Weather, Music Event, JavaScript Quiz, To-Do List, Expense Tracker, and Technical Documentation mini projects
 - Unit tests for app shell, dashboard logic, registry metadata, shared services, and mini project behavior
 - Playwright smoke tests for catalog navigation, view switching, and language switching
 
@@ -46,12 +46,15 @@ Exact installed versions are tracked in [DEPENDENCIES.md](./DEPENDENCIES.md).
 | Weather App | Ready | Migrated as a standalone Angular component with simulated API states and tests. |
 | Music Event App | Ready | Migrated as a standalone Angular component with PrimeNG filters, dialog details, and tests. |
 | JavaScript Quiz | Ready | Six randomized questions per round from a reviewed 26-question bank, with timer, review, translations, and tests. |
+| To-Do List | Ready | Migrated as a standalone Angular component with task CRUD, validation, filters, priority labels, and LocalStorage persistence. |
+| Expense Tracker | Ready | Migrated as a standalone Angular component with income/expense entries, totals, validation, LocalStorage persistence, and Chart.js summaries. |
+| Technical Documentation | Ready | Added as a searchable standalone documentation component for architecture, contribution flow, translations, and quality checks. |
 
 The master roadmap is tracked in [TASKS.md](./TASKS.md). Detailed batches, project backlogs, and completion rules live in [docs/tasks](./docs/tasks/README.md).
 
 ## Next Work
 
-The next product priority is the To-Do List with LocalStorage, followed by Expense Tracker and Technical Documentation. Legacy migrations start with Project Planner, Odd/Even, and Dev Logger.
+The next product priority is the Batch 2 API project track, starting with the Weather App OpenWeather upgrade. Legacy migrations start with Project Planner, Odd/Even, and Dev Logger.
 
 ## Migrated Projects
 
@@ -67,9 +70,9 @@ Angular coverage: standalone component, host keyboard listener, template-driven 
 
 Folder: [`src/app/features/projects/tic-tac-toe`](./src/app/features/projects/tic-tac-toe)
 
-Tic Tac Toe is a local two-player game built to demonstrate signal-based state and derived game outcomes. It includes alternating turns, winner detection for rows, columns, and diagonals, draw detection, winning-cell highlighting, reset flow, and responsive board layout.
+Tic Tac Toe is a local two-player game built to demonstrate signal-based state and derived game outcomes. It includes alternating turns, winner detection for rows, columns, and diagonals, draw detection, winning-cell highlighting, score tracking, reset confirmations, round result modals, match winner flow, and responsive board layout.
 
-Angular coverage: standalone component, signals, computed state, template control flow, button grid rendering, and unit tests for game rules.
+Angular coverage: standalone component, signals, computed state, template control flow, PrimeNG Dialog, button grid rendering, and unit tests for game rules.
 
 ### Hang Man
 
@@ -102,6 +105,30 @@ Folder: [`src/app/features/projects/javascript-quiz`](./src/app/features/project
 JavaScript Quiz is a timed multiple-choice challenge built from reviewed JavaScript learning material. Every round draws six questions from a typed bank of 26 and randomizes the answer positions. It includes a per-question countdown, automatic timeout progression, score calculation, translated explanations, answer review, and restart flow.
 
 Angular coverage: standalone component, signals, computed score and progress, timer cleanup, translated typed question data, lazy loading, unit tests, and an end-to-end completion workflow.
+
+### To-Do List
+
+Folder: [`src/app/features/projects/todo-list`](./src/app/features/projects/todo-list)
+
+To-Do List is a productivity mini project for managing local tasks. It includes required-title validation, optional notes, priority labels, due dates, edit and delete actions, active/completed filters, completed-task cleanup, demo reset, and LocalStorage persistence.
+
+Angular coverage: standalone component, template-driven forms, signals, computed task counts and filters, LocalStorage persistence, translated labels, lazy loading, and focused unit tests.
+
+### Expense Tracker
+
+Folder: [`src/app/features/projects/expense-tracker`](./src/app/features/projects/expense-tracker)
+
+Expense Tracker is a local finance mini project for tracking income and expenses. It includes title and amount validation, entry type and category fields, date metadata, edit and delete actions, income/expense filters, balance calculation, LocalStorage persistence, and a Chart.js doughnut summary.
+
+Angular coverage: standalone component, template-driven forms, signals, computed finance totals, Chart.js canvas integration, LocalStorage persistence, translated labels, lazy loading, and focused unit tests.
+
+### Technical Documentation
+
+Folder: [`src/app/features/projects/technical-documentation`](./src/app/features/projects/technical-documentation)
+
+Technical Documentation is a searchable guide for the current Projects Hub architecture and contribution flow. It includes documentation sections for application architecture, adding a project, translation rules, and quality checks, with relevant code references for each section.
+
+Angular coverage: standalone component, signals, computed search results, translated documentation content, lazy loading, and focused unit tests.
 
 ## Getting Started
 
@@ -158,9 +185,11 @@ src/app/
     dashboard/
     projects/
       calculator/
+      expense-tracker/
       hang-man/
       javascript-quiz/
       tic-tac-toe/
+      todo-list/
       weather/
       music-event/
       project-detail/

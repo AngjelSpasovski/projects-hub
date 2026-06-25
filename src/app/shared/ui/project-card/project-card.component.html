@@ -4,16 +4,25 @@
   </a>
 
   <div class="project-content">
-    <div class="project-title-row">
-      <div>
+    <header class="project-title-block">
+      <div class="project-meta-row">
         <p class="category">{{ project().categoryKey | translate }}</p>
-        <h3>{{ project().titleKey | translate }}</h3>
+        <app-project-status-badge [status]="project().status" />
       </div>
-      <app-project-status-badge [status]="project().status" />
-    </div>
+      <h3>{{ project().titleKey | translate }}</h3>
+    </header>
 
     @if (viewMode() !== 'list') {
-      <p class="summary">{{ project().summaryKey | translate }}</p>
+      <div class="summary-block">
+        <p class="summary">{{ translatedSummary() }}</p>
+        <div class="summary-more-slot">
+          @if (hasLongSummary()) {
+            <button type="button" class="summary-more" (click)="openSummary()">
+              {{ 'PROJECT.SHOW_MORE' | translate }}
+            </button>
+          }
+        </div>
+      </div>
     }
 
     @if (viewMode() === 'detailed') {
@@ -47,3 +56,20 @@
     </div>
   </div>
 </article>
+
+<p-dialog
+  styleClass="summary-dialog"
+  [header]="project().titleKey | translate"
+  [modal]="true"
+  [visible]="summaryVisible()"
+  [dismissableMask]="true"
+  [draggable]="false"
+  [breakpoints]="{ '640px': '94vw' }"
+  [style]="{ width: 'min(34rem, 94vw)' }"
+  (visibleChange)="closeSummary()"
+>
+  <div class="summary-dialog-content">
+    <p class="category">{{ project().categoryKey | translate }}</p>
+    <p>{{ translatedSummary() }}</p>
+  </div>
+</p-dialog>

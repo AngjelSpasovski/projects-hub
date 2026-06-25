@@ -172,10 +172,6 @@ dt {
   padding: 1rem;
 }
 
-:host ::ng-deep .p-dialog-mask {
-  backdrop-filter: blur(3px);
-}
-
 .event-detail {
   display: grid;
   gap: 0.85rem;

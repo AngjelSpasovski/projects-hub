@@ -30,6 +30,8 @@ export class HangManComponent implements OnDestroy {
   readonly maxWrongGuesses = MAX_WRONG_GUESSES;
   readonly pendingLanguage = signal<AppLanguage | null>(null);
   readonly languageConfirmVisible = signal(false);
+  readonly newWordConfirmVisible = signal(false);
+  readonly resultDialogVisible = signal(false);
   readonly currentLanguage = this.languageService.activeLanguage;
   readonly currentWord = signal(this.wordsForCurrentLanguage()[0]);
   readonly guessedLetters = signal<string[]>([]);
@@ -73,9 +75,22 @@ export class HangManComponent implements OnDestroy {
     }
 
     this.guessedLetters.set([...this.guessedLetters(), normalizedLetter]);
+
+    if (this.hasWon() || this.hasLost()) {
+      this.resultDialogVisible.set(true);
+    }
   }
 
-  resetGame(): void {
+  requestNewWord(): void {
+    if (this.guessedLetters().length > 0 && !this.isGameOver()) {
+      this.newWordConfirmVisible.set(true);
+      return;
+    }
+
+    this.startNextWord();
+  }
+
+  startNextWord(): void {
     const language = this.currentLanguage();
     const words = this.wordsForCurrentLanguage();
     const nextWordIndex = this.wordIndexes[language];
@@ -83,6 +98,16 @@ export class HangManComponent implements OnDestroy {
     this.currentWord.set(words[nextWordIndex]);
     this.wordIndexes[language] = (nextWordIndex + 1) % words.length;
     this.guessedLetters.set([]);
+    this.newWordConfirmVisible.set(false);
+    this.resultDialogVisible.set(false);
+  }
+
+  resetGame(): void {
+    this.startNextWord();
+  }
+
+  cancelNewWord(): void {
+    this.newWordConfirmVisible.set(false);
   }
 
   confirmLanguageChange(): void {

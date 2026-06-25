@@ -28,7 +28,7 @@ describe('PROJECTS registry', () => {
       expect(project.titleKey).toMatch(/^PROJECTS\.[A-Z0-9_]+\.TITLE$/);
       expect(project.summaryKey).toMatch(/^PROJECTS\.[A-Z0-9_]+\.SUMMARY$/);
       expect(project.categoryKey).toMatch(/^CATEGORIES\.[A-Z0-9_]+$/);
-      expect(project.image).toMatch(/^assets\/project-covers\/.+\.png$/);
+      expect(project.image).toMatch(/^assets\/project-covers\/.+\.(png|svg)$/);
       expect(project.order).toBeGreaterThan(0);
       expect(project.tags.length).toBeGreaterThan(0);
     });

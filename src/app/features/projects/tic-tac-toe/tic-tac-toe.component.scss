@@ -27,6 +27,11 @@
   text-align: center;
 }
 
+.score-panel {
+  display: grid;
+  gap: 0.5rem;
+}
+
 .scoreboard {
   display: grid;
   gap: 0.4rem;
@@ -52,6 +57,24 @@
 .scoreboard strong {
   font-size: 1.1rem;
   line-height: 1;
+}
+
+.reset-score-danger {
+  align-items: center;
+  background: rgba(127, 29, 29, 0.96);
+  border: 1px solid rgba(248, 113, 113, 0.55);
+  color: #fff;
+  display: inline-flex;
+  gap: 0.4rem;
+  justify-content: center;
+  width: 100%;
+}
+
+.reset-score-danger:hover,
+.reset-score-danger:focus {
+  background: #991b1b;
+  border-color: rgba(252, 165, 165, 0.8);
+  color: #fff;
 }
 
 .board {
@@ -101,36 +124,33 @@
   justify-content: center;
 }
 
-.game-actions {
-  flex-wrap: wrap;
-}
-
 .game-actions .btn {
-  flex: 1 1 8rem;
+  width: 100%;
 }
 
-:host ::ng-deep .match-winner-dialog {
+:host ::ng-deep .tic-tac-toe-dialog {
   border: 1px solid var(--app-border);
   border-radius: var(--app-radius-lg);
   box-shadow: var(--app-shadow-hover);
   overflow: hidden;
 }
 
-:host ::ng-deep .match-winner-dialog .p-dialog-header,
-:host ::ng-deep .match-winner-dialog .p-dialog-content {
+:host ::ng-deep .tic-tac-toe-dialog .p-dialog-header,
+:host ::ng-deep .tic-tac-toe-dialog .p-dialog-content {
   background: var(--app-surface);
   color: var(--app-text);
 }
 
-:host ::ng-deep .match-winner-dialog .p-dialog-header {
+:host ::ng-deep .tic-tac-toe-dialog .p-dialog-header {
   border-bottom: 1px solid var(--app-border);
   padding: 0.9rem 1rem;
 }
 
-:host ::ng-deep .match-winner-dialog .p-dialog-content {
+:host ::ng-deep .tic-tac-toe-dialog .p-dialog-content {
   padding: 1rem;
 }
 
+.dialog-content,
 .match-winner-content {
   align-items: center;
   display: grid;
@@ -139,11 +159,36 @@
   text-align: center;
 }
 
+.dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  justify-content: center;
+}
+
+.result-icon,
 .match-winner-content i {
   color: #facc15;
   font-size: 2.2rem;
 }
 
+.result-icon.success {
+  color: #22c55e;
+}
+
+.result-icon.neutral {
+  color: var(--app-accent);
+}
+
+.result-icon.warning {
+  color: #f59e0b;
+}
+
+.result-icon.danger {
+  color: #ef4444;
+}
+
+.dialog-content p,
 .match-winner-content p {
   color: var(--app-text-muted);
   margin: 0;

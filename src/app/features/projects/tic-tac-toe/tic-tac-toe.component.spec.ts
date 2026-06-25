@@ -50,6 +50,7 @@ describe('TicTacToeComponent', () => {
     expect(component.isWinningCell(1)).toBeTrue();
     expect(component.isGameOver()).toBeTrue();
     expect(component.score().X).toBe(1);
+    expect(component.roundResultVisible()).toBeTrue();
   });
 
   it('should detect a draw', () => {
@@ -58,15 +59,35 @@ describe('TicTacToeComponent', () => {
     expect(component.isDraw()).toBeTrue();
     expect(component.isGameOver()).toBeTrue();
     expect(component.score().draws).toBe(1);
+    expect(component.roundResultVisible()).toBeTrue();
   });
 
-  it('should reset the board', () => {
+  it('should ask before resetting an active board', () => {
     component.play(0);
 
-    component.resetGame();
+    component.requestResetGame();
+
+    expect(component.resetGameConfirmVisible()).toBeTrue();
+    expect(component.board()[0]).toBe('X');
+
+    component.confirmResetGame();
 
     expect(component.board().every((cell) => cell === null)).toBeTrue();
     expect(component.currentPlayer()).toBe('X');
+    expect(component.resetGameConfirmVisible()).toBeFalse();
+  });
+
+  it('should reset a finished board without confirmation', () => {
+    component.play(0);
+    component.play(3);
+    component.play(1);
+    component.play(4);
+    component.play(2);
+
+    component.requestResetGame();
+
+    expect(component.resetGameConfirmVisible()).toBeFalse();
+    expect(component.board().every((cell) => cell === null)).toBeTrue();
   });
 
   it('should declare a match winner after ten wins', () => {
@@ -83,17 +104,23 @@ describe('TicTacToeComponent', () => {
     expect(component.matchWinner()).toBe('X');
   });
 
-  it('should reset score and board', () => {
+  it('should ask before resetting score and board', () => {
     component.play(0);
     component.play(3);
     component.play(1);
     component.play(4);
     component.play(2);
 
-    component.resetScore();
+    component.requestResetScore();
+
+    expect(component.resetScoreConfirmVisible()).toBeTrue();
+    expect(component.score().X).toBe(1);
+
+    component.confirmResetScore();
 
     expect(component.score()).toEqual({ X: 0, O: 0, draws: 0 });
     expect(component.matchWinner()).toBeNull();
     expect(component.board().every((cell) => cell === null)).toBeTrue();
+    expect(component.resetScoreConfirmVisible()).toBeFalse();
   });
 });

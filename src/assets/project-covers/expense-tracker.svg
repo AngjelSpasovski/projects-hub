@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Expense Tracker cover</title>
+  <desc id="desc">Illustrated dashboard with a wallet, balance chart, and finance cards.</desc>
+  <rect width="960" height="540" rx="18" fill="#eef5ff"/>
+  <circle cx="124" cy="136" r="11" fill="#8ed7c6"/>
+  <circle cx="826" cy="406" r="15" fill="none" stroke="#9ab9ef" stroke-width="4"/>
+  <path d="M130 424h650" stroke="#b9cef6" stroke-width="4"/>
+  <path d="M172 124h616v296H172z" fill="#fff" stroke="#b9cef6" stroke-width="4"/>
+  <rect x="214" y="164" width="220" height="88" rx="14" fill="#111827"/>
+  <rect x="214" y="278" width="220" height="88" rx="14" fill="#111827"/>
+  <rect x="486" y="164" width="260" height="202" rx="18" fill="#dce9ff"/>
+  <path d="M560 300a78 78 0 1 0 0-156v78z" fill="#5272dc"/>
+  <path d="M560 144a78 78 0 1 1-66 119" fill="none" stroke="#65c89f" stroke-width="28"/>
+  <path d="M560 222v-78a78 78 0 0 1 78 78z" fill="#ef767a"/>
+  <path d="M246 202h92m-92 30h150" stroke="#fff" stroke-linecap="round" stroke-width="12"/>
+  <path d="M246 316h126m-126 30h88" stroke="#fff" stroke-linecap="round" stroke-width="12"/>
+  <path d="M650 418l42-42 42 42" fill="none" stroke="#5272dc" stroke-linecap="round" stroke-linejoin="round" stroke-width="10"/>
+  <path d="M692 376v96" stroke="#5272dc" stroke-linecap="round" stroke-width="10"/>
+  <path d="M208 118v-38h120" fill="none" stroke="#a5bff4" stroke-width="5"/>
+  <path d="M794 120v-38h-120" fill="none" stroke="#a5bff4" stroke-width="5"/>
+  <g fill="#5272dc">
+    <circle cx="90" cy="194" r="4"/><circle cx="112" cy="194" r="4"/><circle cx="134" cy="194" r="4"/>
+    <circle cx="90" cy="216" r="4"/><circle cx="112" cy="216" r="4"/><circle cx="134" cy="216" r="4"/>
+    <circle cx="90" cy="238" r="4"/><circle cx="112" cy="238" r="4"/><circle cx="134" cy="238" r="4"/>
+  </g>
+  <path d="M798 232h54m-54 24h36m-36 24h54" stroke="#111827" stroke-linecap="round" stroke-width="5"/>
+  <path d="M790 340h88" stroke="#ef767a" stroke-linecap="round" stroke-width="16"/>
+  <path d="M790 374h62" stroke="#65c89f" stroke-linecap="round" stroke-width="16"/>
+</svg>

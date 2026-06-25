@@ -9,6 +9,7 @@ Complete this batch before adding a large number of new projects.
 - [x] Keep project names and important symbols readable in light, dark, and blue themes.
 - [x] Update the cover-generation workflow so it does not overwrite illustrated covers.
 - [x] Verify big, list, and detailed catalog modes on desktop and mobile.
+- [x] Standardize catalog summary height and add a scrollable `Show more` dialog for longer text.
 
 ## Project Workspace
 
@@ -25,6 +26,8 @@ Complete this batch before adding a large number of new projects.
 
 - [x] Check Calculator keyboard symbols and encoding.
 - [x] Check Tic Tac Toe board sizing and winning-state contrast in all themes.
+- [x] Add Tic Tac Toe score reset separation and confirmation/result modals.
 - [x] Check Hang Man physical and on-screen keyboard behavior.
 - [x] Keep Weather as a simulated API-state demo until the OpenWeather upgrade in the API backlog.
 - [x] Check Music Event modal, tag filters, and mobile overflow.
+- [x] Add e2e smoke coverage for Calculator, Weather, Music Event, Hang Man, and Tic Tac Toe refinement flows.

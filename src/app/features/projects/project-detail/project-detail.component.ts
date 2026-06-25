@@ -14,7 +14,14 @@ const PROJECT_COMPONENT_LOADERS: Record<string, () => Promise<Type<unknown>>> = 
   weather: () => import('../weather/weather.component').then((component) => component.WeatherComponent),
   'music-event': () => import('../music-event/music-event.component').then((component) => component.MusicEventComponent),
   'javascript-quiz': () =>
-    import('../javascript-quiz/javascript-quiz.component').then((component) => component.JavaScriptQuizComponent)
+    import('../javascript-quiz/javascript-quiz.component').then((component) => component.JavaScriptQuizComponent),
+  'todo-list': () => import('../todo-list/todo-list.component').then((component) => component.TodoListComponent),
+  'expense-tracker': () =>
+    import('../expense-tracker/expense-tracker.component').then((component) => component.ExpenseTrackerComponent),
+  'technical-documentation': () =>
+    import('../technical-documentation/technical-documentation.component').then(
+      (component) => component.TechnicalDocumentationComponent
+    )
 };
 
 @Component({

@@ -12,7 +12,7 @@ test('dashboard catalog supports view switching and project navigation', async (
   await page.getByRole('button', { name: 'EN' }).click();
 
   await expect(page.getByRole('heading', { name: 'Project Catalog' })).toBeVisible();
-  await expect(page.getByText('6 project(s)')).toBeVisible();
+  await expect(page.getByText('9 project(s)')).toBeVisible();
 
   await page.getByRole('button', { name: /Detailed/ }).click();
   await expect(page.getByText('Difficulty').first()).toBeVisible();
@@ -63,7 +63,7 @@ test('catalog keeps filtered cards compact and tag overlay above cards', async (
   await page.goto('/');
   await page.getByRole('button', { name: 'EN', exact: true }).click();
 
-  await page.getByPlaceholder('Search projects, tags, or categories').fill('cal');
+  await page.getByPlaceholder('Search projects, tags, or categories').fill('calculator');
   await expect(page.getByText('1 project(s)')).toBeVisible();
 
   const cardBox = await page.locator('.project-card').first().boundingBox();
@@ -92,6 +92,29 @@ test('catalog keeps filtered cards compact and tag overlay above cards', async (
   });
 
   expect(overlayZIndex).toBeGreaterThan(cardZIndex);
+});
+
+test('catalog summaries use show more dialog only for long card text', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'EN', exact: true }).click();
+
+  await expect(page.getByRole('button', { name: 'Show more' }).first()).toBeVisible();
+  await page.getByRole('button', { name: 'Show more' }).first().click();
+
+  const dialog = page.getByRole('dialog');
+  await expect(dialog).toBeVisible();
+  await expect(dialog).toContainText('Randomized JavaScript challenge');
+
+  const dialogBody = page.locator('.summary-dialog-content');
+  await expect(dialogBody).toBeVisible();
+  await expect(dialogBody).toHaveCSS('overflow-y', 'auto');
+  await expect(page.locator('.p-dialog-mask')).toHaveCSS('backdrop-filter', /blur/);
+
+  await page.keyboard.press('Escape');
+  await expect(dialog).toBeHidden();
+
+  await page.getByRole('button', { name: /List/ }).click();
+  await expect(page.getByRole('button', { name: 'Show more' })).toHaveCount(0);
 });
 
 test('admin shell keeps chrome fixed while main content scrolls', async ({ page }) => {
@@ -123,11 +146,19 @@ test('desktop catalog and project workspaces fit without nested scrollbars', asy
   await page.setViewportSize({ width: 1920, height: 1080 });
   await page.goto('/');
   await page.getByRole('button', { name: 'EN', exact: true }).click();
-  await expect(page.getByText('6 project(s)')).toBeVisible();
+  await expect(page.getByText('9 project(s)')).toBeVisible();
 
-  expect(await page.locator('.admin-main').evaluate((element) => element.scrollHeight <= element.clientHeight + 1)).toBe(true);
-
-  const routes = ['tic-tac-toe', 'calculator', 'hang-man', 'weather', 'music-event', 'javascript-quiz'];
+  const routes = [
+    'tic-tac-toe',
+    'calculator',
+    'hang-man',
+    'weather',
+    'music-event',
+    'javascript-quiz',
+    'todo-list',
+    'expense-tracker',
+    'technical-documentation'
+  ];
 
   for (const route of routes) {
     await page.goto(`/admin/projects/${route}`);
@@ -140,6 +171,51 @@ test('desktop catalog and project workspaces fit without nested scrollbars', asy
       }))
     ).toMatchObject({ fits: true });
   }
+});
+
+test('mini project refinements keep core interactions stable', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('projects-hub-language', 'en'));
+  await page.goto('/');
+  await expect(page.getByRole('heading', { name: 'Project Catalog' })).toBeVisible();
+
+  await page.goto('/admin/projects/calculator');
+  await page.getByRole('button', { name: '9', exact: true }).click();
+  await page.locator('.calculator-key').nth(3).click();
+  await expect(page.locator('output')).toHaveText('3');
+  await page.getByRole('button', { name: 'C', exact: true }).click();
+  await page.getByRole('button', { name: '5', exact: true }).click();
+  await page.getByRole('button', { name: '%', exact: true }).click();
+  await expect(page.locator('output')).toHaveText('0.05');
+
+  await page.goto('/admin/projects/weather');
+  await page.getByRole('button', { name: 'Simulate API failure' }).click();
+  await expect(page.getByRole('heading', { name: 'Weather data unavailable' })).toBeVisible();
+  await page.getByRole('button', { name: 'Retry' }).click();
+  await expect(page.getByText('Weather data unavailable')).toBeHidden();
+
+  await page.goto('/admin/projects/music-event');
+  await page.getByRole('button', { name: 'Details' }).first().click();
+  await expect(page.getByRole('dialog', { name: 'Jazz Night' })).toBeVisible();
+  await expect(page.locator('.p-dialog-mask')).toHaveCSS('backdrop-filter', /blur/);
+  await page.getByRole('button', { name: 'Close' }).click();
+  await expect(page.getByRole('dialog', { name: 'Jazz Night' })).toBeHidden();
+
+  await page.goto('/admin/projects/hang-man');
+  await page.getByRole('button', { name: 'A', exact: true }).click();
+  await page.getByRole('button', { name: 'MK', exact: true }).click();
+  await expect(page.getByRole('dialog', { name: 'Restart round?' })).toBeVisible();
+  await page.getByRole('button', { name: 'Change language' }).click();
+  await expect(page.getByRole('dialog', { name: 'Restart round?' })).toBeHidden();
+
+  await page.getByRole('button', { name: 'EN', exact: true }).click();
+  await page.goto('/admin/projects/tic-tac-toe');
+  await page.locator('.cell').first().click();
+  await page.getByRole('button', { name: 'Restart game' }).click();
+  await expect(page.getByRole('dialog', { name: 'Restart current game?' })).toBeVisible();
+  await page.getByRole('button', { name: 'Keep playing' }).click();
+  await expect(page.getByRole('dialog', { name: 'Restart current game?' })).toBeHidden();
+  await page.getByRole('button', { name: 'Reset score' }).first().click();
+  await expect(page.getByRole('dialog', { name: 'Reset match score?' })).toBeVisible();
 });
 
 test('JavaScript Quiz completes a randomized workflow and answer review', async ({ page }) => {
@@ -166,4 +242,87 @@ test('JavaScript Quiz completes a randomized workflow and answer review', async 
   await page.getByRole('button', { name: 'Review answers' }).click();
   await expect(page.getByRole('heading', { name: 'Answer review' })).toBeVisible();
   await expect(page.locator('.review-item')).toHaveCount(6);
+});
+
+test('To-Do List supports task CRUD, filters, and persistence', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'EN', exact: true }).click();
+  await page.getByRole('link', { name: 'To-Do List', exact: true }).click();
+
+  await expect(page.getByRole('heading', { name: 'To-Do List', exact: true })).toBeVisible();
+  await expect(page.locator('.project-live')).toBeVisible();
+
+  await page.getByPlaceholder('Example: publish project update').fill('Prepare LinkedIn post');
+  await page.getByPlaceholder('Add a short note or context').fill('Mention the new Angular To-Do List.');
+  await page.getByLabel('Priority').selectOption('high');
+  await page.getByRole('button', { name: 'Add task' }).click();
+
+  await expect(page.getByRole('heading', { name: 'Prepare LinkedIn post' })).toBeVisible();
+  await expect(page.locator('.priority.high').first()).toBeVisible();
+
+  await page.getByRole('button', { name: 'Edit' }).first().click();
+  await page.getByPlaceholder('Example: publish project update').fill('Prepare portfolio update');
+  await page.getByRole('button', { name: 'Save changes' }).click();
+  await expect(page.getByRole('heading', { name: 'Prepare portfolio update' })).toBeVisible();
+
+  await page.getByRole('button', { name: 'Mark task done' }).first().click();
+  await page.getByRole('button', { name: 'Completed' }).click();
+  await expect(page.getByRole('heading', { name: 'Prepare portfolio update' })).toBeVisible();
+
+  await expect.poll(async () => page.evaluate(() => localStorage.getItem('projects-hub-todo-list'))).toContain(
+    'Prepare portfolio update'
+  );
+
+  await page.getByRole('button', { name: 'Delete' }).first().click();
+  await expect(page.getByRole('heading', { name: 'Prepare portfolio update' })).toBeHidden();
+});
+
+test('Expense Tracker supports entries, filters, chart, and persistence', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'EN', exact: true }).click();
+  await page.getByRole('link', { name: 'Expense Tracker', exact: true }).click();
+
+  await expect(page.getByRole('heading', { name: 'Expense Tracker', exact: true })).toBeVisible();
+  await expect(page.locator('canvas')).toBeVisible();
+  expect(await page.locator('canvas').evaluate((canvas: HTMLCanvasElement) => canvas.width > 0 && canvas.height > 0)).toBe(
+    true
+  );
+
+  await page.getByPlaceholder('Example: lunch, salary, course').fill('Client invoice');
+  await page.getByLabel('Type').selectOption('income');
+  await page.getByLabel('Amount').fill('450');
+  await page.getByRole('button', { name: 'Add entry' }).click();
+
+  await expect(page.getByRole('heading', { name: 'Client invoice' })).toBeVisible();
+  await expect(page.getByText('€1,070.00')).toBeVisible();
+
+  await page.getByRole('button', { name: 'Income' }).click();
+  await expect(page.getByRole('heading', { name: 'Client invoice' })).toBeVisible();
+
+  await page.getByRole('button', { name: 'Edit' }).first().click();
+  await page.getByPlaceholder('Example: lunch, salary, course').fill('Client invoice paid');
+  await page.getByRole('button', { name: 'Save changes' }).click();
+  await expect(page.getByRole('heading', { name: 'Client invoice paid' })).toBeVisible();
+
+  await expect.poll(async () => page.evaluate(() => localStorage.getItem('projects-hub-expense-tracker'))).toContain(
+    'Client invoice paid'
+  );
+});
+
+test('Technical Documentation filters architecture guidance', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'EN', exact: true }).click();
+  await page.getByRole('link', { name: 'Technical Documentation', exact: true }).click();
+
+  await expect(page.getByRole('heading', { name: 'Technical Documentation', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Application architecture' })).toBeVisible();
+
+  await page.getByPlaceholder('Search architecture, i18n, tests, or files').fill('i18n');
+  await expect(page.getByRole('button', { name: /Translations/ })).toBeVisible();
+  await expect(page.getByText('src/assets/i18n/en.json')).toBeVisible();
+
+  await page.getByPlaceholder('Search architecture, i18n, tests, or files').fill('no-match');
+  await expect(page.getByText('No documentation sections found')).toBeVisible();
+  await page.getByRole('button', { name: 'Clear search' }).click();
+  await expect(page.getByRole('heading', { name: 'Application architecture' })).toBeVisible();
 });

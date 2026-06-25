@@ -2,7 +2,7 @@
 
 This file records the main project libraries and the exact installed versions from `package-lock.json`.
 
-Last updated: 2026-06-18
+Last updated: 2026-06-24
 
 ## Runtime
 
@@ -19,6 +19,7 @@ Last updated: 2026-06-18
 | `@ngx-translate/core` | `^18.0.0` | `18.0.0` |
 | `@ngx-translate/http-loader` | `^18.0.0` | `18.0.0` |
 | `bootstrap` | `^5.3.8` | `5.3.8` |
+| `chart.js` | `^4.5.1` | `4.5.1` |
 | `primeicons` | `^7.0.0` | `7.0.0` |
 | `primeng` | `^21.1.9` | `21.1.9` |
 | `rxjs` | `~7.8.0` | `7.8.2` |

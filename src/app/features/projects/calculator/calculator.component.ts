@@ -11,6 +11,7 @@ interface CalculatorButton {
   action?: CalculatorAction;
   operator?: CalculatorOperator;
   className?: string;
+  gridArea: string;
 }
 
 const MAX_DISPLAY_LENGTH = 12;
@@ -30,28 +31,28 @@ export class CalculatorComponent {
   private waitingForOperand = false;
 
   readonly buttons: CalculatorButton[] = [
-    { label: 'C', value: 'clear', type: 'action', action: 'clear', className: 'utility' },
-    { label: '⌫', value: 'backspace', type: 'action', action: 'backspace', className: 'utility' },
-    { label: '√', value: 'squareRoot', type: 'action', action: 'squareRoot', className: 'utility' },
-    { label: 'x²', value: 'square', type: 'action', action: 'square', className: 'utility' },
-    { label: '+/-', value: 'sign', type: 'action', action: 'sign', className: 'utility' },
-    { label: '%', value: 'percent', type: 'action', action: 'percent', className: 'utility' },
-    { label: '÷', value: 'divide', type: 'operator', operator: 'divide', className: 'operator' },
-    { label: '7', value: '7', type: 'digit' },
-    { label: '8', value: '8', type: 'digit' },
-    { label: '9', value: '9', type: 'digit' },
-    { label: '×', value: 'multiply', type: 'operator', operator: 'multiply', className: 'operator' },
-    { label: '4', value: '4', type: 'digit' },
-    { label: '5', value: '5', type: 'digit' },
-    { label: '6', value: '6', type: 'digit' },
-    { label: '-', value: 'subtract', type: 'operator', operator: 'subtract', className: 'operator' },
-    { label: '1', value: '1', type: 'digit' },
-    { label: '2', value: '2', type: 'digit' },
-    { label: '3', value: '3', type: 'digit' },
-    { label: '+', value: 'add', type: 'operator', operator: 'add', className: 'operator' },
-    { label: '0', value: '0', type: 'digit', className: 'zero' },
-    { label: '.', value: 'decimal', type: 'action', action: 'decimal' },
-    { label: '=', value: 'equals', type: 'action', action: 'equals', className: 'equals' }
+    { label: 'C', value: 'clear', type: 'action', action: 'clear', className: 'utility', gridArea: 'clear' },
+    { label: '⌫', value: 'backspace', type: 'action', action: 'backspace', className: 'utility', gridArea: 'back' },
+    { label: '%', value: 'percent', type: 'action', action: 'percent', className: 'utility', gridArea: 'percent' },
+    { label: '√', value: 'squareRoot', type: 'action', action: 'squareRoot', className: 'utility', gridArea: 'root' },
+    { label: '÷', value: 'divide', type: 'operator', operator: 'divide', className: 'operator', gridArea: 'divide' },
+    { label: '7', value: '7', type: 'digit', gridArea: 'seven' },
+    { label: '8', value: '8', type: 'digit', gridArea: 'eight' },
+    { label: '9', value: '9', type: 'digit', gridArea: 'nine' },
+    { label: 'x²', value: 'square', type: 'action', action: 'square', className: 'utility', gridArea: 'square' },
+    { label: '×', value: 'multiply', type: 'operator', operator: 'multiply', className: 'operator', gridArea: 'multiply' },
+    { label: '4', value: '4', type: 'digit', gridArea: 'four' },
+    { label: '5', value: '5', type: 'digit', gridArea: 'five' },
+    { label: '6', value: '6', type: 'digit', gridArea: 'six' },
+    { label: '+/-', value: 'sign', type: 'action', action: 'sign', className: 'utility', gridArea: 'sign' },
+    { label: '-', value: 'subtract', type: 'operator', operator: 'subtract', className: 'operator', gridArea: 'subtract' },
+    { label: '1', value: '1', type: 'digit', gridArea: 'one' },
+    { label: '2', value: '2', type: 'digit', gridArea: 'two' },
+    { label: '3', value: '3', type: 'digit', gridArea: 'three' },
+    { label: '=', value: 'equals', type: 'action', action: 'equals', className: 'equals tall', gridArea: 'equals' },
+    { label: '+', value: 'add', type: 'operator', operator: 'add', className: 'operator tall', gridArea: 'add' },
+    { label: '0', value: '0', type: 'digit', className: 'zero', gridArea: 'zero' },
+    { label: '.', value: 'decimal', type: 'action', action: 'decimal', gridArea: 'decimal' }
   ];
 
   @HostListener('window:keydown', ['$event'])

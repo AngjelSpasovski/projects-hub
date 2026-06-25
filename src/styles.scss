@@ -262,6 +262,15 @@ input:focus-visible {
   z-index: 1200 !important;
 }
 
+.p-dialog-mask {
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.p-dialog-mask.p-overlay-mask {
+  background: rgba(12, 18, 28, 0.28);
+}
+
 .p-select-list,
 .p-multiselect-list {
   list-style: none;

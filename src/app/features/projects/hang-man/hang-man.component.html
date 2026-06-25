@@ -42,14 +42,65 @@
       }
     </div>
 
-    <button type="button" class="btn btn-primary reset-game" (click)="resetGame()">
+    <button type="button" class="btn btn-primary reset-game" (click)="requestNewWord()">
       <i class="pi pi-refresh"></i>
       <span>{{ 'HANG_MAN.RESET' | translate }}</span>
     </button>
   </div>
 
   <p-dialog
-    styleClass="language-reset-dialog"
+    styleClass="hang-man-dialog"
+    [header]="(hasWon() ? 'HANG_MAN.RESULT_WON_TITLE' : 'HANG_MAN.RESULT_LOST_TITLE') | translate"
+    [modal]="true"
+    [visible]="resultDialogVisible()"
+    [dismissableMask]="true"
+    [draggable]="false"
+    [style]="{ width: 'min(28rem, 94vw)' }"
+    (visibleChange)="resultDialogVisible.set(false)"
+  >
+    <div class="dialog-content result-content">
+      <i [class]="hasWon() ? 'pi pi-check-circle result-icon won' : 'pi pi-times-circle result-icon lost'"></i>
+      @if (hasWon()) {
+        <p>{{ 'HANG_MAN.RESULT_WON_TEXT' | translate:{ word: currentWord() } }}</p>
+      } @else {
+        <p>{{ 'HANG_MAN.RESULT_LOST_TEXT' | translate:{ word: currentWord() } }}</p>
+      }
+      <div class="dialog-actions">
+        <button type="button" class="btn btn-sm btn-icon" (click)="resultDialogVisible.set(false)">
+          {{ 'HANG_MAN.RESULT_CLOSE' | translate }}
+        </button>
+        <button type="button" class="btn btn-primary btn-sm" (click)="startNextWord()">
+          {{ 'HANG_MAN.RESET' | translate }}
+        </button>
+      </div>
+    </div>
+  </p-dialog>
+
+  <p-dialog
+    styleClass="hang-man-dialog"
+    [header]="'HANG_MAN.NEW_WORD_CONFIRM_TITLE' | translate"
+    [modal]="true"
+    [visible]="newWordConfirmVisible()"
+    [dismissableMask]="true"
+    [draggable]="false"
+    [style]="{ width: 'min(28rem, 94vw)' }"
+    (visibleChange)="cancelNewWord()"
+  >
+    <div class="dialog-content">
+      <p>{{ 'HANG_MAN.NEW_WORD_CONFIRM_TEXT' | translate }}</p>
+      <div class="dialog-actions">
+        <button type="button" class="btn btn-sm btn-icon" (click)="cancelNewWord()">
+          {{ 'HANG_MAN.NEW_WORD_CANCEL' | translate }}
+        </button>
+        <button type="button" class="btn btn-primary btn-sm" (click)="startNextWord()">
+          {{ 'HANG_MAN.NEW_WORD_CONFIRM' | translate }}
+        </button>
+      </div>
+    </div>
+  </p-dialog>
+
+  <p-dialog
+    styleClass="hang-man-dialog"
     [header]="'HANG_MAN.LANGUAGE_CONFIRM_TITLE' | translate"
     [modal]="true"
     [visible]="languageConfirmVisible()"
@@ -58,7 +109,7 @@
     [style]="{ width: 'min(28rem, 94vw)' }"
     (visibleChange)="cancelLanguageChange()"
   >
-    <div class="language-reset-content">
+    <div class="dialog-content">
       <p>{{ 'HANG_MAN.LANGUAGE_CONFIRM_TEXT' | translate }}</p>
       <div class="dialog-actions">
         <button type="button" class="btn btn-sm btn-icon" (click)="cancelLanguageChange()">

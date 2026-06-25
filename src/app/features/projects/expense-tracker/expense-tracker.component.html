@@ -1,0 +1,178 @@
+<section class="expense-page">
+  <div class="expense-shell" [attr.aria-label]="'EXPENSE_TRACKER.TITLE' | translate">
+    <form class="entry-form" (ngSubmit)="submitEntry()" novalidate>
+      <div class="form-heading">
+        <div>
+          <span>{{ 'EXPENSE_TRACKER.FORM.EYEBROW' | translate }}</span>
+          <h3>{{ (editingId() ? 'EXPENSE_TRACKER.FORM.EDIT_TITLE' : 'EXPENSE_TRACKER.FORM.ADD_TITLE') | translate }}</h3>
+        </div>
+        @if (editingId()) {
+          <button type="button" class="btn btn-sm ghost-button" (click)="cancelEdit()">
+            {{ 'EXPENSE_TRACKER.FORM.CANCEL' | translate }}
+          </button>
+        }
+      </div>
+
+      <label>
+        <span>{{ 'EXPENSE_TRACKER.FORM.TITLE' | translate }}</span>
+        <input
+          type="text"
+          class="form-control"
+          [class.invalid]="isTitleInvalid()"
+          [ngModel]="draftTitle()"
+          (ngModelChange)="updateTitle($event)"
+          (blur)="titleTouched.set(true)"
+          name="title"
+          [attr.maxlength]="titleMaxLength"
+          [placeholder]="'EXPENSE_TRACKER.FORM.TITLE_PLACEHOLDER' | translate"
+        />
+        <small [class.error]="isTitleInvalid()">
+          @if (isTitleInvalid()) {
+            {{ 'EXPENSE_TRACKER.FORM.TITLE_REQUIRED' | translate }}
+          } @else {
+            {{ 'EXPENSE_TRACKER.FORM.CHARACTERS' | translate:{ count: draftTitle().length, max: titleMaxLength } }}
+          }
+        </small>
+      </label>
+
+      <div class="form-grid">
+        <label>
+          <span>{{ 'EXPENSE_TRACKER.FORM.TYPE' | translate }}</span>
+          <select class="form-select" [ngModel]="draftType()" (ngModelChange)="updateType($event)" name="type">
+            <option value="income">{{ 'EXPENSE_TRACKER.TYPE.INCOME' | translate }}</option>
+            <option value="expense">{{ 'EXPENSE_TRACKER.TYPE.EXPENSE' | translate }}</option>
+          </select>
+        </label>
+
+        <label>
+          <span>{{ 'EXPENSE_TRACKER.FORM.AMOUNT' | translate }}</span>
+          <input
+            type="number"
+            class="form-control"
+            min="0"
+            step="0.01"
+            [class.invalid]="isAmountInvalid()"
+            [ngModel]="draftAmount()"
+            (ngModelChange)="updateAmount($event)"
+            (blur)="amountTouched.set(true)"
+            name="amount"
+            placeholder="0.00"
+          />
+          @if (isAmountInvalid()) {
+            <small class="error">{{ 'EXPENSE_TRACKER.FORM.AMOUNT_REQUIRED' | translate }}</small>
+          }
+        </label>
+      </div>
+
+      <div class="form-grid">
+        <label>
+          <span>{{ 'EXPENSE_TRACKER.FORM.CATEGORY' | translate }}</span>
+          <select class="form-select" [ngModel]="draftCategory()" (ngModelChange)="updateCategory($event)" name="category">
+            @for (category of draftType() === 'income' ? incomeCategories() : expenseCategories(); track category) {
+              <option [value]="category">{{ ('EXPENSE_TRACKER.CATEGORIES.' + category.toUpperCase()) | translate }}</option>
+            }
+          </select>
+        </label>
+
+        <label>
+          <span>{{ 'EXPENSE_TRACKER.FORM.DATE' | translate }}</span>
+          <input
+            type="date"
+            class="form-control"
+            [ngModel]="draftDate()"
+            (ngModelChange)="updateDate($event)"
+            name="date"
+          />
+        </label>
+      </div>
+
+      <button type="submit" class="btn btn-primary submit-entry">
+        <i class="pi pi-check"></i>
+        <span>{{ (editingId() ? 'EXPENSE_TRACKER.FORM.SAVE' : 'EXPENSE_TRACKER.FORM.ADD') | translate }}</span>
+      </button>
+    </form>
+
+    <div class="expense-board">
+      <div class="summary-grid">
+        <div class="summary-card income">
+          <span>{{ 'EXPENSE_TRACKER.STATS.INCOME' | translate }}</span>
+          <strong>{{ formatCurrency(incomeTotal()) }}</strong>
+        </div>
+        <div class="summary-card expense">
+          <span>{{ 'EXPENSE_TRACKER.STATS.EXPENSES' | translate }}</span>
+          <strong>{{ formatCurrency(expenseTotal()) }}</strong>
+        </div>
+        <div class="summary-card balance" [class.negative]="balance() < 0">
+          <span>{{ 'EXPENSE_TRACKER.STATS.BALANCE' | translate }}</span>
+          <strong>{{ formatCurrency(balance()) }}</strong>
+        </div>
+      </div>
+
+      <div class="content-grid">
+        <section class="chart-panel">
+          <div class="panel-heading">
+            <span>{{ 'EXPENSE_TRACKER.CHART.EYEBROW' | translate }}</span>
+            <h3>{{ 'EXPENSE_TRACKER.CHART.TITLE' | translate }}</h3>
+          </div>
+          <div class="chart-frame">
+            <canvas #summaryChart></canvas>
+          </div>
+        </section>
+
+        <section class="entries-panel">
+          <div class="entries-toolbar">
+            <div class="filter-tabs" role="group" [attr.aria-label]="'EXPENSE_TRACKER.FILTERS.TITLE' | translate">
+              <button type="button" class="btn btn-sm" [class.active]="filter() === 'all'" (click)="updateFilter('all')">
+                {{ 'EXPENSE_TRACKER.FILTERS.ALL' | translate }}
+              </button>
+              <button type="button" class="btn btn-sm" [class.active]="filter() === 'income'" (click)="updateFilter('income')">
+                {{ 'EXPENSE_TRACKER.FILTERS.INCOME' | translate }}
+              </button>
+              <button type="button" class="btn btn-sm" [class.active]="filter() === 'expense'" (click)="updateFilter('expense')">
+                {{ 'EXPENSE_TRACKER.FILTERS.EXPENSES' | translate }}
+              </button>
+            </div>
+            <button type="button" class="btn btn-sm reset-button" (click)="resetDemo()">
+              <i class="pi pi-refresh"></i>
+              <span>{{ 'EXPENSE_TRACKER.ACTIONS.RESET_DEMO' | translate }}</span>
+            </button>
+          </div>
+
+          <div class="entry-list">
+            @for (entry of filteredEntries(); track entry.id) {
+              <article class="entry-row" [class.income]="entry.type === 'income'" [class.expense]="entry.type === 'expense'">
+                <div class="entry-main">
+                  <span class="type-dot"></span>
+                  <div>
+                    <h4>{{ entry.title }}</h4>
+                    <p>
+                      {{ ('EXPENSE_TRACKER.CATEGORIES.' + entry.category.toUpperCase()) | translate }}
+                      <span>{{ entry.date }}</span>
+                    </p>
+                  </div>
+                </div>
+                <strong>{{ entry.type === 'income' ? '+' : '-' }}{{ formatCurrency(entry.amount) }}</strong>
+                <div class="entry-actions">
+                  <button type="button" class="btn btn-sm action-button" (click)="editEntry(entry)">
+                    <i class="pi pi-pencil"></i>
+                    <span>{{ 'EXPENSE_TRACKER.ACTIONS.EDIT' | translate }}</span>
+                  </button>
+                  <button type="button" class="btn btn-sm action-button delete" (click)="deleteEntry(entry.id)">
+                    <i class="pi pi-times"></i>
+                    <span>{{ 'EXPENSE_TRACKER.ACTIONS.DELETE' | translate }}</span>
+                  </button>
+                </div>
+              </article>
+            } @empty {
+              <section class="empty-state">
+                <i class="pi pi-wallet"></i>
+                <h3>{{ 'EXPENSE_TRACKER.EMPTY.TITLE' | translate }}</h3>
+                <p>{{ 'EXPENSE_TRACKER.EMPTY.TEXT' | translate }}</p>
+              </section>
+            }
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</section>

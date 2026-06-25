@@ -7,9 +7,9 @@ Duplicate ideas are consolidated. `To-Do List` appears once, and `Find the Word`
 - [x] JavaScript Quiz: multiple-choice questions, timer, progress, score, review, and restart.
 - [x] Convert JavaScript fundamentals, ES6, objects, prototypes, and Weird Parts material into a 26-question typed bank.
 - [x] Randomize six questions and their answer positions on every quiz start.
-- [ ] To-Do List: add, edit, complete, delete, filter, and LocalStorage persistence.
-- [ ] Expense Tracker: income/expense entries, totals, categories, validation, persistence, and Chart.js summaries.
-- [ ] Technical Documentation: searchable documentation for Projects Hub architecture and contribution flow.
+- [x] To-Do List: add, edit, complete, delete, filter, and LocalStorage persistence.
+- [x] Expense Tracker: income/expense entries, totals, categories, validation, persistence, and Chart.js summaries.
+- [x] Technical Documentation: searchable documentation for Projects Hub architecture and contribution flow.
 
 ## Batch 2: API Projects
 

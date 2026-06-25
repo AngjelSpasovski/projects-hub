@@ -10,7 +10,10 @@ Create a small game project that demonstrates Angular signals, derived state, co
 - Winner detection for rows, columns, and diagonals
 - Draw detection
 - Winning-cell highlight
-- Reset action
+- Scoreboard for X wins, O wins, and draws
+- Confirmation modals for restarting active rounds and resetting match score
+- Round result and match winner modals
+- Separate restart-game and reset-score actions
 - Responsive layout
 
 ## Angular Concepts
@@ -18,6 +21,7 @@ Create a small game project that demonstrates Angular signals, derived state, co
 - Standalone component
 - Signals and computed state
 - Template control flow
+- PrimeNG Dialog
 - Button grid rendering
 - Unit tests for game behavior
 

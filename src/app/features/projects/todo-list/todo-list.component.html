@@ -1,0 +1,186 @@
+<section class="todo-page">
+  <div class="todo-shell" [attr.aria-label]="'TODO_LIST.TITLE' | translate">
+    <form class="task-form" (ngSubmit)="submitTask()" novalidate>
+      <div class="form-heading">
+        <div>
+          <span>{{ 'TODO_LIST.FORM.EYEBROW' | translate }}</span>
+          <h3>{{ (editingId() ? 'TODO_LIST.FORM.EDIT_TITLE' : 'TODO_LIST.FORM.ADD_TITLE') | translate }}</h3>
+        </div>
+        @if (editingId()) {
+          <button type="button" class="btn btn-sm btn-icon" (click)="cancelEdit()">
+            {{ 'TODO_LIST.FORM.CANCEL' | translate }}
+          </button>
+        }
+      </div>
+
+      <label>
+        <span>{{ 'TODO_LIST.FORM.TASK' | translate }}</span>
+        <input
+          type="text"
+          class="form-control"
+          [class.invalid]="isTitleInvalid()"
+          [ngModel]="draftTitle()"
+          (ngModelChange)="updateTitle($event)"
+          (blur)="titleTouched.set(true)"
+          name="title"
+          [attr.maxlength]="titleMaxLength"
+          [placeholder]="'TODO_LIST.FORM.TASK_PLACEHOLDER' | translate"
+        />
+        <small [class.error]="isTitleInvalid()">
+          @if (isTitleInvalid()) {
+            {{ 'TODO_LIST.FORM.TASK_REQUIRED' | translate }}
+          } @else {
+            {{ 'TODO_LIST.FORM.CHARACTERS' | translate:{ count: draftTitle().length, max: titleMaxLength } }}
+          }
+        </small>
+      </label>
+
+      <label>
+        <span>{{ 'TODO_LIST.FORM.NOTES' | translate }}</span>
+        <textarea
+          class="form-control"
+          rows="3"
+          [ngModel]="draftNotes()"
+          (ngModelChange)="updateNotes($event)"
+          name="notes"
+          [placeholder]="'TODO_LIST.FORM.NOTES_PLACEHOLDER' | translate"
+        ></textarea>
+      </label>
+
+      <div class="form-grid">
+        <label>
+          <span>{{ 'TODO_LIST.FORM.PRIORITY' | translate }}</span>
+          <select class="form-select" [ngModel]="draftPriority()" (ngModelChange)="updatePriority($event)" name="priority">
+            <option value="low">{{ 'TODO_LIST.PRIORITY.LOW' | translate }}</option>
+            <option value="medium">{{ 'TODO_LIST.PRIORITY.MEDIUM' | translate }}</option>
+            <option value="high">{{ 'TODO_LIST.PRIORITY.HIGH' | translate }}</option>
+          </select>
+        </label>
+
+        <label>
+          <span>{{ 'TODO_LIST.FORM.DUE_DATE' | translate }}</span>
+          <input
+            #dueDateInput
+            type="date"
+            class="form-control"
+            [ngModel]="draftDueDate()"
+            (ngModelChange)="updateDueDate($event)"
+            (click)="openDatePicker(dueDateInput)"
+            (focus)="openDatePicker(dueDateInput)"
+            name="dueDate"
+          />
+        </label>
+      </div>
+
+      <button type="submit" class="btn btn-primary submit-task">
+        <i class="pi pi-check"></i>
+        <span>{{ (editingId() ? 'TODO_LIST.FORM.SAVE' : 'TODO_LIST.FORM.ADD') | translate }}</span>
+      </button>
+    </form>
+
+    <div class="task-board">
+      <div class="todo-stats">
+        <div>
+          <span>{{ 'TODO_LIST.STATS.TOTAL' | translate }}</span>
+          <strong>{{ tasks().length }}</strong>
+        </div>
+        <div>
+          <span>{{ 'TODO_LIST.STATS.ACTIVE' | translate }}</span>
+          <strong>{{ activeCount() }}</strong>
+        </div>
+        <div>
+          <span>{{ 'TODO_LIST.STATS.DONE' | translate }}</span>
+          <strong>{{ completedCount() }}</strong>
+        </div>
+      </div>
+
+      <div class="board-toolbar">
+        <div class="filter-tabs" role="group" [attr.aria-label]="'TODO_LIST.FILTERS.TITLE' | translate">
+          <button type="button" class="btn btn-sm" [class.active]="filter() === 'all'" (click)="updateFilter('all')">
+            {{ 'TODO_LIST.FILTERS.ALL' | translate }}
+          </button>
+          <button type="button" class="btn btn-sm" [class.active]="filter() === 'active'" (click)="updateFilter('active')">
+            {{ 'TODO_LIST.FILTERS.ACTIVE' | translate }}
+          </button>
+          <button
+            type="button"
+            class="btn btn-sm"
+            [class.active]="filter() === 'completed'"
+            (click)="updateFilter('completed')"
+          >
+            {{ 'TODO_LIST.FILTERS.COMPLETED' | translate }}
+          </button>
+        </div>
+
+        <div class="board-actions">
+          <button type="button" class="btn btn-sm btn-icon" [disabled]="completedCount() === 0" (click)="clearCompleted()">
+            <i class="pi pi-trash"></i>
+            <span>{{ 'TODO_LIST.ACTIONS.CLEAR_DONE' | translate }}</span>
+          </button>
+          <button type="button" class="btn btn-sm btn-icon" (click)="resetDemo()">
+            <i class="pi pi-refresh"></i>
+            <span>{{ 'TODO_LIST.ACTIONS.RESET_DEMO' | translate }}</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="task-list">
+        @for (task of filteredTasks(); track task.id) {
+          <article class="task-row" [class.completed]="task.completed">
+            <button
+              type="button"
+              class="task-toggle"
+              [class.done]="task.completed"
+              [attr.aria-label]="
+                (task.completed ? 'TODO_LIST.ACTIONS.MARK_ACTIVE' : 'TODO_LIST.ACTIONS.MARK_DONE') | translate
+              "
+              (click)="toggleTask(task.id)"
+            >
+              <i [class]="task.completed ? 'pi pi-check' : 'pi pi-circle'"></i>
+            </button>
+
+            <div class="task-content">
+              <div class="task-title-line">
+                <h4>{{ task.title }}</h4>
+                <span
+                  class="priority"
+                  [class.low]="task.priority === 'low'"
+                  [class.medium]="task.priority === 'medium'"
+                  [class.high]="task.priority === 'high'"
+                >
+                  {{ ('TODO_LIST.PRIORITY.' + task.priority.toUpperCase()) | translate }}
+                </span>
+              </div>
+              @if (task.notes) {
+                <p>{{ task.notes }}</p>
+              }
+              <div class="task-meta">
+                <span>{{ 'TODO_LIST.META.CREATED' | translate }} {{ task.createdAt }}</span>
+                @if (task.dueDate) {
+                  <span>{{ 'TODO_LIST.META.DUE' | translate }} {{ task.dueDate }}</span>
+                }
+              </div>
+            </div>
+
+            <div class="task-actions">
+              <button type="button" class="btn btn-sm btn-icon task-action edit-action" (click)="editTask(task)">
+                <i class="pi pi-pencil"></i>
+                <span>{{ 'TODO_LIST.ACTIONS.EDIT' | translate }}</span>
+              </button>
+              <button type="button" class="btn btn-sm btn-icon task-action delete-action" (click)="deleteTask(task.id)">
+                <i class="pi pi-times"></i>
+                <span>{{ 'TODO_LIST.ACTIONS.DELETE' | translate }}</span>
+              </button>
+            </div>
+          </article>
+        } @empty {
+          <section class="empty-state">
+            <i class="pi pi-list-check"></i>
+            <h3>{{ 'TODO_LIST.EMPTY.TITLE' | translate }}</h3>
+            <p>{{ 'TODO_LIST.EMPTY.TEXT' | translate }}</p>
+          </section>
+        }
+      </div>
+    </div>
+  </div>
+</section>

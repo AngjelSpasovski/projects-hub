@@ -54,6 +54,7 @@ describe('HangManComponent', () => {
 
     expect(component.hasWon()).toBeTrue();
     expect(component.isGameOver()).toBeTrue();
+    expect(component.resultDialogVisible()).toBeTrue();
   });
 
   it('should detect a loss', () => {
@@ -61,6 +62,7 @@ describe('HangManComponent', () => {
 
     expect(component.hasLost()).toBeTrue();
     expect(component.isGameOver()).toBeTrue();
+    expect(component.resultDialogVisible()).toBeTrue();
   });
 
   it('should reset with a new word and clear guesses', () => {
@@ -70,6 +72,36 @@ describe('HangManComponent', () => {
 
     expect(component.currentWord()).toBe('TYPESCRIPT');
     expect(component.guessedLetters()).toEqual([]);
+  });
+
+  it('should confirm before replacing an unfinished word', () => {
+    component.guessLetter('A');
+
+    component.requestNewWord();
+
+    expect(component.newWordConfirmVisible()).toBeTrue();
+    expect(component.currentWord()).toBe('ANGULAR');
+
+    component.cancelNewWord();
+
+    expect(component.newWordConfirmVisible()).toBeFalse();
+
+    component.requestNewWord();
+    component.startNextWord();
+
+    expect(component.currentWord()).toBe('TYPESCRIPT');
+    expect(component.guessedLetters()).toEqual([]);
+    expect(component.newWordConfirmVisible()).toBeFalse();
+  });
+
+  it('should start a new word without confirmation after a completed round', () => {
+    ['A', 'N', 'G', 'U', 'L', 'R'].forEach((letter) => component.guessLetter(letter));
+
+    component.requestNewWord();
+
+    expect(component.currentWord()).toBe('TYPESCRIPT');
+    expect(component.newWordConfirmVisible()).toBeFalse();
+    expect(component.resultDialogVisible()).toBeFalse();
   });
 
   it('should use Macedonian words and alphabet after confirmed language change', () => {

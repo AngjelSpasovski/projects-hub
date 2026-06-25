@@ -11,6 +11,7 @@
           type="button"
           class="calculator-key"
           [class]="button.className"
+          [style.grid-area]="button.gridArea"
           (click)="handleButton(button)"
         >
           {{ button.label }}

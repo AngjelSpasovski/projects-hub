@@ -40,6 +40,9 @@ export class TicTacToeComponent {
   readonly currentPlayer = signal<Player>('X');
   readonly score = signal<MatchScore>({ X: 0, O: 0, draws: 0 });
   readonly matchWinner = signal<Player | null>(null);
+  readonly resetGameConfirmVisible = signal(false);
+  readonly resetScoreConfirmVisible = signal(false);
+  readonly roundResultVisible = signal(false);
   readonly targetScore = TARGET_SCORE;
 
   readonly winningLine = computed<WinningLine | null>(() => {
@@ -59,6 +62,7 @@ export class TicTacToeComponent {
 
   readonly isDraw = computed(() => !this.winningLine() && this.board().every(Boolean));
   readonly isGameOver = computed(() => Boolean(this.winningLine()) || this.isDraw());
+  readonly hasRoundProgress = computed(() => this.board().some(Boolean));
 
   play(index: number): void {
     if (this.board()[index] || this.isGameOver()) {
@@ -72,12 +76,18 @@ export class TicTacToeComponent {
     const winningLine = this.winningLine();
 
     if (winningLine) {
-      this.addWin(winningLine.player);
+      const hasMatchWinner = this.addWin(winningLine.player);
+
+      if (!hasMatchWinner) {
+        this.roundResultVisible.set(true);
+      }
+
       return;
     }
 
     if (this.isDraw()) {
       this.score.update((score) => ({ ...score, draws: score.draws + 1 }));
+      this.roundResultVisible.set(true);
       return;
     }
 
@@ -89,12 +99,48 @@ export class TicTacToeComponent {
   resetGame(): void {
     this.board.set(this.createEmptyBoard());
     this.currentPlayer.set('X');
+    this.roundResultVisible.set(false);
+    this.resetGameConfirmVisible.set(false);
   }
 
   resetScore(): void {
     this.score.set({ X: 0, O: 0, draws: 0 });
     this.matchWinner.set(null);
+    this.resetScoreConfirmVisible.set(false);
     this.resetGame();
+  }
+
+  requestResetGame(): void {
+    if (this.hasRoundProgress() && !this.isGameOver()) {
+      this.resetGameConfirmVisible.set(true);
+      return;
+    }
+
+    this.resetGame();
+  }
+
+  confirmResetGame(): void {
+    this.resetGame();
+  }
+
+  cancelResetGame(): void {
+    this.resetGameConfirmVisible.set(false);
+  }
+
+  requestResetScore(): void {
+    this.resetScoreConfirmVisible.set(true);
+  }
+
+  confirmResetScore(): void {
+    this.resetScore();
+  }
+
+  cancelResetScore(): void {
+    this.resetScoreConfirmVisible.set(false);
+  }
+
+  closeRoundResult(): void {
+    this.roundResultVisible.set(false);
   }
 
   isWinningCell(index: number): boolean {
@@ -105,7 +151,7 @@ export class TicTacToeComponent {
     return Array<CellValue>(9).fill(null);
   }
 
-  private addWin(player: Player): void {
+  private addWin(player: Player): boolean {
     const nextScore = {
       ...this.score(),
       [player]: this.score()[player] + 1
@@ -115,6 +161,9 @@ export class TicTacToeComponent {
 
     if (nextScore[player] >= TARGET_SCORE) {
       this.matchWinner.set(player);
+      return true;
     }
+
+    return false;
   }
 }

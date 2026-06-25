@@ -1,18 +1,25 @@
 <section class="tic-tac-toe-page">
   <div class="game-shell" [attr.aria-label]="'TIC_TAC_TOE.TITLE' | translate">
-    <div class="scoreboard" [attr.aria-label]="'TIC_TAC_TOE.SCOREBOARD' | translate">
-      <div>
-        <span>X</span>
-        <strong>{{ score().X }}</strong>
+    <div class="score-panel">
+      <div class="scoreboard" [attr.aria-label]="'TIC_TAC_TOE.SCOREBOARD' | translate">
+        <div>
+          <span>X</span>
+          <strong>{{ score().X }}</strong>
+        </div>
+        <div>
+          <span>O</span>
+          <strong>{{ score().O }}</strong>
+        </div>
+        <div>
+          <span>{{ 'TIC_TAC_TOE.DRAWS' | translate }}</span>
+          <strong>{{ score().draws }}</strong>
+        </div>
       </div>
-      <div>
-        <span>O</span>
-        <strong>{{ score().O }}</strong>
-      </div>
-      <div>
-        <span>{{ 'TIC_TAC_TOE.DRAWS' | translate }}</span>
-        <strong>{{ score().draws }}</strong>
-      </div>
+
+      <button type="button" class="btn btn-sm reset-score-danger" (click)="requestResetScore()">
+        <i class="pi pi-undo"></i>
+        <span>{{ 'TIC_TAC_TOE.RESET_SCORE' | translate }}</span>
+      </button>
     </div>
 
     <div class="game-status">
@@ -43,19 +50,88 @@
     </div>
 
     <div class="game-actions">
-      <button type="button" class="btn btn-primary reset-game" (click)="resetGame()">
+      <button type="button" class="btn btn-primary reset-game" (click)="requestResetGame()">
         <i class="pi pi-refresh"></i>
         <span>{{ 'TIC_TAC_TOE.RESET' | translate }}</span>
-      </button>
-      <button type="button" class="btn btn-sm btn-icon reset-game" (click)="resetScore()">
-        <i class="pi pi-undo"></i>
-        <span>{{ 'TIC_TAC_TOE.RESET_SCORE' | translate }}</span>
       </button>
     </div>
   </div>
 
   <p-dialog
-    styleClass="match-winner-dialog"
+    styleClass="tic-tac-toe-dialog"
+    [header]="(winningLine() ? 'TIC_TAC_TOE.ROUND_WIN_TITLE' : 'TIC_TAC_TOE.ROUND_DRAW_TITLE') | translate"
+    [modal]="true"
+    [visible]="roundResultVisible()"
+    [closable]="true"
+    [draggable]="false"
+    [style]="{ width: 'min(28rem, 94vw)' }"
+    (visibleChange)="closeRoundResult()"
+  >
+    <div class="dialog-content">
+      @if (winningLine(); as line) {
+        <i class="pi pi-check-circle result-icon success"></i>
+        <p>{{ 'TIC_TAC_TOE.ROUND_WIN_TEXT' | translate:{ player: line.player } }}</p>
+      } @else {
+        <i class="pi pi-minus-circle result-icon neutral"></i>
+        <p>{{ 'TIC_TAC_TOE.ROUND_DRAW_TEXT' | translate }}</p>
+      }
+
+      <div class="dialog-actions">
+        <button type="button" class="btn btn-primary btn-sm" (click)="resetGame()">
+          {{ 'TIC_TAC_TOE.NEXT_ROUND' | translate }}
+        </button>
+      </div>
+    </div>
+  </p-dialog>
+
+  <p-dialog
+    styleClass="tic-tac-toe-dialog"
+    [header]="'TIC_TAC_TOE.RESET_GAME_CONFIRM_TITLE' | translate"
+    [modal]="true"
+    [visible]="resetGameConfirmVisible()"
+    [closable]="false"
+    [draggable]="false"
+    [style]="{ width: 'min(28rem, 94vw)' }"
+  >
+    <div class="dialog-content">
+      <i class="pi pi-exclamation-triangle result-icon warning"></i>
+      <p>{{ 'TIC_TAC_TOE.RESET_GAME_CONFIRM_TEXT' | translate }}</p>
+      <div class="dialog-actions">
+        <button type="button" class="btn btn-sm btn-outline-secondary" (click)="cancelResetGame()">
+          {{ 'TIC_TAC_TOE.RESET_GAME_CANCEL' | translate }}
+        </button>
+        <button type="button" class="btn btn-primary btn-sm" (click)="confirmResetGame()">
+          {{ 'TIC_TAC_TOE.RESET_GAME_CONFIRM' | translate }}
+        </button>
+      </div>
+    </div>
+  </p-dialog>
+
+  <p-dialog
+    styleClass="tic-tac-toe-dialog"
+    [header]="'TIC_TAC_TOE.RESET_SCORE_CONFIRM_TITLE' | translate"
+    [modal]="true"
+    [visible]="resetScoreConfirmVisible()"
+    [closable]="false"
+    [draggable]="false"
+    [style]="{ width: 'min(28rem, 94vw)' }"
+  >
+    <div class="dialog-content">
+      <i class="pi pi-exclamation-triangle result-icon danger"></i>
+      <p>{{ 'TIC_TAC_TOE.RESET_SCORE_CONFIRM_TEXT' | translate }}</p>
+      <div class="dialog-actions">
+        <button type="button" class="btn btn-sm btn-outline-secondary" (click)="cancelResetScore()">
+          {{ 'TIC_TAC_TOE.RESET_SCORE_CANCEL' | translate }}
+        </button>
+        <button type="button" class="btn btn-danger btn-sm" (click)="confirmResetScore()">
+          {{ 'TIC_TAC_TOE.RESET_SCORE_CONFIRM' | translate }}
+        </button>
+      </div>
+    </div>
+  </p-dialog>
+
+  <p-dialog
+    styleClass="tic-tac-toe-dialog match-winner-dialog"
     [header]="'TIC_TAC_TOE.MATCH_WINNER_TITLE' | translate"
     [modal]="true"
     [visible]="matchWinner() !== null"
