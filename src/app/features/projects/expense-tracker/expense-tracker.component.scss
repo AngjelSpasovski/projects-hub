@@ -1,15 +1,15 @@
-.expense-page {
+﻿.expense-page {
   display: grid;
 }
 
 .expense-shell {
   background:
     radial-gradient(circle at top left, rgba(101, 200, 159, 0.14), transparent 26rem),
-    #151b24;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+    var(--project-bg);
+  border: 1px solid var(--project-border);
   border-radius: 8px;
   box-shadow: var(--app-shadow);
-  color: #f8fafc;
+  color: var(--project-text);
   display: grid;
   gap: 0.85rem;
   grid-template-columns: minmax(17rem, 0.76fr) minmax(0, 1.5fr);
@@ -20,8 +20,8 @@
 .expense-board,
 .chart-panel,
 .entries-panel {
-  background: rgba(12, 17, 24, 0.94);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--project-shell);
+  border: 1px solid var(--project-border);
   border-radius: 8px;
   min-width: 0;
 }
@@ -52,7 +52,7 @@
 label > span,
 .summary-card span,
 .panel-heading span {
-  color: #aab7c8;
+  color: var(--project-text-muted);
   font-size: 0.72rem;
   font-weight: 800;
   text-transform: uppercase;
@@ -76,9 +76,9 @@ label {
 
 .form-control,
 .form-select {
-  background-color: #151b24;
-  border-color: rgba(255, 255, 255, 0.12);
-  color: #f8fafc;
+  background-color: var(--project-bg);
+  border-color: var(--project-border);
+  color: var(--project-text);
   min-height: 2.75rem;
 }
 
@@ -88,7 +88,7 @@ label {
 }
 
 small {
-  color: #aab7c8;
+  color: var(--project-text-muted);
 }
 
 small.error {
@@ -97,7 +97,7 @@ small.error {
 
 input[type='date']::-webkit-calendar-picker-indicator {
   cursor: pointer;
-  filter: invert(1) opacity(0.75);
+  filter: var(--project-date-icon-filter);
 }
 
 .form-grid,
@@ -126,8 +126,8 @@ input[type='date']::-webkit-calendar-picker-indicator {
 }
 
 .summary-card {
-  background: linear-gradient(135deg, #151b24, #1b2431);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: linear-gradient(135deg, var(--project-bg), var(--project-surface-muted));
+  border: 1px solid var(--project-border);
   border-radius: 8px;
   display: grid;
   gap: 0.2rem;
@@ -139,7 +139,7 @@ input[type='date']::-webkit-calendar-picker-indicator {
 }
 
 .summary-card.income strong {
-  color: #8ce2b8;
+  color: #36a074;
 }
 
 .summary-card.expense strong,
@@ -169,7 +169,7 @@ input[type='date']::-webkit-calendar-picker-indicator {
 }
 
 .entries-toolbar {
-  background: rgba(21, 27, 36, 0.66);
+  background: var(--project-surface);
   border-radius: 8px;
   padding: 0.5rem;
 }
@@ -181,14 +181,19 @@ input[type='date']::-webkit-calendar-picker-indicator {
 }
 
 .filter-tabs .btn {
-  background: #1c2635;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #cbd5e1;
+  background: var(--project-control);
+  border: 1px solid var(--project-border);
+  color: var(--project-text-muted);
   font-weight: 800;
   min-width: 4.5rem;
 }
 
-.filter-tabs .btn:hover,
+.filter-tabs .btn:hover {
+  background: var(--project-control-hover);
+  border-color: rgba(147, 197, 253, 0.42);
+  color: var(--project-text);
+}
+
 .filter-tabs .btn.active {
   background: var(--app-accent);
   border-color: var(--app-accent);
@@ -196,9 +201,14 @@ input[type='date']::-webkit-calendar-picker-indicator {
 }
 
 .reset-button {
-  background: #f8fafc;
-  color: #1f2a3b;
+  background: var(--project-control);
+  border-color: var(--project-border);
+  color: var(--project-text);
   font-weight: 800;
+}
+
+.reset-button:hover {
+  background: var(--project-control-hover);
 }
 
 .entry-list {
@@ -207,8 +217,8 @@ input[type='date']::-webkit-calendar-picker-indicator {
 }
 
 .entry-row {
-  background: linear-gradient(135deg, #273244, #222b3b);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(135deg, var(--project-control), var(--project-surface-muted));
+  border: 1px solid var(--project-border);
   border-radius: 8px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto auto;
@@ -227,7 +237,7 @@ input[type='date']::-webkit-calendar-picker-indicator {
 }
 
 .entry-row.income .type-dot {
-  background: #65c89f;
+  background: #36a074;
 }
 
 .entry-row.expense .type-dot {
@@ -240,7 +250,7 @@ input[type='date']::-webkit-calendar-picker-indicator {
 }
 
 .entry-main p {
-  color: #aab7c8;
+  color: var(--project-text-muted);
   margin: 0.1rem 0 0;
 }
 
@@ -254,7 +264,7 @@ input[type='date']::-webkit-calendar-picker-indicator {
 }
 
 .entry-row.income > strong {
-  color: #8ce2b8;
+  color: #36a074;
 }
 
 .entry-row.expense > strong {
@@ -269,22 +279,34 @@ input[type='date']::-webkit-calendar-picker-indicator {
 }
 
 .action-button {
-  background: #f8fafc;
-  color: #1f2a3b;
+  background: var(--project-control);
+  border-color: var(--project-border);
+  color: var(--project-text);
   font-size: 0.78rem;
   min-height: 2.05rem;
   padding: 0.28rem 0.5rem;
 }
 
+.action-button:hover {
+  background: var(--project-control-hover);
+  color: var(--project-text);
+}
+
 .action-button.delete {
-  background: rgba(239, 68, 68, 0.11);
-  border-color: rgba(239, 68, 68, 0.26);
-  color: #fca5a5;
+  background: var(--project-danger-bg);
+  border-color: var(--project-danger-border);
+  color: var(--project-danger-text);
+}
+
+.action-button.delete:hover {
+  background: color-mix(in srgb, var(--project-danger-text) 16%, transparent);
+  border-color: color-mix(in srgb, var(--project-danger-text) 42%, transparent);
+  color: var(--project-danger-text);
 }
 
 .empty-state {
   align-items: center;
-  background: #151b24;
+  background: var(--project-bg);
   border-radius: 8px;
   display: grid;
   gap: 0.45rem;
@@ -300,7 +322,7 @@ input[type='date']::-webkit-calendar-picker-indicator {
 }
 
 .empty-state p {
-  color: #aab7c8;
+  color: var(--project-text-muted);
   margin: 0;
 }
 

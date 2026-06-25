@@ -1,15 +1,15 @@
-.todo-page {
+﻿.todo-page {
   display: grid;
 }
 
 .todo-shell {
   background:
     radial-gradient(circle at top left, rgba(79, 112, 216, 0.16), transparent 28rem),
-    #151b24;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+    var(--project-bg);
+  border: 1px solid var(--project-border);
   border-radius: 8px;
   box-shadow: var(--app-shadow);
-  color: #f8fafc;
+  color: var(--project-text);
   display: grid;
   gap: 0.9rem;
   grid-template-columns: minmax(16rem, 0.85fr) minmax(0, 1.45fr);
@@ -18,8 +18,8 @@
 
 .task-form,
 .task-board {
-  background: rgba(12, 17, 24, 0.94);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--project-shell);
+  border: 1px solid var(--project-border);
   border-radius: 8px;
   display: grid;
   gap: 0.7rem;
@@ -46,7 +46,7 @@ label > span,
 .todo-stats span,
 .task-meta,
 .priority {
-  color: #aab7c8;
+  color: var(--project-text-muted);
   font-size: 0.72rem;
   font-weight: 800;
   text-transform: uppercase;
@@ -70,9 +70,9 @@ label {
 
 .form-control,
 .form-select {
-  background-color: #151b24;
-  border-color: rgba(255, 255, 255, 0.12);
-  color: #f8fafc;
+  background-color: var(--project-bg);
+  border-color: var(--project-border);
+  color: var(--project-text);
   min-height: 2.8rem;
 }
 
@@ -87,7 +87,7 @@ input[type='date'] {
 
 input[type='date']::-webkit-calendar-picker-indicator {
   cursor: pointer;
-  filter: invert(1) opacity(0.75);
+  filter: var(--project-date-icon-filter);
 }
 
 .form-control.invalid {
@@ -96,7 +96,7 @@ input[type='date']::-webkit-calendar-picker-indicator {
 }
 
 small {
-  color: #aab7c8;
+  color: var(--project-text-muted);
 }
 
 small.error {
@@ -124,8 +124,8 @@ small.error {
 }
 
 .todo-stats div {
-  background: linear-gradient(135deg, #151b24, #1b2431);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: linear-gradient(135deg, var(--project-bg), var(--project-surface-muted));
+  border: 1px solid var(--project-border);
   border-radius: 8px;
   display: grid;
   gap: 0.15rem;
@@ -138,7 +138,7 @@ small.error {
 
 .board-toolbar {
   align-items: center;
-  background: rgba(21, 27, 36, 0.64);
+  background: var(--project-surface);
   border-radius: 8px;
   padding: 0.5rem;
 }
@@ -152,18 +152,18 @@ small.error {
 }
 
 .filter-tabs .btn {
-  background: #1c2635;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #cbd5e1;
+  background: var(--project-control);
+  border: 1px solid var(--project-border);
+  color: var(--project-text-muted);
   font-weight: 800;
   min-width: 4.4rem;
   padding: 0.42rem 0.7rem;
 }
 
 .filter-tabs .btn:hover {
-  background: #263249;
+  background: var(--project-control-hover);
   border-color: rgba(147, 197, 253, 0.42);
-  color: #fff;
+  color: var(--project-text);
 }
 
 .filter-tabs .btn.active {
@@ -180,8 +180,8 @@ small.error {
 
 .task-row {
   align-items: start;
-  background: linear-gradient(135deg, #273244, #222b3b);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(135deg, var(--project-control), var(--project-surface-muted));
+  border: 1px solid var(--project-border);
   border-radius: 8px;
   display: grid;
   gap: 0.75rem;
@@ -190,16 +190,16 @@ small.error {
 }
 
 .task-row.completed {
-  background: #222a38;
+  background: var(--project-surface-muted);
   opacity: 0.74;
 }
 
 .task-toggle {
   align-items: center;
-  background: #151b24;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--project-bg);
+  border: 1px solid var(--project-border);
   border-radius: 999px;
-  color: #aab7c8;
+  color: var(--project-text-muted);
   display: inline-flex;
   height: 2rem;
   justify-content: center;
@@ -228,7 +228,7 @@ small.error {
 }
 
 .task-content p {
-  color: #d5deea;
+  color: var(--project-text-muted);
   line-height: 1.35;
   margin: 0;
   overflow-wrap: anywhere;
@@ -242,7 +242,7 @@ small.error {
 }
 
 .priority {
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--project-border);
   border-radius: 999px;
   flex: 0 0 auto;
   font-size: 0.68rem;
@@ -270,36 +270,36 @@ small.error {
 }
 
 .task-action {
-  border-color: rgba(255, 255, 255, 0.12);
+  border-color: var(--project-border);
   font-size: 0.78rem;
   min-height: 2.05rem;
   padding: 0.28rem 0.52rem;
 }
 
 .edit-action {
-  background: #f8fafc;
-  color: #1f2a3b;
+  background: var(--project-control);
+  color: var(--project-text);
 }
 
 .edit-action:hover {
-  background: #e8eef8;
+  background: var(--project-control-hover);
 }
 
 .delete-action {
-  background: rgba(239, 68, 68, 0.11);
-  border-color: rgba(239, 68, 68, 0.26);
-  color: #fca5a5;
+  background: var(--project-danger-bg);
+  border-color: var(--project-danger-border);
+  color: var(--project-danger-text);
 }
 
 .delete-action:hover {
-  background: rgba(239, 68, 68, 0.18);
-  border-color: rgba(239, 68, 68, 0.42);
-  color: #fecaca;
+  background: color-mix(in srgb, var(--project-danger-text) 16%, transparent);
+  border-color: color-mix(in srgb, var(--project-danger-text) 42%, transparent);
+  color: var(--project-danger-text);
 }
 
 .empty-state {
   align-items: center;
-  background: #151b24;
+  background: var(--project-bg);
   border-radius: 8px;
   display: grid;
   gap: 0.45rem;
@@ -315,7 +315,7 @@ small.error {
 }
 
 .empty-state p {
-  color: #aab7c8;
+  color: var(--project-text-muted);
   margin: 0;
 }
 

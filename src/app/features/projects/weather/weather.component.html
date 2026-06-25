@@ -1,6 +1,25 @@
 <section class="weather-page">
   <div class="weather-shell" [attr.aria-label]="'WEATHER.TITLE' | translate">
     <div class="toolbar">
+      <label class="search-field">
+        <span>{{ 'WEATHER.SEARCH' | translate }}</span>
+        <div class="input-shell">
+          <i class="pi pi-search"></i>
+          <input
+            type="search"
+            class="form-control"
+            [ngModel]="searchTerm()"
+            (ngModelChange)="updateSearchTerm($event)"
+            [placeholder]="'WEATHER.SEARCH_PLACEHOLDER' | translate"
+          />
+          @if (searchTerm()) {
+            <button type="button" class="clear-search" (click)="clearSearch()" [attr.aria-label]="'WEATHER.CLEAR_SEARCH' | translate">
+              <i class="pi pi-times"></i>
+            </button>
+          }
+        </div>
+      </label>
+
       <label>
         <span>{{ 'WEATHER.FILTER' | translate }}</span>
         <select class="form-select" [ngModel]="filter()" (ngModelChange)="updateFilter($event)">
@@ -12,9 +31,9 @@
       </label>
 
       <div class="actions">
-        <button type="button" class="btn btn-sm btn-icon" (click)="simulateApiFailure()">
+        <button type="button" class="btn btn-sm btn-icon secondary-action" (click)="simulateApiFailure()">
           <i class="pi pi-exclamation-triangle"></i>
-          <span>{{ 'WEATHER.SIMULATE_FAILURE' | translate }}</span>
+          <span>{{ 'WEATHER.TEST_ERROR' | translate }}</span>
         </button>
         <button type="button" class="btn btn-primary btn-sm" (click)="loadWeather()">
           <i class="pi pi-refresh"></i>
@@ -42,40 +61,101 @@
       <div class="summary-row">
         <div>
           <span>{{ 'WEATHER.AVERAGE' | translate }}</span>
-          <strong>{{ averageTemperature() }}°C</strong>
+          <strong>{{ averageTemperature() }}&deg;C</strong>
+        </div>
+        <div>
+          <span>{{ 'WEATHER.HUMIDITY_AVERAGE' | translate }}</span>
+          <strong>{{ averageHumidity() }}%</strong>
+        </div>
+        <div>
+          <span>{{ 'WEATHER.WARMEST' | translate }}</span>
+          <strong>{{ warmestCity()?.city || '-' }}</strong>
         </div>
         <div>
           <span>{{ 'WEATHER.UPDATED' | translate }}</span>
-          <strong>{{ lastUpdated() || '-' }}</strong>
+          <strong>
+            {{ lastUpdated() || '-' }}
+            @if (stale()) {
+              <small>{{ 'WEATHER.STALE' | translate }}</small>
+            }
+          </strong>
         </div>
       </div>
 
-      <div class="weather-grid">
-        @for (city of filteredCities(); track city.city) {
-          <article class="weather-card">
-            <div class="card-head">
-              <i [class]="conditionIcon(city.condition)"></i>
-              <span>{{ ('WEATHER.CONDITION.' + city.condition.toUpperCase()) | translate }}</span>
+      @if (featuredCity(); as featured) {
+        <section class="featured-weather">
+          <div class="featured-icon">
+            <i [class]="conditionIcon(featured.condition)"></i>
+          </div>
+          <div class="featured-copy">
+            <span>{{ 'WEATHER.FEATURED' | translate }}</span>
+            <h3>{{ featured.city }}, {{ featured.country }}</h3>
+            <p>{{ featured.description }}</p>
+          </div>
+          <div class="featured-temp">
+            <strong>{{ featured.temperature }}&deg;C</strong>
+            <span>{{ 'WEATHER.FEELS_LIKE' | translate:{ value: featured.feelsLike } }}</span>
+          </div>
+        </section>
+      }
+
+      <div class="weather-content">
+        <div class="weather-grid">
+          @for (city of filteredCities(); track city.city) {
+            <article class="weather-card">
+              <div class="card-head">
+                <i [class]="conditionIcon(city.condition)"></i>
+                <span>{{ ('WEATHER.CONDITION.' + city.condition.toUpperCase()) | translate }}</span>
+              </div>
+              <h3>{{ city.city }}</h3>
+              <strong>{{ city.temperature }}&deg;C</strong>
+              <p>{{ city.description }}</p>
+              <dl>
+                <div>
+                  <dt>{{ 'WEATHER.HUMIDITY' | translate }}</dt>
+                  <dd>{{ city.humidity }}%</dd>
+                </div>
+                <div>
+                  <dt>{{ 'WEATHER.WIND' | translate }}</dt>
+                  <dd>{{ city.wind }} km/h</dd>
+                </div>
+              </dl>
+            </article>
+          } @empty {
+            <app-async-state-panel
+              icon="pi pi-filter-slash"
+              titleKey="WEATHER.EMPTY_TITLE"
+              messageKey="WEATHER.EMPTY_TEXT"
+            />
+          }
+        </div>
+
+        @if (featuredCity(); as selectedCity) {
+          <aside class="forecast-panel">
+            <div class="panel-title">
+              <span>{{ 'WEATHER.FORECAST' | translate }}</span>
+              <strong>{{ trendLabel(selectedCity) | translate }}</strong>
             </div>
-            <h3>{{ city.city }}</h3>
-            <strong>{{ city.temperature }}°C</strong>
-            <dl>
+            <div class="forecast-bars">
+              @for (temp of selectedCity.forecast; track $index) {
+                <div>
+                  <span>{{ 'WEATHER.FORECAST_DAY' | translate:{ day: $index + 1 } }}</span>
+                  <strong>{{ temp }}&deg;C</strong>
+                  <i [style.width.%]="temp * 2.4"></i>
+                </div>
+              }
+            </div>
+            <dl class="detail-list">
               <div>
-                <dt>{{ 'WEATHER.HUMIDITY' | translate }}</dt>
-                <dd>{{ city.humidity }}%</dd>
+                <dt>{{ 'WEATHER.PRESSURE' | translate }}</dt>
+                <dd>{{ selectedCity.pressure }} hPa</dd>
               </div>
               <div>
-                <dt>{{ 'WEATHER.WIND' | translate }}</dt>
-                <dd>{{ city.wind }} km/h</dd>
+                <dt>{{ 'WEATHER.VISIBILITY' | translate }}</dt>
+                <dd>{{ selectedCity.visibility }} km</dd>
               </div>
             </dl>
-          </article>
-        } @empty {
-          <app-async-state-panel
-            icon="pi pi-filter-slash"
-            titleKey="WEATHER.EMPTY_TITLE"
-            messageKey="WEATHER.EMPTY_TEXT"
-          />
+          </aside>
         }
       </div>
     }

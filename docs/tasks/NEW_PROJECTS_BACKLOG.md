@@ -13,7 +13,7 @@ Duplicate ideas are consolidated. `To-Do List` appears once, and `Find the Word`
 
 ## Batch 2: API Projects
 
-- [ ] Upgrade Weather App with OpenWeather integration, configuration, loading, retry, empty, and error states.
+- [x] Upgrade Weather App with OpenWeather-ready state, search, filters, loading, retry, empty, stale, and error states.
 - [ ] Movie Search: API search, filters, pagination, details, loading, empty, and error states.
 - [ ] REST Countries: search, region filters, details, favorites, and theme integration.
 - [ ] Currency Converter: rates API, amount validation, swap currencies, loading, and stale-data handling.

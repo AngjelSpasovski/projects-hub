@@ -296,6 +296,7 @@
       "RAINY": "Rainy",
       "SUNNY": "Sunny"
     },
+    "CLEAR_SEARCH": "Clear search",
     "DESCRIPTION": "An API-style weather dashboard with simulated loading, filters, summaries, and fallback states.",
     "EMPTY_TEXT": "Select another weather condition to show city cards.",
     "EMPTY_TITLE": "No cities for this filter",
@@ -306,15 +307,32 @@
       "FILTERS": "Condition filters and summaries update from the loaded data.",
       "LOADING": "A simulated fetch shows loading skeletons before cards render."
     },
+    "FEATURED": "Featured city",
+    "FEELS_LIKE": "Feels like {{value}}°C",
     "FILTER": "Condition",
+    "FORECAST": "Local forecast",
+    "FORECAST_DAY": "Day {{day}}",
     "HUMIDITY": "Humidity",
+    "HUMIDITY_AVERAGE": "Average humidity",
     "LOADING": "Loading weather cards",
+    "PRESSURE": "Pressure",
     "REFRESH": "Refresh",
     "RETRY": "Retry",
+    "SEARCH": "Search",
+    "SEARCH_PLACEHOLDER": "Search city or country",
     "SHOW_ERROR": "Show error",
     "SIMULATE_FAILURE": "Simulate API failure",
+    "STALE": "Stale",
+    "TEST_ERROR": "Test error state",
     "TITLE": "Weather Dashboard",
+    "TREND": {
+      "COOLING": "Cooling trend",
+      "STABLE": "Stable trend",
+      "WARMING": "Warming trend"
+    },
     "UPDATED": "Updated",
+    "VISIBILITY": "Visibility",
+    "WARMEST": "Warmest city",
     "WIND": "Wind"
   },
   "MUSIC_EVENT": {

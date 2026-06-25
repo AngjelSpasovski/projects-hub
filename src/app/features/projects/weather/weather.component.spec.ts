@@ -30,8 +30,9 @@ describe('WeatherComponent', () => {
     tick(0);
 
     expect(component.loadState()).toBe('ready');
-    expect(component.cities().length).toBe(4);
+    expect(component.cities().length).toBe(5);
     expect(component.lastUpdated()).toBeTruthy();
+    expect(component.stale()).toBeFalse();
   }));
 
   it('should filter cities by condition', fakeAsync(() => {
@@ -43,6 +44,19 @@ describe('WeatherComponent', () => {
     expect(component.filteredCities().map((city) => city.city)).toEqual(['Skopje', 'Strumica']);
   }));
 
+  it('should filter cities by search term', fakeAsync(() => {
+    component.loadWeather(0);
+    tick(0);
+
+    component.updateSearchTerm('oh');
+
+    expect(component.filteredCities().map((city) => city.city)).toEqual(['Ohrid']);
+
+    component.clearSearch();
+
+    expect(component.filteredCities().length).toBe(5);
+  }));
+
   it('should calculate the average temperature for the filtered list', fakeAsync(() => {
     component.loadWeather(0);
     tick(0);
@@ -52,15 +66,32 @@ describe('WeatherComponent', () => {
     expect(component.averageTemperature()).toBe(30);
   }));
 
+  it('should calculate secondary weather summaries', fakeAsync(() => {
+    component.loadWeather(0);
+    tick(0);
+
+    expect(component.warmestCity()?.city).toBe('Skopje');
+    expect(component.averageHumidity()).toBe(53);
+    expect(component.featuredCity()?.city).toBe('Skopje');
+  }));
+
   it('should simulate an API failure state', fakeAsync(() => {
     component.simulateApiFailure();
 
     expect(component.loadState()).toBe('error');
     expect(component.cities()).toEqual([]);
     expect(component.lastUpdated()).toBeNull();
+    expect(component.stale()).toBeTrue();
   }));
 
   it('should map weather conditions to icons', () => {
     expect(component.conditionIcon('rainy')).toBe('pi pi-cloud-download');
   });
+
+  it('should map forecast trend labels', fakeAsync(() => {
+    component.loadWeather(0);
+    tick(0);
+
+    expect(component.trendLabel(component.cities()[0])).toBe('WEATHER.TREND.COOLING');
+  }));
 });

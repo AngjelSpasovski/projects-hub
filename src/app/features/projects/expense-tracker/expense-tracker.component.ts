@@ -200,7 +200,7 @@ export class ExpenseTrackerComponent implements AfterViewInit, OnDestroy {
           {
             data,
             backgroundColor: ['#65c89f', '#ef767a'],
-            borderColor: '#111827',
+            borderColor: 'transparent',
             borderWidth: 4
           }
         ]

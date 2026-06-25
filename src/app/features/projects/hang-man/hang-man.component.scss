@@ -4,11 +4,11 @@
 }
 
 .game-shell {
-  background: #151b24;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--project-bg);
+  border: 1px solid var(--project-border);
   border-radius: 8px;
   box-shadow: var(--app-shadow);
-  color: #f8fafc;
+  color: var(--project-text);
   display: grid;
   gap: 0.55rem;
   padding: 0.7rem;
@@ -17,7 +17,7 @@
 
 .game-status {
   align-items: center;
-  background: #0c1118;
+  background: var(--project-shell);
   border-radius: 8px;
   display: flex;
   font-weight: 800;
@@ -36,8 +36,8 @@
 .letter-tile {
   align-items: center;
   aspect-ratio: 1;
-  background: #273244;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--project-control);
+  border: 1px solid var(--project-border);
   border-radius: 8px;
   display: flex;
   font-size: 1.2rem;
@@ -52,7 +52,7 @@
 }
 
 .attempt-meter span {
-  background: #273244;
+  background: var(--project-surface-muted);
   border-radius: 999px;
   height: 0.55rem;
 }
@@ -63,7 +63,7 @@
 
 .wrong-letters {
   align-items: center;
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--project-surface);
   border-radius: 8px;
   display: flex;
   gap: 0.6rem;
@@ -73,7 +73,7 @@
 }
 
 .wrong-letters span {
-  color: #aab7c8;
+  color: var(--project-text-muted);
   font-size: 0.78rem;
   font-weight: 800;
   text-transform: uppercase;
@@ -90,16 +90,16 @@
 }
 
 .letter-key {
-  background: #273244;
-  border: 0;
+  background: var(--project-control);
+  border: 1px solid var(--project-border);
   border-radius: 8px;
-  color: #f8fafc;
+  color: var(--project-text);
   font-weight: 900;
   min-height: 2rem;
 }
 
 .letter-key:not(:disabled):hover {
-  background: #344158;
+  background: var(--project-control-hover);
 }
 
 .letter-key.correct {

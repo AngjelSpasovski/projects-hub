@@ -1,37 +1,21 @@
 @if (project(); as selectedProject) {
   <section class="project-workspace surface-panel">
     <div class="project-detail">
-      <img class="project-cover" [src]="selectedProject.image" [alt]="selectedProject.titleKey | translate" decoding="async" />
-
-      <div class="project-summary">
+      <div class="project-media">
         <a routerLink="/admin/dashboard" class="back-link">
           <i class="pi pi-arrow-left"></i>
           <span>{{ 'PROJECT.BACK' | translate }}</span>
         </a>
-        <p class="category">{{ selectedProject.categoryKey | translate }}</p>
-        <h2>{{ selectedProject.titleKey | translate }}</h2>
-        <p>{{ selectedProject.summaryKey | translate }}</p>
+        <img class="project-cover" [src]="selectedProject.image" [alt]="selectedProject.titleKey | translate" decoding="async" />
+      </div>
 
-        <dl class="project-meta">
-        <div>
-          <dt>{{ 'PROJECT.META.STATUS' | translate }}</dt>
-          <dd>{{ ('PROJECT.STATUS.' + selectedProject.status.toUpperCase()) | translate }}</dd>
-        </div>
-        <div>
-          <dt>{{ 'PROJECT.META.DIFFICULTY' | translate }}</dt>
-          <dd>{{ ('PROJECT.DIFFICULTY.' + selectedProject.difficulty.toUpperCase()) | translate }}</dd>
-        </div>
-        <div>
-          <dt>{{ 'PROJECT.META.CREATED' | translate }}</dt>
-          <dd>{{ selectedProject.createdAt }}</dd>
-        </div>
-        <div>
-          <dt>{{ 'PROJECT.META.UPDATED' | translate }}</dt>
-          <dd>{{ selectedProject.updatedAt }}</dd>
-        </div>
-        </dl>
+      <div class="project-summary">
+        <div class="project-title-row">
+          <div class="project-heading">
+            <p class="category">{{ selectedProject.categoryKey | translate }}</p>
+            <h2>{{ selectedProject.titleKey | translate }}</h2>
+          </div>
 
-        <div class="project-footer-row">
           <div class="tags">
           @for (tag of selectedProject.tags; track tag) {
             <span>{{ tag }}</span>
@@ -64,6 +48,27 @@
           }
           </div>
         </div>
+
+        <p class="project-description">{{ selectedProject.summaryKey | translate }}</p>
+
+        <dl class="project-meta">
+          <div>
+            <dt>{{ 'PROJECT.META.STATUS' | translate }}</dt>
+            <dd>{{ ('PROJECT.STATUS.' + selectedProject.status.toUpperCase()) | translate }}</dd>
+          </div>
+          <div>
+            <dt>{{ 'PROJECT.META.DIFFICULTY' | translate }}</dt>
+            <dd>{{ ('PROJECT.DIFFICULTY.' + selectedProject.difficulty.toUpperCase()) | translate }}</dd>
+          </div>
+          <div>
+            <dt>{{ 'PROJECT.META.CREATED' | translate }}</dt>
+            <dd>{{ selectedProject.createdAt }}</dd>
+          </div>
+          <div>
+            <dt>{{ 'PROJECT.META.UPDATED' | translate }}</dt>
+            <dd>{{ selectedProject.updatedAt }}</dd>
+          </div>
+        </dl>
       </div>
     </div>
 

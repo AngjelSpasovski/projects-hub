@@ -3,11 +3,11 @@
 }
 
 .event-shell {
-  background: #151b24;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--project-bg);
+  border: 1px solid var(--project-border);
   border-radius: 8px;
   box-shadow: var(--app-shadow);
-  color: #f8fafc;
+  color: var(--project-text);
   display: grid;
   gap: 0.65rem;
   padding: 0.75rem;
@@ -30,16 +30,16 @@ label > span,
 .event-summary span,
 .event-row p,
 dt {
-  color: #aab7c8;
+  color: var(--project-text-muted);
   font-size: 0.75rem;
   font-weight: 800;
   text-transform: uppercase;
 }
 
 .form-select {
-  background-color: #0c1118;
-  border-color: rgba(255, 255, 255, 0.12);
-  color: #f8fafc;
+  background-color: var(--project-shell);
+  border-color: var(--project-border);
+  color: var(--project-text);
   min-height: 2.5rem;
 }
 
@@ -59,7 +59,7 @@ dt {
 }
 
 .event-summary div {
-  background: #0c1118;
+  background: var(--project-shell);
   border-radius: 8px;
   display: grid;
   gap: 0.2rem;
@@ -77,8 +77,8 @@ dt {
 
 .event-row {
   align-items: center;
-  background: #273244;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--project-control);
+  border: 1px solid var(--project-border);
   border-radius: 8px;
   display: grid;
   gap: 0.65rem;
@@ -110,13 +110,13 @@ dt {
 }
 
 .event-meta span {
-  color: #aab7c8;
+  color: var(--project-text-muted);
   white-space: nowrap;
 }
 
 .empty-state {
   align-items: center;
-  background: #0c1118;
+  background: var(--project-shell);
   border-radius: 8px;
   display: grid;
   gap: 0.55rem;

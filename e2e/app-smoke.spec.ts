@@ -188,7 +188,7 @@ test('mini project refinements keep core interactions stable', async ({ page }) 
   await expect(page.locator('output')).toHaveText('0.05');
 
   await page.goto('/admin/projects/weather');
-  await page.getByRole('button', { name: 'Simulate API failure' }).click();
+  await page.getByRole('button', { name: 'Test error state' }).click();
   await expect(page.getByRole('heading', { name: 'Weather data unavailable' })).toBeVisible();
   await page.getByRole('button', { name: 'Retry' }).click();
   await expect(page.getByText('Weather data unavailable')).toBeHidden();

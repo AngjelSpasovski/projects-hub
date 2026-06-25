@@ -13,14 +13,22 @@
 }
 
 .project-detail {
+  align-items: start;
   display: grid;
   flex: 0 0 auto;
-  gap: var(--app-space-4);
-  grid-template-columns: 10rem minmax(0, 1fr);
-  padding: var(--app-space-3);
+  gap: 0.5rem;
+  grid-template-columns: 6.7rem minmax(0, 1fr);
+  padding: 0.34rem 0.5rem;
+}
+
+.project-media {
+  display: grid;
+  gap: 0.28rem;
 }
 
 .project-summary {
+  display: grid;
+  gap: 0.2rem;
   min-width: 0;
 }
 
@@ -38,14 +46,34 @@
   align-items: center;
   color: var(--app-accent-strong);
   display: inline-flex;
-  gap: var(--app-space-2);
-  margin-bottom: var(--app-space-2);
+  font-size: 0.8rem;
+  gap: 0.25rem;
+  line-height: 1.2;
+  margin-bottom: 0;
   text-decoration: none;
+}
+
+.back-link span {
+  max-width: 4.9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.project-title-row {
+  align-items: start;
+  display: grid;
+  gap: 0.45rem;
+  grid-template-columns: minmax(14rem, 0.9fr) minmax(12rem, 1fr) auto;
+}
+
+.project-heading {
+  min-width: 0;
 }
 
 .category {
   color: var(--app-text-muted);
-  font-size: var(--app-font-size-sm);
+  font-size: 0.66rem;
   font-weight: 700;
   letter-spacing: 0;
   margin: 0;
@@ -53,55 +81,64 @@
 }
 
 h2 {
-  font-size: 1.45rem;
-  margin: 0.15rem 0 0.3rem;
+  font-size: 0.98rem;
+  line-height: 1.15;
+  margin: 0;
 }
 
-p {
+.project-description {
   color: var(--app-text-muted);
+  font-size: 0.82rem;
+  line-height: 1.25;
   margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .tags {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--app-space-2);
+  gap: 0.3rem;
   margin: 0;
 }
 
-.project-footer-row {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--app-space-3);
-  justify-content: space-between;
-  margin-top: var(--app-space-2);
-}
-
 .project-meta {
-  display: grid;
-  gap: var(--app-space-3);
-  grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
-  margin: var(--app-space-2) 0 0;
-}
-
-.project-meta div {
   background: var(--app-surface-muted);
   border: 1px solid var(--app-border);
   border-radius: var(--app-radius-md);
-  padding: 0.4rem 0.6rem;
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0;
+  overflow: hidden;
+}
+
+.project-meta div {
+  min-width: 0;
+  padding: 0.22rem 0.45rem;
+}
+
+.project-meta div + div {
+  border-left: 1px solid var(--app-border);
 }
 
 .project-meta dt {
   color: var(--app-text-muted);
-  font-size: var(--app-font-size-xs);
+  font-size: 0.62rem;
   font-weight: 700;
+  line-height: 1.05;
   text-transform: uppercase;
 }
 
 .project-meta dd {
+  font-size: 0.78rem;
   font-weight: 700;
-  margin: 0.2rem 0 0;
+  line-height: 1.15;
+  margin: 0.08rem 0 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .tags span {
@@ -109,21 +146,25 @@ p {
   border: 1px solid var(--app-border);
   border-radius: var(--app-radius-pill);
   color: var(--app-text-muted);
-  font-size: var(--app-font-size-sm);
+  font-size: 0.62rem;
   font-weight: 700;
-  padding: 0.3rem 0.6rem;
+  line-height: 1.1;
+  padding: 0.14rem 0.36rem;
 }
 
 .project-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.55rem;
+  gap: 0.35rem;
 }
 
 .project-actions .btn {
   align-items: center;
   display: inline-flex;
-  gap: 0.4rem;
+  font-size: 0.68rem;
+  gap: 0.32rem;
+  min-height: 1.72rem;
+  padding: 0.22rem 0.46rem;
 }
 
 .project-live {
@@ -131,7 +172,7 @@ p {
   flex: 1 1 auto;
   min-height: 0;
   overflow: auto;
-  padding: var(--app-space-2);
+  padding: 0.42rem;
 }
 
 .project-component-loading {
@@ -159,15 +200,37 @@ p {
 
   .project-detail {
     grid-template-columns: 1fr;
-    padding: var(--app-space-4);
+    padding: 0.65rem;
+  }
+
+  .project-title-row {
+    grid-template-columns: 1fr;
   }
 
   .project-live {
     overflow: visible;
-    padding: var(--app-space-4);
+    padding: var(--app-space-3);
   }
 
   .project-cover {
-    max-width: 24rem;
+    max-width: 11rem;
+  }
+
+  .project-meta {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .project-meta div:nth-child(odd) {
+    border-left: 0;
+  }
+
+  .project-meta div:nth-child(n + 3) {
+    border-top: 1px solid var(--app-border);
+  }
+}
+
+@media (max-width: 520px) {
+  .project-meta {
+    grid-template-columns: 1fr;
   }
 }

@@ -59,7 +59,7 @@ export const PROJECTS: PortfolioProject[] = [
     status: 'ready',
     image: 'assets/project-covers/weather.png',
     route: '/admin/projects/weather',
-    updatedAt: '2026-06-17',
+    updatedAt: '2026-06-25',
     createdAt: '2026-06-17',
     difficulty: 'intermediate',
     repositoryUrl: null,
