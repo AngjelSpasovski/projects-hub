@@ -1,15 +1,15 @@
 import { Component, input } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 
-import { ProjectStatus } from '../../../core/models/project.model';
+import { ProjectDifficulty } from '../../../core/models/project.model';
 
 @Component({
   selector: 'app-project-status-badge',
   standalone: true,
   imports: [TranslatePipe],
-  template: `<span class="status">{{ ('PROJECT.STATUS.' + status().toUpperCase()) | translate }}</span>`,
+  template: `<span class="difficulty">{{ ('PROJECT.DIFFICULTY.' + difficulty().toUpperCase()) | translate }}</span>`,
   styles: `
-    .status {
+    .difficulty {
       background: var(--app-surface-muted);
       border: 1px solid var(--app-border);
       border-radius: var(--app-radius-pill);
@@ -26,5 +26,5 @@ import { ProjectStatus } from '../../../core/models/project.model';
   `
 })
 export class ProjectStatusBadgeComponent {
-  readonly status = input.required<ProjectStatus>();
+  readonly difficulty = input.required<ProjectDifficulty>();
 }

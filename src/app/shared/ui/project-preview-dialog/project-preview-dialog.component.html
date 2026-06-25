@@ -18,7 +18,7 @@
             <p class="category">{{ selectedProject.categoryKey | translate }}</p>
             <h3>{{ selectedProject.titleKey | translate }}</h3>
           </div>
-          <app-project-status-badge [status]="selectedProject.status" />
+          <app-project-status-badge [difficulty]="selectedProject.difficulty" />
         </div>
         <p class="summary">{{ selectedProject.summaryKey | translate }}</p>
         <dl class="project-meta preview-meta">

@@ -21,6 +21,7 @@
 
 .admin-main {
   min-height: 0;
+  overflow-anchor: none;
   overflow: auto;
   padding: var(--app-space-5);
 }

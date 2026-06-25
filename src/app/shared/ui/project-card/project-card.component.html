@@ -1,13 +1,13 @@
 <article class="project-card surface-panel" [class.horizontal]="viewMode() !== 'big'">
   <a [routerLink]="project().route" class="cover" [attr.aria-label]="project().titleKey | translate">
-    <img [src]="project().image" [alt]="project().titleKey | translate" loading="lazy" decoding="async" />
+    <img [src]="project().image" [alt]="project().titleKey | translate" loading="eager" decoding="async" />
   </a>
 
   <div class="project-content">
     <header class="project-title-block">
       <div class="project-meta-row">
         <p class="category">{{ project().categoryKey | translate }}</p>
-        <app-project-status-badge [status]="project().status" />
+        <app-project-status-badge [difficulty]="project().difficulty" />
       </div>
       <h3>{{ project().titleKey | translate }}</h3>
     </header>

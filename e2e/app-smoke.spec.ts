@@ -142,6 +142,26 @@ test('admin shell keeps chrome fixed while main content scrolls', async ({ page 
   );
 });
 
+test('dashboard keeps the main scroll position at the catalog bottom', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'EN', exact: true }).click();
+  await expect(page.getByText('15 project(s)')).toBeVisible();
+
+  const main = page.locator('.admin-main');
+
+  await main.evaluate((element) => {
+    element.scrollTop = element.scrollHeight;
+  });
+
+  const initialBottomDistance = await main.evaluate((element) => element.scrollHeight - element.clientHeight - element.scrollTop);
+  expect(initialBottomDistance).toBeLessThanOrEqual(2);
+
+  await page.waitForTimeout(600);
+
+  const finalBottomDistance = await main.evaluate((element) => element.scrollHeight - element.clientHeight - element.scrollTop);
+  expect(finalBottomDistance).toBeLessThanOrEqual(8);
+});
+
 test('desktop catalog and project workspaces fit without nested scrollbars', async ({ page }) => {
   await page.setViewportSize({ width: 1920, height: 1080 });
   await page.goto('/');

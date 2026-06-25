@@ -40,6 +40,7 @@
     "SORT": "Sort",
     "SORT_ORDER": "Project order",
     "SORT_CATEGORY": "Category",
+    "SORT_DIFFICULTY": "Difficulty",
     "SORT_STATUS": "Status",
     "SORT_TITLE": "Name",
     "SORT_UPDATED": "Last updated",

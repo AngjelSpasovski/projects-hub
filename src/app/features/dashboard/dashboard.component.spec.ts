@@ -60,12 +60,13 @@ describe('DashboardComponent', () => {
     expect(component.filteredProjects().map((project) => project.id)).toEqual(['calculator']);
   });
 
-  it('should sort projects by status', () => {
-    component.updateSortMode('status');
+  it('should sort projects by difficulty', () => {
+    component.updateSortMode('difficulty');
 
-    const statuses = component.filteredProjects().map((project) => project.status);
+    const difficultyOrder = { beginner: 0, intermediate: 1, advanced: 2 };
+    const difficulties = component.filteredProjects().map((project) => difficultyOrder[project.difficulty]);
 
-    expect(statuses).toEqual([...statuses].sort());
+    expect(difficulties).toEqual([...difficulties].sort((first, second) => first - second));
   });
 
   it('should reset filters and sorting', () => {

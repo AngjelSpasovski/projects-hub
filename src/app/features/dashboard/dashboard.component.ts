@@ -11,7 +11,7 @@ import { PROJECTS } from '../projects/project-registry';
 import { ProjectCardComponent, ProjectCardViewMode } from '../../shared/ui/project-card/project-card.component';
 import { ProjectPreviewDialogComponent } from '../../shared/ui/project-preview-dialog/project-preview-dialog.component';
 
-type DashboardSortMode = 'order' | 'title' | 'category' | 'status' | 'updated';
+type DashboardSortMode = 'order' | 'title' | 'category' | 'difficulty' | 'updated';
 
 interface FilterOption {
   label: string;
@@ -24,6 +24,11 @@ interface TagOption {
 }
 
 const VIEW_MODE_STORAGE_KEY = 'projects-hub-dashboard-view-mode';
+const DIFFICULTY_ORDER: Record<PortfolioProject['difficulty'], number> = {
+  beginner: 0,
+  intermediate: 1,
+  advanced: 2
+};
 
 @Component({
   selector: 'app-dashboard',
@@ -65,7 +70,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       { label: this.translateKey('FILTERS.SORT_ORDER'), value: 'order' },
       { label: this.translateKey('FILTERS.SORT_TITLE'), value: 'title' },
       { label: this.translateKey('FILTERS.SORT_CATEGORY'), value: 'category' },
-      { label: this.translateKey('FILTERS.SORT_STATUS'), value: 'status' },
+      { label: this.translateKey('FILTERS.SORT_DIFFICULTY'), value: 'difficulty' },
       { label: this.translateKey('FILTERS.SORT_UPDATED'), value: 'updated' }
     ];
   });
@@ -149,7 +154,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.translateKey(project.titleKey),
       this.translateKey(project.summaryKey),
       this.translateKey(project.categoryKey),
-      project.status,
+      this.translateKey(`PROJECT.DIFFICULTY.${project.difficulty.toUpperCase()}`),
       ...project.tags
     ]
       .join(' ')
@@ -166,8 +171,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
       return second.updatedAt.localeCompare(first.updatedAt);
     }
 
-    if (sortMode === 'status') {
-      return first.status.localeCompare(second.status);
+    if (sortMode === 'difficulty') {
+      return DIFFICULTY_ORDER[first.difficulty] - DIFFICULTY_ORDER[second.difficulty];
     }
 
     if (sortMode === 'category') {
