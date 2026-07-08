@@ -41,6 +41,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   private readonly languageService = inject(LanguageService);
   private readonly translate = inject(TranslateService);
   private loadingTimer: number | undefined;
+  private clockTimer: number | undefined;
 
   readonly projects = PROJECTS;
   readonly skeletonCards = Array.from({ length: 5 }, (_, index) => index);
@@ -51,6 +52,28 @@ export class DashboardComponent implements OnInit, OnDestroy {
   readonly sortMode = signal<DashboardSortMode>('order');
   readonly viewMode = signal<ProjectCardViewMode>(this.getInitialViewMode());
   readonly previewProject = signal<PortfolioProject | null>(null);
+  readonly now = signal(new Date());
+  readonly dashboardWeather = {
+    city: 'Skopje',
+    conditionKey: 'WEATHER.CONDITION.SUNNY',
+    temperature: 31,
+    icon: 'pi pi-sun'
+  };
+
+  readonly clockTime = computed(() =>
+    new Intl.DateTimeFormat(this.activeLocale(), {
+      hour: '2-digit',
+      minute: '2-digit'
+    }).format(this.now())
+  );
+
+  readonly clockDate = computed(() =>
+    new Intl.DateTimeFormat(this.activeLocale(), {
+      day: '2-digit',
+      month: 'short',
+      weekday: 'short'
+    }).format(this.now())
+  );
 
   readonly categoryOptions = computed<FilterOption[]>(() => {
     this.languageService.activeLanguage();
@@ -98,10 +121,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadingTimer = window.setTimeout(() => this.isCatalogLoading.set(false), 250);
+    this.clockTimer = window.setInterval(() => this.now.set(new Date()), 1000);
   }
 
   ngOnDestroy(): void {
     window.clearTimeout(this.loadingTimer);
+    window.clearInterval(this.clockTimer);
   }
 
   setViewMode(viewMode: ProjectCardViewMode): void {
@@ -184,5 +209,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   private translateKey(key: string): string {
     return String(this.translate.instant(key));
+  }
+
+  private activeLocale(): string {
+    return this.languageService.activeLanguage() === 'mk' ? 'mk-MK' : 'en-US';
   }
 }

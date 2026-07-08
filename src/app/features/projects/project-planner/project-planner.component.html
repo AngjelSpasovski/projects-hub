@@ -1,0 +1,144 @@
+<section class="planner-shell" [attr.aria-label]="'PROJECT_PLANNER.TITLE' | translate">
+  <div class="planner-workspace">
+    <form class="planner-form" (submit)="addProject(); $event.preventDefault()" novalidate>
+      <div class="field-group">
+        <label for="planner-title">{{ 'PROJECT_PLANNER.FORM.TITLE_LABEL' | translate }}</label>
+        <input
+          id="planner-title"
+          type="text"
+          [class.is-invalid]="titleErrorVisible()"
+          [value]="newProjectTitle()"
+          [placeholder]="'PROJECT_PLANNER.FORM.TITLE_PLACEHOLDER' | translate"
+          (input)="updateNewProjectTitle($any($event.target).value)"
+        />
+        @if (titleErrorVisible()) {
+          <small>{{ 'PROJECT_PLANNER.FORM.TITLE_ERROR' | translate }}</small>
+        }
+      </div>
+      <div class="field-group">
+        <label for="planner-description">{{ 'PROJECT_PLANNER.FORM.DESCRIPTION_LABEL' | translate }}</label>
+        <input
+          id="planner-description"
+          type="text"
+          [value]="newProjectDescription()"
+          [placeholder]="'PROJECT_PLANNER.FORM.DESCRIPTION_PLACEHOLDER' | translate"
+          (input)="updateNewProjectDescription($any($event.target).value)"
+        />
+      </div>
+      <button type="submit" class="btn btn-primary add-project">
+        <i class="pi pi-plus"></i>
+        <span>{{ 'PROJECT_PLANNER.FORM.ADD' | translate }}</span>
+      </button>
+    </form>
+
+    <div class="planner-board">
+    <article
+      class="planner-lane lane-active"
+      [class.is-drop-target]="dropTarget() === 'active'"
+      (dragover)="allowDrop('active', $event)"
+      (dragenter)="enterLane('active')"
+      (dragleave)="leaveLane('active')"
+      (drop)="dropProject('active', $event)"
+    >
+      <header>
+        <span>{{ 'PROJECT_PLANNER.LANES.ACTIVE' | translate }}</span>
+        <strong>{{ activeProjects().length }}</strong>
+      </header>
+
+      <div class="planner-list">
+        @for (project of activeProjects(); track project.id) {
+          <div
+            class="planner-card"
+            draggable="true"
+            [class.is-dragging]="draggedProjectId() === project.id"
+            (dragstart)="startDrag(project.id, $event)"
+            (dragend)="endDrag()"
+          >
+            <div>
+              <h3>{{ project.titleKey ? (project.titleKey | translate) : project.title }}</h3>
+              <p>{{ project.descriptionKey ? (project.descriptionKey | translate) : project.description }}</p>
+            </div>
+            <div class="planner-actions">
+              <button type="button" class="btn btn-ghost btn-sm" (click)="selectProject(project.id)">
+                <i class="pi pi-info-circle"></i>
+                <span>{{ 'PROJECT_PLANNER.ACTIONS.INFO' | translate }}</span>
+              </button>
+              <button type="button" class="btn btn-primary btn-sm" (click)="moveProject(project.id, 'finished')">
+                <i class="pi pi-check"></i>
+                <span>{{ 'PROJECT_PLANNER.ACTIONS.FINISH' | translate }}</span>
+              </button>
+            </div>
+          </div>
+        } @empty {
+          <div class="lane-empty">
+            <i class="pi pi-inbox"></i>
+            <p>{{ 'PROJECT_PLANNER.EMPTY.ACTIVE' | translate }}</p>
+          </div>
+        }
+      </div>
+    </article>
+
+    <article
+      class="planner-lane lane-finished"
+      [class.is-drop-target]="dropTarget() === 'finished'"
+      (dragover)="allowDrop('finished', $event)"
+      (dragenter)="enterLane('finished')"
+      (dragleave)="leaveLane('finished')"
+      (drop)="dropProject('finished', $event)"
+    >
+      <header>
+        <span>{{ 'PROJECT_PLANNER.LANES.FINISHED' | translate }}</span>
+        <strong>{{ finishedProjects().length }}</strong>
+      </header>
+
+      <div class="planner-list">
+        @for (project of finishedProjects(); track project.id) {
+          <div
+            class="planner-card"
+            draggable="true"
+            [class.is-dragging]="draggedProjectId() === project.id"
+            (dragstart)="startDrag(project.id, $event)"
+            (dragend)="endDrag()"
+          >
+            <div>
+              <h3>{{ project.titleKey ? (project.titleKey | translate) : project.title }}</h3>
+              <p>{{ project.descriptionKey ? (project.descriptionKey | translate) : project.description }}</p>
+            </div>
+            <div class="planner-actions">
+              <button type="button" class="btn btn-ghost btn-sm" (click)="selectProject(project.id)">
+                <i class="pi pi-info-circle"></i>
+                <span>{{ 'PROJECT_PLANNER.ACTIONS.INFO' | translate }}</span>
+              </button>
+              <button type="button" class="btn btn-secondary btn-sm" (click)="moveProject(project.id, 'active')">
+                <i class="pi pi-undo"></i>
+                <span>{{ 'PROJECT_PLANNER.ACTIONS.ACTIVATE' | translate }}</span>
+              </button>
+            </div>
+          </div>
+        } @empty {
+          <div class="lane-empty">
+            <i class="pi pi-check-circle"></i>
+            <p>{{ 'PROJECT_PLANNER.EMPTY.FINISHED' | translate }}</p>
+          </div>
+        }
+      </div>
+    </article>
+    </div>
+  </div>
+
+  <aside class="planner-info" [class.is-empty]="!selectedProject()">
+    @if (selectedProject(); as project) {
+      <button type="button" class="btn btn-ghost btn-sm close-info" (click)="clearSelection()">
+        <i class="pi pi-times"></i>
+        <span>{{ 'PROJECT_PLANNER.ACTIONS.CLOSE' | translate }}</span>
+      </button>
+      <span>{{ 'PROJECT_PLANNER.INFO.EYEBROW' | translate }}</span>
+      <h3>{{ project.titleKey ? (project.titleKey | translate) : project.title }}</h3>
+      <p>{{ project.extraInfoKey ? (project.extraInfoKey | translate) : project.extraInfo }}</p>
+    } @else {
+      <i class="pi pi-objects-column"></i>
+      <h3>{{ 'PROJECT_PLANNER.INFO.EMPTY_TITLE' | translate }}</h3>
+      <p>{{ 'PROJECT_PLANNER.INFO.EMPTY_TEXT' | translate }}</p>
+    }
+  </aside>
+</section>

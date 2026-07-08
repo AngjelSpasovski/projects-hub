@@ -1,14 +1,14 @@
 <aside class="app-sidebar">
   <a class="brand" routerLink="/admin/dashboard">
-    <span class="brand-mark">PH</span>
+    <img class="brand-mark" src="assets/brand/projects-hub-logo.svg" alt="" aria-hidden="true" />
     <span>
       <strong>Projects Hub</strong>
       <small>{{ 'APP.PORTFOLIO_REPO' | translate }}</small>
     </span>
   </a>
 
-  <nav class="sidebar-nav" [attr.aria-label]="'NAV.MAIN' | translate">
-    <a routerLink="/admin/dashboard" routerLinkActive="active">
+  <nav class="sidebar-nav main-nav" [attr.aria-label]="'NAV.MAIN' | translate">
+    <a routerLink="/admin/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
       <i class="pi pi-th-large"></i>
       <span>{{ 'NAV.DASHBOARD' | translate }}</span>
     </a>
@@ -16,12 +16,57 @@
 
   <div class="sidebar-section">
     <p>{{ 'NAV.PROJECTS' | translate }}</p>
-    <nav class="sidebar-nav project-links" [attr.aria-label]="'NAV.PROJECTS' | translate">
-      @for (project of projects; track project.id) {
-        <a [routerLink]="project.route" routerLinkActive="active">
-          <i class="pi pi-folder"></i>
-          <span>{{ project.titleKey | translate }}</span>
-        </a>
+    <nav class="project-tree" [attr.aria-label]="'NAV.PROJECTS' | translate">
+      <a
+        class="tree-all-link"
+        routerLink="/admin/dashboard"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <span class="tree-link-main">
+          <i class="pi pi-folder-open"></i>
+          <span>{{ 'NAV.ALL_PROJECTS' | translate }}</span>
+        </span>
+        <span class="tree-count">{{ totalProjects }}</span>
+      </a>
+
+      @for (group of projectGroups(); track group.difficulty) {
+        <section
+          class="project-group"
+          [class.beginner]="group.difficulty === 'beginner'"
+          [class.intermediate]="group.difficulty === 'intermediate'"
+          [class.advanced]="group.difficulty === 'advanced'"
+        >
+          <button
+            type="button"
+            class="group-trigger"
+            [class.active-group]="isGroupOpen(group.difficulty)"
+            [attr.aria-expanded]="isGroupOpen(group.difficulty)"
+            (click)="toggleGroup(group.difficulty)"
+          >
+            <span class="group-title">
+              <span class="difficulty-dot"></span>
+              <span>{{ group.labelKey | translate }}</span>
+            </span>
+            <span class="group-meta">
+              <span class="tree-count">{{ group.projects.length }}</span>
+              <i class="pi" [class.pi-chevron-down]="isGroupOpen(group.difficulty)" [class.pi-chevron-right]="!isGroupOpen(group.difficulty)"></i>
+            </span>
+          </button>
+
+          @if (isGroupOpen(group.difficulty)) {
+            <div class="group-links">
+              @for (project of group.projects; track project.id) {
+                <a [routerLink]="project.route" routerLinkActive="active" [class.project-active]="isProjectActive(project)">
+                  <i class="pi pi-folder"></i>
+                  <span>{{ project.titleKey | translate }}</span>
+                </a>
+              } @empty {
+                <span class="empty-group">{{ 'NAV.NO_PROJECTS' | translate }}</span>
+              }
+            </div>
+          }
+        </section>
       }
     </nav>
   </div>

@@ -1,5 +1,5 @@
 import { NgComponentOutlet } from '@angular/common';
-import { Component, DestroyRef, Type, computed, inject, signal } from '@angular/core';
+import { Component, DestroyRef, ElementRef, Type, ViewChild, computed, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -33,7 +33,11 @@ const PROJECT_COMPONENT_LOADERS: Record<string, () => Promise<Type<unknown>>> = 
   'sticky-notes': () =>
     import('../sticky-notes/sticky-notes.component').then((component) => component.StickyNotesComponent),
   'grocery-list': () =>
-    import('../grocery-list/grocery-list.component').then((component) => component.GroceryListComponent)
+    import('../grocery-list/grocery-list.component').then((component) => component.GroceryListComponent),
+  'project-planner': () =>
+    import('../project-planner/project-planner.component').then((component) => component.ProjectPlannerComponent),
+  'odd-even': () => import('../odd-even/odd-even.component').then((component) => component.OddEvenComponent),
+  'dev-logger': () => import('../dev-logger/dev-logger.component').then((component) => component.DevLoggerComponent)
 };
 
 @Component({
@@ -44,6 +48,8 @@ const PROJECT_COMPONENT_LOADERS: Record<string, () => Promise<Type<unknown>>> = 
   styleUrl: './project-detail.component.scss'
 })
 export class ProjectDetailComponent {
+  @ViewChild('projectLive') private readonly projectLive?: ElementRef<HTMLElement>;
+
   private readonly route = inject(ActivatedRoute);
   private readonly destroyRef = inject(DestroyRef);
 
@@ -62,6 +68,13 @@ export class ProjectDetailComponent {
       this.projectId.set(projectId);
       void this.loadProjectComponent(projectId);
     });
+  }
+
+  focusLivePreview(): void {
+    const liveElement = this.projectLive?.nativeElement;
+
+    liveElement?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    liveElement?.focus({ preventScroll: true });
   }
 
   private async loadProjectComponent(projectId: string | null): Promise<void> {

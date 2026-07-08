@@ -47,41 +47,18 @@ dt {
   min-height: 2.55rem;
 }
 
-.input-shell {
-  align-items: center;
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  position: relative;
+.search-shell {
+  --app-control-bg: var(--project-shell);
+  --app-control-border: var(--project-border);
+  --app-control-hover: var(--project-control-hover);
+  --app-text: var(--project-text);
+  --app-text-muted: var(--project-text-muted);
 }
 
-.input-shell > i {
-  color: var(--project-text-muted);
-  left: 0.85rem;
-  position: absolute;
-  z-index: 1;
-}
-
-.input-shell .form-control {
-  padding-left: 2.45rem;
-  padding-right: 2.35rem;
-}
-
-.clear-search {
-  align-items: center;
+.search-shell .form-control {
   background: transparent;
   border: 0;
-  color: var(--project-text-muted);
-  cursor: pointer;
-  display: inline-flex;
-  height: 2rem;
-  justify-content: center;
-  position: absolute;
-  right: 0.25rem;
-  width: 2rem;
-}
-
-.clear-search:hover {
-  color: var(--project-text);
+  box-shadow: none;
 }
 
 .actions {
@@ -99,14 +76,14 @@ dt {
 }
 
 .secondary-action {
-  background: var(--project-control);
-  border-color: var(--project-border);
-  color: var(--project-text);
+  background: var(--app-danger-soft);
+  border-color: color-mix(in srgb, var(--app-danger) 34%, var(--project-border));
+  color: var(--app-danger-strong);
 }
 
 .secondary-action:hover {
-  background: var(--project-control-hover);
-  color: var(--project-text);
+  background: color-mix(in srgb, var(--app-danger-soft) 76%, var(--app-danger) 24%);
+  color: var(--app-danger-strong);
 }
 
 .summary-row {

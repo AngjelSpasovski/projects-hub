@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="Projects Hub logo">
+  <defs>
+    <linearGradient id="stone" x1="18" y1="8" x2="82" y2="88" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8fb2ff"/>
+      <stop offset="1" stop-color="#4f6fd6"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="22" y1="20" x2="76" y2="78" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f8df8f"/>
+      <stop offset="1" stop-color="#b8892f"/>
+    </linearGradient>
+  </defs>
+  <rect width="96" height="96" rx="22" fill="#101512"/>
+  <path d="M18 76V20h28c13 0 21 7 21 18s-8 18-21 18H34v20H18Zm16-33h11c5 0 8-2 8-5s-3-5-8-5H34v10Z" fill="url(#stone)"/>
+  <path d="M66 76V55H45v21H30V20h15v21h21V20h15v56H66Z" fill="url(#gold)" opacity=".95"/>
+  <path d="M14 15h68M14 81h68" fill="none" stroke="#7d8d64" stroke-linecap="round" stroke-width="3" opacity=".72"/>
+  <path d="M74 26c5 1 8 4 10 9M76 70c5-1 8-4 10-9" fill="none" stroke="#f8df8f" stroke-linecap="round" stroke-width="3" opacity=".78"/>
+</svg>

@@ -1,0 +1,129 @@
+<section class="dev-logger-shell" [attr.aria-label]="'DEV_LOGGER.TITLE' | translate">
+  <div class="logger-panel form-panel">
+    <div class="panel-heading">
+      <div>
+        <span class="eyebrow">{{ 'DEV_LOGGER.FORM.EYEBROW' | translate }}</span>
+        <h3>{{ editingId() ? ('DEV_LOGGER.FORM.EDIT_TITLE' | translate) : ('DEV_LOGGER.FORM.NEW_TITLE' | translate) }}</h3>
+      </div>
+      @if (editingId()) {
+        <button type="button" class="ghost-action" (click)="clearDraft()">
+          <i class="pi pi-times"></i>
+          <span>{{ 'DEV_LOGGER.ACTIONS.CANCEL' | translate }}</span>
+        </button>
+      }
+    </div>
+
+    <form class="logger-form" (ngSubmit)="submitLog()">
+      <label for="dev-log-text">{{ 'DEV_LOGGER.FORM.TEXT_LABEL' | translate }}</label>
+      <textarea
+        id="dev-log-text"
+        name="text"
+        rows="4"
+        [ngModel]="draftText()"
+        (ngModelChange)="updateText($event)"
+        (blur)="textTouched.set(true)"
+        [attr.maxlength]="textMaxLength"
+        [class.invalid]="isTextInvalid()"
+        [placeholder]="'DEV_LOGGER.FORM.TEXT_PLACEHOLDER' | translate"
+      ></textarea>
+      <div class="field-help" [class.error]="isTextInvalid()">
+        @if (isTextInvalid()) {
+          <span>{{ 'DEV_LOGGER.FORM.TEXT_ERROR' | translate }}</span>
+        } @else {
+          <span>{{ draftText().length }} / {{ textMaxLength }} {{ 'DEV_LOGGER.FORM.CHARACTERS' | translate }}</span>
+        }
+      </div>
+
+      <label for="dev-log-level">{{ 'DEV_LOGGER.FORM.LEVEL_LABEL' | translate }}</label>
+      <select id="dev-log-level" name="level" [ngModel]="draftLevel()" (ngModelChange)="updateLevel($event)">
+        <option value="info">{{ 'DEV_LOGGER.LEVELS.INFO' | translate }}</option>
+        <option value="warning">{{ 'DEV_LOGGER.LEVELS.WARNING' | translate }}</option>
+        <option value="error">{{ 'DEV_LOGGER.LEVELS.ERROR' | translate }}</option>
+      </select>
+
+      <button type="submit" class="primary-action">
+        <i class="pi pi-check"></i>
+        <span>{{ editingId() ? ('DEV_LOGGER.ACTIONS.UPDATE' | translate) : ('DEV_LOGGER.ACTIONS.ADD' | translate) }}</span>
+      </button>
+    </form>
+  </div>
+
+  <div class="logger-panel list-panel">
+    <div class="stats-grid">
+      <article>
+        <span>{{ 'DEV_LOGGER.STATS.TOTAL' | translate }}</span>
+        <strong>{{ logs().length }}</strong>
+      </article>
+      <article>
+        <span>{{ 'DEV_LOGGER.LEVELS.INFO' | translate }}</span>
+        <strong>{{ infoCount() }}</strong>
+      </article>
+      <article>
+        <span>{{ 'DEV_LOGGER.LEVELS.WARNING' | translate }}</span>
+        <strong>{{ warningCount() }}</strong>
+      </article>
+      <article>
+        <span>{{ 'DEV_LOGGER.LEVELS.ERROR' | translate }}</span>
+        <strong>{{ errorCount() }}</strong>
+      </article>
+    </div>
+
+    <div class="toolbar">
+      <label class="search-field" for="dev-log-search">
+        <i class="pi pi-search"></i>
+        <input
+          id="dev-log-search"
+          type="search"
+          [ngModel]="searchTerm()"
+          (ngModelChange)="updateSearch($event)"
+          [placeholder]="'DEV_LOGGER.SEARCH_PLACEHOLDER' | translate"
+        />
+      </label>
+
+      <div class="filter-group" [attr.aria-label]="'DEV_LOGGER.FILTER_LABEL' | translate">
+        @for (filterOption of filterOptions; track filterOption) {
+          <button
+            type="button"
+            [class.active]="filter() === filterOption"
+            (click)="updateFilter(filterOption)"
+          >
+            {{ ('DEV_LOGGER.FILTERS.' + filterOption.toUpperCase()) | translate }}
+          </button>
+        }
+      </div>
+
+      <button type="button" class="ghost-action" (click)="resetDemo()">
+        <i class="pi pi-refresh"></i>
+        <span>{{ 'DEV_LOGGER.ACTIONS.RESET' | translate }}</span>
+      </button>
+    </div>
+
+    <div class="log-list">
+      @for (log of filteredLogs(); track log.id) {
+        <article class="log-row" [class.selected]="editingId() === log.id" [class]="log.level">
+          <div class="log-main">
+            <span class="level-dot"></span>
+            <div>
+              <strong>{{ log.text }}</strong>
+              <p>{{ levelLabelKey(log.level) | translate }} · {{ log.createdAt }}</p>
+            </div>
+          </div>
+          <div class="row-actions">
+            <button type="button" class="icon-action" (click)="editLog(log)" [attr.aria-label]="'DEV_LOGGER.ACTIONS.EDIT' | translate">
+              <i class="pi pi-pencil"></i>
+            </button>
+            <button type="button" class="icon-action danger" (click)="deleteLog(log.id)" [attr.aria-label]="'DEV_LOGGER.ACTIONS.DELETE' | translate">
+              <i class="pi pi-times"></i>
+            </button>
+          </div>
+        </article>
+      } @empty {
+        <div class="empty-state">
+          <i class="pi pi-inbox"></i>
+          <strong>{{ 'DEV_LOGGER.EMPTY_TITLE' | translate }}</strong>
+          <p>{{ 'DEV_LOGGER.EMPTY_TEXT' | translate }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>

@@ -9,14 +9,21 @@
 
       <label class="search-field">
         <span>{{ 'TECHNICAL_DOCS.SEARCH.LABEL' | translate }}</span>
-        <i class="pi pi-search"></i>
-        <input
-          type="search"
-          class="form-control"
-          [ngModel]="query()"
-          (ngModelChange)="updateQuery($event)"
-          [placeholder]="'TECHNICAL_DOCS.SEARCH.PLACEHOLDER' | translate"
-        />
+        <span class="search-shell">
+          <i class="pi pi-search"></i>
+          <input
+            type="search"
+            class="form-control"
+            [ngModel]="query()"
+            (ngModelChange)="updateQuery($event)"
+            [placeholder]="'TECHNICAL_DOCS.SEARCH.PLACEHOLDER' | translate"
+          />
+          @if (query()) {
+            <button type="button" class="search-clear" (click)="clearSearch()" [attr.aria-label]="'FILTERS.CLEAR_SEARCH_FIELD' | translate">
+              <i class="pi pi-times"></i>
+            </button>
+          }
+        </span>
       </label>
 
       <nav class="section-nav" [attr.aria-label]="'TECHNICAL_DOCS.SECTION_NAV' | translate">

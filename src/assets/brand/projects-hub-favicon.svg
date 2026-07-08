@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Projects Hub">
+  <rect width="64" height="64" rx="14" fill="#0e1110"/>
+  <path d="M17 45V16h14c7 0 11 4 11 10s-4 10-11 10h-6v9h-8Zm8-16h5c3 0 5-1 5-3s-2-3-5-3h-5v6Z" fill="#f4ecd8"/>
+  <path d="M43 45V33H31v12h-7V16h7v11h12V16h7v29h-7Z" fill="#c59b4a"/>
+  <path d="M12 12h40M12 52h40" stroke="#5f6f4a" stroke-width="2" stroke-linecap="round" opacity=".75"/>
+</svg>

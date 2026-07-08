@@ -1,5 +1,6 @@
 export type ProjectStatus = 'ready' | 'planned' | 'migration';
 export type ProjectDifficulty = 'beginner' | 'intermediate' | 'advanced';
+export type ProjectLayout = 'compact' | 'wide';
 
 export interface PortfolioProject {
   order: number;
@@ -14,6 +15,7 @@ export interface PortfolioProject {
   updatedAt: string;
   createdAt: string;
   difficulty: ProjectDifficulty;
+  layout?: ProjectLayout;
   repositoryUrl?: string | null;
   demoUrl?: string | null;
 }

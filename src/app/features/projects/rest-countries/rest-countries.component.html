@@ -3,12 +3,21 @@
     <div class="countries-toolbar">
       <label class="field search-field">
         <span>{{ 'REST_COUNTRIES.SEARCH' | translate }}</span>
-        <input
-          type="search"
-          [ngModel]="searchTerm()"
-          (ngModelChange)="updateSearchTerm($event)"
-          [placeholder]="'REST_COUNTRIES.SEARCH_PLACEHOLDER' | translate"
-        />
+        <span class="search-shell">
+          <i class="pi pi-search"></i>
+          <input
+            type="search"
+            class="form-control"
+            [ngModel]="searchTerm()"
+            (ngModelChange)="updateSearchTerm($event)"
+            [placeholder]="'REST_COUNTRIES.SEARCH_PLACEHOLDER' | translate"
+          />
+          @if (searchTerm()) {
+            <button type="button" class="search-clear" (click)="updateSearchTerm('')" [attr.aria-label]="'FILTERS.CLEAR_SEARCH_FIELD' | translate">
+              <i class="pi pi-times"></i>
+            </button>
+          }
+        </span>
       </label>
 
       <label class="field">
@@ -24,7 +33,7 @@
       </label>
 
       <div class="toolbar-actions">
-        <button class="btn btn-outline-danger btn-sm" type="button" (click)="simulateApiFailure()">
+        <button class="btn btn-danger btn-sm" type="button" (click)="simulateApiFailure()">
           {{ 'REST_COUNTRIES.TEST_ERROR' | translate }}
         </button>
         <button class="btn btn-primary btn-sm" type="button" (click)="loadCountries()">

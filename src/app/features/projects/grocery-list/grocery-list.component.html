@@ -7,7 +7,7 @@
           <h3>{{ (editingId() ? 'GROCERY_LIST.FORM.EDIT_TITLE' : 'GROCERY_LIST.FORM.ADD_TITLE') | translate }}</h3>
         </div>
         @if (editingId()) {
-          <button type="button" class="btn btn-sm btn-icon" (click)="cancelEdit()">
+          <button type="button" class="btn btn-ghost btn-sm btn-icon" (click)="cancelEdit()">
             {{ 'GROCERY_LIST.FORM.CANCEL' | translate }}
           </button>
         }
@@ -91,15 +91,15 @@
 
       <div class="board-toolbar">
         <div class="filter-tabs" role="group" [attr.aria-label]="'GROCERY_LIST.FILTERS.TITLE' | translate">
-          <button type="button" class="btn btn-sm" [class.active]="filter() === 'all'" (click)="updateFilter('all')">
+          <button type="button" class="btn btn-ghost btn-sm" [class.active]="filter() === 'all'" (click)="updateFilter('all')">
             {{ 'GROCERY_LIST.FILTERS.ALL' | translate }}
           </button>
-          <button type="button" class="btn btn-sm" [class.active]="filter() === 'active'" (click)="updateFilter('active')">
+          <button type="button" class="btn btn-ghost btn-sm" [class.active]="filter() === 'active'" (click)="updateFilter('active')">
             {{ 'GROCERY_LIST.FILTERS.ACTIVE' | translate }}
           </button>
           <button
             type="button"
-            class="btn btn-sm"
+            class="btn btn-ghost btn-sm"
             [class.active]="filter() === 'purchased'"
             (click)="updateFilter('purchased')"
           >
@@ -118,11 +118,11 @@
         </label>
 
         <div class="board-actions">
-          <button type="button" class="btn btn-sm btn-icon" [disabled]="purchasedCount() === 0" (click)="clearPurchased()">
+          <button type="button" class="btn btn-ghost btn-sm btn-icon" [disabled]="purchasedCount() === 0" (click)="clearPurchased()">
             <i class="pi pi-trash"></i>
             <span>{{ 'GROCERY_LIST.ACTIONS.CLEAR_PURCHASED' | translate }}</span>
           </button>
-          <button type="button" class="btn btn-sm btn-icon" (click)="resetDemo()">
+          <button type="button" class="btn btn-ghost btn-sm btn-icon" (click)="resetDemo()">
             <i class="pi pi-refresh"></i>
             <span>{{ 'GROCERY_LIST.ACTIONS.RESET_DEMO' | translate }}</span>
           </button>
@@ -156,11 +156,11 @@
             </div>
 
             <div class="item-actions">
-              <button type="button" class="btn btn-sm btn-icon edit-action" (click)="editItem(item)">
+              <button type="button" class="btn btn-ghost btn-sm btn-icon edit-action" (click)="editItem(item)">
                 <i class="pi pi-pencil"></i>
                 <span>{{ 'GROCERY_LIST.ACTIONS.EDIT' | translate }}</span>
               </button>
-              <button type="button" class="btn btn-sm btn-icon delete-action" (click)="deleteItem(item.id)">
+              <button type="button" class="btn btn-danger btn-sm btn-icon delete-action" (click)="deleteItem(item.id)">
                 <i class="pi pi-times"></i>
                 <span>{{ 'GROCERY_LIST.ACTIONS.DELETE' | translate }}</span>
               </button>

@@ -11,8 +11,8 @@ test('dashboard catalog supports view switching and project navigation', async (
   await page.goto('/');
   await page.getByRole('button', { name: 'EN' }).click();
 
-  await expect(page.getByRole('heading', { name: 'Project Catalog' })).toBeVisible();
-  await expect(page.getByText('15 project(s)')).toBeVisible();
+  await expect(page.getByText('Overview of the small apps that will be migrated and added to this repo.')).toBeVisible();
+  await expect(page.getByText('18 project(s)')).toBeVisible();
 
   await page.getByRole('button', { name: /Detailed/ }).click();
   await expect(page.getByText('Difficulty').first()).toBeVisible();
@@ -28,7 +28,56 @@ test('dashboard catalog supports view switching and project navigation', async (
   await expect(page.locator('.project-workspace .project-live .surface-panel')).toHaveCount(0);
 
   await page.getByRole('link', { name: /Dashboard/ }).click();
-  await expect(page.getByRole('heading', { name: 'Project Catalog' })).toBeVisible();
+  await expect(page.getByText('18 project(s)')).toBeVisible();
+});
+
+test('theme switcher applies every theme without layout overflow', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 820 });
+  await page.goto('/');
+  await page.getByRole('button', { name: 'EN', exact: true }).click();
+  await expect(page.getByText('18 project(s)')).toBeVisible();
+
+  const themes = [
+    { label: 'Realm', value: 'realm' },
+    { label: 'White', value: 'light' },
+    { label: 'Dark', value: 'dark' },
+    { label: 'Blue', value: 'blue' }
+  ];
+
+  for (const theme of themes) {
+    await page.getByRole('button', { name: new RegExp(theme.label) }).click();
+    await expect(page.locator('html')).toHaveAttribute('data-theme', theme.value);
+    await expect(page.getByRole('button', { name: new RegExp(theme.label) })).toHaveClass(/active/);
+
+    const shellMetrics = await page.locator('.admin-shell').evaluate((element) => ({
+      bodyOverflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+      shellHeight: element.clientHeight,
+      shellScrollHeight: element.scrollHeight
+    }));
+
+    expect(shellMetrics.bodyOverflow).toBeLessThanOrEqual(1);
+    expect(shellMetrics.shellScrollHeight).toBeLessThanOrEqual(shellMetrics.shellHeight + 1);
+    await expect(page.locator('.project-card').first()).toBeVisible();
+  }
+
+  await page.getByRole('link', { name: 'Weather App', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'Weather App', exact: true })).toBeVisible();
+
+  for (const theme of themes) {
+    await page.getByRole('button', { name: new RegExp(theme.label) }).click();
+    await expect(page.locator('html')).toHaveAttribute('data-theme', theme.value);
+    await expect(page.locator('.project-workspace')).toBeVisible();
+    await expect(page.locator('.project-live')).toBeVisible();
+
+    const workspaceMetrics = await page.locator('.admin-shell').evaluate((element) => ({
+      bodyOverflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+      shellHeight: element.clientHeight,
+      shellScrollHeight: element.scrollHeight
+    }));
+
+    expect(workspaceMetrics.bodyOverflow).toBeLessThanOrEqual(1);
+    expect(workspaceMetrics.shellScrollHeight).toBeLessThanOrEqual(workspaceMetrics.shellHeight + 1);
+  }
 });
 
 test('language switch renders Macedonian catalog labels', async ({ page }) => {
@@ -36,8 +85,8 @@ test('language switch renders Macedonian catalog labels', async ({ page }) => {
 
   await page.getByRole('button', { name: 'MK' }).click();
 
-  await expect(page.getByRole('heading', { name: 'Каталог на проекти' })).toBeVisible();
   await expect(page.getByRole('button', { name: /Детално/ })).toBeVisible();
+  await expect(page.getByText('18 проект(и)')).toBeVisible();
   await expect(page.getByText('Калкулатор').first()).toBeVisible();
 });
 
@@ -117,48 +166,58 @@ test('catalog summaries use show more dialog only for long card text', async ({ 
   await expect(page.getByRole('button', { name: 'Show more' })).toHaveCount(0);
 });
 
-test('admin shell keeps chrome fixed while main content scrolls', async ({ page }) => {
+test('admin shell keeps chrome fixed while dashboard catalog scrolls', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 560 });
   await page.goto('/');
   await page.getByRole('button', { name: 'EN', exact: true }).click();
+  await expect(page.getByText('18 project(s)')).toBeVisible();
 
   const header = page.locator('.app-header');
   const sidebar = page.locator('.app-sidebar');
   const footer = page.locator('.app-footer');
   const main = page.locator('.admin-main');
+  const catalog = page.locator('.project-catalog');
+  const controls = page.locator('.catalog-controls');
 
   const headerTop = (await header.boundingBox())?.y;
   const sidebarTop = (await sidebar.boundingBox())?.y;
   const footerBottom = await footer.evaluate((element) => window.innerHeight - element.getBoundingClientRect().bottom);
+  const controlsTop = (await controls.boundingBox())?.y;
 
-  await main.evaluate((element) => {
+  expect(await main.evaluate((element) => element.scrollHeight <= element.clientHeight + 1)).toBe(true);
+  expect(await catalog.evaluate((element) => element.scrollHeight > element.clientHeight)).toBe(true);
+
+  await catalog.evaluate((element) => {
     element.scrollTop = 600;
   });
 
-  await expect.poll(async () => main.evaluate((element) => element.scrollTop)).toBeGreaterThan(0);
+  await expect.poll(async () => catalog.evaluate((element) => element.scrollTop)).toBeGreaterThan(0);
   expect((await header.boundingBox())?.y).toBe(headerTop);
   expect((await sidebar.boundingBox())?.y).toBe(sidebarTop);
+  expect((await controls.boundingBox())?.y).toBe(controlsTop);
   await expect.poll(async () => footer.evaluate((element) => Math.round(window.innerHeight - element.getBoundingClientRect().bottom))).toBe(
     Math.round(footerBottom ?? 0)
   );
 });
 
-test('dashboard keeps the main scroll position at the catalog bottom', async ({ page }) => {
+test('dashboard keeps the catalog scroll position at the catalog bottom', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 560 });
   await page.goto('/');
   await page.getByRole('button', { name: 'EN', exact: true }).click();
-  await expect(page.getByText('15 project(s)')).toBeVisible();
+  await expect(page.getByText('18 project(s)')).toBeVisible();
 
-  const main = page.locator('.admin-main');
+  const catalog = page.locator('.project-catalog');
 
-  await main.evaluate((element) => {
+  await catalog.evaluate((element) => {
     element.scrollTop = element.scrollHeight;
   });
 
-  const initialBottomDistance = await main.evaluate((element) => element.scrollHeight - element.clientHeight - element.scrollTop);
+  const initialBottomDistance = await catalog.evaluate((element) => element.scrollHeight - element.clientHeight - element.scrollTop);
   expect(initialBottomDistance).toBeLessThanOrEqual(2);
 
   await page.waitForTimeout(600);
 
-  const finalBottomDistance = await main.evaluate((element) => element.scrollHeight - element.clientHeight - element.scrollTop);
+  const finalBottomDistance = await catalog.evaluate((element) => element.scrollHeight - element.clientHeight - element.scrollTop);
   expect(finalBottomDistance).toBeLessThanOrEqual(8);
 });
 
@@ -166,7 +225,7 @@ test('desktop catalog and project workspaces fit without nested scrollbars', asy
   await page.setViewportSize({ width: 1920, height: 1080 });
   await page.goto('/');
   await page.getByRole('button', { name: 'EN', exact: true }).click();
-  await expect(page.getByText('15 project(s)')).toBeVisible();
+  await expect(page.getByText('18 project(s)')).toBeVisible();
 
   const routes = [
     'tic-tac-toe',
@@ -183,7 +242,10 @@ test('desktop catalog and project workspaces fit without nested scrollbars', asy
     'currency-converter',
     'quotes-api',
     'sticky-notes',
-    'grocery-list'
+    'grocery-list',
+    'project-planner',
+    'odd-even',
+    'dev-logger'
   ];
 
   for (const route of routes) {
@@ -199,10 +261,40 @@ test('desktop catalog and project workspaces fit without nested scrollbars', asy
   }
 });
 
+test('project detail remains responsive on compact desktop and mobile viewports', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 720 });
+
+  for (const route of ['tic-tac-toe', 'calculator', 'hang-man']) {
+    await page.goto(`/admin/projects/${route}`);
+    await expect(page.locator('.project-live')).toBeVisible();
+
+    expect(
+      await page.locator('.project-live').evaluate((element) => ({
+        fitsY: element.scrollHeight <= element.clientHeight + 1,
+        fitsX: element.scrollWidth <= element.clientWidth + 1
+      }))
+    ).toMatchObject({ fitsY: true, fitsX: true });
+  }
+
+  await page.setViewportSize({ width: 390, height: 844 });
+
+  for (const route of ['tic-tac-toe', 'calculator', 'hang-man', 'weather']) {
+    await page.goto(`/admin/projects/${route}`);
+    await expect(page.locator('.project-workspace')).toBeVisible();
+
+    expect(
+      await page.locator('.project-workspace').evaluate((element) => ({
+        bodyOverflowX: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+        workspaceOverflowX: element.scrollWidth - element.clientWidth
+      }))
+    ).toMatchObject({ bodyOverflowX: 0, workspaceOverflowX: 0 });
+  }
+});
+
 test('mini project refinements keep core interactions stable', async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('projects-hub-language', 'en'));
   await page.goto('/');
-  await expect(page.getByRole('heading', { name: 'Project Catalog' })).toBeVisible();
+  await expect(page.getByText('18 project(s)')).toBeVisible();
 
   await page.goto('/admin/projects/calculator');
   await page.getByRole('button', { name: '9', exact: true }).click();
@@ -351,6 +443,85 @@ test('Technical Documentation filters architecture guidance', async ({ page }) =
   await expect(page.getByText('No documentation sections found')).toBeVisible();
   await page.getByRole('button', { name: 'Clear search' }).click();
   await expect(page.getByRole('heading', { name: 'Application architecture' })).toBeVisible();
+});
+
+test('Project Planner supports creation, selection, and lane movement', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('projects-hub-language', 'en'));
+  await page.goto('/admin/projects/project-planner');
+
+  await expect(page.getByRole('heading', { name: 'Project Planner', exact: true })).toBeVisible();
+  await expect(page.getByText('Active projects')).toBeVisible();
+  await expect(page.getByText('Finished projects')).toBeVisible();
+
+  await page.locator('#planner-title').fill('Migrate sidebar tree');
+  await page.locator('#planner-description').fill('Convert the legacy navigation into grouped Angular state.');
+  await page.getByRole('button', { name: 'Add project' }).click();
+
+  const createdCard = page.locator('.planner-card').filter({ hasText: 'Migrate sidebar tree' });
+  await expect(createdCard).toBeVisible();
+  await expect(page.getByText('Project details')).toBeVisible();
+  await expect(page.locator('.planner-info').getByRole('heading', { name: 'Migrate sidebar tree' })).toBeVisible();
+
+  await createdCard.getByRole('button', { name: 'Finish' }).click();
+  await expect(page.locator('.lane-finished').filter({ hasText: 'Migrate sidebar tree' })).toBeVisible();
+
+  await page
+    .locator('.lane-finished .planner-card')
+    .filter({ hasText: 'Migrate sidebar tree' })
+    .getByRole('button', { name: 'Activate' })
+    .click();
+  await expect(page.locator('.lane-active').filter({ hasText: 'Migrate sidebar tree' })).toBeVisible();
+
+  await page.locator('#planner-title').fill('');
+  await page.getByRole('button', { name: 'Add project' }).click();
+  await expect(page.getByText('Project title is required.')).toBeVisible();
+});
+
+test('Odd Even supports manual generation and reset', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('projects-hub-language', 'en'));
+  await page.goto('/admin/projects/odd-even');
+
+  await expect(page.getByRole('heading', { name: 'Odd/Even Counter', exact: true })).toBeVisible();
+  await expect(page.getByText('No odd numbers yet.')).toBeVisible();
+  await expect(page.getByText('No even numbers yet.')).toBeVisible();
+
+  await page.getByRole('button', { name: 'Step' }).click();
+  await page.getByRole('button', { name: 'Step' }).click();
+  await page.getByRole('button', { name: 'Step' }).click();
+
+  await expect(page.getByText('Odd - 1')).toBeVisible();
+  await expect(page.getByText('Even - 2')).toBeVisible();
+  await expect(page.getByText('Odd - 3')).toBeVisible();
+  await expect(page.locator('.stats-grid article').first().locator('strong')).toHaveText('3');
+
+  await page.getByRole('button', { name: 'Reset' }).click();
+  await expect(page.getByText('No odd numbers yet.')).toBeVisible();
+  await expect(page.getByText('No even numbers yet.')).toBeVisible();
+});
+
+test('Dev Logger supports validated CRUD and filtering', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('projects-hub-language', 'en'));
+  await page.goto('/admin/projects/dev-logger');
+
+  await expect(page.getByRole('heading', { name: 'Dev Logger', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'New log' })).toBeVisible();
+
+  await page.getByRole('button', { name: 'Add log' }).click();
+  await expect(page.getByText('Log text is required.')).toBeVisible();
+
+  await page.getByPlaceholder('Example: validate migration output').fill('Review logger migration');
+  await page.locator('#dev-log-level').selectOption('warning');
+  await page.getByRole('button', { name: 'Add log' }).click();
+  await expect(page.getByText('Review logger migration')).toBeVisible();
+
+  await page.getByPlaceholder('Search logs or levels').fill('legacy');
+  await expect(page.getByText('Legacy service dependency removed from migrated logger.')).toBeVisible();
+  await expect(page.getByText('Review logger migration')).toBeHidden();
+
+  await page.getByPlaceholder('Search logs or levels').fill('');
+  await page.getByRole('button', { name: 'Warnings' }).click();
+  await expect(page.getByText('Review logger migration')).toBeVisible();
+  await expect(page.getByText('Initial Angular migration review completed.')).toBeHidden();
 });
 
 test('Movie Search supports search, pagination, selection, and retry state', async ({ page }) => {

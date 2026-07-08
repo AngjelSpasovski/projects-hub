@@ -7,13 +7,24 @@ import { ProjectDifficulty } from '../../../core/models/project.model';
   selector: 'app-project-status-badge',
   standalone: true,
   imports: [TranslatePipe],
-  template: `<span class="difficulty">{{ ('PROJECT.DIFFICULTY.' + difficulty().toUpperCase()) | translate }}</span>`,
+  template: `
+    <span
+      class="difficulty"
+      [class.beginner]="difficulty() === 'beginner'"
+      [class.intermediate]="difficulty() === 'intermediate'"
+      [class.advanced]="difficulty() === 'advanced'"
+    >
+      {{ ('PROJECT.DIFFICULTY.' + difficulty().toUpperCase()) | translate }}
+    </span>
+  `,
   styles: `
     .difficulty {
-      background: var(--app-surface-muted);
-      border: 1px solid var(--app-border);
+      --difficulty-accent: #94a3b8;
+
+      background: color-mix(in srgb, var(--difficulty-accent) 14%, var(--app-surface-muted));
+      border: 1px solid color-mix(in srgb, var(--difficulty-accent) 26%, var(--app-border));
       border-radius: var(--app-radius-pill);
-      color: var(--app-text-muted);
+      color: color-mix(in srgb, var(--difficulty-accent) 58%, var(--app-text));
       display: inline-block;
       font-size: var(--app-font-size-xs);
       font-weight: 700;
@@ -22,6 +33,18 @@ import { ProjectDifficulty } from '../../../core/models/project.model';
       padding: 0.25rem 0.55rem;
       text-overflow: ellipsis;
       white-space: nowrap;
+    }
+
+    .difficulty.beginner {
+      --difficulty-accent: #34d399;
+    }
+
+    .difficulty.intermediate {
+      --difficulty-accent: #60a5fa;
+    }
+
+    .difficulty.advanced {
+      --difficulty-accent: #f472b6;
     }
   `
 })

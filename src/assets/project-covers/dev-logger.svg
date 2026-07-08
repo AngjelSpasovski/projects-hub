@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 360" role="img" aria-labelledby="title desc">
+  <title id="title">Dev Logger project cover</title>
+  <desc id="desc">Illustrated developer log panel with status rows and validation marks.</desc>
+  <rect width="720" height="360" rx="18" fill="#eef4ff"/>
+  <circle cx="96" cy="72" r="8" fill="#8dd5c5"/>
+  <circle cx="628" cy="86" r="10" fill="#f2795f"/>
+  <path d="M96 86h170v198H96z" fill="#101722" stroke="#202b3b" stroke-width="5"/>
+  <path d="M132 126h86M132 158h54M132 190h100M132 222h68" stroke="#fff" stroke-width="12" stroke-linecap="round"/>
+  <path d="M286 95h318v174H286z" fill="#fff" stroke="#b9cbf7" stroke-width="5"/>
+  <path d="M318 135h92M318 177h120M318 219h82" stroke="#1d2430" stroke-width="12" stroke-linecap="round"/>
+  <path d="M484 126h70M484 168h90M484 210h58" stroke="#7aa2ff" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="294" cy="307" r="9" fill="#7aa2ff"/>
+  <circle cx="340" cy="307" r="9" fill="#8bd0a4"/>
+  <circle cx="386" cy="307" r="9" fill="#e07b7b"/>
+  <path d="M568 276l22 22 48-58" fill="none" stroke="#62b883" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M58 132h26M71 119v26M638 180h28M652 166v28" stroke="#5670ef" stroke-width="5" stroke-linecap="round"/>
+  <path d="M590 52h72v72" fill="none" stroke="#b9cbf7" stroke-width="4"/>
+  <path d="M78 294h118" stroke="#b9cbf7" stroke-width="4"/>
+</svg>

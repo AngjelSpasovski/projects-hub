@@ -1,31 +1,51 @@
-<section class="dashboard">
+<section class="dashboard" [attr.aria-label]="'DASHBOARD.TITLE' | translate">
   <div class="dashboard-header">
-    <div>
-      <p class="eyebrow">{{ 'DASHBOARD.EYEBROW' | translate }}</p>
-      <h2>{{ 'DASHBOARD.TITLE' | translate }}</h2>
-      <p>{{ 'DASHBOARD.SUBTITLE' | translate }}</p>
+    <h2 class="visually-hidden">{{ 'DASHBOARD.TITLE' | translate }}</h2>
+
+    <div class="dashboard-toolbar">
+      <div class="view-switcher" role="group" [attr.aria-label]="'DASHBOARD.VIEW_MODE' | translate">
+        <button type="button" class="btn btn-ghost btn-icon" [class.active]="viewMode() === 'big'" (click)="setViewMode('big')">
+          <i class="pi pi-table"></i>
+          <span>{{ 'DASHBOARD.BIG' | translate }}</span>
+        </button>
+        <button type="button" class="btn btn-ghost btn-icon" [class.active]="viewMode() === 'list'" (click)="setViewMode('list')">
+          <i class="pi pi-list"></i>
+          <span>{{ 'DASHBOARD.LIST' | translate }}</span>
+        </button>
+        <button type="button" class="btn btn-ghost btn-icon" [class.active]="viewMode() === 'detailed'" (click)="setViewMode('detailed')">
+          <i class="pi pi-align-left"></i>
+          <span>{{ 'DASHBOARD.DETAILED' | translate }}</span>
+        </button>
+      </div>
+
+      <div class="dashboard-widgets" [attr.aria-label]="'DASHBOARD.WIDGETS.TITLE' | translate">
+        <article class="dashboard-widget clock-widget">
+          <i class="pi pi-clock"></i>
+          <div>
+            <span>{{ 'DASHBOARD.WIDGETS.CLOCK' | translate }}</span>
+            <strong>{{ clockTime() }}</strong>
+            <small>{{ clockDate() }}</small>
+          </div>
+        </article>
+
+        <article class="dashboard-widget weather-widget">
+          <i [class]="dashboardWeather.icon"></i>
+          <div>
+            <span>{{ dashboardWeather.city }}</span>
+            <strong>{{ dashboardWeather.temperature }}°C</strong>
+            <small>{{ dashboardWeather.conditionKey | translate }}</small>
+          </div>
+        </article>
+      </div>
     </div>
 
-    <div class="view-switcher" role="group" [attr.aria-label]="'DASHBOARD.VIEW_MODE' | translate">
-      <button type="button" class="btn btn-icon" [class.active]="viewMode() === 'big'" (click)="setViewMode('big')">
-        <i class="pi pi-table"></i>
-        <span>{{ 'DASHBOARD.BIG' | translate }}</span>
-      </button>
-      <button type="button" class="btn btn-icon" [class.active]="viewMode() === 'list'" (click)="setViewMode('list')">
-        <i class="pi pi-list"></i>
-        <span>{{ 'DASHBOARD.LIST' | translate }}</span>
-      </button>
-      <button type="button" class="btn btn-icon" [class.active]="viewMode() === 'detailed'" (click)="setViewMode('detailed')">
-        <i class="pi pi-align-left"></i>
-        <span>{{ 'DASHBOARD.DETAILED' | translate }}</span>
-      </button>
-    </div>
+    <p>{{ 'DASHBOARD.SUBTITLE' | translate }}</p>
   </div>
 
   <section class="catalog-controls surface-panel" [attr.aria-label]="'FILTERS.TITLE' | translate">
     <label class="control-field search-field">
       <span>{{ 'FILTERS.SEARCH' | translate }}</span>
-      <span class="input-shell">
+      <span class="search-shell">
         <i class="pi pi-search"></i>
         <input
           type="search"
@@ -34,6 +54,11 @@
           (ngModelChange)="updateSearchTerm($event)"
           [placeholder]="'FILTERS.SEARCH_PLACEHOLDER' | translate"
         />
+        @if (searchTerm()) {
+          <button type="button" class="search-clear" (click)="updateSearchTerm('')" [attr.aria-label]="'FILTERS.CLEAR_SEARCH_FIELD' | translate">
+            <i class="pi pi-times"></i>
+          </button>
+        }
       </span>
     </label>
 
@@ -86,7 +111,7 @@
       />
     </label>
 
-    <button type="button" class="btn btn-icon reset-filters" (click)="resetFilters()">
+    <button type="button" class="btn btn-ghost btn-icon reset-filters" (click)="resetFilters()">
       <i class="pi pi-filter-slash"></i>
       <span>{{ 'FILTERS.RESET' | translate }}</span>
     </button>
@@ -136,7 +161,7 @@
         <i class="pi pi-search"></i>
         <h3>{{ 'FILTERS.NO_RESULTS_TITLE' | translate }}</h3>
         <p>{{ 'FILTERS.NO_RESULTS_TEXT' | translate }}</p>
-        <button type="button" class="btn btn-primary btn-sm" (click)="resetFilters()">
+        <button type="button" class="btn btn-ghost btn-sm" (click)="resetFilters()">
           {{ 'FILTERS.RESET' | translate }}
         </button>
       </section>

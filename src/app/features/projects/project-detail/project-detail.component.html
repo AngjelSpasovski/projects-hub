@@ -2,7 +2,7 @@
   <section class="project-workspace surface-panel">
     <div class="project-detail">
       <div class="project-media">
-        <a routerLink="/admin/dashboard" class="back-link">
+        <a routerLink="/admin/dashboard" class="back-link" [attr.aria-label]="'PROJECT.BACK_LABEL' | translate">
           <i class="pi pi-arrow-left"></i>
           <span>{{ 'PROJECT.BACK' | translate }}</span>
         </a>
@@ -24,28 +24,21 @@
 
           <div class="project-actions">
         @if (selectedProject.repositoryUrl) {
-          <a class="btn btn-primary btn-sm" [href]="selectedProject.repositoryUrl" target="_blank" rel="noopener">
+          <a class="btn btn-ghost btn-sm btn-icon" [href]="selectedProject.repositoryUrl" target="_blank" rel="noopener">
             <i class="pi pi-github"></i>
             <span>{{ 'PROJECT.REPOSITORY' | translate }}</span>
           </a>
         } @else {
-          <button type="button" class="btn btn-sm btn-icon" disabled>
+          <button type="button" class="btn btn-ghost btn-sm btn-icon" disabled>
             <i class="pi pi-github"></i>
             <span>{{ 'PROJECT.REPOSITORY_PENDING' | translate }}</span>
           </button>
         }
 
-        @if (selectedProject.demoUrl) {
-          <a class="btn btn-primary btn-sm" [href]="selectedProject.demoUrl" target="_blank" rel="noopener">
+          <button type="button" class="btn btn-primary btn-sm btn-icon" (click)="focusLivePreview()">
             <i class="pi pi-desktop"></i>
             <span>{{ 'PROJECT.DEMO' | translate }}</span>
-          </a>
-        } @else {
-          <button type="button" class="btn btn-sm btn-icon" disabled>
-            <i class="pi pi-desktop"></i>
-            <span>{{ 'PROJECT.DEMO_PENDING' | translate }}</span>
           </button>
-          }
           </div>
         </div>
 
@@ -72,7 +65,13 @@
       </div>
     </div>
 
-    <div class="project-live">
+    <div
+      #projectLive
+      class="project-live"
+      [class.project-live-compact]="(selectedProject.layout ?? 'wide') === 'compact'"
+      [class.project-live-wide]="(selectedProject.layout ?? 'wide') === 'wide'"
+      tabindex="-1"
+    >
       @if (projectComponent(); as component) {
         <ng-container *ngComponentOutlet="component" />
       } @else if (isComponentLoading()) {

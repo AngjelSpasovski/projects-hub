@@ -89,6 +89,14 @@ describe('DashboardComponent', () => {
     expect(localStorage.getItem('projects-hub-dashboard-view-mode')).toBe('detailed');
   });
 
+  it('should expose compact dashboard widgets', () => {
+    component.now.set(new Date('2026-07-03T14:05:00'));
+
+    expect(component.clockTime()).toContain('02:05');
+    expect(component.dashboardWeather.city).toBe('Skopje');
+    expect(component.dashboardWeather.temperature).toBe(31);
+  });
+
   it('should open and close a project preview', () => {
     component.openPreview(PROJECTS[0]);
 

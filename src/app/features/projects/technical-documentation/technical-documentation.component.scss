@@ -74,14 +74,6 @@ p {
 .search-field {
   display: grid;
   gap: 0.35rem;
-  position: relative;
-}
-
-.search-field i {
-  color: var(--project-text-muted);
-  left: 0.85rem;
-  position: absolute;
-  top: 2.45rem;
 }
 
 .form-control {
@@ -89,7 +81,20 @@ p {
   border-color: var(--project-border);
   color: var(--project-text);
   min-height: 2.75rem;
-  padding-left: 2.4rem;
+}
+
+.search-field .search-shell {
+  --app-control-bg: var(--project-bg);
+  --app-control-border: var(--project-border);
+  --app-control-hover: var(--project-control-hover);
+  --app-text: var(--project-text);
+  --app-text-muted: var(--project-text-muted);
+}
+
+.search-field .search-shell .form-control {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
 }
 
 .section-nav {

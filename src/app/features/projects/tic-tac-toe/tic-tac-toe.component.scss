@@ -1,28 +1,40 @@
 .tic-tac-toe-page {
   display: grid;
+  min-height: 100%;
+  place-items: center;
   justify-items: center;
+  width: 100%;
 }
 
 .game-shell {
+  align-items: stretch;
   background: var(--project-bg);
   border: 1px solid var(--project-border);
   border-radius: 8px;
-  box-shadow: var(--app-shadow);
+  box-shadow:
+    0 1rem 2.5rem color-mix(in srgb, var(--app-accent) 10%, transparent),
+    var(--app-shadow);
   color: var(--project-text);
   display: grid;
   gap: 0.65rem;
+  grid-template-areas:
+    "score board"
+    "status board"
+    "actions board";
+  grid-template-columns: minmax(14rem, 0.9fr) minmax(18rem, 1.1fr);
   padding: 0.75rem;
-  width: min(100%, 18rem);
+  width: clamp(42rem, 50vw, 58rem);
 }
 
 .game-status {
   align-items: center;
   background: var(--project-shell);
+  border: 1px solid color-mix(in srgb, var(--project-border) 82%, transparent);
   border-radius: 8px;
   display: flex;
   font-weight: 800;
   justify-content: center;
-  min-height: 2.6rem;
+  min-height: 2.8rem;
   padding: 0.5rem;
   text-align: center;
 }
@@ -30,6 +42,7 @@
 .score-panel {
   display: grid;
   gap: 0.5rem;
+  grid-area: score;
 }
 
 .scoreboard {
@@ -40,6 +53,7 @@
 
 .scoreboard div {
   background: var(--project-surface);
+  border: 1px solid color-mix(in srgb, var(--project-border) 80%, transparent);
   border-radius: 8px;
   display: grid;
   gap: 0.1rem;
@@ -55,7 +69,7 @@
 }
 
 .scoreboard strong {
-  font-size: 1.1rem;
+  font-size: clamp(1.1rem, 1.5vw, 1.35rem);
   line-height: 1;
 }
 
@@ -67,6 +81,10 @@
   display: inline-flex;
   gap: 0.4rem;
   justify-content: center;
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.12s ease;
   width: 100%;
 }
 
@@ -77,25 +95,49 @@
   color: #fff;
 }
 
+.reset-score-danger:active {
+  transform: translateY(1px);
+}
+
 .board {
+  align-self: center;
   display: grid;
   gap: 0.4rem;
+  grid-area: board;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  justify-self: center;
+  width: min(100%, 27rem);
 }
 
 .cell {
   aspect-ratio: 1;
-  background: var(--project-control);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--project-control) 92%, #fff), var(--project-control));
   border: 1px solid var(--project-border);
   border-radius: 8px;
   color: var(--project-text);
-  font-size: 2rem;
+  font-size: clamp(2.6rem, 4vw, 4rem);
   font-weight: 900;
   line-height: 1;
+  box-shadow: inset 0 -0.15rem 0 color-mix(in srgb, #000 14%, transparent);
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.12s ease;
 }
 
 .cell:not(:disabled):hover {
   background: var(--project-control-hover);
+  border-color: color-mix(in srgb, var(--app-accent) 45%, var(--project-border));
+  box-shadow:
+    inset 0 -0.15rem 0 color-mix(in srgb, #000 14%, transparent),
+    0 0 0 0.15rem color-mix(in srgb, var(--app-accent) 12%, transparent);
+  transform: translateY(-1px);
+}
+
+.cell:not(:disabled):active {
+  transform: translateY(0);
 }
 
 .cell:disabled {
@@ -105,10 +147,12 @@
 
 .cell.x {
   color: #93c5fd;
+  text-shadow: 0 0.35rem 1rem color-mix(in srgb, #93c5fd 30%, transparent);
 }
 
 .cell.o {
   color: #facc15;
+  text-shadow: 0 0.35rem 1rem color-mix(in srgb, #facc15 25%, transparent);
 }
 
 .cell.winner {
@@ -121,7 +165,12 @@
   align-items: center;
   display: inline-flex;
   gap: 0.45rem;
+  grid-area: actions;
   justify-content: center;
+}
+
+.game-status {
+  grid-area: status;
 }
 
 .game-actions .btn {
@@ -197,5 +246,19 @@
 @media (max-width: 860px) {
   .tic-tac-toe-page {
     grid-template-columns: 1fr;
+  }
+
+  .game-shell {
+    grid-template-areas:
+      "score"
+      "status"
+      "board"
+      "actions";
+    grid-template-columns: 1fr;
+    width: clamp(20rem, 88vw, 28rem);
+  }
+
+  .board {
+    width: 100%;
   }
 }

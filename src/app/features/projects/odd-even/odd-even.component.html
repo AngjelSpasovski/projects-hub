@@ -1,0 +1,78 @@
+<section class="odd-even-shell" [attr.aria-label]="'ODD_EVEN.TITLE' | translate">
+  <div class="control-panel">
+    <div>
+      <span class="eyebrow">{{ 'ODD_EVEN.CONTROL.EYEBROW' | translate }}</span>
+      <h3>{{ 'ODD_EVEN.CONTROL.TITLE' | translate }}</h3>
+      <p>{{ 'ODD_EVEN.DESCRIPTION' | translate }}</p>
+    </div>
+
+    <div class="counter-display" aria-live="polite">
+      <span>{{ 'ODD_EVEN.CURRENT' | translate }}</span>
+      <strong>{{ lastNumber() }}</strong>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="btn btn-primary" [disabled]="running()" (click)="start()">
+        <i class="pi pi-play"></i>
+        <span>{{ 'ODD_EVEN.ACTIONS.START' | translate }}</span>
+      </button>
+      <button type="button" class="btn btn-secondary" [disabled]="!running()" (click)="pause()">
+        <i class="pi pi-pause"></i>
+        <span>{{ 'ODD_EVEN.ACTIONS.PAUSE' | translate }}</span>
+      </button>
+      <button type="button" class="btn btn-ghost" [disabled]="running()" (click)="step()">
+        <i class="pi pi-forward"></i>
+        <span>{{ 'ODD_EVEN.ACTIONS.STEP' | translate }}</span>
+      </button>
+      <button type="button" class="btn btn-danger" [disabled]="numbers().length === 0" (click)="reset()">
+        <i class="pi pi-refresh"></i>
+        <span>{{ 'ODD_EVEN.ACTIONS.RESET' | translate }}</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <article>
+      <span>{{ 'ODD_EVEN.STATS.TOTAL' | translate }}</span>
+      <strong>{{ numbers().length }}</strong>
+    </article>
+    <article>
+      <span>{{ 'ODD_EVEN.STATS.ODD' | translate }}</span>
+      <strong>{{ oddNumbers().length }}</strong>
+    </article>
+    <article>
+      <span>{{ 'ODD_EVEN.STATS.EVEN' | translate }}</span>
+      <strong>{{ evenNumbers().length }}</strong>
+    </article>
+  </div>
+
+  <div class="lane-grid">
+    <article class="number-lane odd-lane">
+      <header>
+        <span>{{ 'ODD_EVEN.LANES.ODD' | translate }}</span>
+        <strong>{{ oddNumbers().length }}</strong>
+      </header>
+      <div class="number-list">
+        @for (number of oddNumbers(); track number) {
+          <span class="number-chip">{{ 'ODD_EVEN.ODD_VALUE' | translate:{ number } }}</span>
+        } @empty {
+          <p>{{ 'ODD_EVEN.EMPTY.ODD' | translate }}</p>
+        }
+      </div>
+    </article>
+
+    <article class="number-lane even-lane">
+      <header>
+        <span>{{ 'ODD_EVEN.LANES.EVEN' | translate }}</span>
+        <strong>{{ evenNumbers().length }}</strong>
+      </header>
+      <div class="number-list">
+        @for (number of evenNumbers(); track number) {
+          <span class="number-chip">{{ 'ODD_EVEN.EVEN_VALUE' | translate:{ number } }}</span>
+        } @empty {
+          <p>{{ 'ODD_EVEN.EMPTY.EVEN' | translate }}</p>
+        }
+      </div>
+    </article>
+  </div>
+</section>

@@ -19,7 +19,7 @@ The app opens directly into an admin-style dashboard where projects are browsed 
 - Project metadata: status, difficulty, dates, repository link, live demo link
 - Distinctive illustrated catalog covers with separate live-project screenshots for documentation
 - Unified project workspace containing metadata and the interactive application
-- Lazy-loaded Calculator, Tic Tac Toe, Hang Man, Weather, Music Event, JavaScript Quiz, To-Do List, Expense Tracker, and Technical Documentation mini projects
+- Lazy-loaded Calculator, Tic Tac Toe, Hang Man, Weather, Music Event, JavaScript Quiz, To-Do List, Expense Tracker, Technical Documentation, Project Planner, Odd/Even Counter, and Dev Logger mini projects
 - Unit tests for app shell, dashboard logic, registry metadata, shared services, and mini project behavior
 - Playwright smoke tests for catalog navigation, view switching, and language switching
 
@@ -49,12 +49,15 @@ Exact installed versions are tracked in [DEPENDENCIES.md](./DEPENDENCIES.md).
 | To-Do List | Ready | Migrated as a standalone Angular component with task CRUD, validation, filters, priority labels, and LocalStorage persistence. |
 | Expense Tracker | Ready | Migrated as a standalone Angular component with income/expense entries, totals, validation, LocalStorage persistence, and Chart.js summaries. |
 | Technical Documentation | Ready | Added as a searchable standalone documentation component for architecture, contribution flow, translations, and quality checks. |
+| Project Planner | Ready | Migrated as the first legacy JavaScript project board with typed lanes, project creation, drag-and-drop movement, and contextual details. |
+| Odd/Even Counter | Ready | Migrated as a compact Angular timing and data-binding demo with signal-derived odd/even lanes. |
+| Dev Logger | Ready | Migrated as a CRUD logger with validated entries, level filters, search, and typed signal state. |
 
 The master roadmap is tracked in [TASKS.md](./TASKS.md). Detailed batches, project backlogs, and completion rules live in [docs/tasks](./docs/tasks/README.md).
 
 ## Next Work
 
-The next product priority is the Batch 2 API project track, starting with the Weather App OpenWeather upgrade. Legacy migrations start with Project Planner, Odd/Even, and Dev Logger.
+The current product priority is the legacy migration batch. Project Planner, Odd/Even, and Dev Logger are complete; Recipe Book is the next legacy migration candidate.
 
 ## Migrated Projects
 
@@ -128,7 +131,29 @@ Folder: [`src/app/features/projects/technical-documentation`](./src/app/features
 
 Technical Documentation is a searchable guide for the current Projects Hub architecture and contribution flow. It includes documentation sections for application architecture, adding a project, translation rules, and quality checks, with relevant code references for each section.
 
-Angular coverage: standalone component, signals, computed search results, translated documentation content, lazy loading, and focused unit tests.
+### Project Planner
+
+Folder: [`src/app/features/projects/project-planner`](./src/app/features/projects/project-planner)
+
+Project Planner is the first completed legacy JavaScript migration from the old project board example. It includes active and finished lanes, button and drag-and-drop project movement, project creation with validation, contextual details, empty states, and a translated Angular shell.
+
+Angular coverage: standalone component, typed project state, signals, computed lane filters, guarded drag events, signal-based form state, lazy loading, illustrated cover, focused unit tests, and e2e workflow coverage.
+
+### Odd/Even Counter
+
+Folder: [`src/app/features/projects/odd-even`](./src/app/features/projects/odd-even)
+
+Odd/Even Counter is a compact legacy migration from the old Angular data-binding exercise. It includes timed number generation, manual stepping, pause and reset controls, derived odd/even lanes, translated empty states, and a responsive workspace layout.
+
+Angular coverage: standalone component, signals, computed odd/even lists, interval cleanup with `DestroyRef`, lazy loading, illustrated cover, focused unit tests, and e2e workflow coverage.
+
+### Dev Logger
+
+Folder: [`src/app/features/projects/dev-logger`](./src/app/features/projects/dev-logger)
+
+Dev Logger is a migrated CRUD log manager from the old Angular component/service example. It includes validated log creation, edit and delete actions, severity levels, search, level filters, derived totals, and demo reset state.
+
+Angular coverage: standalone component, template-driven form bindings, signals, computed filters and counts, lazy loading, illustrated cover, focused unit tests, and e2e workflow coverage.
 
 ## Getting Started
 
@@ -185,9 +210,11 @@ src/app/
     dashboard/
     projects/
       calculator/
+      dev-logger/
       expense-tracker/
       hang-man/
       javascript-quiz/
+      odd-even/
       tic-tac-toe/
       todo-list/
       weather/

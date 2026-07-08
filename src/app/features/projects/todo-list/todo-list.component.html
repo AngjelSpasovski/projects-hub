@@ -7,7 +7,7 @@
           <h3>{{ (editingId() ? 'TODO_LIST.FORM.EDIT_TITLE' : 'TODO_LIST.FORM.ADD_TITLE') | translate }}</h3>
         </div>
         @if (editingId()) {
-          <button type="button" class="btn btn-sm btn-icon" (click)="cancelEdit()">
+          <button type="button" class="btn btn-ghost btn-sm btn-icon" (click)="cancelEdit()">
             {{ 'TODO_LIST.FORM.CANCEL' | translate }}
           </button>
         }
@@ -96,15 +96,15 @@
 
       <div class="board-toolbar">
         <div class="filter-tabs" role="group" [attr.aria-label]="'TODO_LIST.FILTERS.TITLE' | translate">
-          <button type="button" class="btn btn-sm" [class.active]="filter() === 'all'" (click)="updateFilter('all')">
+          <button type="button" class="btn btn-ghost btn-sm" [class.active]="filter() === 'all'" (click)="updateFilter('all')">
             {{ 'TODO_LIST.FILTERS.ALL' | translate }}
           </button>
-          <button type="button" class="btn btn-sm" [class.active]="filter() === 'active'" (click)="updateFilter('active')">
+          <button type="button" class="btn btn-ghost btn-sm" [class.active]="filter() === 'active'" (click)="updateFilter('active')">
             {{ 'TODO_LIST.FILTERS.ACTIVE' | translate }}
           </button>
           <button
             type="button"
-            class="btn btn-sm"
+            class="btn btn-ghost btn-sm"
             [class.active]="filter() === 'completed'"
             (click)="updateFilter('completed')"
           >
@@ -113,11 +113,11 @@
         </div>
 
         <div class="board-actions">
-          <button type="button" class="btn btn-sm btn-icon" [disabled]="completedCount() === 0" (click)="clearCompleted()">
+          <button type="button" class="btn btn-ghost btn-sm btn-icon" [disabled]="completedCount() === 0" (click)="clearCompleted()">
             <i class="pi pi-trash"></i>
             <span>{{ 'TODO_LIST.ACTIONS.CLEAR_DONE' | translate }}</span>
           </button>
-          <button type="button" class="btn btn-sm btn-icon" (click)="resetDemo()">
+          <button type="button" class="btn btn-ghost btn-sm btn-icon" (click)="resetDemo()">
             <i class="pi pi-refresh"></i>
             <span>{{ 'TODO_LIST.ACTIONS.RESET_DEMO' | translate }}</span>
           </button>
@@ -163,11 +163,11 @@
             </div>
 
             <div class="task-actions">
-              <button type="button" class="btn btn-sm btn-icon task-action edit-action" (click)="editTask(task)">
+              <button type="button" class="btn btn-ghost btn-sm btn-icon task-action edit-action" (click)="editTask(task)">
                 <i class="pi pi-pencil"></i>
                 <span>{{ 'TODO_LIST.ACTIONS.EDIT' | translate }}</span>
               </button>
-              <button type="button" class="btn btn-sm btn-icon task-action delete-action" (click)="deleteTask(task.id)">
+              <button type="button" class="btn btn-danger btn-sm btn-icon task-action delete-action" (click)="deleteTask(task.id)">
                 <i class="pi pi-times"></i>
                 <span>{{ 'TODO_LIST.ACTIONS.DELETE' | translate }}</span>
               </button>

@@ -1,18 +1,18 @@
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable, signal } from '@angular/core';
 
-export type AppTheme = 'light' | 'dark' | 'blue';
+export type AppTheme = 'realm' | 'light' | 'dark' | 'blue';
 
 const STORAGE_KEY = 'projects-hub-theme';
 
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
-  readonly themes: AppTheme[] = ['light', 'dark', 'blue'];
-  readonly activeTheme = signal<AppTheme>('light');
+  readonly themes: AppTheme[] = ['realm', 'light', 'dark', 'blue'];
+  readonly activeTheme = signal<AppTheme>('realm');
 
   constructor(@Inject(DOCUMENT) private readonly document: Document) {
     const savedTheme = localStorage.getItem(STORAGE_KEY) as AppTheme | null;
-    this.setTheme(savedTheme && this.themes.includes(savedTheme) ? savedTheme : 'light');
+    this.setTheme(savedTheme && this.themes.includes(savedTheme) ? savedTheme : 'realm');
   }
 
   setTheme(theme: AppTheme): void {

@@ -1,5 +1,8 @@
 import { PortfolioProject } from '../../core/models/project.model';
 
+const REPOSITORY_BASE_URL =
+  'https://github.com/AngjelSpasovski/projects-hub/tree/master/src/app/features/projects';
+
 export const PROJECTS: PortfolioProject[] = [
   {
     order: 10,
@@ -14,7 +17,8 @@ export const PROJECTS: PortfolioProject[] = [
     updatedAt: '2026-06-17',
     createdAt: '2026-06-17',
     difficulty: 'beginner',
-    repositoryUrl: null,
+    layout: 'compact',
+    repositoryUrl: `${REPOSITORY_BASE_URL}/tic-tac-toe`,
     demoUrl: null
   },
   {
@@ -30,7 +34,8 @@ export const PROJECTS: PortfolioProject[] = [
     updatedAt: '2026-06-17',
     createdAt: '2026-06-17',
     difficulty: 'beginner',
-    repositoryUrl: null,
+    layout: 'compact',
+    repositoryUrl: `${REPOSITORY_BASE_URL}/calculator`,
     demoUrl: null
   },
   {
@@ -46,7 +51,8 @@ export const PROJECTS: PortfolioProject[] = [
     updatedAt: '2026-06-17',
     createdAt: '2026-06-17',
     difficulty: 'intermediate',
-    repositoryUrl: null,
+    layout: 'compact',
+    repositoryUrl: `${REPOSITORY_BASE_URL}/hang-man`,
     demoUrl: null
   },
   {
@@ -62,7 +68,8 @@ export const PROJECTS: PortfolioProject[] = [
     updatedAt: '2026-06-25',
     createdAt: '2026-06-17',
     difficulty: 'intermediate',
-    repositoryUrl: null,
+    layout: 'wide',
+    repositoryUrl: `${REPOSITORY_BASE_URL}/weather`,
     demoUrl: null
   },
   {
@@ -78,7 +85,8 @@ export const PROJECTS: PortfolioProject[] = [
     updatedAt: '2026-06-17',
     createdAt: '2026-06-17',
     difficulty: 'intermediate',
-    repositoryUrl: null,
+    layout: 'wide',
+    repositoryUrl: `${REPOSITORY_BASE_URL}/music-event`,
     demoUrl: null
   },
   {
@@ -94,7 +102,8 @@ export const PROJECTS: PortfolioProject[] = [
     updatedAt: '2026-06-22',
     createdAt: '2026-06-22',
     difficulty: 'intermediate',
-    repositoryUrl: null,
+    layout: 'compact',
+    repositoryUrl: `${REPOSITORY_BASE_URL}/javascript-quiz`,
     demoUrl: null
   },
   {
@@ -110,7 +119,8 @@ export const PROJECTS: PortfolioProject[] = [
     updatedAt: '2026-06-24',
     createdAt: '2026-06-24',
     difficulty: 'beginner',
-    repositoryUrl: null,
+    layout: 'wide',
+    repositoryUrl: `${REPOSITORY_BASE_URL}/todo-list`,
     demoUrl: null
   },
   {
@@ -126,7 +136,8 @@ export const PROJECTS: PortfolioProject[] = [
     updatedAt: '2026-06-24',
     createdAt: '2026-06-24',
     difficulty: 'intermediate',
-    repositoryUrl: null,
+    layout: 'wide',
+    repositoryUrl: `${REPOSITORY_BASE_URL}/expense-tracker`,
     demoUrl: null
   },
   {
@@ -142,7 +153,8 @@ export const PROJECTS: PortfolioProject[] = [
     updatedAt: '2026-06-25',
     createdAt: '2026-06-25',
     difficulty: 'beginner',
-    repositoryUrl: null,
+    layout: 'wide',
+    repositoryUrl: `${REPOSITORY_BASE_URL}/technical-documentation`,
     demoUrl: null
   },
   {
@@ -158,7 +170,8 @@ export const PROJECTS: PortfolioProject[] = [
     updatedAt: '2026-06-25',
     createdAt: '2026-06-25',
     difficulty: 'intermediate',
-    repositoryUrl: null,
+    layout: 'wide',
+    repositoryUrl: `${REPOSITORY_BASE_URL}/movie-search`,
     demoUrl: null
   },
   {
@@ -174,7 +187,8 @@ export const PROJECTS: PortfolioProject[] = [
     updatedAt: '2026-06-25',
     createdAt: '2026-06-25',
     difficulty: 'intermediate',
-    repositoryUrl: null,
+    layout: 'wide',
+    repositoryUrl: `${REPOSITORY_BASE_URL}/rest-countries`,
     demoUrl: null
   },
   {
@@ -190,7 +204,8 @@ export const PROJECTS: PortfolioProject[] = [
     updatedAt: '2026-06-25',
     createdAt: '2026-06-25',
     difficulty: 'intermediate',
-    repositoryUrl: null,
+    layout: 'wide',
+    repositoryUrl: `${REPOSITORY_BASE_URL}/currency-converter`,
     demoUrl: null
   },
   {
@@ -206,7 +221,8 @@ export const PROJECTS: PortfolioProject[] = [
     updatedAt: '2026-06-25',
     createdAt: '2026-06-25',
     difficulty: 'beginner',
-    repositoryUrl: null,
+    layout: 'wide',
+    repositoryUrl: `${REPOSITORY_BASE_URL}/quotes-api`,
     demoUrl: null
   },
   {
@@ -222,7 +238,8 @@ export const PROJECTS: PortfolioProject[] = [
     updatedAt: '2026-06-25',
     createdAt: '2026-06-25',
     difficulty: 'beginner',
-    repositoryUrl: null,
+    layout: 'wide',
+    repositoryUrl: `${REPOSITORY_BASE_URL}/sticky-notes`,
     demoUrl: null
   },
   {
@@ -238,7 +255,59 @@ export const PROJECTS: PortfolioProject[] = [
     updatedAt: '2026-06-25',
     createdAt: '2026-06-25',
     difficulty: 'beginner',
-    repositoryUrl: null,
+    layout: 'wide',
+    repositoryUrl: `${REPOSITORY_BASE_URL}/grocery-list`,
+    demoUrl: null
+  },
+  {
+    order: 160,
+    id: 'project-planner',
+    titleKey: 'PROJECTS.PROJECT_PLANNER.TITLE',
+    summaryKey: 'PROJECTS.PROJECT_PLANNER.SUMMARY',
+    categoryKey: 'CATEGORIES.UTILITIES',
+    tags: ['Angular', 'TypeScript', 'Signals', 'Migration'],
+    status: 'ready',
+    image: 'assets/project-covers/project-planner.svg',
+    route: '/admin/projects/project-planner',
+    updatedAt: '2026-07-06',
+    createdAt: '2026-07-06',
+    difficulty: 'intermediate',
+    layout: 'wide',
+    repositoryUrl: `${REPOSITORY_BASE_URL}/project-planner`,
+    demoUrl: null
+  },
+  {
+    order: 170,
+    id: 'odd-even',
+    titleKey: 'PROJECTS.ODD_EVEN.TITLE',
+    summaryKey: 'PROJECTS.ODD_EVEN.SUMMARY',
+    categoryKey: 'CATEGORIES.UTILITIES',
+    tags: ['Angular', 'TypeScript', 'Signals', 'Timing'],
+    status: 'ready',
+    image: 'assets/project-covers/odd-even.svg',
+    route: '/admin/projects/odd-even',
+    updatedAt: '2026-07-08',
+    createdAt: '2026-07-08',
+    difficulty: 'beginner',
+    layout: 'wide',
+    repositoryUrl: `${REPOSITORY_BASE_URL}/odd-even`,
+    demoUrl: null
+  },
+  {
+    order: 180,
+    id: 'dev-logger',
+    titleKey: 'PROJECTS.DEV_LOGGER.TITLE',
+    summaryKey: 'PROJECTS.DEV_LOGGER.SUMMARY',
+    categoryKey: 'CATEGORIES.UTILITIES',
+    tags: ['Angular', 'TypeScript', 'Forms', 'Signals'],
+    status: 'ready',
+    image: 'assets/project-covers/dev-logger.svg',
+    route: '/admin/projects/dev-logger',
+    updatedAt: '2026-07-08',
+    createdAt: '2026-07-08',
+    difficulty: 'beginner',
+    layout: 'wide',
+    repositoryUrl: `${REPOSITORY_BASE_URL}/dev-logger`,
     demoUrl: null
   }
 ];

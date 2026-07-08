@@ -1,15 +1,10 @@
 <header class="app-header">
-  <div>
-    <p class="eyebrow">{{ 'APP.ADMIN' | translate }}</p>
-    <h1>{{ 'APP.TITLE' | translate }}</h1>
-  </div>
-
   <div class="header-actions">
     <div class="btn-group" role="group" [attr.aria-label]="'APP.THEME' | translate">
       @for (theme of themeService.themes; track theme) {
         <button
           type="button"
-          class="btn btn-sm btn-icon"
+          class="btn btn-ghost btn-sm btn-icon"
           [class.active]="themeService.activeTheme() === theme"
           (click)="themeService.setTheme(theme)"
         >
@@ -23,7 +18,7 @@
       @for (language of languageService.languages; track language) {
         <button
           type="button"
-          class="btn btn-sm btn-icon"
+          class="btn btn-ghost btn-sm btn-icon"
           [class.active]="languageService.activeLanguage() === language"
           (click)="languageService.setLanguage(language)"
         >

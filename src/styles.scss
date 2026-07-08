@@ -29,6 +29,13 @@
   --app-text-muted: #627386;
   --app-accent: #2f6fed;
   --app-accent-strong: #184ea8;
+  --app-accent-soft: #e8f0ff;
+  --app-danger: #dc2626;
+  --app-danger-strong: #991b1b;
+  --app-danger-soft: #fee2e2;
+  --app-control-bg: #ffffff;
+  --app-control-border: #cdd8e5;
+  --app-control-hover: #f5f8fc;
   --app-sidebar: #121923;
   --app-sidebar-text: #eef4fb;
   --app-sidebar-muted: #95a3b3;
@@ -51,6 +58,45 @@
   --project-date-icon-filter: none;
 }
 
+[data-theme='realm'] {
+  color-scheme: dark;
+  --app-bg: #0e1110;
+  --app-surface: #171b18;
+  --app-surface-muted: #23291f;
+  --app-border: #394031;
+  --app-text: #f4ecd8;
+  --app-text-muted: #b9af97;
+  --app-accent: #c59b4a;
+  --app-accent-strong: #e4c477;
+  --app-accent-soft: rgba(197, 155, 74, 0.16);
+  --app-danger: #c96d5a;
+  --app-danger-strong: #e7a08f;
+  --app-danger-soft: rgba(201, 109, 90, 0.14);
+  --app-control-bg: #111512;
+  --app-control-border: #47503d;
+  --app-control-hover: #1d241d;
+  --app-sidebar: #080b0a;
+  --app-sidebar-text: #f5ecd8;
+  --app-sidebar-muted: #a99f8a;
+  --app-shadow: 0 18px 52px rgba(0, 0, 0, 0.42);
+  --app-shadow-hover: 0 20px 54px rgba(197, 155, 74, 0.14);
+  --app-focus-ring: 0 0 0 0.18rem rgba(197, 155, 74, 0.26);
+  --project-bg: #121713;
+  --project-shell: #0b0f0d;
+  --project-surface: #171d18;
+  --project-surface-muted: #242c24;
+  --project-control: #202720;
+  --project-control-hover: #2b342a;
+  --project-border: rgba(228, 196, 119, 0.17);
+  --project-text: #f4ecd8;
+  --project-text-muted: #b9af97;
+  --project-code-bg: #101410;
+  --project-danger-bg: rgba(127, 29, 29, 0.65);
+  --project-danger-border: rgba(231, 160, 143, 0.46);
+  --project-danger-text: #f0b4a7;
+  --project-date-icon-filter: invert(1) sepia(0.2) opacity(0.75);
+}
+
 [data-theme='dark'] {
   color-scheme: dark;
   --app-bg: #101418;
@@ -61,6 +107,13 @@
   --app-text-muted: #a9b6c4;
   --app-accent: #62a5ff;
   --app-accent-strong: #a4caff;
+  --app-accent-soft: rgba(98, 165, 255, 0.16);
+  --app-danger: #f87171;
+  --app-danger-strong: #fca5a5;
+  --app-danger-soft: rgba(127, 29, 29, 0.4);
+  --app-control-bg: #111820;
+  --app-control-border: #3a4654;
+  --app-control-hover: #202a35;
   --app-sidebar: #0c1117;
   --app-sidebar-text: #f3f7fb;
   --app-sidebar-muted: #91a0af;
@@ -92,6 +145,13 @@
   --app-text-muted: #526d8a;
   --app-accent: #1469c8;
   --app-accent-strong: #0b3f7b;
+  --app-accent-soft: #d7eaff;
+  --app-danger: #dc2626;
+  --app-danger-strong: #991b1b;
+  --app-danger-soft: #fee2e2;
+  --app-control-bg: #ffffff;
+  --app-control-border: #b8d2ec;
+  --app-control-hover: #eef6ff;
   --app-sidebar: #0a2a4a;
   --app-sidebar-text: #f4f9ff;
   --app-sidebar-muted: #a9c8e8;
@@ -137,8 +197,9 @@ a {
 
 .btn {
   align-items: center;
-  background: transparent;
-  border: 1px solid transparent;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--app-surface) 96%, #fff), var(--app-control-hover));
+  border: 1px solid var(--app-control-border);
   border-radius: var(--app-radius-md);
   color: var(--app-text);
   cursor: pointer;
@@ -150,41 +211,62 @@ a {
   justify-content: center;
   line-height: 1.35;
   min-width: 0;
-  padding: 0.48rem 0.85rem;
+  padding: 0.46rem 0.82rem;
+  position: relative;
   text-align: center;
   text-decoration: none;
   transition: background-color var(--app-transition-fast), border-color var(--app-transition-fast),
-    box-shadow var(--app-transition-fast), color var(--app-transition-fast);
+    box-shadow var(--app-transition-fast), color var(--app-transition-fast), transform var(--app-transition-fast);
   user-select: none;
   vertical-align: middle;
   white-space: nowrap;
 }
 
-.btn:not(.btn-primary) {
-  border-color: var(--app-border);
-  background: var(--app-surface);
-}
-
 .btn:not(:disabled):hover {
-  border-color: color-mix(in srgb, var(--app-accent) 45%, var(--app-border));
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--app-accent-soft) 46%, var(--app-surface)), var(--app-control-hover));
+  border-color: color-mix(in srgb, var(--app-accent) 38%, var(--app-control-border));
+  box-shadow: 0 0.55rem 1.4rem color-mix(in srgb, var(--app-accent) 10%, transparent);
+  transform: translateY(-1px);
 }
 
-.btn.active {
-  background: var(--app-accent);
-  border-color: var(--app-accent);
-  color: #fff;
-}
-
+.btn.active,
 .btn-primary {
   background: var(--app-accent);
   border-color: var(--app-accent);
-  color: #fff;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 0.65rem 1.45rem color-mix(in srgb, var(--app-accent) 18%, transparent);
+  color: color-mix(in srgb, var(--app-bg) 12%, #fff);
 }
 
 .btn-primary:not(:disabled):hover {
-  background: var(--app-accent-strong);
+  background:
+    linear-gradient(180deg, var(--app-accent-strong), var(--app-accent));
   border-color: var(--app-accent-strong);
-  color: #fff;
+  color: color-mix(in srgb, var(--app-bg) 8%, #fff);
+}
+
+.btn-danger {
+  background: var(--app-danger-soft);
+  border-color: color-mix(in srgb, var(--app-danger) 36%, var(--app-border));
+  color: var(--app-danger);
+}
+
+.btn-danger:not(:disabled):hover {
+  background: color-mix(in srgb, var(--app-danger) 16%, var(--app-danger-soft));
+  border-color: var(--app-danger);
+  color: var(--app-danger-strong);
+}
+
+.btn-ghost {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.btn-ghost:not(:disabled):hover {
+  background: var(--app-surface-muted);
+  border-color: var(--app-border);
+  box-shadow: none;
 }
 
 .btn-sm {
@@ -201,33 +283,36 @@ a {
 }
 
 .btn-group {
+  background: color-mix(in srgb, var(--app-surface) 72%, transparent);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-md);
   display: inline-flex;
+  padding: 0.18rem;
   vertical-align: middle;
 }
 
 .btn-group > .btn {
-  border-radius: 0;
+  border-color: transparent;
+  border-radius: var(--app-radius-sm);
   flex: 1 1 auto;
 }
 
 .btn-group > .btn:first-child {
-  border-bottom-left-radius: var(--app-radius-md);
-  border-top-left-radius: var(--app-radius-md);
+  border-bottom-left-radius: var(--app-radius-sm);
+  border-top-left-radius: var(--app-radius-sm);
 }
 
 .btn-group > .btn:last-child {
-  border-bottom-right-radius: var(--app-radius-md);
-  border-top-right-radius: var(--app-radius-md);
+  border-bottom-right-radius: var(--app-radius-sm);
+  border-top-right-radius: var(--app-radius-sm);
 }
 
 .btn-group > .btn + .btn {
-  margin-left: -1px;
+  margin-left: 0;
 }
 
 .btn-icon {
   align-items: center;
-  border: 1px solid var(--app-border);
-  border-radius: var(--app-radius-md);
   display: inline-flex;
   gap: var(--app-space-2);
   min-height: var(--app-control-height-sm);
@@ -245,9 +330,10 @@ input:focus-visible {
 .form-control,
 .form-select {
   appearance: none;
-  background-color: var(--app-surface);
-  border: 1px solid var(--app-border);
+  background-color: var(--app-control-bg);
+  border: 1px solid var(--app-control-border);
   border-radius: var(--app-radius-md);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 7%, transparent);
   color: var(--app-text);
   display: block;
   font-family: inherit;
@@ -255,7 +341,7 @@ input:focus-visible {
   line-height: 1.35;
   min-height: var(--app-control-height);
   padding: 0.48rem 0.75rem;
-  transition: border-color var(--app-transition-fast), box-shadow var(--app-transition-fast);
+  transition: background-color var(--app-transition-fast), border-color var(--app-transition-fast), box-shadow var(--app-transition-fast);
   width: 100%;
 }
 
@@ -266,9 +352,90 @@ input:focus-visible {
 
 .form-control:focus,
 .form-select:focus {
+  background-color: color-mix(in srgb, var(--app-control-bg) 88%, var(--app-accent-soft));
   border-color: var(--app-accent);
   box-shadow: var(--app-focus-ring);
   outline: 0;
+}
+
+.form-control:hover,
+.form-select:hover {
+  border-color: color-mix(in srgb, var(--app-accent) 28%, var(--app-control-border));
+}
+
+.search-shell {
+  align-items: center;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--app-control-bg) 94%, var(--app-accent-soft)), var(--app-control-bg));
+  border: 1px solid var(--app-control-border);
+  border-radius: var(--app-radius-md);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 7%, transparent);
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  min-height: var(--app-control-height);
+  overflow: hidden;
+  transition: background-color var(--app-transition-fast), border-color var(--app-transition-fast), box-shadow var(--app-transition-fast);
+}
+
+.search-shell > i {
+  color: var(--app-text-muted);
+  font-size: 1rem;
+  padding-left: 0.8rem;
+  pointer-events: none;
+}
+
+.search-shell .form-control,
+.search-shell input {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  color: var(--app-text);
+  min-height: calc(var(--app-control-height) - 2px);
+  padding: 0.48rem 0.35rem;
+}
+
+.search-shell .form-control:focus,
+.search-shell input:focus {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.search-shell:hover {
+  border-color: color-mix(in srgb, var(--app-accent) 34%, var(--app-control-border));
+}
+
+.search-shell:focus-within {
+  background: color-mix(in srgb, var(--app-control-bg) 88%, var(--app-accent-soft));
+  border-color: var(--app-accent);
+  box-shadow: var(--app-focus-ring);
+}
+
+.search-clear {
+  align-items: center;
+  background: color-mix(in srgb, var(--app-control-hover) 72%, transparent);
+  border: 0;
+  border-left: 1px solid color-mix(in srgb, var(--app-control-border) 72%, transparent);
+  color: var(--app-text-muted);
+  cursor: pointer;
+  display: inline-flex;
+  height: 100%;
+  justify-content: center;
+  min-height: calc(var(--app-control-height) - 2px);
+  padding: 0 0.65rem;
+  transition: background-color var(--app-transition-fast), color var(--app-transition-fast);
+}
+
+.search-clear:hover {
+  background: var(--app-control-hover);
+  color: var(--app-text);
+}
+
+.search-field,
+.filter-search,
+.p-multiselect-filter {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--app-control-bg) 94%, var(--app-accent-soft)), var(--app-control-bg)) !important;
 }
 
 .form-select {
@@ -375,7 +542,7 @@ input:focus-visible {
 
 .p-multiselect-header {
   align-items: center;
-  background: var(--app-surface);
+  background: color-mix(in srgb, var(--app-surface) 86%, var(--app-surface-muted));
   border-bottom: 1px solid var(--app-border);
   color: var(--app-text);
   display: flex;
@@ -390,8 +557,8 @@ input:focus-visible {
 }
 
 .p-multiselect-filter {
-  background: var(--app-surface) !important;
-  border: 1px solid var(--app-border) !important;
+  background: var(--app-control-bg) !important;
+  border: 1px solid var(--app-control-border) !important;
   border-radius: var(--app-radius-md) !important;
   color: var(--app-text) !important;
   font-size: var(--app-font-size-md);

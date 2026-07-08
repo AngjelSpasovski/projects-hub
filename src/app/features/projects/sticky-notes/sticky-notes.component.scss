@@ -111,7 +111,7 @@ small.error {
 
   &.active {
     border-color: var(--app-accent);
-    box-shadow: 0 0 0 0.18rem rgba(76, 107, 207, 0.22);
+    box-shadow: 0 0 0 0.18rem color-mix(in srgb, var(--app-accent) 22%, transparent);
   }
 }
 
@@ -197,6 +197,20 @@ small.error {
   }
 }
 
+.search-row .search-shell {
+  --app-control-bg: var(--project-bg);
+  --app-control-border: var(--project-border);
+  --app-control-hover: var(--project-control-hover);
+  --app-text: var(--project-text);
+  --app-text-muted: var(--project-text-muted);
+}
+
+.search-row .search-shell .form-control {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
 .notes-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -216,7 +230,7 @@ small.error {
 }
 
 .note-card.pinned {
-  box-shadow: 0 0.9rem 2rem rgba(76, 107, 207, 0.18);
+  box-shadow: 0 0.9rem 2rem color-mix(in srgb, var(--app-accent) 18%, transparent);
 }
 
 .note-card-header,
@@ -240,7 +254,7 @@ small.error {
   justify-content: flex-start;
   flex-wrap: wrap;
 
-  .btn {
+  .btn:not(.btn-danger) {
     min-height: 2rem;
     padding: 0.25rem 0.5rem;
     border-color: color-mix(in srgb, var(--note-text) 18%, transparent);
@@ -252,7 +266,8 @@ small.error {
 }
 
 .delete-action {
-  color: #991b1b !important;
+  min-height: 2rem;
+  padding: 0.25rem 0.5rem;
 }
 
 .empty-state {

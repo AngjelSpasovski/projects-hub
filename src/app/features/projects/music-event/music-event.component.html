@@ -30,7 +30,7 @@
         />
       </label>
 
-      <button type="button" class="btn btn-sm btn-icon reset-filters" (click)="resetFilters()">
+      <button type="button" class="btn btn-ghost btn-sm btn-icon reset-filters" (click)="resetFilters()">
         <i class="pi pi-filter-slash"></i>
         <span>{{ 'FILTERS.RESET' | translate }}</span>
       </button>
@@ -71,7 +71,7 @@
           <i class="pi pi-calendar-times"></i>
           <h3>{{ 'MUSIC_EVENT.EMPTY_TITLE' | translate }}</h3>
           <p>{{ 'MUSIC_EVENT.EMPTY_TEXT' | translate }}</p>
-          <button type="button" class="btn btn-primary btn-sm" (click)="resetFilters()">
+          <button type="button" class="btn btn-ghost btn-sm" (click)="resetFilters()">
             {{ 'FILTERS.RESET' | translate }}
           </button>
         </section>
@@ -127,7 +127,7 @@
           }
         </div>
 
-        <button type="button" class="btn btn-primary btn-sm close-detail" (click)="closeEvent()">
+        <button type="button" class="btn btn-ghost btn-sm close-detail" (click)="closeEvent()">
           {{ 'MUSIC_EVENT.CLOSE' | translate }}
         </button>
       </div>

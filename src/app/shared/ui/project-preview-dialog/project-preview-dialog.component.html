@@ -41,17 +41,17 @@
           }
         </div>
         <div class="preview-actions">
-          <a class="btn btn-primary btn-sm" [routerLink]="selectedProject.route" (click)="closed.emit()">
+          <a class="btn btn-primary btn-sm btn-icon" [routerLink]="selectedProject.route" (click)="closed.emit()">
             <i class="pi pi-external-link"></i>
             <span>{{ 'PROJECT.OPEN' | translate }}</span>
           </a>
           @if (selectedProject.repositoryUrl) {
-            <a class="btn btn-sm btn-icon" [href]="selectedProject.repositoryUrl" target="_blank" rel="noopener">
+            <a class="btn btn-ghost btn-sm btn-icon" [href]="selectedProject.repositoryUrl" target="_blank" rel="noopener">
               <i class="pi pi-github"></i>
               <span>{{ 'PROJECT.REPOSITORY' | translate }}</span>
             </a>
           } @else {
-            <button type="button" class="btn btn-sm btn-icon" disabled>
+            <button type="button" class="btn btn-ghost btn-sm btn-icon" disabled>
               <i class="pi pi-github"></i>
               <span>{{ 'PROJECT.REPOSITORY_PENDING' | translate }}</span>
             </button>

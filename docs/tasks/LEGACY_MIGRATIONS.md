@@ -14,9 +14,13 @@ The smaller Client Panel and Odd/Even copies inside `theBigProject` are duplicat
 
 ## Batch 1
 
-- [ ] Migrate Project Planner with typed state and drag-and-drop behavior.
-- [ ] Migrate Odd/Even as a compact Angular interaction demo.
-- [ ] Migrate Dev Logger with validated log entry forms and filtering.
+- [x] Start Batch 1 by registering Project Planner as the first migration workspace.
+- [x] Add Project Planner lane movement with buttons and drag-and-drop interactions.
+- [x] Add Project Planner project creation with validation and lane empty states.
+- [x] Add Project Planner e2e coverage for creation, selection, movement, and workspace fit.
+- [x] Migrate Project Planner with typed state and drag-and-drop behavior.
+- [x] Migrate Odd/Even as a compact Angular interaction demo.
+- [x] Migrate Dev Logger with validated log entry forms and filtering.
 
 ## Batch 2
 

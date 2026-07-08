@@ -7,7 +7,7 @@
           <h3>{{ (editingId() ? 'STICKY_NOTES.FORM.EDIT_TITLE' : 'STICKY_NOTES.FORM.ADD_TITLE') | translate }}</h3>
         </div>
         @if (editingId()) {
-          <button type="button" class="btn btn-sm btn-icon" (click)="cancelEdit()">
+          <button type="button" class="btn btn-ghost btn-sm btn-icon" (click)="cancelEdit()">
             {{ 'STICKY_NOTES.FORM.CANCEL' | translate }}
           </button>
         }
@@ -89,20 +89,24 @@
         <div class="search-row">
           <label>
             <span>{{ 'STICKY_NOTES.SEARCH.LABEL' | translate }}</span>
-            <input
-              type="search"
-              class="form-control"
-              [ngModel]="searchTerm()"
-              (ngModelChange)="updateSearchTerm($event)"
-              name="search"
-              [placeholder]="'STICKY_NOTES.SEARCH.PLACEHOLDER' | translate"
-            />
+            <span class="search-shell">
+              <i class="pi pi-search"></i>
+              <input
+                type="search"
+                class="form-control"
+                [ngModel]="searchTerm()"
+                (ngModelChange)="updateSearchTerm($event)"
+                name="search"
+                [placeholder]="'STICKY_NOTES.SEARCH.PLACEHOLDER' | translate"
+              />
+              @if (searchTerm()) {
+                <button type="button" class="search-clear" (click)="clearSearch()" [attr.aria-label]="'FILTERS.CLEAR_SEARCH_FIELD' | translate">
+                  <i class="pi pi-times"></i>
+                </button>
+              }
+            </span>
           </label>
-          <button type="button" class="btn btn-sm btn-icon" (click)="clearSearch()" [disabled]="!searchTerm()">
-            <i class="pi pi-times"></i>
-            <span>{{ 'STICKY_NOTES.ACTIONS.CLEAR_SEARCH' | translate }}</span>
-          </button>
-          <button type="button" class="btn btn-sm btn-icon" (click)="resetDemo()">
+          <button type="button" class="btn btn-ghost btn-sm btn-icon" (click)="resetDemo()">
             <i class="pi pi-refresh"></i>
             <span>{{ 'STICKY_NOTES.ACTIONS.RESET_DEMO' | translate }}</span>
           </button>
@@ -124,15 +128,15 @@
             <p>{{ note.body || ('STICKY_NOTES.EMPTY_BODY' | translate) }}</p>
 
             <div class="note-actions">
-              <button type="button" class="btn btn-sm btn-icon" (click)="togglePin(note.id)">
+              <button type="button" class="btn btn-ghost btn-sm btn-icon" (click)="togglePin(note.id)">
                 <i [class]="note.pinned ? 'pi pi-star-fill' : 'pi pi-star'"></i>
                 <span>{{ (note.pinned ? 'STICKY_NOTES.ACTIONS.UNPIN' : 'STICKY_NOTES.ACTIONS.PIN') | translate }}</span>
               </button>
-              <button type="button" class="btn btn-sm btn-icon" (click)="editNote(note)">
+              <button type="button" class="btn btn-ghost btn-sm btn-icon" (click)="editNote(note)">
                 <i class="pi pi-pencil"></i>
                 <span>{{ 'STICKY_NOTES.ACTIONS.EDIT' | translate }}</span>
               </button>
-              <button type="button" class="btn btn-sm btn-icon delete-action" (click)="deleteNote(note.id)">
+              <button type="button" class="btn btn-danger btn-sm btn-icon delete-action" (click)="deleteNote(note.id)">
                 <i class="pi pi-times"></i>
                 <span>{{ 'STICKY_NOTES.ACTIONS.DELETE' | translate }}</span>
               </button>

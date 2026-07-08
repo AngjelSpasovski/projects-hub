@@ -3,7 +3,7 @@
   color: var(--app-sidebar-text);
   display: flex;
   flex-direction: column;
-  gap: var(--app-space-5);
+  gap: var(--app-space-4);
   height: 100vh;
   min-height: 0;
   overflow: hidden;
@@ -19,13 +19,13 @@
 }
 
 .brand-mark {
-  align-items: center;
-  background: var(--app-accent);
+  background: var(--app-surface);
   border-radius: var(--app-radius-md);
-  display: inline-flex;
-  font-weight: 800;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  display: block;
+  flex: 0 0 auto;
   height: 2.75rem;
-  justify-content: center;
+  object-fit: cover;
   width: 2.75rem;
 }
 
@@ -57,7 +57,9 @@
   gap: 0.35rem;
 }
 
-.sidebar-nav a {
+.sidebar-nav a,
+.tree-all-link,
+.group-links a {
   align-items: center;
   border-radius: var(--app-radius-md);
   color: var(--app-sidebar-text);
@@ -69,20 +71,168 @@
   text-decoration: none;
 }
 
-.sidebar-nav a span {
+.sidebar-nav a span,
+.tree-all-link span,
+.group-links a span {
   min-width: 0;
   overflow-wrap: anywhere;
 }
 
 .sidebar-nav a:hover,
-.sidebar-nav a.active {
+.sidebar-nav a.active,
+.tree-all-link:hover,
+.tree-all-link.active,
+.group-links a:hover,
+.group-links a.active,
+.group-links a.project-active {
   background: rgba(255, 255, 255, 0.12);
 }
 
-.project-links {
+.main-nav {
+  flex: 0 0 auto;
+}
+
+.sidebar-section {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.project-tree {
+  display: grid;
+  gap: 0.45rem;
   max-height: calc(100vh - 13rem);
   overflow: auto;
   padding-right: 0.15rem;
+}
+
+.tree-all-link {
+  justify-content: space-between;
+}
+
+.tree-link-main {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.tree-count {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.11);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--app-radius-pill);
+  color: var(--app-sidebar-muted);
+  display: inline-flex;
+  flex: 0 0 auto;
+  font-size: 0.72rem;
+  font-weight: 800;
+  justify-content: center;
+  min-width: 1.65rem;
+  padding: 0.08rem 0.45rem;
+}
+
+.project-group {
+  --difficulty-accent: #94a3b8;
+  --difficulty-soft: rgba(148, 163, 184, 0.13);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--app-radius-md);
+  overflow: hidden;
+}
+
+.project-group.beginner {
+  --difficulty-accent: #34d399;
+  --difficulty-soft: rgba(52, 211, 153, 0.13);
+}
+
+.project-group.intermediate {
+  --difficulty-accent: #60a5fa;
+  --difficulty-soft: rgba(96, 165, 250, 0.14);
+}
+
+.project-group.advanced {
+  --difficulty-accent: #f472b6;
+  --difficulty-soft: rgba(244, 114, 182, 0.14);
+}
+
+.group-trigger {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: var(--app-sidebar-text);
+  cursor: pointer;
+  display: flex;
+  font: inherit;
+  justify-content: space-between;
+  min-height: 2.35rem;
+  padding: 0.5rem 0.65rem;
+  text-align: left;
+  width: 100%;
+}
+
+.group-trigger:hover,
+.group-trigger.active-group {
+  background: var(--difficulty-soft);
+}
+
+.group-title,
+.group-meta {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.45rem;
+  min-width: 0;
+}
+
+.group-title {
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.group-title span:last-child {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.group-meta i {
+  color: var(--app-sidebar-muted);
+  font-size: 0.75rem;
+}
+
+.difficulty-dot {
+  background: var(--difficulty-accent);
+  border-radius: 999px;
+  box-shadow: 0 0 0 0.2rem var(--difficulty-soft);
+  flex: 0 0 auto;
+  height: 0.5rem;
+  width: 0.5rem;
+}
+
+.group-links {
+  display: grid;
+  gap: 0.18rem;
+  padding: 0.1rem 0.35rem 0.45rem 0.85rem;
+}
+
+.group-links a {
+  border-left: 2px solid transparent;
+  min-height: 2.25rem;
+  padding: 0.45rem 0.55rem;
+}
+
+.group-links a.active,
+.group-links a.project-active {
+  border-left-color: var(--difficulty-accent);
+}
+
+.empty-group {
+  color: var(--app-sidebar-muted);
+  display: block;
+  font-size: var(--app-font-size-sm);
+  padding: 0.35rem 0.55rem 0.45rem;
 }
 
 @media (max-width: 900px) {
@@ -92,7 +242,7 @@
     min-height: 0;
   }
 
-  .project-links {
+  .project-tree {
     display: grid;
     max-height: calc(100vh - 13rem);
     overflow: auto;

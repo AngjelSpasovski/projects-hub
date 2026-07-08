@@ -36,8 +36,8 @@
     text-transform: uppercase;
   }
 
-  input,
-  select {
+  > input,
+  > select {
     min-height: 2.55rem;
     width: 100%;
     border: 1px solid var(--project-border);
@@ -47,6 +47,14 @@
     padding: 0 0.8rem;
     font: inherit;
   }
+}
+
+.field .search-shell {
+  --app-control-bg: var(--project-control);
+  --app-control-border: var(--project-border);
+  --app-control-hover: var(--project-control-hover);
+  --app-text: var(--project-text);
+  --app-text-muted: var(--project-text-muted);
 }
 
 .toolbar-actions {
@@ -122,8 +130,8 @@
 
   &:hover,
   &.active {
-    border-color: #4c6bcf;
-    box-shadow: 0 0.55rem 1.25rem rgba(76, 107, 207, 0.16);
+    border-color: var(--app-accent);
+    box-shadow: 0 0.55rem 1.25rem color-mix(in srgb, var(--app-accent) 18%, transparent);
     transform: translateY(-1px);
   }
 }
@@ -136,7 +144,7 @@
   border: 1px solid var(--project-border);
   border-radius: 0.5rem;
   background: var(--project-surface);
-  color: #4c6bcf;
+  color: var(--app-accent);
   font-weight: 900;
 
   &.large {

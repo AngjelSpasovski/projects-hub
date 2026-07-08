@@ -7,7 +7,7 @@
           <h3>{{ (editingId() ? 'EXPENSE_TRACKER.FORM.EDIT_TITLE' : 'EXPENSE_TRACKER.FORM.ADD_TITLE') | translate }}</h3>
         </div>
         @if (editingId()) {
-          <button type="button" class="btn btn-sm ghost-button" (click)="cancelEdit()">
+          <button type="button" class="btn btn-ghost btn-sm ghost-button" (click)="cancelEdit()">
             {{ 'EXPENSE_TRACKER.FORM.CANCEL' | translate }}
           </button>
         }
@@ -122,17 +122,17 @@
         <section class="entries-panel">
           <div class="entries-toolbar">
             <div class="filter-tabs" role="group" [attr.aria-label]="'EXPENSE_TRACKER.FILTERS.TITLE' | translate">
-              <button type="button" class="btn btn-sm" [class.active]="filter() === 'all'" (click)="updateFilter('all')">
+              <button type="button" class="btn btn-ghost btn-sm" [class.active]="filter() === 'all'" (click)="updateFilter('all')">
                 {{ 'EXPENSE_TRACKER.FILTERS.ALL' | translate }}
               </button>
-              <button type="button" class="btn btn-sm" [class.active]="filter() === 'income'" (click)="updateFilter('income')">
+              <button type="button" class="btn btn-ghost btn-sm" [class.active]="filter() === 'income'" (click)="updateFilter('income')">
                 {{ 'EXPENSE_TRACKER.FILTERS.INCOME' | translate }}
               </button>
-              <button type="button" class="btn btn-sm" [class.active]="filter() === 'expense'" (click)="updateFilter('expense')">
+              <button type="button" class="btn btn-ghost btn-sm" [class.active]="filter() === 'expense'" (click)="updateFilter('expense')">
                 {{ 'EXPENSE_TRACKER.FILTERS.EXPENSES' | translate }}
               </button>
             </div>
-            <button type="button" class="btn btn-sm reset-button" (click)="resetDemo()">
+            <button type="button" class="btn btn-ghost btn-sm reset-button" (click)="resetDemo()">
               <i class="pi pi-refresh"></i>
               <span>{{ 'EXPENSE_TRACKER.ACTIONS.RESET_DEMO' | translate }}</span>
             </button>
@@ -153,11 +153,11 @@
                 </div>
                 <strong>{{ entry.type === 'income' ? '+' : '-' }}{{ formatCurrency(entry.amount) }}</strong>
                 <div class="entry-actions">
-                  <button type="button" class="btn btn-sm action-button" (click)="editEntry(entry)">
+                  <button type="button" class="btn btn-ghost btn-sm action-button" (click)="editEntry(entry)">
                     <i class="pi pi-pencil"></i>
                     <span>{{ 'EXPENSE_TRACKER.ACTIONS.EDIT' | translate }}</span>
                   </button>
-                  <button type="button" class="btn btn-sm action-button delete" (click)="deleteEntry(entry.id)">
+                  <button type="button" class="btn btn-danger btn-sm action-button delete" (click)="deleteEntry(entry.id)">
                     <i class="pi pi-times"></i>
                     <span>{{ 'EXPENSE_TRACKER.ACTIONS.DELETE' | translate }}</span>
                   </button>

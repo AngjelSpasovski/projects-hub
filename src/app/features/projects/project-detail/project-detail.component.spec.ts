@@ -36,4 +36,14 @@ describe('ProjectDetailComponent', () => {
     expect(workspace?.querySelector('.project-live .calculator-page')).not.toBeNull();
     expect(workspace?.querySelectorAll('.surface-panel').length).toBe(0);
   });
+
+  it('uses the demo action to target the live project region', () => {
+    const element = fixture.nativeElement as HTMLElement;
+    const demoButton = element.querySelector('.project-actions .btn-primary');
+    const liveRegion = element.querySelector('.project-live');
+
+    expect(demoButton?.textContent).toContain('PROJECT.DEMO');
+    expect(demoButton?.textContent).not.toContain('PROJECT.DEMO_PENDING');
+    expect(liveRegion?.getAttribute('tabindex')).toBe('-1');
+  });
 });

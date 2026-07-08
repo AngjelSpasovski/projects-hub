@@ -66,7 +66,7 @@
         <p>{{ 'HANG_MAN.RESULT_LOST_TEXT' | translate:{ word: currentWord() } }}</p>
       }
       <div class="dialog-actions">
-        <button type="button" class="btn btn-sm btn-icon" (click)="resultDialogVisible.set(false)">
+        <button type="button" class="btn btn-ghost btn-sm btn-icon" (click)="resultDialogVisible.set(false)">
           {{ 'HANG_MAN.RESULT_CLOSE' | translate }}
         </button>
         <button type="button" class="btn btn-primary btn-sm" (click)="startNextWord()">
@@ -89,7 +89,7 @@
     <div class="dialog-content">
       <p>{{ 'HANG_MAN.NEW_WORD_CONFIRM_TEXT' | translate }}</p>
       <div class="dialog-actions">
-        <button type="button" class="btn btn-sm btn-icon" (click)="cancelNewWord()">
+        <button type="button" class="btn btn-ghost btn-sm btn-icon" (click)="cancelNewWord()">
           {{ 'HANG_MAN.NEW_WORD_CANCEL' | translate }}
         </button>
         <button type="button" class="btn btn-primary btn-sm" (click)="startNextWord()">
@@ -112,7 +112,7 @@
     <div class="dialog-content">
       <p>{{ 'HANG_MAN.LANGUAGE_CONFIRM_TEXT' | translate }}</p>
       <div class="dialog-actions">
-        <button type="button" class="btn btn-sm btn-icon" (click)="cancelLanguageChange()">
+        <button type="button" class="btn btn-ghost btn-sm btn-icon" (click)="cancelLanguageChange()">
           {{ 'HANG_MAN.LANGUAGE_CANCEL' | translate }}
         </button>
         <button type="button" class="btn btn-primary btn-sm" (click)="confirmLanguageChange()">

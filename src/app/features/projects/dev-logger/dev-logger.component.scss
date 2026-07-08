@@ -1,0 +1,317 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.dev-logger-shell {
+  --logger-bg: color-mix(in srgb, var(--app-surface) 88%, #020617 12%);
+  --logger-panel: color-mix(in srgb, var(--app-card) 78%, #020617 22%);
+  --logger-muted: var(--app-muted);
+  --logger-border: var(--app-border);
+  --logger-accent: var(--app-accent);
+
+  display: grid;
+  grid-template-columns: minmax(20rem, 0.85fr) minmax(28rem, 1.35fr);
+  gap: 1rem;
+  width: min(100%, 94rem);
+  min-height: 26rem;
+  padding: 1rem;
+  border: 1px solid var(--logger-border);
+  border-radius: 0.75rem;
+  background:
+    radial-gradient(circle at top left, color-mix(in srgb, var(--logger-accent) 18%, transparent), transparent 32%),
+    var(--logger-bg);
+  color: var(--app-text);
+}
+
+.logger-panel,
+.stats-grid article,
+.log-row,
+.search-field,
+select,
+textarea {
+  border: 1px solid var(--logger-border);
+  background: var(--logger-panel);
+}
+
+.logger-panel {
+  border-radius: 0.7rem;
+  padding: 1rem;
+}
+
+.panel-heading,
+.toolbar,
+.log-row,
+.log-main,
+.row-actions {
+  display: flex;
+  align-items: center;
+}
+
+.panel-heading,
+.toolbar {
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.eyebrow,
+label,
+.stats-grid span,
+.log-row p {
+  color: var(--logger-muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+h3 {
+  margin: 0.12rem 0 0;
+  font-size: 1.15rem;
+}
+
+.logger-form {
+  display: grid;
+  gap: 0.55rem;
+}
+
+textarea,
+select,
+.search-field input {
+  width: 100%;
+  color: var(--app-text);
+  outline: none;
+}
+
+textarea,
+select {
+  border-radius: 0.55rem;
+  padding: 0.72rem 0.85rem;
+}
+
+textarea {
+  resize: none;
+  min-height: 7.5rem;
+}
+
+textarea.invalid {
+  border-color: #dc6b6b;
+}
+
+.field-help {
+  min-height: 1.1rem;
+  color: var(--logger-muted);
+  font-size: 0.78rem;
+}
+
+.field-help.error {
+  color: #dc6b6b;
+}
+
+.primary-action,
+.ghost-action,
+.filter-group button,
+.icon-action {
+  border: 1px solid var(--logger-border);
+  border-radius: 0.55rem;
+  font-weight: 800;
+}
+
+.primary-action {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 2.65rem;
+  border-color: color-mix(in srgb, var(--logger-accent) 72%, var(--logger-border));
+  background: var(--logger-accent);
+  color: #fff;
+}
+
+.ghost-action,
+.filter-group button,
+.icon-action {
+  background: color-mix(in srgb, var(--logger-panel) 88%, transparent);
+  color: var(--app-text);
+}
+
+.ghost-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.35rem;
+  padding: 0 0.75rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin-bottom: 0.85rem;
+}
+
+.stats-grid article {
+  border-radius: 0.65rem;
+  padding: 0.7rem 0.85rem;
+}
+
+.stats-grid strong {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 1.35rem;
+}
+
+.toolbar {
+  align-items: stretch;
+}
+
+.search-field {
+  display: flex;
+  align-items: center;
+  flex: 1 1 18rem;
+  gap: 0.5rem;
+  min-height: 2.45rem;
+  padding: 0 0.75rem;
+  border-radius: 0.55rem;
+}
+
+.search-field input {
+  border: 0;
+  background: transparent;
+}
+
+.filter-group {
+  display: flex;
+  gap: 0.4rem;
+  padding: 0.22rem;
+  border-radius: 0.65rem;
+  background: color-mix(in srgb, var(--logger-panel) 72%, transparent);
+}
+
+.filter-group button {
+  min-height: 2rem;
+  padding: 0 0.75rem;
+}
+
+.filter-group button.active {
+  border-color: color-mix(in srgb, var(--logger-accent) 65%, var(--logger-border));
+  background: color-mix(in srgb, var(--logger-accent) 82%, #fff 18%);
+  color: #fff;
+}
+
+.log-list {
+  display: grid;
+  gap: 0.55rem;
+  max-height: 18rem;
+  overflow: auto;
+  padding-right: 0.2rem;
+}
+
+.log-row {
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-height: 4.7rem;
+  border-radius: 0.65rem;
+  padding: 0.75rem;
+}
+
+.log-row.selected {
+  border-color: color-mix(in srgb, var(--logger-accent) 75%, var(--logger-border));
+}
+
+.log-main {
+  min-width: 0;
+  gap: 0.7rem;
+}
+
+.log-main strong {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.log-row p {
+  margin: 0.2rem 0 0;
+  text-transform: none;
+}
+
+.level-dot {
+  width: 0.7rem;
+  height: 0.7rem;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: #7aa2ff;
+}
+
+.log-row.warning .level-dot {
+  background: #f7c948;
+}
+
+.log-row.error .level-dot {
+  background: #dc6b6b;
+}
+
+.row-actions {
+  gap: 0.4rem;
+}
+
+.icon-action {
+  display: inline-grid;
+  place-items: center;
+  width: 2.15rem;
+  height: 2.15rem;
+}
+
+.icon-action.danger {
+  border-color: color-mix(in srgb, #dc6b6b 45%, var(--logger-border));
+  color: #dc6b6b;
+}
+
+.empty-state {
+  display: grid;
+  place-items: center;
+  min-height: 10rem;
+  border: 1px dashed var(--logger-border);
+  border-radius: 0.65rem;
+  color: var(--logger-muted);
+  text-align: center;
+}
+
+.empty-state i {
+  font-size: 1.4rem;
+}
+
+.empty-state strong {
+  margin-top: 0.45rem;
+  color: var(--app-text);
+}
+
+.empty-state p {
+  margin: 0.25rem 0 0;
+}
+
+@media (max-width: 75rem) {
+  .dev-logger-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .toolbar {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 48rem) {
+  .dev-logger-shell {
+    padding: 0.75rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .filter-group {
+    width: 100%;
+    overflow-x: auto;
+  }
+}

@@ -9,14 +9,20 @@
     "TITLE": "Projects Hub"
   },
   "NAV": {
+    "ADVANCED": "Advanced",
+    "ALL_PROJECTS": "All projects",
+    "BEGINNER": "Beginner",
     "DASHBOARD": "Dashboard",
+    "INTERMEDIATE": "Intermediate",
     "MAIN": "Main navigation",
+    "NO_PROJECTS": "No projects yet",
     "PROJECTS": "Projects"
   },
   "THEMES": {
     "BLUE": "Blue",
     "DARK": "Dark",
-    "LIGHT": "White"
+    "LIGHT": "White",
+    "REALM": "Realm"
   },
   "DASHBOARD": {
     "BIG": "Big",
@@ -25,11 +31,17 @@
     "LIST": "List",
     "SUBTITLE": "Overview of the small apps that will be migrated and added to this repo.",
     "TITLE": "Project Catalog",
-    "VIEW_MODE": "View mode"
+    "VIEW_MODE": "View mode",
+    "WIDGETS": {
+      "CLOCK": "Local time",
+      "TITLE": "Dashboard widgets"
+    }
   },
   "FILTERS": {
     "ALL_CATEGORIES": "All categories",
     "CATEGORY": "Category",
+    "CLEAR_SEARCH": "Clear search",
+    "CLEAR_SEARCH_FIELD": "Clear field",
     "EMPTY": "No options found",
     "NO_RESULTS_TEXT": "Change the search, category, or tags to show projects again.",
     "NO_RESULTS_TITLE": "No projects match these filters",
@@ -115,7 +127,140 @@
     "GROCERY_LIST": {
       "TITLE": "Grocery List",
       "SUMMARY": "Grocery planner with quantities, categories, purchased state, filters, and LocalStorage persistence."
+    },
+    "PROJECT_PLANNER": {
+      "TITLE": "Project Planner",
+      "SUMMARY": "Legacy JavaScript planner migration with active and finished lanes, project movement, and contextual details."
+    },
+    "ODD_EVEN": {
+      "TITLE": "Odd/Even Counter",
+      "SUMMARY": "Legacy Angular binding exercise rebuilt with timed number generation, odd/even lanes, and signal state."
+    },
+    "DEV_LOGGER": {
+      "TITLE": "Dev Logger",
+      "SUMMARY": "Legacy CRUD logger migrated with validated entries, level filters, search, and signal state."
     }
+  },
+  "PROJECT_PLANNER": {
+    "ACTIONS": {
+      "ACTIVATE": "Activate",
+      "CLOSE": "Close",
+      "FINISH": "Finish",
+      "INFO": "Details"
+    },
+    "EMPTY": {
+      "ACTIVE": "No active projects. Add a project to start planning.",
+      "FINISHED": "Finished projects will appear here."
+    },
+    "FORM": {
+      "ADD": "Add project",
+      "DESCRIPTION_LABEL": "Description",
+      "DESCRIPTION_PLACEHOLDER": "Short context or next step",
+      "TITLE_ERROR": "Project title is required.",
+      "TITLE_LABEL": "Project title",
+      "TITLE_PLACEHOLDER": "Example: migrate client panel"
+    },
+    "INFO": {
+      "EMPTY_TEXT": "Select a project card to inspect its migration context.",
+      "EMPTY_TITLE": "No project selected",
+      "EYEBROW": "Project details"
+    },
+    "LANES": {
+      "ACTIVE": "Active projects",
+      "FINISHED": "Finished projects"
+    },
+    "SAMPLE": {
+      "COURSE": {
+        "DESCRIPTION": "Finish the course within the next two weeks.",
+        "EXTRA": "Got lifetime access, but it would be useful to finish this migration track soon.",
+        "TITLE": "Finish the Course"
+      },
+      "GROCERIES": {
+        "DESCRIPTION": "Don't forget to pick up groceries today.",
+        "EXTRA": "Small personal tasks are kept here to test mixed project priorities.",
+        "TITLE": "Buy Groceries"
+      },
+      "HOTEL": {
+        "DESCRIPTION": "Prepare the hotel booking before the conference deadline.",
+        "EXTRA": "This item starts in the finished lane to verify two-way movement.",
+        "TITLE": "Book Hotel"
+      }
+    },
+    "TITLE": "Project Planner"
+  },
+  "ODD_EVEN": {
+    "ACTIONS": {
+      "PAUSE": "Pause",
+      "RESET": "Reset",
+      "START": "Start",
+      "STEP": "Step"
+    },
+    "CONTROL": {
+      "EYEBROW": "Timer control",
+      "TITLE": "Generate numbers"
+    },
+    "CURRENT": "Current number",
+    "DESCRIPTION": "Start the timer to generate a number every second, or step manually to inspect the odd and even streams.",
+    "EMPTY": {
+      "EVEN": "No even numbers yet.",
+      "ODD": "No odd numbers yet."
+    },
+    "EVEN_VALUE": "Even - {{number}}",
+    "FEATURES": {
+      "LANES": "Generated values are split into odd and even lanes.",
+      "SIGNALS": "Counts, current value, and lane content are derived from signal state.",
+      "TIMER": "The original interval demo is preserved with start, pause, step, and reset controls."
+    },
+    "LANES": {
+      "EVEN": "Even numbers",
+      "ODD": "Odd numbers"
+    },
+    "ODD_VALUE": "Odd - {{number}}",
+    "STATS": {
+      "EVEN": "Even",
+      "ODD": "Odd",
+      "TOTAL": "Total"
+    },
+    "TITLE": "Odd/Even Counter"
+  },
+  "DEV_LOGGER": {
+    "ACTIONS": {
+      "ADD": "Add log",
+      "CANCEL": "Cancel",
+      "DELETE": "Delete",
+      "EDIT": "Edit",
+      "RESET": "Reset demo",
+      "UPDATE": "Update log"
+    },
+    "EMPTY_TEXT": "Change the filter or add a new log entry.",
+    "EMPTY_TITLE": "No logs found",
+    "FILTER_LABEL": "Log filters",
+    "FILTERS": {
+      "ALL": "All",
+      "ERROR": "Errors",
+      "INFO": "Info",
+      "WARNING": "Warnings"
+    },
+    "FORM": {
+      "CHARACTERS": "characters",
+      "EDIT_TITLE": "Edit log",
+      "EYEBROW": "Log form",
+      "LEVEL_LABEL": "Level",
+      "NEW_TITLE": "New log",
+      "TEXT_ERROR": "Log text is required.",
+      "TEXT_LABEL": "Message",
+      "TEXT_PLACEHOLDER": "Example: validate migration output"
+    },
+    "LEVELS": {
+      "ERROR": "Error",
+      "INFO": "Info",
+      "WARNING": "Warning"
+    },
+    "SEARCH_PLACEHOLDER": "Search logs or levels",
+    "STATS": {
+      "TOTAL": "Total"
+    },
+    "TITLE": "Dev Logger"
   },
   "TECHNICAL_DOCS": {
     "CHECKLIST": "Checklist",
@@ -674,7 +819,8 @@
     }
   },
   "PROJECT": {
-    "BACK": "Back to catalog",
+    "BACK": "Back",
+    "BACK_LABEL": "Return catalog",
     "DEMO": "Live demo",
     "DEMO_PENDING": "Demo pending",
     "DIFFICULTY": {

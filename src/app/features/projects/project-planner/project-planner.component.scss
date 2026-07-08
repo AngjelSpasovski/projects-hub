@@ -1,0 +1,238 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.planner-shell {
+  background: var(--project-surface);
+  border: 1px solid var(--project-border);
+  border-radius: var(--app-radius-md);
+  display: grid;
+  gap: var(--app-space-3);
+  grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.32fr);
+  min-height: min(32rem, 100%);
+  padding: var(--app-space-3);
+}
+
+.planner-workspace {
+  display: grid;
+  gap: var(--app-space-3);
+  min-width: 0;
+}
+
+.planner-form {
+  align-items: end;
+  background: color-mix(in srgb, var(--project-panel) 86%, transparent);
+  border: 1px solid var(--project-border);
+  border-radius: var(--app-radius-md);
+  display: grid;
+  gap: var(--app-space-2);
+  grid-template-columns: minmax(12rem, 0.9fr) minmax(14rem, 1.1fr) auto;
+  padding: var(--app-space-2);
+}
+
+.field-group {
+  display: grid;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.field-group label {
+  color: var(--app-text-muted);
+  font-size: var(--app-font-size-xs);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.field-group input {
+  background: var(--project-surface);
+  border: 1px solid var(--project-border);
+  border-radius: var(--app-radius-sm);
+  color: var(--app-text);
+  min-height: 2.45rem;
+  outline: none;
+  padding: 0.55rem 0.75rem;
+  transition:
+    border-color var(--app-transition-fast),
+    box-shadow var(--app-transition-fast);
+  width: 100%;
+}
+
+.field-group input:focus {
+  border-color: color-mix(in srgb, var(--app-accent) 62%, var(--project-border));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--app-accent) 16%, transparent);
+}
+
+.field-group input.is-invalid {
+  border-color: color-mix(in srgb, #ef4444 72%, var(--project-border));
+}
+
+.field-group small {
+  color: #ef8f8f;
+  font-size: var(--app-font-size-xs);
+  font-weight: 700;
+}
+
+.add-project {
+  min-height: 2.45rem;
+  white-space: nowrap;
+}
+
+.planner-board {
+  display: grid;
+  gap: var(--app-space-3);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  min-width: 0;
+}
+
+.planner-lane,
+.planner-info {
+  background: var(--project-panel);
+  border: 1px solid var(--project-border);
+  border-radius: var(--app-radius-md);
+  min-width: 0;
+}
+
+.planner-lane {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  overflow: hidden;
+  transition:
+    border-color var(--app-transition-fast),
+    box-shadow var(--app-transition-fast);
+}
+
+.planner-lane.is-drop-target {
+  border-color: color-mix(in srgb, var(--app-accent) 70%, var(--project-border));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--app-accent) 18%, transparent);
+}
+
+.planner-lane header {
+  align-items: center;
+  border-bottom: 1px solid var(--project-border);
+  display: flex;
+  justify-content: space-between;
+  padding: 0.8rem;
+}
+
+.planner-lane header span,
+.planner-info > span {
+  color: var(--app-text-muted);
+  font-size: var(--app-font-size-xs);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.planner-lane header strong {
+  align-items: center;
+  background: var(--app-accent-soft);
+  border: 1px solid color-mix(in srgb, var(--app-accent) 36%, transparent);
+  border-radius: var(--app-radius-pill);
+  display: inline-flex;
+  min-width: 2rem;
+  justify-content: center;
+  padding: 0.15rem 0.5rem;
+}
+
+.planner-list {
+  display: grid;
+  gap: var(--app-space-2);
+  align-content: start;
+  overflow: auto;
+  padding: var(--app-space-2);
+}
+
+.planner-card {
+  background: color-mix(in srgb, var(--project-panel) 82%, var(--app-accent-soft));
+  border: 1px solid var(--project-border);
+  border-radius: var(--app-radius-md);
+  cursor: grab;
+  display: grid;
+  gap: 0.75rem;
+  padding: 0.85rem;
+  transition:
+    opacity var(--app-transition-fast),
+    transform var(--app-transition-fast),
+    border-color var(--app-transition-fast);
+}
+
+.planner-card:hover {
+  border-color: color-mix(in srgb, var(--app-accent) 44%, var(--project-border));
+  transform: translateY(-1px);
+}
+
+.planner-card.is-dragging {
+  cursor: grabbing;
+  opacity: 0.56;
+  transform: scale(0.98);
+}
+
+.planner-card h3,
+.planner-info h3 {
+  font-size: var(--app-font-size-lg);
+  margin: 0;
+}
+
+.planner-card p,
+.planner-info p {
+  color: var(--app-text-muted);
+  line-height: 1.35;
+  margin: 0.35rem 0 0;
+}
+
+.planner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.lane-empty {
+  align-content: center;
+  border: 1px dashed color-mix(in srgb, var(--project-border) 72%, var(--app-accent));
+  border-radius: var(--app-radius-md);
+  color: var(--app-text-muted);
+  display: grid;
+  justify-items: center;
+  min-height: 8rem;
+  padding: var(--app-space-3);
+  text-align: center;
+}
+
+.lane-empty i {
+  color: var(--app-accent);
+  font-size: 1.5rem;
+}
+
+.lane-empty p {
+  margin: 0.35rem 0 0;
+}
+
+.planner-info {
+  align-content: start;
+  display: grid;
+  gap: 0.5rem;
+  padding: var(--app-space-3);
+  position: relative;
+}
+
+.planner-info > i {
+  color: var(--app-accent);
+  font-size: 2rem;
+}
+
+.close-info {
+  justify-self: end;
+}
+
+.is-empty {
+  align-content: center;
+  text-align: center;
+}
+
+@media (max-width: 980px) {
+  .planner-shell,
+  .planner-board,
+  .planner-form {
+    grid-template-columns: 1fr;
+  }
+}

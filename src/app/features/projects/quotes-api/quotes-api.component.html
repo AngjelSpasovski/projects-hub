@@ -7,7 +7,7 @@
       </div>
 
       <div class="toolbar-actions">
-        <button class="btn btn-outline-danger btn-sm" type="button" (click)="simulateApiFailure()">
+        <button class="btn btn-danger btn-sm" type="button" (click)="simulateApiFailure()">
           {{ 'QUOTES_API.TEST_ERROR' | translate }}
         </button>
         <button class="btn btn-primary btn-sm" type="button" (click)="loadQuotes()">
@@ -62,7 +62,7 @@
               <button class="btn btn-primary" type="button" (click)="nextQuote()">
                 {{ 'QUOTES_API.NEXT_QUOTE' | translate }}
               </button>
-              <button class="btn btn-outline-primary" type="button" (click)="toggleFavorite()">
+              <button class="btn btn-ghost" type="button" (click)="toggleFavorite()">
                 {{ (isFavorite() ? 'QUOTES_API.REMOVE_FAVORITE' : 'QUOTES_API.ADD_FAVORITE') | translate }}
               </button>
             </div>
@@ -76,7 +76,7 @@
               <h3>{{ 'QUOTES_API.SAVED_QUOTES' | translate }}</h3>
             </div>
             <button
-              class="btn btn-outline-danger btn-sm"
+              class="btn btn-danger btn-sm"
               type="button"
               (click)="clearFavorites()"
               [disabled]="favoriteIds().length === 0"

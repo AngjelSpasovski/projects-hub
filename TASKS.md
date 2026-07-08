@@ -10,10 +10,10 @@ Detailed active work is tracked in [`docs/tasks/`](./docs/tasks/README.md). A pr
 - [x] Merge project detail and live application into one workspace surface.
 - [x] Remove duplicated project headers and nested surfaces.
 - [x] Build the JavaScript Quiz from the reviewed question material.
-- [ ] Build the To-Do List with LocalStorage.
-- [ ] Build the Expense Tracker with Chart.js.
-- [ ] Add Digital Clock and weather dashboard widgets.
-- [ ] Start legacy migrations with Project Planner, Odd/Even, and Dev Logger.
+- [x] Build the To-Do List with LocalStorage.
+- [x] Build the Expense Tracker with Chart.js.
+- [x] Add Digital Clock and weather dashboard widgets.
+- [x] Start legacy migrations with Project Planner, Odd/Even, and Dev Logger.
 
 ## Foundation
 
@@ -30,6 +30,12 @@ Detailed active work is tracked in [`docs/tasks/`](./docs/tasks/README.md). A pr
 ## Design And Layout
 
 - [x] Refine responsive behavior for mobile and tablet sidebar navigation.
+- [x] Group the sidebar project navigation by difficulty with matching visual badges.
+- [x] Add the first shared design-system pass for themes, buttons, inputs, and browser tab branding.
+- [x] Normalize project action buttons so primary, secondary, and destructive actions have distinct visual weight.
+- [x] Add theme QA coverage for Realm, White, Dark, and Blue without shell overflow.
+- [x] Polish shared search controls with consistent icons, clear actions, focus states, and theme-aware styling.
+- [x] Compact project detail workspaces with clearer back navigation, live layout modes, and repository links.
 - [x] Add polished active, hover, loading, and empty states.
 - [x] Decide final typography, spacing scale, and color tokens.
 - [x] Replace temporary SVG covers with generated component covers. Superseded by the illustrated-cover redesign in the next product cycle.

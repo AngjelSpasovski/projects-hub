@@ -3,7 +3,7 @@
     <div class="toolbar">
       <label class="search-field">
         <span>{{ 'WEATHER.SEARCH' | translate }}</span>
-        <div class="input-shell">
+        <div class="search-shell">
           <i class="pi pi-search"></i>
           <input
             type="search"
@@ -13,7 +13,7 @@
             [placeholder]="'WEATHER.SEARCH_PLACEHOLDER' | translate"
           />
           @if (searchTerm()) {
-            <button type="button" class="clear-search" (click)="clearSearch()" [attr.aria-label]="'WEATHER.CLEAR_SEARCH' | translate">
+            <button type="button" class="search-clear" (click)="clearSearch()" [attr.aria-label]="'FILTERS.CLEAR_SEARCH_FIELD' | translate">
               <i class="pi pi-times"></i>
             </button>
           }
@@ -31,7 +31,7 @@
       </label>
 
       <div class="actions">
-        <button type="button" class="btn btn-sm btn-icon secondary-action" (click)="simulateApiFailure()">
+        <button type="button" class="btn btn-danger btn-sm btn-icon secondary-action" (click)="simulateApiFailure()">
           <i class="pi pi-exclamation-triangle"></i>
           <span>{{ 'WEATHER.TEST_ERROR' | translate }}</span>
         </button>
