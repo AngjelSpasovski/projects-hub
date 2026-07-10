@@ -67,7 +67,7 @@ The master roadmap is tracked in [TASKS.md](./TASKS.md). Detailed batches, proje
 
 ## Next Work
 
-The current priority is to keep documentation aligned as the product changes, then continue with a small UI polish cycle for themes, buttons, search controls, dropdown states, and repo/demo actions.
+Documentation alignment and the first shared UI polish pass are complete. Continue visual QA as larger features are added, especially across Realm, white, dark, and blue themes.
 
 After that, the strongest portfolio-value path is the next legacy migration: Client Panel. If a smaller project is preferred first, Flashcards, Timer, and Digital Clock are the lowest-risk candidates from the backlog.
 

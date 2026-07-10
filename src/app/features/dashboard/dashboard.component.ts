@@ -52,6 +52,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
   readonly sortMode = signal<DashboardSortMode>('order');
   readonly viewMode = signal<ProjectCardViewMode>(this.getInitialViewMode());
   readonly previewProject = signal<PortfolioProject | null>(null);
+  readonly filterOverlayOptions = {
+    hideTransitionOptions: '0ms',
+    showTransitionOptions: '80ms ease-out'
+  };
   readonly now = signal(new Date());
   readonly dashboardWeather = {
     city: 'Skopje',

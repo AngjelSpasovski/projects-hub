@@ -23,6 +23,14 @@ Complete this batch before adding a large number of new projects.
 - [x] Update project-detail unit tests.
 - [x] Update Playwright navigation and visual layout checks.
 
+## Current Polish Pass
+
+- [x] Add shared `btn-secondary` styling and tighten disabled button states.
+- [x] Improve PrimeNG dropdown selected states and MultiSelect chip styling across themes.
+- [x] Clarify project detail actions: local live workspace focus stays in-app, external demos render only when a project has `demoUrl`, and repository links remain separate.
+- [x] Apply the same external demo rule in the project preview dialog.
+- [x] Add missing shared radius token used by dialog styling.
+
 ## Existing Project Review
 
 - [x] Check Calculator keyboard symbols and encoding.

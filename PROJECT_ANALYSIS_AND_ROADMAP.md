@@ -327,9 +327,8 @@ Repo and demo links:
 
 Design polish:
 
-- Some controls still carry a Bootstrap-like feel.
-- Buttons, search fields, dropdowns, and theme-specific states need another polish pass.
-- Realm is accepted as the custom visual direction, but it still needs final consistency checks across all components.
+- A first shared polish pass is complete for button variants, disabled states, dropdown selected states, MultiSelect chips, and project repo/demo actions.
+- Realm is accepted as the custom visual direction, but it still needs visual QA across all components after each larger feature addition.
 
 Encoding:
 
@@ -346,12 +345,11 @@ Encoding:
 
 ### Priority 2: UI Polish Cycle
 
-- Polish buttons so they feel more custom and less default Bootstrap.
-- Continue search field polish.
-- Review dropdown, multiselect, focus, hover, selected, and disabled states.
+- Continue visual QA for Realm, white, dark, and blue themes after each larger feature addition.
+- Continue component-level polish when a mini project still looks inconsistent with the shared shell.
 - Verify all themes across catalog and every mini project.
 - Review logo/favicon usage.
-- Review repo/demo actions and hide or activate them consistently.
+- Keep repo/demo actions consistent: local live workspaces stay in-app, external demo links render only when `demoUrl` exists, and repository links stay separate.
 
 ### Priority 3: Next Small Mini Project
 
@@ -415,7 +413,7 @@ When adding any new mini project:
 
 ## 11. Practical Recommendation
 
-The best immediate next step is documentation alignment plus a small UI polish cycle.
+The documentation alignment and first UI polish pass are complete.
 
 After that, choose one of two paths:
 

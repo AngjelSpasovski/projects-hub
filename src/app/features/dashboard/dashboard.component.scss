@@ -20,15 +20,6 @@
   min-width: 0;
 }
 
-.category {
-  color: var(--app-text-muted);
-  font-size: var(--app-font-size-sm);
-  font-weight: 700;
-  letter-spacing: 0;
-  margin: 0;
-  text-transform: uppercase;
-}
-
 .visually-hidden {
   block-size: 1px;
   clip: rect(0 0 0 0);
@@ -175,7 +166,7 @@
   justify-content: start;
   min-height: 0;
   overflow: auto;
-  padding: 0 0.15rem var(--app-space-3) 0;
+  padding: 0.1rem 1.15rem var(--app-space-3) 1rem;
 }
 
 .project-card {

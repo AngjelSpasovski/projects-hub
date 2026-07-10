@@ -45,6 +45,12 @@
             <i class="pi pi-external-link"></i>
             <span>{{ 'PROJECT.OPEN' | translate }}</span>
           </a>
+          @if (selectedProject.demoUrl) {
+            <a class="btn btn-secondary btn-sm btn-icon" [href]="selectedProject.demoUrl" target="_blank" rel="noopener">
+              <i class="pi pi-desktop"></i>
+              <span>{{ 'PROJECT.DEMO' | translate }}</span>
+            </a>
+          }
           @if (selectedProject.repositoryUrl) {
             <a class="btn btn-ghost btn-sm btn-icon" [href]="selectedProject.repositoryUrl" target="_blank" rel="noopener">
               <i class="pi pi-github"></i>

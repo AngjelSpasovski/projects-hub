@@ -42,7 +42,7 @@ describe('ProjectDetailComponent', () => {
     const demoButton = element.querySelector('.project-actions .btn-primary');
     const liveRegion = element.querySelector('.project-live');
 
-    expect(demoButton?.textContent).toContain('PROJECT.DEMO');
+    expect(demoButton?.textContent).toContain('PROJECT.LIVE_WORKSPACE');
     expect(demoButton?.textContent).not.toContain('PROJECT.DEMO_PENDING');
     expect(liveRegion?.getAttribute('tabindex')).toBe('-1');
   });

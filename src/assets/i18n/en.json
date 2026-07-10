@@ -838,6 +838,7 @@
       "STATUS": "Status",
       "UPDATED": "Updated"
     },
+    "LIVE_WORKSPACE": "Live workspace",
     "NOT_FOUND": "Project not found",
     "OPEN": "Open",
     "PLACEHOLDER": "The real Angular component for this project will live here.",
