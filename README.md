@@ -14,12 +14,13 @@ The app opens directly into an admin-style dashboard where projects are browsed 
 - Category filter
 - PrimeNG MultiSelect tag filter
 - Sorting by name, category, status, and last updated date
-- Light, dark, and blue themes
+- Realm, light, dark, and blue themes
 - Macedonian and English translations with `ngx-translate`
 - Project metadata: status, difficulty, dates, repository link, live demo link
+- Fixed dashboard clock and weather summary widgets
 - Distinctive illustrated catalog covers with separate live-project screenshots for documentation
 - Unified project workspace containing metadata and the interactive application
-- Lazy-loaded Calculator, Tic Tac Toe, Hang Man, Weather, Music Event, JavaScript Quiz, To-Do List, Expense Tracker, Technical Documentation, Project Planner, Odd/Even Counter, Dev Logger, and Recipe Book mini projects
+- Lazy-loaded Calculator, Tic Tac Toe, Hang Man, Weather, Music Event, JavaScript Quiz, To-Do List, Expense Tracker, Technical Documentation, Movie Search, REST Countries, Currency Converter, Quotes API, Sticky Notes, Grocery List, Project Planner, Odd/Even Counter, Dev Logger, and Recipe Book mini projects
 - Unit tests for app shell, dashboard logic, registry metadata, shared services, and mini project behavior
 - Playwright smoke tests for catalog navigation, view switching, and language switching
 
@@ -32,7 +33,9 @@ The app opens directly into an admin-style dashboard where projects are browsed 
 - PrimeNG
 - PrimeIcons
 - ngx-translate
+- Chart.js
 - Karma and Jasmine
+- Playwright
 
 Exact installed versions are tracked in [DEPENDENCIES.md](./DEPENDENCIES.md).
 
@@ -49,16 +52,24 @@ Exact installed versions are tracked in [DEPENDENCIES.md](./DEPENDENCIES.md).
 | To-Do List | Ready | Migrated as a standalone Angular component with task CRUD, validation, filters, priority labels, and LocalStorage persistence. |
 | Expense Tracker | Ready | Migrated as a standalone Angular component with income/expense entries, totals, validation, LocalStorage persistence, and Chart.js summaries. |
 | Technical Documentation | Ready | Added as a searchable standalone documentation component for architecture, contribution flow, translations, and quality checks. |
+| Movie Search | Ready | Added as an API-style movie catalog with search, pagination, selected details, and retry states. |
+| REST Countries | Ready | Added as a country explorer with search, region filters, detail cards, favorites, and persistence. |
+| Currency Converter | Ready | Added as an exchange-rate demo with validation, currency swap, stale-data handling, and retry states. |
+| Quotes API | Ready | Added as a quote loader with favorites, retry behavior, and reduced-motion-aware typewriter effects. |
+| Sticky Notes | Ready | Added as a LocalStorage note board with create, edit, color, pin, delete, and search flows. |
+| Grocery List | Ready | Added as a persisted grocery workflow with quantities, categories, purchased state, and filters. |
 | Project Planner | Ready | Migrated as the first legacy JavaScript project board with typed lanes, project creation, drag-and-drop movement, and contextual details. |
 | Odd/Even Counter | Ready | Migrated as a compact Angular timing and data-binding demo with signal-derived odd/even lanes. |
 | Dev Logger | Ready | Migrated as a CRUD logger with validated entries, level filters, search, and typed signal state. |
 | Recipe Book | Ready | Migrated as a recipe list, detail, and shopping list workflow with reactive forms and typed signal state. |
 
-The master roadmap is tracked in [TASKS.md](./TASKS.md). Detailed batches, project backlogs, and completion rules live in [docs/tasks](./docs/tasks/README.md).
+The master roadmap is tracked in [TASKS.md](./TASKS.md). Detailed batches, project backlogs, and completion rules live in [docs/tasks](./docs/tasks/README.md). A consolidated project analysis and forward plan is tracked in [PROJECT_ANALYSIS_AND_ROADMAP.md](./PROJECT_ANALYSIS_AND_ROADMAP.md).
 
 ## Next Work
 
-The current product priority is the legacy migration batch. Project Planner, Odd/Even, Dev Logger, and Recipe Book are complete; Client Panel is the next legacy migration candidate.
+The current priority is to keep documentation aligned as the product changes, then continue with a small UI polish cycle for themes, buttons, search controls, dropdown states, and repo/demo actions.
+
+After that, the strongest portfolio-value path is the next legacy migration: Client Panel. If a smaller project is preferred first, Flashcards, Timer, and Digital Clock are the lowest-risk candidates from the backlog.
 
 ## Migrated Projects
 

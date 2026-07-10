@@ -2,9 +2,19 @@
 
 Widgets enhance the admin dashboard and are not separate catalog projects.
 
-- [ ] Add a compact Digital Clock widget with localized date and 12/24-hour preference.
-- [ ] Add a weather-status widget or icon with loading, unavailable, and stale-data states.
-- [ ] Decide whether widgets are configurable, reorderable, or fixed.
-- [ ] Persist user widget preferences when configuration is added.
-- [ ] Verify widget layout across desktop, tablet, and mobile widths.
-- [ ] Add focused unit tests and one dashboard E2E check.
+## Current Scope
+
+The dashboard currently uses fixed widgets. They provide quick ambient context, not a configurable widget system.
+
+- [x] Add a compact Digital Clock widget with localized time and date.
+- [x] Add a fixed weather summary widget for Skopje.
+- [x] Keep dashboard widgets fixed for the current portfolio release.
+- [x] Verify the dashboard widget area through the existing dashboard and theme E2E coverage.
+
+## Future Enhancements
+
+- [ ] Add a 12/24-hour clock preference.
+- [ ] Add configurable weather loading, unavailable, and stale-data states.
+- [ ] Decide whether widgets should become configurable or reorderable.
+- [ ] Persist user widget preferences if configuration is added.
+- [ ] Add focused widget unit tests if widget behavior becomes configurable.

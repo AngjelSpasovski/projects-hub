@@ -12,8 +12,9 @@ Detailed active work is tracked in [`docs/tasks/`](./docs/tasks/README.md). A pr
 - [x] Build the JavaScript Quiz from the reviewed question material.
 - [x] Build the To-Do List with LocalStorage.
 - [x] Build the Expense Tracker with Chart.js.
-- [x] Add Digital Clock and weather dashboard widgets.
+- [x] Add fixed Digital Clock and weather summary dashboard widgets.
 - [x] Start legacy migrations with Project Planner, Odd/Even, and Dev Logger.
+- [x] Add consolidated project analysis and roadmap documentation.
 
 ## Foundation
 
