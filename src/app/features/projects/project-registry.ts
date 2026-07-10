@@ -360,5 +360,22 @@ export const PROJECTS: PortfolioProject[] = [
     layout: 'wide',
     repositoryUrl: `${REPOSITORY_BASE_URL}/timer`,
     demoUrl: null
+  },
+  {
+    order: 220,
+    id: 'digital-clock',
+    titleKey: 'PROJECTS.DIGITAL_CLOCK.TITLE',
+    summaryKey: 'PROJECTS.DIGITAL_CLOCK.SUMMARY',
+    categoryKey: 'CATEGORIES.UTILITIES',
+    tags: ['Angular', 'TypeScript', 'Signals', 'Intl'],
+    status: 'ready',
+    image: 'assets/project-covers/digital-clock.svg',
+    route: '/admin/projects/digital-clock',
+    updatedAt: '2026-07-10',
+    createdAt: '2026-07-10',
+    difficulty: 'beginner',
+    layout: 'wide',
+    repositoryUrl: `${REPOSITORY_BASE_URL}/digital-clock`,
+    demoUrl: null
   }
 ];

@@ -151,6 +151,10 @@
     "TIMER": {
       "TITLE": "Timer",
       "SUMMARY": "Countdown timer with presets, custom duration, pause and resume controls, completion state, and persisted selection."
+    },
+    "DIGITAL_CLOCK": {
+      "TITLE": "Digital Clock",
+      "SUMMARY": "Live clock with date display, 12/24-hour mode, timezone selection, and persisted settings."
     }
   },
   "PROJECT_PLANNER": {
@@ -1289,6 +1293,44 @@
       "IDLE": "Ready",
       "PAUSED": "Paused",
       "RUNNING": "Running"
+    }
+  },
+  "DIGITAL_CLOCK": {
+    "TITLE": "Digital Clock",
+    "DESCRIPTION": "A live digital clock with timezone selection, date display, 12-hour and 24-hour modes, and persisted settings.",
+    "ACTIONS": {
+      "REFRESH": "Refresh"
+    },
+    "FEATURES": {
+      "LIVE": "The clock refreshes every second and keeps the display current.",
+      "STORAGE": "LocalStorage keeps the selected timezone and display mode after reloads.",
+      "TIMEZONE": "Timezone selection uses built-in Intl formatting without external APIs."
+    },
+    "MODE": {
+      "TWELVE": "12-hour",
+      "TWENTY_FOUR": "24-hour"
+    },
+    "SETTINGS": {
+      "EYEBROW": "Clock settings",
+      "MODE": "Clock mode",
+      "TIMEZONE": "Timezone",
+      "TITLE": "Display options"
+    },
+    "STAGE": {
+      "EYEBROW": "Live time",
+      "TITLE": "Current time"
+    },
+    "STATS": {
+      "DATE": "Date",
+      "MODE": "Mode",
+      "OFFSET": "Offset"
+    },
+    "TIMEZONES": {
+      "LONDON": "London",
+      "NEW_YORK": "New York",
+      "SKOPJE": "Skopje",
+      "TOKYO": "Tokyo",
+      "UTC": "UTC"
     }
   },
   "EXPENSE_TRACKER": {

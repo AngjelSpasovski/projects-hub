@@ -30,6 +30,7 @@ Complete this batch before adding a large number of new projects.
 - [x] Clarify project detail actions: local live workspace focus stays in-app, external demos render only when a project has `demoUrl`, and repository links remain separate.
 - [x] Apply the same external demo rule in the project preview dialog.
 - [x] Add missing shared radius token used by dialog styling.
+- [x] Normalize Flashcards, Timer, and Digital Clock layouts for shared spacing, stat cards, mobile overflow, and desktop fit.
 
 ## Existing Project Review
 

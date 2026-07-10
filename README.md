@@ -20,7 +20,7 @@ The app opens directly into an admin-style dashboard where projects are browsed 
 - Fixed dashboard clock and weather summary widgets
 - Distinctive illustrated catalog covers with separate live-project screenshots for documentation
 - Unified project workspace containing metadata and the interactive application
-- Lazy-loaded Calculator, Tic Tac Toe, Hang Man, Weather, Music Event, JavaScript Quiz, To-Do List, Expense Tracker, Technical Documentation, Movie Search, REST Countries, Currency Converter, Quotes API, Sticky Notes, Grocery List, Project Planner, Odd/Even Counter, Dev Logger, Recipe Book, Flashcards, and Timer mini projects
+- Lazy-loaded Calculator, Tic Tac Toe, Hang Man, Weather, Music Event, JavaScript Quiz, To-Do List, Expense Tracker, Technical Documentation, Movie Search, REST Countries, Currency Converter, Quotes API, Sticky Notes, Grocery List, Project Planner, Odd/Even Counter, Dev Logger, Recipe Book, Flashcards, Timer, and Digital Clock mini projects
 - Unit tests for app shell, dashboard logic, registry metadata, shared services, and mini project behavior
 - Playwright smoke tests for catalog navigation, view switching, and language switching
 
@@ -64,6 +64,7 @@ Exact installed versions are tracked in [DEPENDENCIES.md](./DEPENDENCIES.md).
 | Recipe Book | Ready | Migrated as a recipe list, detail, and shopping list workflow with reactive forms and typed signal state. |
 | Flashcards | Ready | Added as a study deck manager with reveal/review flow, editing, shuffle, and LocalStorage persistence. |
 | Timer | Ready | Added as a countdown timer with presets, custom duration, pause/resume controls, completion state, and persistence. |
+| Digital Clock | Ready | Added as a live clock with date display, 12/24-hour mode, timezone selection, and persisted settings. |
 
 The master roadmap is tracked in [TASKS.md](./TASKS.md). Detailed batches, project backlogs, and completion rules live in [docs/tasks](./docs/tasks/README.md). A consolidated project analysis and forward plan is tracked in [PROJECT_ANALYSIS_AND_ROADMAP.md](./PROJECT_ANALYSIS_AND_ROADMAP.md).
 
@@ -71,7 +72,7 @@ The master roadmap is tracked in [TASKS.md](./TASKS.md). Detailed batches, proje
 
 Documentation alignment and the first shared UI polish pass are complete. Continue visual QA as larger features are added, especially across Realm, white, dark, and blue themes.
 
-After that, the strongest portfolio-value path is the next legacy migration: Client Panel. If a smaller project is preferred first, Digital Clock is the lowest-risk candidate from the backlog.
+After that, the strongest portfolio-value path is the next legacy migration: Client Panel. Smaller utility candidates can continue from the remaining backlog if a lower-risk cycle is preferred.
 
 ## Migrated Projects
 
@@ -193,6 +194,14 @@ Timer is a countdown productivity mini project. It includes preset durations, cu
 
 Angular coverage: standalone component, template-driven forms, signals, computed progress and display time, interval cleanup with `DestroyRef`, LocalStorage persistence, lazy loading, illustrated cover, focused unit tests, and e2e workflow coverage.
 
+### Digital Clock
+
+Folder: [`src/app/features/projects/digital-clock`](./src/app/features/projects/digital-clock)
+
+Digital Clock is a live time utility mini project. It includes a ticking digital display, full date output, 12-hour and 24-hour modes, timezone selection, UTC offset display, refresh action, and persisted settings.
+
+Angular coverage: standalone component, template-driven controls, signals, computed time/date/offset labels, interval cleanup with `DestroyRef`, `Intl.DateTimeFormat` timezone formatting, LocalStorage persistence, lazy loading, illustrated cover, focused unit tests, and e2e workflow coverage.
+
 ## Getting Started
 
 Install dependencies:
@@ -249,6 +258,7 @@ src/app/
     projects/
       calculator/
       dev-logger/
+      digital-clock/
       expense-tracker/
       flashcards/
       hang-man/

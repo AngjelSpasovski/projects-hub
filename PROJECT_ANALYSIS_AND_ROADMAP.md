@@ -18,7 +18,7 @@ The project is in a stable portfolio-ready phase.
 - Unit tests pass.
 - Playwright end-to-end smoke tests pass.
 - The repository has a clean project structure.
-- The catalog currently contains 21 ready mini projects.
+- The catalog currently contains 22 ready mini projects.
 - Shared layout, themes, translations, metadata, covers, routing, tests, and docs are in place.
 
 Latest local verification from this review:
@@ -277,6 +277,13 @@ The catalog currently contains these ready projects:
     - Completion state and completed-session count.
     - LocalStorage persistence for selected duration.
 
+22. `Digital Clock`
+    - Live ticking time display.
+    - Full date display.
+    - 12-hour and 24-hour modes.
+    - Timezone selection and UTC offset display.
+    - LocalStorage persistence for selected settings.
+
 ## 7. Important Resolved Problems
 
 Layout and scrolling:
@@ -367,11 +374,9 @@ Encoding:
 
 ### Priority 3: Next Small Mini Project
 
-Good candidates before the next large migration:
+The low-risk LocalStorage/productivity batch is complete through `Digital Clock`.
 
-- `Digital Clock`
-
-These are lower-risk additions and can reuse the current standalone project pattern.
+Remaining smaller backlog items can still be used for short cycles, but the next stronger portfolio step is likely a larger workflow migration.
 
 ### Priority 4: Next Legacy Migration
 
@@ -429,7 +434,7 @@ The documentation alignment and first UI polish pass are complete.
 
 After that, choose one of two paths:
 
-- Small, low-risk feature path: implement `Digital Clock`.
+- Small, low-risk feature path: continue with another utility or game from `NEW_PROJECTS_BACKLOG.md`.
 - Bigger portfolio-value path: migrate `Client Panel`.
 
-For portfolio impact, `Client Panel` is the stronger next feature because it can demonstrate CRUD workflows, route handling, validation, guarded/demo access, confirmations, and richer application state. For momentum and lower risk, `Digital Clock` is better.
+For portfolio impact, `Client Panel` is the stronger next feature because it can demonstrate CRUD workflows, route handling, validation, guarded/demo access, confirmations, and richer application state. For momentum and lower risk, choose another small utility or game from the backlog.

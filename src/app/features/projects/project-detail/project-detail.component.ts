@@ -41,7 +41,9 @@ const PROJECT_COMPONENT_LOADERS: Record<string, () => Promise<Type<unknown>>> = 
   'recipe-book': () =>
     import('../recipe-book/recipe-book.component').then((component) => component.RecipeBookComponent),
   flashcards: () => import('../flashcards/flashcards.component').then((component) => component.FlashcardsComponent),
-  timer: () => import('../timer/timer.component').then((component) => component.TimerComponent)
+  timer: () => import('../timer/timer.component').then((component) => component.TimerComponent),
+  'digital-clock': () =>
+    import('../digital-clock/digital-clock.component').then((component) => component.DigitalClockComponent)
 };
 
 @Component({

@@ -37,7 +37,7 @@
   border: 1px solid var(--project-border);
   border-radius: 8px;
   display: grid;
-  gap: 0.7rem;
+  gap: 0.75rem;
   min-width: 0;
   padding: 0.75rem;
 }
@@ -169,11 +169,13 @@ p {
   border-radius: 8px;
   display: grid;
   gap: 0.15rem;
+  min-width: 0;
   padding: 0.6rem 0.7rem;
 }
 
 .stats-grid strong {
-  font-size: 1.2rem;
+  font-size: 1.05rem;
+  overflow-wrap: anywhere;
 }
 
 .form-grid {
@@ -288,10 +290,26 @@ small.error {
 }
 
 @media (max-width: 1100px) {
+  :host {
+    height: auto;
+    overflow: visible;
+  }
+
+  .flashcards-page,
+  .flashcards-shell {
+    height: auto;
+    overflow: visible;
+  }
+
   .flashcards-shell,
   .form-grid,
   .card-row {
     grid-template-columns: 1fr;
+  }
+
+  .study-panel,
+  .cards-panel {
+    overflow: visible;
   }
 }
 

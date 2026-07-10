@@ -6,7 +6,7 @@
   width: 100%;
 }
 
-.timer-page {
+.digital-clock-page {
   display: grid;
   height: 100%;
   min-height: 0;
@@ -14,34 +14,33 @@
   width: 100%;
 }
 
-.timer-shell {
+.clock-shell {
   background:
-    radial-gradient(circle at 78% 10%, color-mix(in srgb, var(--app-accent) 18%, transparent), transparent 18rem),
+    radial-gradient(circle at 18% 12%, color-mix(in srgb, var(--app-accent) 18%, transparent), transparent 18rem),
     var(--project-bg);
   border: 1px solid var(--project-border);
   border-radius: 8px;
   color: var(--project-text);
   display: grid;
   gap: 0.75rem;
-  grid-template-columns: minmax(18rem, 0.9fr) minmax(0, 1.1fr);
+  grid-template-columns: minmax(18rem, 0.95fr) minmax(0, 1.05fr);
   height: 100%;
   min-height: 0;
   overflow: hidden;
   padding: 0.7rem;
 }
 
-.timer-stage,
-.timer-panel,
-.preset-panel,
-.custom-form,
+.clock-stage,
+.clock-panel,
+.settings-panel,
 .feature-list article {
   background: var(--project-shell);
   border: 1px solid var(--project-border);
   border-radius: 8px;
 }
 
-.timer-stage,
-.timer-panel {
+.clock-stage,
+.clock-panel {
   align-content: start;
   display: grid;
   gap: 0.75rem;
@@ -51,14 +50,14 @@
   padding: 0.75rem;
 }
 
-.timer-panel {
-  grid-template-rows: auto auto auto minmax(0, 1fr);
+.clock-panel {
+  grid-template-rows: auto auto minmax(0, 1fr);
   overflow: hidden;
 }
 
 .stage-heading,
 .panel-heading,
-.timer-actions {
+.clock-actions {
   align-items: center;
   display: flex;
   flex-wrap: wrap;
@@ -70,7 +69,7 @@
 .panel-heading span,
 label > span,
 .stats-grid span,
-.preset-button span {
+.clock-display > span {
   color: var(--project-text-muted);
   font-size: 0.72rem;
   font-weight: 800;
@@ -94,32 +93,17 @@ p {
   padding: 0.22rem 0.58rem;
 }
 
-.timer-ring {
-  --progress: 0%;
-  aspect-ratio: 1;
+.clock-display {
   background:
-    radial-gradient(circle, var(--project-shell) 0 58%, transparent 59%),
-    conic-gradient(var(--app-accent) var(--progress), var(--project-surface-muted) 0);
-  border-radius: 50%;
+    linear-gradient(135deg, color-mix(in srgb, var(--app-accent-soft) 58%, var(--project-surface)), var(--project-shell));
+  border: 1px solid color-mix(in srgb, var(--app-accent) 32%, var(--project-border));
+  border-radius: 8px;
   display: grid;
-  justify-self: center;
-  max-height: 22rem;
-  min-height: 15rem;
+  gap: 0.65rem;
+  min-height: 20rem;
+  padding: clamp(1rem, 3vw, 2rem);
   place-items: center;
-  width: min(100%, 22rem);
-}
-
-.timer-ring > div {
-  display: grid;
-  gap: 0.2rem;
-  place-items: center;
-}
-
-.timer-ring span {
-  color: var(--project-text-muted);
-  font-size: 0.82rem;
-  font-weight: 800;
-  text-transform: uppercase;
+  text-align: center;
 }
 
 output {
@@ -131,26 +115,13 @@ output {
   line-height: 1;
 }
 
-.complete-state {
-  align-items: center;
-  background: color-mix(in srgb, #22c55e 14%, var(--project-surface));
-  border: 1px solid color-mix(in srgb, #22c55e 38%, var(--project-border));
-  border-radius: 8px;
-  display: flex;
-  gap: 0.65rem;
-  padding: 0.65rem;
-}
-
-.complete-state i {
-  color: #22c55e;
-  font-size: 1.45rem;
-}
-
-.complete-state p {
+.clock-display p {
   color: var(--project-text-muted);
+  font-size: clamp(1rem, 1.8vw, 1.35rem);
+  overflow-wrap: anywhere;
 }
 
-.timer-actions {
+.clock-actions {
   justify-content: center;
 }
 
@@ -175,51 +146,37 @@ output {
   overflow-wrap: anywhere;
 }
 
-.preset-panel,
-.custom-form {
+.settings-panel {
   display: grid;
   gap: 0.65rem;
   padding: 0.75rem;
 }
 
-.preset-grid {
-  display: grid;
-  gap: 0.55rem;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
-.preset-button {
-  background: var(--project-control);
+.mode-toggle {
+  background: var(--project-bg);
   border: 1px solid var(--project-border);
   border-radius: 8px;
-  color: var(--project-text);
-  cursor: pointer;
   display: grid;
-  gap: 0.25rem;
-  min-height: 4.4rem;
-  padding: 0.65rem;
-  text-align: left;
+  gap: 0.4rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding: 0.35rem;
 }
 
-.preset-button.active {
+.mode-toggle button {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: var(--project-text-muted);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  padding: 0.55rem 0.7rem;
+}
+
+.mode-toggle button.active {
   background: var(--app-accent);
   border-color: var(--app-accent);
   color: #fff;
-}
-
-.preset-button.active span {
-  color: rgba(255, 255, 255, 0.78);
-}
-
-.preset-button strong {
-  font-size: 1.25rem;
-}
-
-.time-inputs {
-  align-items: end;
-  display: grid;
-  gap: 0.6rem;
-  grid-template-columns: repeat(2, minmax(6rem, 0.5fr)) auto;
 }
 
 label {
@@ -231,12 +188,6 @@ label {
   background-color: var(--project-bg);
   border-color: var(--project-border);
   color: var(--project-text);
-  font-variant-numeric: tabular-nums;
-}
-
-small.error {
-  color: #fca5a5;
-  font-weight: 800;
 }
 
 .feature-list {
@@ -268,29 +219,28 @@ small.error {
     overflow: visible;
   }
 
-  .timer-page,
-  .timer-shell {
+  .digital-clock-page,
+  .clock-shell {
     height: auto;
     overflow: visible;
   }
 
-  .timer-shell,
-  .preset-grid {
+  .clock-shell {
     grid-template-columns: 1fr;
   }
 
-  .timer-panel {
+  .clock-panel {
     overflow: visible;
   }
 }
 
 @media (max-width: 720px) {
   .stats-grid,
-  .time-inputs {
+  .mode-toggle {
     grid-template-columns: 1fr;
   }
 
-  .timer-ring {
-    min-height: 13rem;
+  .clock-display {
+    min-height: 15rem;
   }
 }

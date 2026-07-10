@@ -17,6 +17,7 @@ Detailed active work is tracked in [`docs/tasks/`](./docs/tasks/README.md). A pr
 - [x] Add consolidated project analysis and roadmap documentation.
 - [x] Add Flashcards as the first new LocalStorage productivity mini project.
 - [x] Add Timer as a countdown productivity mini project.
+- [x] Add Digital Clock as a live timezone utility mini project.
 
 ## Foundation
 

@@ -1,0 +1,85 @@
+<section class="digital-clock-page">
+  <div class="clock-shell" [attr.aria-label]="'DIGITAL_CLOCK.TITLE' | translate">
+    <section class="clock-stage">
+      <div class="stage-heading">
+        <div>
+          <span>{{ 'DIGITAL_CLOCK.STAGE.EYEBROW' | translate }}</span>
+          <h3>{{ 'DIGITAL_CLOCK.STAGE.TITLE' | translate }}</h3>
+        </div>
+        <strong>{{ timezoneOffsetLabel() }}</strong>
+      </div>
+
+      <div class="clock-display">
+        <span>{{ selectedTimezone().labelKey | translate }}</span>
+        <output>{{ timeLabel() }}</output>
+        <p>{{ dateLabel() }}</p>
+      </div>
+
+      <div class="clock-actions">
+        <button type="button" class="btn btn-primary btn-icon" (click)="refreshNow()">
+          <i class="pi pi-refresh"></i>
+          <span>{{ 'DIGITAL_CLOCK.ACTIONS.REFRESH' | translate }}</span>
+        </button>
+      </div>
+    </section>
+
+    <aside class="clock-panel">
+      <div class="stats-grid">
+        <article>
+          <span>{{ 'DIGITAL_CLOCK.STATS.DATE' | translate }}</span>
+          <strong>{{ isoDateLabel() }}</strong>
+        </article>
+        <article>
+          <span>{{ 'DIGITAL_CLOCK.STATS.MODE' | translate }}</span>
+          <strong>{{ modeLabel() | translate }}</strong>
+        </article>
+        <article>
+          <span>{{ 'DIGITAL_CLOCK.STATS.OFFSET' | translate }}</span>
+          <strong>{{ timezoneOffsetLabel() }}</strong>
+        </article>
+      </div>
+
+      <section class="settings-panel">
+        <div class="panel-heading">
+          <div>
+            <span>{{ 'DIGITAL_CLOCK.SETTINGS.EYEBROW' | translate }}</span>
+            <h3>{{ 'DIGITAL_CLOCK.SETTINGS.TITLE' | translate }}</h3>
+          </div>
+        </div>
+
+        <div class="mode-toggle" [attr.aria-label]="'DIGITAL_CLOCK.SETTINGS.MODE' | translate">
+          <button type="button" [class.active]="mode() === '24'" (click)="updateMode('24')">
+            {{ 'DIGITAL_CLOCK.MODE.TWENTY_FOUR' | translate }}
+          </button>
+          <button type="button" [class.active]="mode() === '12'" (click)="updateMode('12')">
+            {{ 'DIGITAL_CLOCK.MODE.TWELVE' | translate }}
+          </button>
+        </div>
+
+        <label>
+          <span>{{ 'DIGITAL_CLOCK.SETTINGS.TIMEZONE' | translate }}</span>
+          <select class="form-control" [ngModel]="timezone()" (ngModelChange)="updateTimezone($event)" name="timezone">
+            @for (timezoneOption of timezones; track timezoneOption.id) {
+              <option [value]="timezoneOption.id">{{ timezoneOption.labelKey | translate }}</option>
+            }
+          </select>
+        </label>
+      </section>
+
+      <section class="feature-list">
+        <article>
+          <i class="pi pi-clock"></i>
+          <p>{{ 'DIGITAL_CLOCK.FEATURES.LIVE' | translate }}</p>
+        </article>
+        <article>
+          <i class="pi pi-globe"></i>
+          <p>{{ 'DIGITAL_CLOCK.FEATURES.TIMEZONE' | translate }}</p>
+        </article>
+        <article>
+          <i class="pi pi-save"></i>
+          <p>{{ 'DIGITAL_CLOCK.FEATURES.STORAGE' | translate }}</p>
+        </article>
+      </section>
+    </aside>
+  </div>
+</section>
