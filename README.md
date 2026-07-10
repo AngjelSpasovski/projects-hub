@@ -20,7 +20,7 @@ The app opens directly into an admin-style dashboard where projects are browsed 
 - Fixed dashboard clock and weather summary widgets
 - Distinctive illustrated catalog covers with separate live-project screenshots for documentation
 - Unified project workspace containing metadata and the interactive application
-- Lazy-loaded Calculator, Tic Tac Toe, Hang Man, Weather, Music Event, JavaScript Quiz, To-Do List, Expense Tracker, Technical Documentation, Movie Search, REST Countries, Currency Converter, Quotes API, Sticky Notes, Grocery List, Project Planner, Odd/Even Counter, Dev Logger, and Recipe Book mini projects
+- Lazy-loaded Calculator, Tic Tac Toe, Hang Man, Weather, Music Event, JavaScript Quiz, To-Do List, Expense Tracker, Technical Documentation, Movie Search, REST Countries, Currency Converter, Quotes API, Sticky Notes, Grocery List, Project Planner, Odd/Even Counter, Dev Logger, Recipe Book, Flashcards, and Timer mini projects
 - Unit tests for app shell, dashboard logic, registry metadata, shared services, and mini project behavior
 - Playwright smoke tests for catalog navigation, view switching, and language switching
 
@@ -62,6 +62,8 @@ Exact installed versions are tracked in [DEPENDENCIES.md](./DEPENDENCIES.md).
 | Odd/Even Counter | Ready | Migrated as a compact Angular timing and data-binding demo with signal-derived odd/even lanes. |
 | Dev Logger | Ready | Migrated as a CRUD logger with validated entries, level filters, search, and typed signal state. |
 | Recipe Book | Ready | Migrated as a recipe list, detail, and shopping list workflow with reactive forms and typed signal state. |
+| Flashcards | Ready | Added as a study deck manager with reveal/review flow, editing, shuffle, and LocalStorage persistence. |
+| Timer | Ready | Added as a countdown timer with presets, custom duration, pause/resume controls, completion state, and persistence. |
 
 The master roadmap is tracked in [TASKS.md](./TASKS.md). Detailed batches, project backlogs, and completion rules live in [docs/tasks](./docs/tasks/README.md). A consolidated project analysis and forward plan is tracked in [PROJECT_ANALYSIS_AND_ROADMAP.md](./PROJECT_ANALYSIS_AND_ROADMAP.md).
 
@@ -69,7 +71,7 @@ The master roadmap is tracked in [TASKS.md](./TASKS.md). Detailed batches, proje
 
 Documentation alignment and the first shared UI polish pass are complete. Continue visual QA as larger features are added, especially across Realm, white, dark, and blue themes.
 
-After that, the strongest portfolio-value path is the next legacy migration: Client Panel. If a smaller project is preferred first, Flashcards, Timer, and Digital Clock are the lowest-risk candidates from the backlog.
+After that, the strongest portfolio-value path is the next legacy migration: Client Panel. If a smaller project is preferred first, Digital Clock is the lowest-risk candidate from the backlog.
 
 ## Migrated Projects
 
@@ -175,6 +177,22 @@ Recipe Book is a migrated Angular recipe workflow from the old list/detail/shopp
 
 Angular coverage: standalone component, reactive forms, signals, computed recipe and shopping totals, lazy loading, illustrated cover, focused unit tests, and e2e workflow coverage.
 
+### Flashcards
+
+Folder: [`src/app/features/projects/flashcards`](./src/app/features/projects/flashcards)
+
+Flashcards is a LocalStorage study deck mini project. It includes deck filters, reveal answer flow, known/study-again review actions, progress counters, card creation, edit and delete actions, shuffle, reset review, and demo reset.
+
+Angular coverage: standalone component, template-driven forms, signals, computed deck and review state, LocalStorage persistence, lazy loading, illustrated cover, focused unit tests, and e2e workflow coverage.
+
+### Timer
+
+Folder: [`src/app/features/projects/timer`](./src/app/features/projects/timer)
+
+Timer is a countdown productivity mini project. It includes preset durations, custom minutes and seconds, start, pause, resume, reset and restart actions, completion state, completed session count, and persisted selected duration.
+
+Angular coverage: standalone component, template-driven forms, signals, computed progress and display time, interval cleanup with `DestroyRef`, LocalStorage persistence, lazy loading, illustrated cover, focused unit tests, and e2e workflow coverage.
+
 ## Getting Started
 
 Install dependencies:
@@ -232,10 +250,12 @@ src/app/
       calculator/
       dev-logger/
       expense-tracker/
+      flashcards/
       hang-man/
       javascript-quiz/
       odd-even/
       recipe-book/
+      timer/
       tic-tac-toe/
       todo-list/
       weather/

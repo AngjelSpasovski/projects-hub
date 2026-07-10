@@ -143,6 +143,14 @@
     "RECIPE_BOOK": {
       "TITLE": "Recipe Book",
       "SUMMARY": "Legacy recipe list, detail, and shopping list workflows rebuilt with reactive forms and typed signal state."
+    },
+    "FLASHCARDS": {
+      "TITLE": "Flashcards",
+      "SUMMARY": "Study deck manager with reveal, correct/incorrect review, editing, shuffle, and LocalStorage persistence."
+    },
+    "TIMER": {
+      "TITLE": "Timer",
+      "SUMMARY": "Countdown timer with presets, custom duration, pause and resume controls, completion state, and persisted selection."
     }
   },
   "PROJECT_PLANNER": {
@@ -1175,6 +1183,113 @@
       "SHOPPING": "Shopping qty"
     },
     "TITLE": "Recipe Book"
+  },
+  "FLASHCARDS": {
+    "TITLE": "Flashcards",
+    "DESCRIPTION": "A study deck manager focused on reveal, review progress, editing, and local persistence.",
+    "ACTIONS": {
+      "DELETE": "Delete",
+      "EDIT": "Edit",
+      "MARK_AGAIN": "Study again",
+      "MARK_KNOWN": "Known",
+      "NEXT": "Next",
+      "PREVIOUS": "Previous",
+      "RESET_DEMO": "Reset demo",
+      "RESET_REVIEW": "Reset review",
+      "REVEAL": "Reveal answer",
+      "SHUFFLE": "Shuffle"
+    },
+    "DECKS": {
+      "ALL": "All decks",
+      "TITLE": "Deck filters"
+    },
+    "EMPTY": {
+      "TEXT": "Add a card or choose another deck to continue.",
+      "TITLE": "No cards in this deck"
+    },
+    "FEATURES": {
+      "DECKS": "Deck filters keep study sessions focused.",
+      "REVIEW": "Correct and incorrect actions track review progress.",
+      "STORAGE": "LocalStorage keeps cards available after reloads."
+    },
+    "FORM": {
+      "ADD": "Add card",
+      "ADD_TITLE": "New card",
+      "ANSWER": "Answer",
+      "ANSWER_PLACEHOLDER": "Short answer or explanation",
+      "ANSWER_REQUIRED": "Answer is required",
+      "CANCEL": "Cancel",
+      "CHARACTERS": "{{count}} / {{max}} characters",
+      "DECK": "Deck",
+      "DECK_PLACEHOLDER": "Example: Angular",
+      "EDIT_TITLE": "Edit card",
+      "EYEBROW": "Card form",
+      "QUESTION": "Question",
+      "QUESTION_PLACEHOLDER": "Example: What is a signal?",
+      "QUESTION_REQUIRED": "Question is required",
+      "SAVE": "Save changes"
+    },
+    "STATS": {
+      "CORRECT": "Correct",
+      "MASTERED": "Mastered",
+      "TOTAL": "Cards"
+    },
+    "STUDY": {
+      "EYEBROW": "Study session",
+      "HIDDEN_ANSWER": "Reveal the answer when you are ready.",
+      "TITLE": "Flashcard review"
+    }
+  },
+  "TIMER": {
+    "TITLE": "Timer",
+    "DESCRIPTION": "A countdown timer for focused work sessions with presets, custom duration, pause, resume, and completion state.",
+    "ACTIONS": {
+      "APPLY": "Apply",
+      "PAUSE": "Pause",
+      "RESET": "Reset",
+      "RESTART": "Restart",
+      "RESUME": "Resume",
+      "START": "Start"
+    },
+    "COMPLETE": {
+      "TEXT": "Reset or restart the timer when you are ready for another session.",
+      "TITLE": "Timer complete"
+    },
+    "FEATURES": {
+      "COMPLETE": "A completion state makes the end of each session obvious.",
+      "PRESETS": "Preset buttons cover short breaks and focus sessions.",
+      "STORAGE": "LocalStorage keeps the last selected duration after reloads."
+    },
+    "FORM": {
+      "EYEBROW": "Custom duration",
+      "MINUTES": "Minutes",
+      "REQUIRED": "Use a duration above zero.",
+      "SECONDS": "Seconds",
+      "TITLE": "Set timer"
+    },
+    "PRESETS": {
+      "EYEBROW": "Timer presets",
+      "FIVE": "Short focus",
+      "ONE": "Quick check",
+      "TEN": "Deep task",
+      "TITLE": "Choose duration",
+      "TWENTY_FIVE": "Pomodoro"
+    },
+    "STAGE": {
+      "EYEBROW": "Countdown",
+      "TITLE": "Focus timer"
+    },
+    "STATS": {
+      "COMPLETED": "Completed",
+      "PROGRESS": "Progress",
+      "SELECTED": "Selected"
+    },
+    "STATUS": {
+      "COMPLETED": "Completed",
+      "IDLE": "Ready",
+      "PAUSED": "Paused",
+      "RUNNING": "Running"
+    }
   },
   "EXPENSE_TRACKER": {
     "ACTIONS": {

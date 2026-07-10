@@ -15,6 +15,8 @@ Detailed active work is tracked in [`docs/tasks/`](./docs/tasks/README.md). A pr
 - [x] Add fixed Digital Clock and weather summary dashboard widgets.
 - [x] Start legacy migrations with Project Planner, Odd/Even, and Dev Logger.
 - [x] Add consolidated project analysis and roadmap documentation.
+- [x] Add Flashcards as the first new LocalStorage productivity mini project.
+- [x] Add Timer as a countdown productivity mini project.
 
 ## Foundation
 

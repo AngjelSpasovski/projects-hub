@@ -1,0 +1,152 @@
+<section class="timer-page">
+  <div class="timer-shell" [attr.aria-label]="'TIMER.TITLE' | translate">
+    <section class="timer-stage" [class.completed]="isCompleted()">
+      <div class="stage-heading">
+        <div>
+          <span>{{ 'TIMER.STAGE.EYEBROW' | translate }}</span>
+          <h3>{{ 'TIMER.STAGE.TITLE' | translate }}</h3>
+        </div>
+        <strong>{{ selectedLabel() }}</strong>
+      </div>
+
+      <div class="timer-ring" [style.--progress]="progress() + '%'">
+        <div>
+          <span>{{ status() === 'completed' ? ('TIMER.STATUS.COMPLETED' | translate) : ('TIMER.STATUS.' + status().toUpperCase() | translate) }}</span>
+          <output>{{ displayTime() }}</output>
+        </div>
+      </div>
+
+      @if (isCompleted()) {
+        <div class="complete-state">
+          <i class="pi pi-check-circle"></i>
+          <div>
+            <strong>{{ 'TIMER.COMPLETE.TITLE' | translate }}</strong>
+            <p>{{ 'TIMER.COMPLETE.TEXT' | translate }}</p>
+          </div>
+        </div>
+      }
+
+      <div class="timer-actions">
+        @if (isPaused()) {
+          <button type="button" class="btn btn-primary btn-icon" (click)="resume()">
+            <i class="pi pi-play"></i>
+            <span>{{ 'TIMER.ACTIONS.RESUME' | translate }}</span>
+          </button>
+        } @else {
+          <button type="button" class="btn btn-primary btn-icon" (click)="start()" [disabled]="isRunning()">
+            <i class="pi pi-play"></i>
+            <span>{{ 'TIMER.ACTIONS.START' | translate }}</span>
+          </button>
+        }
+        <button type="button" class="btn btn-secondary btn-icon" (click)="pause()" [disabled]="!isRunning()">
+          <i class="pi pi-pause"></i>
+          <span>{{ 'TIMER.ACTIONS.PAUSE' | translate }}</span>
+        </button>
+        <button type="button" class="btn btn-ghost btn-icon" (click)="reset()">
+          <i class="pi pi-refresh"></i>
+          <span>{{ 'TIMER.ACTIONS.RESET' | translate }}</span>
+        </button>
+        <button type="button" class="btn btn-ghost btn-icon" (click)="restart()">
+          <i class="pi pi-undo"></i>
+          <span>{{ 'TIMER.ACTIONS.RESTART' | translate }}</span>
+        </button>
+      </div>
+    </section>
+
+    <aside class="timer-panel">
+      <div class="stats-grid">
+        <article>
+          <span>{{ 'TIMER.STATS.SELECTED' | translate }}</span>
+          <strong>{{ selectedLabel() }}</strong>
+        </article>
+        <article>
+          <span>{{ 'TIMER.STATS.PROGRESS' | translate }}</span>
+          <strong>{{ progress() }}%</strong>
+        </article>
+        <article>
+          <span>{{ 'TIMER.STATS.COMPLETED' | translate }}</span>
+          <strong>{{ completedCount() }}</strong>
+        </article>
+      </div>
+
+      <section class="preset-panel">
+        <div class="panel-heading">
+          <div>
+            <span>{{ 'TIMER.PRESETS.EYEBROW' | translate }}</span>
+            <h3>{{ 'TIMER.PRESETS.TITLE' | translate }}</h3>
+          </div>
+        </div>
+        <div class="preset-grid">
+          @for (preset of presets; track preset.seconds) {
+            <button
+              type="button"
+              class="preset-button"
+              [class.active]="selectedSeconds() === preset.seconds"
+              (click)="selectPreset(preset.seconds)"
+            >
+              <span>{{ preset.labelKey | translate }}</span>
+              <strong>{{ preset.seconds / 60 }}m</strong>
+            </button>
+          }
+        </div>
+      </section>
+
+      <form class="custom-form" (ngSubmit)="applyCustomDuration()" novalidate>
+        <div class="panel-heading">
+          <div>
+            <span>{{ 'TIMER.FORM.EYEBROW' | translate }}</span>
+            <h3>{{ 'TIMER.FORM.TITLE' | translate }}</h3>
+          </div>
+          @if (isDurationInvalid()) {
+            <small class="error">{{ 'TIMER.FORM.REQUIRED' | translate }}</small>
+          }
+        </div>
+        <div class="time-inputs">
+          <label>
+            <span>{{ 'TIMER.FORM.MINUTES' | translate }}</span>
+            <input
+              type="text"
+              inputmode="numeric"
+              class="form-control"
+              [ngModel]="minutesInput()"
+              (ngModelChange)="updateMinutes($event)"
+              name="minutes"
+              placeholder="05"
+            />
+          </label>
+          <label>
+            <span>{{ 'TIMER.FORM.SECONDS' | translate }}</span>
+            <input
+              type="text"
+              inputmode="numeric"
+              class="form-control"
+              [ngModel]="secondsInput()"
+              (ngModelChange)="updateSeconds($event)"
+              name="seconds"
+              placeholder="00"
+            />
+          </label>
+          <button type="submit" class="btn btn-primary btn-icon">
+            <i class="pi pi-check"></i>
+            <span>{{ 'TIMER.ACTIONS.APPLY' | translate }}</span>
+          </button>
+        </div>
+      </form>
+
+      <section class="feature-list">
+        <article>
+          <i class="pi pi-sliders-h"></i>
+          <p>{{ 'TIMER.FEATURES.PRESETS' | translate }}</p>
+        </article>
+        <article>
+          <i class="pi pi-save"></i>
+          <p>{{ 'TIMER.FEATURES.STORAGE' | translate }}</p>
+        </article>
+        <article>
+          <i class="pi pi-bell"></i>
+          <p>{{ 'TIMER.FEATURES.COMPLETE' | translate }}</p>
+        </article>
+      </section>
+    </aside>
+  </div>
+</section>

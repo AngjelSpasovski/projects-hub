@@ -23,8 +23,8 @@ Duplicate ideas are consolidated. `To-Do List` appears once, and `Find the Word`
 
 - [x] Sticky Notes: create, edit, color, pin, delete, search, and LocalStorage persistence.
 - [x] Grocery List: quantities, categories, purchased state, filtering, and persistence.
-- [ ] Flashcards: decks, cards, reveal, progress, shuffle, and LocalStorage persistence.
-- [ ] Timer: countdown, presets, pause/resume, reset, and completion notification.
+- [x] Flashcards: decks, cards, reveal, progress, shuffle, and LocalStorage persistence.
+- [x] Timer: countdown, presets, pause/resume, reset, and completion notification.
 - [ ] Digital Clock: time, date, 12/24-hour mode, timezone selection, and persistence.
 
 ## Batch 4: Utilities And Games

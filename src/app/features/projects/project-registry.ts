@@ -326,5 +326,39 @@ export const PROJECTS: PortfolioProject[] = [
     layout: 'wide',
     repositoryUrl: `${REPOSITORY_BASE_URL}/recipe-book`,
     demoUrl: null
+  },
+  {
+    order: 200,
+    id: 'flashcards',
+    titleKey: 'PROJECTS.FLASHCARDS.TITLE',
+    summaryKey: 'PROJECTS.FLASHCARDS.SUMMARY',
+    categoryKey: 'CATEGORIES.UTILITIES',
+    tags: ['Angular', 'TypeScript', 'Forms', 'LocalStorage'],
+    status: 'ready',
+    image: 'assets/project-covers/flashcards.svg',
+    route: '/admin/projects/flashcards',
+    updatedAt: '2026-07-10',
+    createdAt: '2026-07-10',
+    difficulty: 'intermediate',
+    layout: 'wide',
+    repositoryUrl: `${REPOSITORY_BASE_URL}/flashcards`,
+    demoUrl: null
+  },
+  {
+    order: 210,
+    id: 'timer',
+    titleKey: 'PROJECTS.TIMER.TITLE',
+    summaryKey: 'PROJECTS.TIMER.SUMMARY',
+    categoryKey: 'CATEGORIES.UTILITIES',
+    tags: ['Angular', 'TypeScript', 'Signals', 'LocalStorage'],
+    status: 'ready',
+    image: 'assets/project-covers/timer.svg',
+    route: '/admin/projects/timer',
+    updatedAt: '2026-07-10',
+    createdAt: '2026-07-10',
+    difficulty: 'beginner',
+    layout: 'wide',
+    repositoryUrl: `${REPOSITORY_BASE_URL}/timer`,
+    demoUrl: null
   }
 ];

@@ -1,0 +1,302 @@
+:host {
+  display: block;
+  height: calc(100% - 0.75rem);
+  min-height: 0;
+  overflow: hidden;
+  width: 100%;
+}
+
+.flashcards-page {
+  display: grid;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  width: 100%;
+}
+
+.flashcards-shell {
+  background:
+    radial-gradient(circle at 12% 12%, color-mix(in srgb, var(--app-accent) 18%, transparent), transparent 18rem),
+    var(--project-bg);
+  border: 1px solid var(--project-border);
+  border-radius: 8px;
+  color: var(--project-text);
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: minmax(18rem, 0.82fr) minmax(0, 1.18fr);
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  padding: 0.7rem;
+}
+
+.study-panel,
+.cards-panel,
+.card-form {
+  background: var(--project-shell);
+  border: 1px solid var(--project-border);
+  border-radius: 8px;
+  display: grid;
+  gap: 0.7rem;
+  min-width: 0;
+  padding: 0.75rem;
+}
+
+.study-panel,
+.cards-panel {
+  align-content: start;
+  min-height: 0;
+}
+
+.study-panel {
+  overflow: auto;
+}
+
+.cards-panel {
+  grid-template-rows: auto auto minmax(0, 1fr);
+  overflow: hidden;
+}
+
+.panel-heading,
+.study-actions,
+.result-actions,
+.form-actions,
+.row-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  justify-content: space-between;
+}
+
+.panel-heading span,
+.field-header > span,
+label > span:not(.field-header),
+.study-card > span,
+.card-row span,
+.stats-grid span {
+  color: var(--project-text-muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+.panel-heading h3 {
+  font-size: 1.05rem;
+}
+
+.panel-heading strong {
+  background: var(--project-surface-muted);
+  border: 1px solid var(--project-border);
+  border-radius: 999px;
+  padding: 0.22rem 0.58rem;
+}
+
+.deck-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.deck-tab {
+  background: var(--project-control);
+  border: 1px solid var(--project-border);
+  border-radius: 999px;
+  color: var(--project-text-muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 0.35rem 0.7rem;
+}
+
+.deck-tab.active {
+  background: var(--app-accent);
+  border-color: var(--app-accent);
+  color: #fff;
+}
+
+.study-card {
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--app-accent-soft) 55%, var(--project-surface)), var(--project-shell));
+  border: 1px solid color-mix(in srgb, var(--app-accent) 32%, var(--project-border));
+  border-radius: 8px;
+  display: grid;
+  gap: 0.85rem;
+  min-height: 13.5rem;
+  padding: 1rem;
+}
+
+.study-card h4 {
+  font-size: 1.35rem;
+  line-height: 1.22;
+  overflow-wrap: anywhere;
+}
+
+.answer-panel {
+  background: var(--project-surface);
+  border: 1px dashed var(--project-border);
+  border-radius: 8px;
+  color: var(--project-text-muted);
+  min-height: 4.75rem;
+  padding: 0.85rem;
+}
+
+.study-card.revealed .answer-panel {
+  border-style: solid;
+  color: var(--project-text);
+}
+
+.result-actions {
+  justify-content: flex-start;
+}
+
+.stats-grid {
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.stats-grid article {
+  background: linear-gradient(135deg, var(--project-bg), var(--project-surface-muted));
+  border: 1px solid var(--project-border);
+  border-radius: 8px;
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.6rem 0.7rem;
+}
+
+.stats-grid strong {
+  font-size: 1.2rem;
+}
+
+.form-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: minmax(10rem, 0.45fr) minmax(0, 1fr);
+}
+
+label {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.field-header {
+  align-items: center;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.field-header small {
+  font-size: 0.72rem;
+  font-weight: 700;
+  overflow: hidden;
+  text-align: right;
+  text-overflow: ellipsis;
+  text-transform: none;
+  white-space: nowrap;
+}
+
+label:nth-child(3) {
+  grid-column: 1 / -1;
+}
+
+.form-control {
+  background-color: var(--project-bg);
+  border-color: var(--project-border);
+  color: var(--project-text);
+}
+
+textarea.form-control {
+  max-height: 5.5rem;
+  resize: vertical;
+}
+
+.form-control.invalid {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 0.2rem rgba(239, 68, 68, 0.18);
+}
+
+small {
+  color: var(--project-text-muted);
+}
+
+small.error {
+  color: #fca5a5;
+}
+
+.form-actions,
+.row-actions {
+  justify-content: flex-start;
+}
+
+.card-list {
+  display: grid;
+  gap: 0.55rem;
+  min-height: 0;
+  overflow: auto;
+  padding-right: 0.1rem;
+}
+
+.card-row {
+  align-items: start;
+  background: var(--project-surface);
+  border: 1px solid var(--project-border);
+  border-radius: 8px;
+  display: grid;
+  gap: 0.7rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding: 0.7rem;
+}
+
+.card-row.mastered {
+  border-color: color-mix(in srgb, #22c55e 42%, var(--project-border));
+}
+
+.card-row h4,
+.card-row p {
+  overflow-wrap: anywhere;
+}
+
+.card-row p {
+  color: var(--project-text-muted);
+  margin-top: 0.2rem;
+}
+
+.empty-state {
+  border: 1px dashed var(--project-border);
+  border-radius: 8px;
+  color: var(--project-text-muted);
+  display: grid;
+  gap: 0.45rem;
+  min-height: 13rem;
+  place-items: center;
+  text-align: center;
+}
+
+.empty-state i {
+  color: var(--app-accent);
+  font-size: 1.65rem;
+}
+
+@media (max-width: 1100px) {
+  .flashcards-shell,
+  .form-grid,
+  .card-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}

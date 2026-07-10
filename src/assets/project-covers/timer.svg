@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+  <title id="title">Timer project cover</title>
+  <desc id="desc">Illustrated countdown timer interface with preset controls.</desc>
+  <rect width="640" height="360" fill="#eef4ff"/>
+  <rect x="54" y="54" width="532" height="252" rx="22" fill="#ffffff" stroke="#c4d4f5" stroke-width="4"/>
+  <circle cx="276" cy="178" r="78" fill="#f8fbff" stroke="#2d3340" stroke-width="8"/>
+  <path d="M276 100a78 78 0 0 1 67 118" fill="none" stroke="#5865f2" stroke-width="14" stroke-linecap="round"/>
+  <path d="M276 118v62l38 28" fill="none" stroke="#2d3340" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="252" y="58" width="48" height="28" rx="8" fill="#2d3340"/>
+  <rect x="238" y="34" width="76" height="22" rx="9" fill="#f4d35e" stroke="#2d3340" stroke-width="5"/>
+  <rect x="394" y="112" width="126" height="34" rx="10" fill="#f4d35e" stroke="#2d3340" stroke-width="4"/>
+  <rect x="394" y="164" width="126" height="34" rx="10" fill="#93d5bd" stroke="#2d3340" stroke-width="4"/>
+  <rect x="394" y="216" width="126" height="34" rx="10" fill="#e9785f" stroke="#2d3340" stroke-width="4"/>
+  <circle cx="108" cy="111" r="8" fill="#93d5bd"/>
+  <circle cx="520" cy="76" r="8" fill="#5865f2"/>
+  <path d="M122 250h52M466 286h52M112 282h18M530 112h24" stroke="#2d3340" stroke-width="5" stroke-linecap="round"/>
+  <path d="M84 174h20M536 178h20M328 286h20" stroke="#5865f2" stroke-width="5" stroke-linecap="round"/>
+</svg>

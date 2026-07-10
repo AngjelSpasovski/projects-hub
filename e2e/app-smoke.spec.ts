@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+﻿import { expect, test } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => {
@@ -12,7 +12,7 @@ test('dashboard catalog supports view switching and project navigation', async (
   await page.getByRole('button', { name: 'EN' }).click();
 
   await expect(page.getByText('Overview of the small apps that will be migrated and added to this repo.')).toBeVisible();
-  await expect(page.getByText('19 project(s)')).toBeVisible();
+  await expect(page.getByText('21 project(s)')).toBeVisible();
 
   await page.getByRole('button', { name: /Detailed/ }).click();
   await expect(page.getByText('Difficulty').first()).toBeVisible();
@@ -28,14 +28,14 @@ test('dashboard catalog supports view switching and project navigation', async (
   await expect(page.locator('.project-workspace .project-live .surface-panel')).toHaveCount(0);
 
   await page.getByRole('link', { name: /Dashboard/ }).click();
-  await expect(page.getByText('19 project(s)')).toBeVisible();
+  await expect(page.getByText('21 project(s)')).toBeVisible();
 });
 
 test('theme switcher applies every theme without layout overflow', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 820 });
   await page.goto('/');
   await page.getByRole('button', { name: 'EN', exact: true }).click();
-  await expect(page.getByText('19 project(s)')).toBeVisible();
+  await expect(page.getByText('21 project(s)')).toBeVisible();
 
   const themes = [
     { label: 'Realm', value: 'realm' },
@@ -86,7 +86,7 @@ test('language switch renders Macedonian catalog labels', async ({ page }) => {
   await page.getByRole('button', { name: 'MK' }).click();
 
   await expect(page.getByRole('button', { name: /Детално/ })).toBeVisible();
-  await expect(page.getByText('19 проект(и)')).toBeVisible();
+  await expect(page.getByText('21 проект(и)')).toBeVisible();
   await expect(page.getByText('Калкулатор').first()).toBeVisible();
 });
 
@@ -170,7 +170,7 @@ test('admin shell keeps chrome fixed while dashboard catalog scrolls', async ({ 
   await page.setViewportSize({ width: 1280, height: 560 });
   await page.goto('/');
   await page.getByRole('button', { name: 'EN', exact: true }).click();
-  await expect(page.getByText('19 project(s)')).toBeVisible();
+  await expect(page.getByText('21 project(s)')).toBeVisible();
 
   const header = page.locator('.app-header');
   const sidebar = page.locator('.app-sidebar');
@@ -204,7 +204,7 @@ test('dashboard keeps the catalog scroll position at the catalog bottom', async 
   await page.setViewportSize({ width: 1280, height: 560 });
   await page.goto('/');
   await page.getByRole('button', { name: 'EN', exact: true }).click();
-  await expect(page.getByText('19 project(s)')).toBeVisible();
+  await expect(page.getByText('21 project(s)')).toBeVisible();
 
   const catalog = page.locator('.project-catalog');
 
@@ -225,7 +225,7 @@ test('desktop catalog and project workspaces fit without nested scrollbars', asy
   await page.setViewportSize({ width: 1920, height: 1080 });
   await page.goto('/');
   await page.getByRole('button', { name: 'EN', exact: true }).click();
-  await expect(page.getByText('19 project(s)')).toBeVisible();
+  await expect(page.getByText('21 project(s)')).toBeVisible();
 
   const routes = [
     'tic-tac-toe',
@@ -246,19 +246,24 @@ test('desktop catalog and project workspaces fit without nested scrollbars', asy
     'project-planner',
     'odd-even',
     'dev-logger',
-    'recipe-book'
+    'recipe-book',
+    'flashcards',
+    'timer'
   ];
 
   for (const route of routes) {
     await page.goto(`/admin/projects/${route}`);
     await expect(page.locator('.project-live')).toBeVisible();
+    const liveMetrics = await page.locator('.project-live').evaluate((element) => ({
+      fits: element.scrollHeight <= element.clientHeight + 1,
+      clientHeight: element.clientHeight,
+      scrollHeight: element.scrollHeight
+    }));
+
     expect(
-      await page.locator('.project-live').evaluate((element) => ({
-        fits: element.scrollHeight <= element.clientHeight + 1,
-        clientHeight: element.clientHeight,
-        scrollHeight: element.scrollHeight
-      }))
-    ).toMatchObject({ fits: true });
+      liveMetrics.fits,
+      `${route}: clientHeight=${liveMetrics.clientHeight}, scrollHeight=${liveMetrics.scrollHeight}`
+    ).toBe(true);
   }
 });
 
@@ -295,7 +300,7 @@ test('project detail remains responsive on compact desktop and mobile viewports'
 test('mini project refinements keep core interactions stable', async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('projects-hub-language', 'en'));
   await page.goto('/');
-  await expect(page.getByText('19 project(s)')).toBeVisible();
+  await expect(page.getByText('21 project(s)')).toBeVisible();
 
   await page.goto('/admin/projects/calculator');
   await page.getByRole('button', { name: '9', exact: true }).click();
@@ -721,11 +726,66 @@ test('Recipe Book supports recipe selection, creation, and shopping transfer', a
   await expect(page.getByRole('heading', { name: 'Chicken Rice Bowl' })).toBeVisible();
 
   await page.getByRole('button', { name: 'Add ingredients' }).click();
-  await expect(page.getByText('Chicken breast')).toBeVisible();
+  await expect(page.locator('.shopping-list strong').filter({ hasText: 'Chicken breast' })).toBeVisible();
 
   await page.getByPlaceholder('Example: herb omelette').fill('Herb Omelette');
   await page.getByPlaceholder('Short recipe context').fill('Fast breakfast recipe with herbs.');
   await page.getByPlaceholder('Example: tomatoes').fill('Eggs');
   await page.getByRole('button', { name: 'Add recipe' }).click();
   await expect(page.getByRole('heading', { name: 'Herb Omelette' })).toBeVisible();
+});
+
+test('Flashcards supports reveal, deck creation, review, and persistence', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'EN', exact: true }).click();
+  await page.getByRole('link', { name: 'Flashcards', exact: true }).click();
+
+  await expect(page.getByRole('heading', { name: 'Flashcards', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Flashcard review' })).toBeVisible();
+
+  await page.getByRole('button', { name: 'Reveal answer' }).click();
+  await expect(page.locator('.study-card .answer-panel').getByText('A signal stores reactive state')).toBeVisible();
+  await page.getByRole('button', { name: 'Known' }).click();
+  await expect(page.getByText('1 / 1')).toBeVisible();
+
+  await page.getByPlaceholder('Example: Angular').fill('Portfolio');
+  await page.getByPlaceholder('Example: What is a signal?').fill('What keeps this demo persistent?');
+  await page.getByPlaceholder('Short answer or explanation').fill('LocalStorage keeps cards available after reloads.');
+  await page.getByRole('button', { name: 'Add card' }).click();
+
+  await expect(page.getByRole('button', { name: 'Portfolio' })).toBeVisible();
+  await expect(page.locator('.card-list').getByRole('heading', { name: 'What keeps this demo persistent?' })).toBeVisible();
+  await expect.poll(async () => page.evaluate(() => localStorage.getItem('projects-hub-flashcards'))).toContain(
+    'What keeps this demo persistent?'
+  );
+});
+
+test('Timer supports custom countdown, pause, resume, completion, and persistence', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'EN', exact: true }).click();
+  await page.getByRole('link', { name: 'Timer', exact: true }).click();
+
+  await expect(page.getByRole('heading', { name: 'Timer', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Focus timer' })).toBeVisible();
+
+  await page.getByLabel('Minutes').fill('0');
+  await page.getByLabel('Seconds').fill('3');
+  await page.getByRole('button', { name: 'Apply' }).click();
+  await expect(page.locator('output')).toHaveText('00:03');
+  await expect.poll(async () => page.evaluate(() => localStorage.getItem('projects-hub-timer'))).toContain(
+    '"selectedSeconds":3'
+  );
+
+  const timerActions = page.locator('.timer-actions');
+
+  await timerActions.getByRole('button', { name: /Start$/ }).click();
+  await expect.poll(async () => page.locator('output').innerText()).toBe('00:02');
+  await timerActions.getByRole('button', { name: /Pause$/ }).click();
+  const pausedTime = await page.locator('output').innerText();
+  await page.waitForTimeout(1200);
+  await expect(page.locator('output')).toHaveText(pausedTime);
+
+  await timerActions.getByRole('button', { name: /Resume$/ }).click();
+  await expect(page.getByText('Timer complete')).toBeVisible({ timeout: 5000 });
+  await expect(page.getByText('Completed').first()).toBeVisible();
 });

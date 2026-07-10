@@ -1,0 +1,199 @@
+<section class="flashcards-page">
+  <div class="flashcards-shell" [attr.aria-label]="'FLASHCARDS.TITLE' | translate">
+    <aside class="study-panel">
+      <div class="panel-heading">
+        <div>
+          <span>{{ 'FLASHCARDS.STUDY.EYEBROW' | translate }}</span>
+          <h3>{{ 'FLASHCARDS.STUDY.TITLE' | translate }}</h3>
+        </div>
+        <strong>{{ progressLabel() }}</strong>
+      </div>
+
+      <div class="deck-tabs" [attr.aria-label]="'FLASHCARDS.DECKS.TITLE' | translate">
+        @for (deck of deckOptions(); track deck) {
+          <button type="button" class="deck-tab" [class.active]="selectedDeck() === deck" (click)="updateDeck(deck)">
+            {{ deckLabel(deck) | translate }}
+          </button>
+        }
+      </div>
+
+      @if (activeCard(); as card) {
+        <article class="study-card" [class.revealed]="answerVisible()">
+          <span>{{ card.deck }}</span>
+          <h4>{{ card.question }}</h4>
+          <div class="answer-panel">
+            @if (answerVisible()) {
+              <p>{{ card.answer }}</p>
+            } @else {
+              <p>{{ 'FLASHCARDS.STUDY.HIDDEN_ANSWER' | translate }}</p>
+            }
+          </div>
+        </article>
+
+        <div class="study-actions">
+          <button type="button" class="btn btn-ghost btn-sm btn-icon" (click)="previousCard()">
+            <i class="pi pi-arrow-left"></i>
+            <span>{{ 'FLASHCARDS.ACTIONS.PREVIOUS' | translate }}</span>
+          </button>
+          <button type="button" class="btn btn-primary btn-sm btn-icon" (click)="revealAnswer()" [disabled]="answerVisible()">
+            <i class="pi pi-eye"></i>
+            <span>{{ 'FLASHCARDS.ACTIONS.REVEAL' | translate }}</span>
+          </button>
+          <button type="button" class="btn btn-ghost btn-sm btn-icon" (click)="nextCard()">
+            <i class="pi pi-arrow-right"></i>
+            <span>{{ 'FLASHCARDS.ACTIONS.NEXT' | translate }}</span>
+          </button>
+        </div>
+
+        <div class="result-actions">
+          <button type="button" class="btn btn-danger btn-sm btn-icon" (click)="markCard('incorrect')">
+            <i class="pi pi-times"></i>
+            <span>{{ 'FLASHCARDS.ACTIONS.MARK_AGAIN' | translate }}</span>
+          </button>
+          <button type="button" class="btn btn-secondary btn-sm btn-icon" (click)="markCard('correct')">
+            <i class="pi pi-check"></i>
+            <span>{{ 'FLASHCARDS.ACTIONS.MARK_KNOWN' | translate }}</span>
+          </button>
+        </div>
+      } @else {
+        <section class="empty-state">
+          <i class="pi pi-id-card"></i>
+          <h3>{{ 'FLASHCARDS.EMPTY.TITLE' | translate }}</h3>
+          <p>{{ 'FLASHCARDS.EMPTY.TEXT' | translate }}</p>
+        </section>
+      }
+    </aside>
+
+    <section class="cards-panel">
+      <div class="stats-grid">
+        <article>
+          <span>{{ 'FLASHCARDS.STATS.TOTAL' | translate }}</span>
+          <strong>{{ cards().length }}</strong>
+        </article>
+        <article>
+          <span>{{ 'FLASHCARDS.STATS.MASTERED' | translate }}</span>
+          <strong>{{ masteredCount() }}</strong>
+        </article>
+        <article>
+          <span>{{ 'FLASHCARDS.STATS.CORRECT' | translate }}</span>
+          <strong>{{ correctCount() }} / {{ reviewedCount() }}</strong>
+        </article>
+      </div>
+
+      <form class="card-form" (ngSubmit)="submitCard()" novalidate>
+        <div class="panel-heading">
+          <div>
+            <span>{{ 'FLASHCARDS.FORM.EYEBROW' | translate }}</span>
+            <h3>{{ (editingId() ? 'FLASHCARDS.FORM.EDIT_TITLE' : 'FLASHCARDS.FORM.ADD_TITLE') | translate }}</h3>
+          </div>
+          @if (editingId()) {
+            <button type="button" class="btn btn-ghost btn-sm" (click)="cancelEdit()">
+              {{ 'FLASHCARDS.FORM.CANCEL' | translate }}
+            </button>
+          }
+        </div>
+
+        <div class="form-grid">
+          <label>
+            <span>{{ 'FLASHCARDS.FORM.DECK' | translate }}</span>
+            <input
+              type="text"
+              class="form-control"
+              [ngModel]="draftDeck()"
+              (ngModelChange)="updateDraftDeck($event)"
+              name="deck"
+              [placeholder]="'FLASHCARDS.FORM.DECK_PLACEHOLDER' | translate"
+            />
+          </label>
+          <label>
+            <span class="field-header">
+              <span>{{ 'FLASHCARDS.FORM.QUESTION' | translate }}</span>
+              <small [class.error]="isQuestionInvalid()">
+                @if (isQuestionInvalid()) {
+                  {{ 'FLASHCARDS.FORM.QUESTION_REQUIRED' | translate }}
+                } @else {
+                  {{ 'FLASHCARDS.FORM.CHARACTERS' | translate:{ count: draftQuestion().length, max: textMaxLength } }}
+                }
+              </small>
+            </span>
+            <input
+              type="text"
+              class="form-control"
+              [class.invalid]="isQuestionInvalid()"
+              [ngModel]="draftQuestion()"
+              (ngModelChange)="updateQuestion($event)"
+              (blur)="questionTouched.set(true)"
+              name="question"
+              [attr.maxlength]="textMaxLength"
+              [placeholder]="'FLASHCARDS.FORM.QUESTION_PLACEHOLDER' | translate"
+            />
+          </label>
+          <label>
+            <span class="field-header">
+              <span>{{ 'FLASHCARDS.FORM.ANSWER' | translate }}</span>
+              <small [class.error]="isAnswerInvalid()">
+                @if (isAnswerInvalid()) {
+                  {{ 'FLASHCARDS.FORM.ANSWER_REQUIRED' | translate }}
+                } @else {
+                  {{ 'FLASHCARDS.FORM.CHARACTERS' | translate:{ count: draftAnswer().length, max: textMaxLength } }}
+                }
+              </small>
+            </span>
+            <textarea
+              class="form-control"
+              [class.invalid]="isAnswerInvalid()"
+              [ngModel]="draftAnswer()"
+              (ngModelChange)="updateAnswer($event)"
+              (blur)="answerTouched.set(true)"
+              name="answer"
+              rows="3"
+              [attr.maxlength]="textMaxLength"
+              [placeholder]="'FLASHCARDS.FORM.ANSWER_PLACEHOLDER' | translate"
+            ></textarea>
+          </label>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary btn-sm btn-icon">
+            <i class="pi pi-plus"></i>
+            <span>{{ (editingId() ? 'FLASHCARDS.FORM.SAVE' : 'FLASHCARDS.FORM.ADD') | translate }}</span>
+          </button>
+          <button type="button" class="btn btn-ghost btn-sm btn-icon" (click)="shuffleCards()">
+            <i class="pi pi-sort-alt"></i>
+            <span>{{ 'FLASHCARDS.ACTIONS.SHUFFLE' | translate }}</span>
+          </button>
+          <button type="button" class="btn btn-ghost btn-sm btn-icon" (click)="resetReview()">
+            <i class="pi pi-refresh"></i>
+            <span>{{ 'FLASHCARDS.ACTIONS.RESET_REVIEW' | translate }}</span>
+          </button>
+          <button type="button" class="btn btn-ghost btn-sm btn-icon" (click)="resetDemo()">
+            <i class="pi pi-undo"></i>
+            <span>{{ 'FLASHCARDS.ACTIONS.RESET_DEMO' | translate }}</span>
+          </button>
+        </div>
+      </form>
+
+      <div class="card-list">
+        @for (card of filteredCards(); track card.id) {
+          <article class="card-row" [class.mastered]="card.mastered">
+            <div>
+              <span>{{ card.deck }}</span>
+              <h4>{{ card.question }}</h4>
+              <p>{{ card.answer }}</p>
+            </div>
+            <div class="row-actions">
+              <button type="button" class="btn btn-ghost btn-sm btn-icon" (click)="editCard(card)">
+                <i class="pi pi-pencil"></i>
+                <span>{{ 'FLASHCARDS.ACTIONS.EDIT' | translate }}</span>
+              </button>
+              <button type="button" class="btn btn-danger btn-sm btn-icon" (click)="deleteCard(card.id)">
+                <i class="pi pi-trash"></i>
+                <span>{{ 'FLASHCARDS.ACTIONS.DELETE' | translate }}</span>
+              </button>
+            </div>
+          </article>
+        }
+      </div>
+    </section>
+  </div>
+</section>

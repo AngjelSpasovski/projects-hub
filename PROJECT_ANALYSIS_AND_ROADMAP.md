@@ -18,7 +18,7 @@ The project is in a stable portfolio-ready phase.
 - Unit tests pass.
 - Playwright end-to-end smoke tests pass.
 - The repository has a clean project structure.
-- The catalog currently contains 19 ready mini projects.
+- The catalog currently contains 21 ready mini projects.
 - Shared layout, themes, translations, metadata, covers, routing, tests, and docs are in place.
 
 Latest local verification from this review:
@@ -263,6 +263,20 @@ The catalog currently contains these ready projects:
     - Ingredient transfer to shopping list.
     - Manual shopping item creation and deletion.
 
+20. `Flashcards`
+    - Study deck filters.
+    - Reveal answer flow.
+    - Known/study-again review tracking.
+    - Card creation, editing, deletion, shuffle, and reset actions.
+    - LocalStorage persistence.
+
+21. `Timer`
+    - Countdown presets.
+    - Custom minutes and seconds.
+    - Start, pause, resume, reset, and restart controls.
+    - Completion state and completed-session count.
+    - LocalStorage persistence for selected duration.
+
 ## 7. Important Resolved Problems
 
 Layout and scrolling:
@@ -355,8 +369,6 @@ Encoding:
 
 Good candidates before the next large migration:
 
-- `Flashcards`
-- `Timer`
 - `Digital Clock`
 
 These are lower-risk additions and can reuse the current standalone project pattern.
@@ -417,7 +429,7 @@ The documentation alignment and first UI polish pass are complete.
 
 After that, choose one of two paths:
 
-- Small, low-risk feature path: implement `Flashcards`, `Timer`, or `Digital Clock`.
+- Small, low-risk feature path: implement `Digital Clock`.
 - Bigger portfolio-value path: migrate `Client Panel`.
 
-For portfolio impact, `Client Panel` is the stronger next feature because it can demonstrate CRUD workflows, route handling, validation, guarded/demo access, confirmations, and richer application state. For momentum and lower risk, `Flashcards` or `Timer` is better.
+For portfolio impact, `Client Panel` is the stronger next feature because it can demonstrate CRUD workflows, route handling, validation, guarded/demo access, confirmations, and richer application state. For momentum and lower risk, `Digital Clock` is better.
