@@ -13,7 +13,16 @@
   display: grid;
   gap: 0.85rem;
   grid-template-columns: minmax(15rem, 0.45fr) minmax(0, 1fr);
+  height: 100%;
+  min-height: 0;
   padding: 0.7rem;
+}
+
+:host,
+.docs-page {
+  height: 100%;
+  min-height: 0;
+  width: 100%;
 }
 
 .docs-sidebar,
@@ -31,11 +40,17 @@
 .docs-panel {
   display: grid;
   gap: 0.75rem;
+  min-height: 0;
   padding: 0.75rem;
 }
 
 .docs-sidebar {
   align-content: start;
+  grid-template-rows: auto auto minmax(0, 1fr);
+}
+
+.docs-content {
+  grid-template-rows: auto minmax(0, 1fr);
 }
 
 .docs-heading span,
@@ -100,6 +115,9 @@ p {
 .section-nav {
   display: grid;
   gap: 0.45rem;
+  min-height: 0;
+  overflow: auto;
+  padding-right: 0.15rem;
 }
 
 .section-button {
@@ -168,6 +186,7 @@ p {
   display: grid;
   gap: 0.75rem;
   grid-template-columns: minmax(0, 1.3fr) minmax(13rem, 0.7fr);
+  min-height: 0;
 }
 
 .docs-grid section {
@@ -176,6 +195,7 @@ p {
   border-radius: 8px;
   display: grid;
   gap: 0.65rem;
+  min-height: 0;
   padding: 0.75rem;
 }
 

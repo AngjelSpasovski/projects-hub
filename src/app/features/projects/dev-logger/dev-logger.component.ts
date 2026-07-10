@@ -44,13 +44,13 @@ const DEFAULT_LOGS: DevLog[] = [
 export class DevLoggerComponent {
   readonly textMaxLength = TEXT_MAX_LENGTH;
   readonly filterOptions: LogFilter[] = ['all', 'info', 'warning', 'error'];
-  readonly logs = signal<DevLog[]>(DEFAULT_LOGS);
-  readonly draftText = signal('');
-  readonly draftLevel = signal<LogLevel>('info');
-  readonly editingId = signal<number | null>(null);
-  readonly filter = signal<LogFilter>('all');
-  readonly searchTerm = signal('');
-  readonly textTouched = signal(false);
+  readonly logs          = signal<DevLog[]>(DEFAULT_LOGS);
+  readonly draftText    = signal('');
+  readonly draftLevel   = signal<LogLevel>('info');
+  readonly editingId    = signal<number | null>(null);
+  readonly filter       = signal<LogFilter>('all');
+  readonly searchTerm   = signal('');
+  readonly textTouched  = signal(false);
 
   readonly filteredLogs = computed(() => {
     const filter = this.filter();
@@ -67,10 +67,10 @@ export class DevLoggerComponent {
     });
   });
 
-  readonly infoCount = computed(() => this.logs().filter((log) => log.level === 'info').length);
-  readonly warningCount = computed(() => this.logs().filter((log) => log.level === 'warning').length);
-  readonly errorCount = computed(() => this.logs().filter((log) => log.level === 'error').length);
-  readonly isTextInvalid = computed(() => this.textTouched() && this.draftText().trim().length === 0);
+  readonly infoCount      = computed(() => this.logs().filter((log) => log.level === 'info').length);
+  readonly warningCount   = computed(() => this.logs().filter((log) => log.level === 'warning').length);
+  readonly errorCount     = computed(() => this.logs().filter((log) => log.level === 'error').length);
+  readonly isTextInvalid  = computed(() => this.textTouched() && this.draftText().trim().length === 0);
 
   updateText(value: string): void {
     this.draftText.set(value.slice(0, TEXT_MAX_LENGTH));

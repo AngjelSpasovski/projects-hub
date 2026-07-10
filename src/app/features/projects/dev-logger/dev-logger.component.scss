@@ -1,27 +1,24 @@
 :host {
   display: block;
+  height: 100%;
+  min-height: 0;
   width: 100%;
 }
 
 .dev-logger-shell {
-  --logger-bg: color-mix(in srgb, var(--app-surface) 88%, #020617 12%);
-  --logger-panel: color-mix(in srgb, var(--app-card) 78%, #020617 22%);
-  --logger-muted: var(--app-muted);
-  --logger-border: var(--app-border);
-  --logger-accent: var(--app-accent);
-
   display: grid;
-  grid-template-columns: minmax(20rem, 0.85fr) minmax(28rem, 1.35fr);
-  gap: 1rem;
-  width: min(100%, 94rem);
-  min-height: 26rem;
-  padding: 1rem;
-  border: 1px solid var(--logger-border);
-  border-radius: 0.75rem;
+  grid-template-columns: minmax(18rem, 0.78fr) minmax(0, 1.42fr);
+  gap: 0.6rem;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  padding: 0.55rem;
+  border: 1px solid var(--project-border);
+  border-radius: 8px;
   background:
-    radial-gradient(circle at top left, color-mix(in srgb, var(--logger-accent) 18%, transparent), transparent 32%),
-    var(--logger-bg);
-  color: var(--app-text);
+    radial-gradient(circle at top left, color-mix(in srgb, var(--app-accent) 12%, transparent), transparent 28rem),
+    var(--project-bg);
+  color: var(--project-text);
 }
 
 .logger-panel,
@@ -30,13 +27,20 @@
 .search-field,
 select,
 textarea {
-  border: 1px solid var(--logger-border);
-  background: var(--logger-panel);
+  border: 1px solid var(--project-border);
+  background: var(--project-shell);
 }
 
 .logger-panel {
-  border-radius: 0.7rem;
-  padding: 1rem;
+  display: grid;
+  align-content: start;
+  min-height: 0;
+  border-radius: 8px;
+  padding: 0.75rem;
+}
+
+.list-panel {
+  grid-template-rows: auto auto minmax(0, 1fr);
 }
 
 .panel-heading,
@@ -59,7 +63,7 @@ textarea {
 label,
 .stats-grid span,
 .log-row p {
-  color: var(--logger-muted);
+  color: var(--project-text-muted);
   font-size: 0.72rem;
   font-weight: 800;
   text-transform: uppercase;
@@ -79,41 +83,41 @@ textarea,
 select,
 .search-field input {
   width: 100%;
-  color: var(--app-text);
+  color: var(--project-text);
   outline: none;
 }
 
 textarea,
 select {
-  border-radius: 0.55rem;
-  padding: 0.72rem 0.85rem;
+  border-radius: 8px;
+  padding: 0.68rem 0.8rem;
 }
 
 textarea {
   resize: none;
-  min-height: 7.5rem;
+  min-height: 6.8rem;
 }
 
 textarea.invalid {
-  border-color: #dc6b6b;
+  border-color: var(--project-danger-text);
 }
 
 .field-help {
   min-height: 1.1rem;
-  color: var(--logger-muted);
+  color: var(--project-text-muted);
   font-size: 0.78rem;
 }
 
 .field-help.error {
-  color: #dc6b6b;
+  color: var(--project-danger-text);
 }
 
 .primary-action,
 .ghost-action,
 .filter-group button,
 .icon-action {
-  border: 1px solid var(--logger-border);
-  border-radius: 0.55rem;
+  border: 1px solid var(--project-border);
+  border-radius: 8px;
   font-weight: 800;
 }
 
@@ -122,17 +126,17 @@ textarea.invalid {
   justify-content: center;
   align-items: center;
   gap: 0.45rem;
-  min-height: 2.65rem;
-  border-color: color-mix(in srgb, var(--logger-accent) 72%, var(--logger-border));
-  background: var(--logger-accent);
+  min-height: 2.45rem;
+  border-color: color-mix(in srgb, var(--app-accent) 72%, var(--project-border));
+  background: var(--app-accent);
   color: #fff;
 }
 
 .ghost-action,
 .filter-group button,
 .icon-action {
-  background: color-mix(in srgb, var(--logger-panel) 88%, transparent);
-  color: var(--app-text);
+  background: var(--project-control);
+  color: var(--project-text);
 }
 
 .ghost-action {
@@ -147,12 +151,13 @@ textarea.invalid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0.65rem;
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.65rem;
 }
 
 .stats-grid article {
-  border-radius: 0.65rem;
-  padding: 0.7rem 0.85rem;
+  border-radius: 8px;
+  padding: 0.6rem 0.75rem;
+  background: linear-gradient(135deg, var(--project-bg), var(--project-surface-muted));
 }
 
 .stats-grid strong {
@@ -172,7 +177,8 @@ textarea.invalid {
   gap: 0.5rem;
   min-height: 2.45rem;
   padding: 0 0.75rem;
-  border-radius: 0.55rem;
+  border-radius: 8px;
+  background: var(--project-bg);
 }
 
 .search-field input {
@@ -184,8 +190,8 @@ textarea.invalid {
   display: flex;
   gap: 0.4rem;
   padding: 0.22rem;
-  border-radius: 0.65rem;
-  background: color-mix(in srgb, var(--logger-panel) 72%, transparent);
+  border-radius: 8px;
+  background: var(--project-bg);
 }
 
 .filter-group button {
@@ -194,15 +200,15 @@ textarea.invalid {
 }
 
 .filter-group button.active {
-  border-color: color-mix(in srgb, var(--logger-accent) 65%, var(--logger-border));
-  background: color-mix(in srgb, var(--logger-accent) 82%, #fff 18%);
+  border-color: color-mix(in srgb, var(--app-accent) 65%, var(--project-border));
+  background: var(--app-accent);
   color: #fff;
 }
 
 .log-list {
   display: grid;
   gap: 0.55rem;
-  max-height: 18rem;
+  min-height: 0;
   overflow: auto;
   padding-right: 0.2rem;
 }
@@ -211,12 +217,13 @@ textarea.invalid {
   justify-content: space-between;
   gap: 0.75rem;
   min-height: 4.7rem;
-  border-radius: 0.65rem;
-  padding: 0.75rem;
+  border-radius: 8px;
+  padding: 0.7rem 0.75rem;
+  background: linear-gradient(135deg, var(--project-control), var(--project-surface-muted));
 }
 
 .log-row.selected {
-  border-color: color-mix(in srgb, var(--logger-accent) 75%, var(--logger-border));
+  border-color: color-mix(in srgb, var(--app-accent) 75%, var(--project-border));
 }
 
 .log-main {
@@ -249,7 +256,7 @@ textarea.invalid {
 }
 
 .log-row.error .level-dot {
-  background: #dc6b6b;
+  background: var(--project-danger-text);
 }
 
 .row-actions {
@@ -264,17 +271,17 @@ textarea.invalid {
 }
 
 .icon-action.danger {
-  border-color: color-mix(in srgb, #dc6b6b 45%, var(--logger-border));
-  color: #dc6b6b;
+  border-color: color-mix(in srgb, var(--project-danger-text) 45%, var(--project-border));
+  color: var(--project-danger-text);
 }
 
 .empty-state {
   display: grid;
   place-items: center;
   min-height: 10rem;
-  border: 1px dashed var(--logger-border);
-  border-radius: 0.65rem;
-  color: var(--logger-muted);
+  border: 1px dashed var(--project-border);
+  border-radius: 8px;
+  color: var(--project-text-muted);
   text-align: center;
 }
 
@@ -284,7 +291,7 @@ textarea.invalid {
 
 .empty-state strong {
   margin-top: 0.45rem;
-  color: var(--app-text);
+  color: var(--project-text);
 }
 
 .empty-state p {

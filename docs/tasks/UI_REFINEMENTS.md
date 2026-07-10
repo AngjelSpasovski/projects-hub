@@ -18,6 +18,7 @@ Complete this batch before adding a large number of new projects.
 - [x] Remove duplicated title, description, and feature copy from mini-project components.
 - [x] Remove nested `surface-panel` styling from mini-project root elements.
 - [x] Keep repository/demo actions, tags, status, difficulty, and dates in the workspace header.
+- [x] Make data-heavy project components fill the live workspace and scroll only their internal lists.
 - [x] Add a compact responsive layout for mobile project routes.
 - [x] Update project-detail unit tests.
 - [x] Update Playwright navigation and visual layout checks.

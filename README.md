@@ -19,7 +19,7 @@ The app opens directly into an admin-style dashboard where projects are browsed 
 - Project metadata: status, difficulty, dates, repository link, live demo link
 - Distinctive illustrated catalog covers with separate live-project screenshots for documentation
 - Unified project workspace containing metadata and the interactive application
-- Lazy-loaded Calculator, Tic Tac Toe, Hang Man, Weather, Music Event, JavaScript Quiz, To-Do List, Expense Tracker, Technical Documentation, Project Planner, Odd/Even Counter, and Dev Logger mini projects
+- Lazy-loaded Calculator, Tic Tac Toe, Hang Man, Weather, Music Event, JavaScript Quiz, To-Do List, Expense Tracker, Technical Documentation, Project Planner, Odd/Even Counter, Dev Logger, and Recipe Book mini projects
 - Unit tests for app shell, dashboard logic, registry metadata, shared services, and mini project behavior
 - Playwright smoke tests for catalog navigation, view switching, and language switching
 
@@ -52,12 +52,13 @@ Exact installed versions are tracked in [DEPENDENCIES.md](./DEPENDENCIES.md).
 | Project Planner | Ready | Migrated as the first legacy JavaScript project board with typed lanes, project creation, drag-and-drop movement, and contextual details. |
 | Odd/Even Counter | Ready | Migrated as a compact Angular timing and data-binding demo with signal-derived odd/even lanes. |
 | Dev Logger | Ready | Migrated as a CRUD logger with validated entries, level filters, search, and typed signal state. |
+| Recipe Book | Ready | Migrated as a recipe list, detail, and shopping list workflow with reactive forms and typed signal state. |
 
 The master roadmap is tracked in [TASKS.md](./TASKS.md). Detailed batches, project backlogs, and completion rules live in [docs/tasks](./docs/tasks/README.md).
 
 ## Next Work
 
-The current product priority is the legacy migration batch. Project Planner, Odd/Even, and Dev Logger are complete; Recipe Book is the next legacy migration candidate.
+The current product priority is the legacy migration batch. Project Planner, Odd/Even, Dev Logger, and Recipe Book are complete; Client Panel is the next legacy migration candidate.
 
 ## Migrated Projects
 
@@ -155,6 +156,14 @@ Dev Logger is a migrated CRUD log manager from the old Angular component/service
 
 Angular coverage: standalone component, template-driven form bindings, signals, computed filters and counts, lazy loading, illustrated cover, focused unit tests, and e2e workflow coverage.
 
+### Recipe Book
+
+Folder: [`src/app/features/projects/recipe-book`](./src/app/features/projects/recipe-book)
+
+Recipe Book is a migrated Angular recipe workflow from the old list/detail/shopping-list example. It includes searchable recipe selection, recipe detail cards, reactive recipe creation, ingredient transfer to the shopping list, manual shopping item creation, item removal, and demo reset.
+
+Angular coverage: standalone component, reactive forms, signals, computed recipe and shopping totals, lazy loading, illustrated cover, focused unit tests, and e2e workflow coverage.
+
 ## Getting Started
 
 Install dependencies:
@@ -215,6 +224,7 @@ src/app/
       hang-man/
       javascript-quiz/
       odd-even/
+      recipe-book/
       tic-tac-toe/
       todo-list/
       weather/

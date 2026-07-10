@@ -24,9 +24,9 @@ The smaller Client Panel and Odd/Even copies inside `theBigProject` are duplicat
 
 ## Batch 2
 
-- [ ] Migrate Recipe Book using standalone routes and reactive forms.
-- [ ] Migrate Recipe List, Recipe Detail, and Shopping List workflows.
-- [ ] Replace legacy services and mutable shared state with typed modern services/signals.
+- [x] Migrate Recipe Book using standalone routes and reactive forms.
+- [x] Migrate Recipe List, Recipe Detail, and Shopping List workflows.
+- [x] Replace legacy services and mutable shared state with typed modern services/signals.
 
 ## Batch 3
 

@@ -139,6 +139,10 @@
     "DEV_LOGGER": {
       "TITLE": "Dev Logger",
       "SUMMARY": "Legacy CRUD logger migrated with validated entries, level filters, search, and signal state."
+    },
+    "RECIPE_BOOK": {
+      "TITLE": "Recipe Book",
+      "SUMMARY": "Legacy recipe list, detail, and shopping list workflows rebuilt with reactive forms and typed signal state."
     }
   },
   "PROJECT_PLANNER": {
@@ -1119,6 +1123,57 @@
       "TOTAL": "Items"
     },
     "TITLE": "Grocery List"
+  },
+  "RECIPE_BOOK": {
+    "ACTIONS": {
+      "ADD_ITEM": "Add item",
+      "ADD_RECIPE": "Add recipe",
+      "ADD_TO_SHOPPING": "Add ingredients",
+      "DELETE_RECIPE": "Delete recipe",
+      "REMOVE": "Remove",
+      "RESET": "Reset demo"
+    },
+    "CATEGORIES": {
+      "DESSERT": "Dessert",
+      "MAIN": "Main",
+      "VEGETARIAN": "Vegetarian"
+    },
+    "FORM": {
+      "AMOUNT": "Amount",
+      "CATEGORY": "Category",
+      "DESCRIPTION": "Description",
+      "DESCRIPTION_PLACEHOLDER": "Short recipe context",
+      "ERROR": "Complete the required recipe fields before adding it.",
+      "EYEBROW": "Recipe form",
+      "INGREDIENT": "Starter ingredient",
+      "INGREDIENT_PLACEHOLDER": "Example: tomatoes",
+      "NAME": "Recipe name",
+      "NAME_PLACEHOLDER": "Example: herb omelette",
+      "PREP_TIME": "Minutes",
+      "TITLE": "New recipe"
+    },
+    "LIST": {
+      "EMPTY": "No recipes match this search.",
+      "EYEBROW": "Recipes",
+      "PREP_TIME": "{{minutes}} min",
+      "SEARCH": "Search",
+      "SEARCH_PLACEHOLDER": "Search recipes or categories",
+      "TITLE": "Recipe list"
+    },
+    "SHOPPING": {
+      "AMOUNT": "Amount",
+      "AMOUNT_LABEL": "Amount {{amount}}",
+      "EYEBROW": "Shopping list",
+      "NAME": "Ingredient",
+      "NAME_PLACEHOLDER": "Example: olive oil",
+      "TITLE": "Shopping workflow"
+    },
+    "STATS": {
+      "INGREDIENTS": "Ingredients",
+      "RECIPES": "Recipes",
+      "SHOPPING": "Shopping qty"
+    },
+    "TITLE": "Recipe Book"
   },
   "EXPENSE_TRACKER": {
     "ACTIONS": {

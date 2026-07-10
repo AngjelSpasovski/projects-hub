@@ -13,7 +13,16 @@
   display: grid;
   gap: 0.85rem;
   grid-template-columns: minmax(17rem, 0.76fr) minmax(0, 1.5fr);
+  height: 100%;
+  min-height: 0;
   padding: 0.7rem;
+}
+
+:host,
+.expense-page {
+  height: 100%;
+  min-height: 0;
+  width: 100%;
 }
 
 .entry-form,
@@ -30,11 +39,16 @@
 .expense-board {
   display: grid;
   gap: 0.7rem;
+  min-height: 0;
   padding: 0.7rem;
 }
 
 .entry-form {
   align-content: start;
+}
+
+.expense-board {
+  grid-template-rows: auto minmax(0, 1fr);
 }
 
 .form-heading,
@@ -153,13 +167,19 @@ input[type='date']::-webkit-calendar-picker-indicator {
 
 .content-grid {
   grid-template-columns: minmax(13rem, 0.65fr) minmax(0, 1.35fr);
+  min-height: 0;
 }
 
 .chart-panel,
 .entries-panel {
   display: grid;
   gap: 0.65rem;
+  min-height: 0;
   padding: 0.65rem;
+}
+
+.entries-panel {
+  grid-template-rows: auto minmax(0, 1fr);
 }
 
 .chart-frame {
@@ -214,6 +234,9 @@ input[type='date']::-webkit-calendar-picker-indicator {
 .entry-list {
   display: grid;
   gap: 0.55rem;
+  min-height: 0;
+  overflow: auto;
+  padding-right: 0.15rem;
 }
 
 .entry-row {

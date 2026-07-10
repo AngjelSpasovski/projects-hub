@@ -12,7 +12,7 @@ test('dashboard catalog supports view switching and project navigation', async (
   await page.getByRole('button', { name: 'EN' }).click();
 
   await expect(page.getByText('Overview of the small apps that will be migrated and added to this repo.')).toBeVisible();
-  await expect(page.getByText('18 project(s)')).toBeVisible();
+  await expect(page.getByText('19 project(s)')).toBeVisible();
 
   await page.getByRole('button', { name: /Detailed/ }).click();
   await expect(page.getByText('Difficulty').first()).toBeVisible();
@@ -28,14 +28,14 @@ test('dashboard catalog supports view switching and project navigation', async (
   await expect(page.locator('.project-workspace .project-live .surface-panel')).toHaveCount(0);
 
   await page.getByRole('link', { name: /Dashboard/ }).click();
-  await expect(page.getByText('18 project(s)')).toBeVisible();
+  await expect(page.getByText('19 project(s)')).toBeVisible();
 });
 
 test('theme switcher applies every theme without layout overflow', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 820 });
   await page.goto('/');
   await page.getByRole('button', { name: 'EN', exact: true }).click();
-  await expect(page.getByText('18 project(s)')).toBeVisible();
+  await expect(page.getByText('19 project(s)')).toBeVisible();
 
   const themes = [
     { label: 'Realm', value: 'realm' },
@@ -86,7 +86,7 @@ test('language switch renders Macedonian catalog labels', async ({ page }) => {
   await page.getByRole('button', { name: 'MK' }).click();
 
   await expect(page.getByRole('button', { name: /Детално/ })).toBeVisible();
-  await expect(page.getByText('18 проект(и)')).toBeVisible();
+  await expect(page.getByText('19 проект(и)')).toBeVisible();
   await expect(page.getByText('Калкулатор').first()).toBeVisible();
 });
 
@@ -170,7 +170,7 @@ test('admin shell keeps chrome fixed while dashboard catalog scrolls', async ({ 
   await page.setViewportSize({ width: 1280, height: 560 });
   await page.goto('/');
   await page.getByRole('button', { name: 'EN', exact: true }).click();
-  await expect(page.getByText('18 project(s)')).toBeVisible();
+  await expect(page.getByText('19 project(s)')).toBeVisible();
 
   const header = page.locator('.app-header');
   const sidebar = page.locator('.app-sidebar');
@@ -204,7 +204,7 @@ test('dashboard keeps the catalog scroll position at the catalog bottom', async 
   await page.setViewportSize({ width: 1280, height: 560 });
   await page.goto('/');
   await page.getByRole('button', { name: 'EN', exact: true }).click();
-  await expect(page.getByText('18 project(s)')).toBeVisible();
+  await expect(page.getByText('19 project(s)')).toBeVisible();
 
   const catalog = page.locator('.project-catalog');
 
@@ -225,7 +225,7 @@ test('desktop catalog and project workspaces fit without nested scrollbars', asy
   await page.setViewportSize({ width: 1920, height: 1080 });
   await page.goto('/');
   await page.getByRole('button', { name: 'EN', exact: true }).click();
-  await expect(page.getByText('18 project(s)')).toBeVisible();
+  await expect(page.getByText('19 project(s)')).toBeVisible();
 
   const routes = [
     'tic-tac-toe',
@@ -245,7 +245,8 @@ test('desktop catalog and project workspaces fit without nested scrollbars', asy
     'grocery-list',
     'project-planner',
     'odd-even',
-    'dev-logger'
+    'dev-logger',
+    'recipe-book'
   ];
 
   for (const route of routes) {
@@ -294,7 +295,7 @@ test('project detail remains responsive on compact desktop and mobile viewports'
 test('mini project refinements keep core interactions stable', async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('projects-hub-language', 'en'));
   await page.goto('/');
-  await expect(page.getByText('18 project(s)')).toBeVisible();
+  await expect(page.getByText('19 project(s)')).toBeVisible();
 
   await page.goto('/admin/projects/calculator');
   await page.getByRole('button', { name: '9', exact: true }).click();
@@ -705,4 +706,26 @@ test('Grocery List supports quantities, categories, filters, and persistence', a
 
   await page.getByRole('button', { name: 'Delete' }).first().click();
   await expect(page.getByRole('heading', { name: 'Updated almond milk' })).toBeHidden();
+});
+
+test('Recipe Book supports recipe selection, creation, and shopping transfer', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'EN', exact: true }).click();
+  await page.getByRole('link', { name: 'Recipe Book', exact: true }).click();
+
+  await expect(page.getByRole('heading', { name: 'Recipe Book', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Summer Pasta' })).toBeVisible();
+
+  await page.getByPlaceholder('Search recipes or categories').fill('chicken');
+  await page.getByRole('button', { name: /Chicken Rice Bowl/ }).click();
+  await expect(page.getByRole('heading', { name: 'Chicken Rice Bowl' })).toBeVisible();
+
+  await page.getByRole('button', { name: 'Add ingredients' }).click();
+  await expect(page.getByText('Chicken breast')).toBeVisible();
+
+  await page.getByPlaceholder('Example: herb omelette').fill('Herb Omelette');
+  await page.getByPlaceholder('Short recipe context').fill('Fast breakfast recipe with herbs.');
+  await page.getByPlaceholder('Example: tomatoes').fill('Eggs');
+  await page.getByRole('button', { name: 'Add recipe' }).click();
+  await expect(page.getByRole('heading', { name: 'Herb Omelette' })).toBeVisible();
 });

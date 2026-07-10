@@ -37,7 +37,9 @@ const PROJECT_COMPONENT_LOADERS: Record<string, () => Promise<Type<unknown>>> = 
   'project-planner': () =>
     import('../project-planner/project-planner.component').then((component) => component.ProjectPlannerComponent),
   'odd-even': () => import('../odd-even/odd-even.component').then((component) => component.OddEvenComponent),
-  'dev-logger': () => import('../dev-logger/dev-logger.component').then((component) => component.DevLoggerComponent)
+  'dev-logger': () => import('../dev-logger/dev-logger.component').then((component) => component.DevLoggerComponent),
+  'recipe-book': () =>
+    import('../recipe-book/recipe-book.component').then((component) => component.RecipeBookComponent)
 };
 
 @Component({

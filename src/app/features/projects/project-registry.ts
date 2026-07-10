@@ -309,5 +309,22 @@ export const PROJECTS: PortfolioProject[] = [
     layout: 'wide',
     repositoryUrl: `${REPOSITORY_BASE_URL}/dev-logger`,
     demoUrl: null
+  },
+  {
+    order: 190,
+    id: 'recipe-book',
+    titleKey: 'PROJECTS.RECIPE_BOOK.TITLE',
+    summaryKey: 'PROJECTS.RECIPE_BOOK.SUMMARY',
+    categoryKey: 'CATEGORIES.UTILITIES',
+    tags: ['Angular', 'TypeScript', 'Reactive Forms', 'Signals'],
+    status: 'ready',
+    image: 'assets/project-covers/recipe-book.svg',
+    route: '/admin/projects/recipe-book',
+    updatedAt: '2026-07-09',
+    createdAt: '2026-07-09',
+    difficulty: 'intermediate',
+    layout: 'wide',
+    repositoryUrl: `${REPOSITORY_BASE_URL}/recipe-book`,
+    demoUrl: null
   }
 ];

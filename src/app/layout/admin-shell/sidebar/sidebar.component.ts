@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, computed, inject, signal } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, NavigationEnd } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { filter } from 'rxjs';
@@ -27,8 +27,9 @@ const DIFFICULTY_ORDER: ProjectDifficulty[] = ['beginner', 'intermediate', 'adva
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })
-export class SidebarComponent {
+export class SidebarComponent implements AfterViewInit {
   private readonly router = inject(Router);
+  private readonly host = inject(ElementRef<HTMLElement>);
 
   readonly projects = PROJECTS;
   readonly totalProjects = PROJECTS.length;
@@ -53,7 +54,12 @@ export class SidebarComponent {
     this.router.events.pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd)).subscribe((event) => {
       this.activeUrl.set(event.urlAfterRedirects);
       this.openActiveProjectGroup(event.urlAfterRedirects);
+      this.scrollActiveProjectIntoView();
     });
+  }
+
+  ngAfterViewInit(): void {
+    this.scrollActiveProjectIntoView();
   }
 
   toggleGroup(difficulty: ProjectDifficulty): void {
@@ -61,6 +67,7 @@ export class SidebarComponent {
       ...groups,
       [difficulty]: !groups[difficulty]
     }));
+    this.scrollActiveProjectIntoView();
   }
 
   isGroupOpen(difficulty: ProjectDifficulty): boolean {
@@ -82,5 +89,14 @@ export class SidebarComponent {
       ...groups,
       [activeProject.difficulty]: true
     }));
+  }
+
+  private scrollActiveProjectIntoView(): void {
+    setTimeout(() => {
+      this.host.nativeElement.querySelector('.group-links a.project-active')?.scrollIntoView({
+        block: 'nearest',
+        inline: 'nearest'
+      });
+    });
   }
 }

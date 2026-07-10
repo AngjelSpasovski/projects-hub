@@ -13,7 +13,16 @@
   display: grid;
   gap: 0.9rem;
   grid-template-columns: minmax(16rem, 0.85fr) minmax(0, 1.45fr);
+  height: 100%;
+  min-height: 0;
   padding: 0.7rem;
+}
+
+:host,
+.todo-page {
+  height: 100%;
+  min-height: 0;
+  width: 100%;
 }
 
 .task-form,
@@ -23,12 +32,17 @@
   border-radius: 8px;
   display: grid;
   gap: 0.7rem;
+  min-height: 0;
   min-width: 0;
   padding: 0.7rem;
 }
 
 .task-form {
   align-content: start;
+}
+
+.task-board {
+  grid-template-rows: auto auto minmax(0, 1fr);
 }
 
 .form-heading,
@@ -176,6 +190,9 @@ small.error {
 .task-list {
   display: grid;
   gap: 0.55rem;
+  min-height: 0;
+  overflow: auto;
+  padding-right: 0.15rem;
 }
 
 .task-row {

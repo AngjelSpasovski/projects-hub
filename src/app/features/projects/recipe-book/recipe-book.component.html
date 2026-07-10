@@ -1,0 +1,203 @@
+<section class="recipe-page" [attr.aria-label]="'RECIPE_BOOK.TITLE' | translate">
+  <div class="recipe-shell">
+    <aside class="recipe-sidebar">
+      <div class="panel-heading">
+        <div>
+          <span>{{ 'RECIPE_BOOK.LIST.EYEBROW' | translate }}</span>
+          <h3>{{ 'RECIPE_BOOK.LIST.TITLE' | translate }}</h3>
+        </div>
+        <button type="button" class="btn btn-ghost btn-sm btn-icon" (click)="resetDemo()">
+          <i class="pi pi-refresh"></i>
+          <span>{{ 'RECIPE_BOOK.ACTIONS.RESET' | translate }}</span>
+        </button>
+      </div>
+
+      <label class="search-field">
+        <span>{{ 'RECIPE_BOOK.LIST.SEARCH' | translate }}</span>
+        <input
+          type="search"
+          class="form-control"
+          [value]="searchTerm()"
+          (input)="updateSearch($any($event.target).value)"
+          [placeholder]="'RECIPE_BOOK.LIST.SEARCH_PLACEHOLDER' | translate"
+        />
+      </label>
+
+      <div class="recipe-list" role="list">
+        @for (recipe of filteredRecipes(); track recipe.id) {
+          <button
+            type="button"
+            class="recipe-item"
+            [class.active]="selectedRecipe().id === recipe.id"
+            (click)="selectRecipe(recipe.id)"
+          >
+            <span>{{ categoryKey(recipe.category) | translate }}</span>
+            <strong>{{ recipe.name }}</strong>
+            <small>{{ 'RECIPE_BOOK.LIST.PREP_TIME' | translate:{ minutes: recipe.prepTime } }}</small>
+          </button>
+        } @empty {
+          <p class="empty-copy">{{ 'RECIPE_BOOK.LIST.EMPTY' | translate }}</p>
+        }
+      </div>
+
+      <form class="recipe-form" [formGroup]="recipeForm" (ngSubmit)="addRecipe()" novalidate>
+        <div>
+          <span>{{ 'RECIPE_BOOK.FORM.EYEBROW' | translate }}</span>
+          <h3>{{ 'RECIPE_BOOK.FORM.TITLE' | translate }}</h3>
+        </div>
+
+        <label>
+          <span>{{ 'RECIPE_BOOK.FORM.NAME' | translate }}</span>
+          <input class="form-control" type="text" formControlName="name" [placeholder]="'RECIPE_BOOK.FORM.NAME_PLACEHOLDER' | translate" />
+        </label>
+
+        <label>
+          <span>{{ 'RECIPE_BOOK.FORM.DESCRIPTION' | translate }}</span>
+          <textarea
+            class="form-control"
+            rows="2"
+            formControlName="description"
+            [placeholder]="'RECIPE_BOOK.FORM.DESCRIPTION_PLACEHOLDER' | translate"
+          ></textarea>
+        </label>
+
+        <div class="form-grid">
+          <label>
+            <span>{{ 'RECIPE_BOOK.FORM.CATEGORY' | translate }}</span>
+            <select class="form-select" formControlName="category">
+              @for (category of categories; track category) {
+                <option [value]="category">{{ categoryKey(category) | translate }}</option>
+              }
+            </select>
+          </label>
+
+          <label>
+            <span>{{ 'RECIPE_BOOK.FORM.PREP_TIME' | translate }}</span>
+            <input class="form-control" type="number" min="5" max="240" formControlName="prepTime" />
+          </label>
+        </div>
+
+        <div class="form-grid">
+          <label>
+            <span>{{ 'RECIPE_BOOK.FORM.INGREDIENT' | translate }}</span>
+            <input
+              class="form-control"
+              type="text"
+              formControlName="ingredientName"
+              [placeholder]="'RECIPE_BOOK.FORM.INGREDIENT_PLACEHOLDER' | translate"
+            />
+          </label>
+
+          <label>
+            <span>{{ 'RECIPE_BOOK.FORM.AMOUNT' | translate }}</span>
+            <input class="form-control" type="number" min="1" max="99" formControlName="ingredientAmount" />
+          </label>
+        </div>
+
+        @if (recipeForm.invalid && recipeForm.touched) {
+          <small class="error">{{ 'RECIPE_BOOK.FORM.ERROR' | translate }}</small>
+        }
+
+        <button type="submit" class="btn btn-primary submit-action">
+          <i class="pi pi-plus"></i>
+          <span>{{ 'RECIPE_BOOK.ACTIONS.ADD_RECIPE' | translate }}</span>
+        </button>
+      </form>
+    </aside>
+
+    <main class="recipe-detail">
+      <div class="stats-row">
+        <article>
+          <span>{{ 'RECIPE_BOOK.STATS.RECIPES' | translate }}</span>
+          <strong>{{ recipeCount() }}</strong>
+        </article>
+        <article>
+          <span>{{ 'RECIPE_BOOK.STATS.INGREDIENTS' | translate }}</span>
+          <strong>{{ ingredientCount() }}</strong>
+        </article>
+        <article>
+          <span>{{ 'RECIPE_BOOK.STATS.SHOPPING' | translate }}</span>
+          <strong>{{ shoppingCount() }}</strong>
+        </article>
+      </div>
+
+      @if (selectedRecipe(); as recipe) {
+        <section class="detail-card">
+          <div class="recipe-hero">
+            <div class="recipe-plate" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div>
+              <span>{{ categoryKey(recipe.category) | translate }}</span>
+              <h3>{{ recipe.name }}</h3>
+              <p>{{ recipe.description }}</p>
+            </div>
+          </div>
+
+          <div class="detail-actions">
+            <button type="button" class="btn btn-primary btn-icon" (click)="addSelectedIngredientsToShoppingList()">
+              <i class="pi pi-shopping-cart"></i>
+              <span>{{ 'RECIPE_BOOK.ACTIONS.ADD_TO_SHOPPING' | translate }}</span>
+            </button>
+            <button type="button" class="btn btn-danger btn-icon" [disabled]="recipes().length <= 1" (click)="deleteSelectedRecipe()">
+              <i class="pi pi-trash"></i>
+              <span>{{ 'RECIPE_BOOK.ACTIONS.DELETE_RECIPE' | translate }}</span>
+            </button>
+          </div>
+
+          <div class="ingredient-grid">
+            @for (ingredient of recipe.ingredients; track ingredient.name) {
+              <article>
+                <span>{{ ingredient.name }}</span>
+                <strong>{{ ingredient.amount }}</strong>
+              </article>
+            }
+          </div>
+        </section>
+      }
+
+      <section class="shopping-panel">
+        <div class="panel-heading">
+          <div>
+            <span>{{ 'RECIPE_BOOK.SHOPPING.EYEBROW' | translate }}</span>
+            <h3>{{ 'RECIPE_BOOK.SHOPPING.TITLE' | translate }}</h3>
+          </div>
+        </div>
+
+        <form class="shopping-form" [formGroup]="shoppingForm" (ngSubmit)="addShoppingIngredient()" novalidate>
+          <label>
+            <span>{{ 'RECIPE_BOOK.SHOPPING.NAME' | translate }}</span>
+            <input class="form-control" type="text" formControlName="name" [placeholder]="'RECIPE_BOOK.SHOPPING.NAME_PLACEHOLDER' | translate" />
+          </label>
+
+          <label>
+            <span>{{ 'RECIPE_BOOK.SHOPPING.AMOUNT' | translate }}</span>
+            <input class="form-control" type="number" min="1" max="99" formControlName="amount" />
+          </label>
+
+          <button type="submit" class="btn btn-primary btn-icon">
+            <i class="pi pi-plus"></i>
+            <span>{{ 'RECIPE_BOOK.ACTIONS.ADD_ITEM' | translate }}</span>
+          </button>
+        </form>
+
+        <div class="shopping-list">
+          @for (item of shoppingItems(); track item.name + $index) {
+            <article>
+              <div>
+                <strong>{{ item.name }}</strong>
+                <span>{{ 'RECIPE_BOOK.SHOPPING.AMOUNT_LABEL' | translate:{ amount: item.amount } }}</span>
+              </div>
+              <button type="button" class="btn btn-danger btn-sm btn-icon" (click)="removeShoppingIngredient($index)">
+                <i class="pi pi-times"></i>
+                <span>{{ 'RECIPE_BOOK.ACTIONS.REMOVE' | translate }}</span>
+              </button>
+            </article>
+          }
+        </div>
+      </section>
+    </main>
+  </div>
+</section>

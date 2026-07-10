@@ -1,11 +1,16 @@
 .sticky-page {
   display: grid;
+  height: 100%;
+  min-height: 0;
+  width: 100%;
 }
 
 .sticky-shell {
   display: grid;
   grid-template-columns: minmax(15rem, 0.62fr) minmax(0, 1.38fr);
   gap: 0.75rem;
+  height: 100%;
+  min-height: 0;
   border: 1px solid var(--project-border);
   border-radius: 8px;
   background:
@@ -20,11 +25,16 @@
   display: grid;
   align-content: start;
   gap: 0.7rem;
+  min-height: 0;
   min-width: 0;
   border: 1px solid var(--project-border);
   border-radius: 8px;
   background: var(--project-shell);
   padding: 0.7rem;
+}
+
+.notes-board {
+  grid-template-rows: auto minmax(0, 1fr);
 }
 
 .panel-heading,
@@ -215,6 +225,9 @@ small.error {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.65rem;
+  min-height: 0;
+  overflow: auto;
+  padding-right: 0.15rem;
 }
 
 .note-card {
