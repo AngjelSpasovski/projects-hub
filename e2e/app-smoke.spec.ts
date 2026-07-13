@@ -12,7 +12,7 @@ test('dashboard catalog supports view switching and project navigation', async (
   await page.getByRole('button', { name: 'EN' }).click();
 
   await expect(page.getByText('Overview of the small apps that will be migrated and added to this repo.')).toBeVisible();
-  await expect(page.getByText('22 project(s)')).toBeVisible();
+  await expect(page.getByText('23 project(s)')).toBeVisible();
 
   await page.getByRole('button', { name: /Detailed/ }).click();
   await expect(page.getByText('Difficulty').first()).toBeVisible();
@@ -28,14 +28,14 @@ test('dashboard catalog supports view switching and project navigation', async (
   await expect(page.locator('.project-workspace .project-live .surface-panel')).toHaveCount(0);
 
   await page.getByRole('link', { name: /Dashboard/ }).click();
-  await expect(page.getByText('22 project(s)')).toBeVisible();
+  await expect(page.getByText('23 project(s)')).toBeVisible();
 });
 
 test('theme switcher applies every theme without layout overflow', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 820 });
   await page.goto('/');
   await page.getByRole('button', { name: 'EN', exact: true }).click();
-  await expect(page.getByText('22 project(s)')).toBeVisible();
+  await expect(page.getByText('23 project(s)')).toBeVisible();
 
   const themes = [
     { label: 'Realm', value: 'realm' },
@@ -86,7 +86,7 @@ test('language switch renders Macedonian catalog labels', async ({ page }) => {
   await page.getByRole('button', { name: 'MK' }).click();
 
   await expect(page.getByRole('button', { name: /Детално/ })).toBeVisible();
-  await expect(page.getByText('22 проект(и)')).toBeVisible();
+  await expect(page.getByText('23 проект(и)')).toBeVisible();
   await expect(page.getByText('Калкулатор').first()).toBeVisible();
 });
 
@@ -112,7 +112,7 @@ test('catalog keeps filtered cards compact and tag overlay above cards', async (
   await page.goto('/');
   await page.getByRole('button', { name: 'EN', exact: true }).click();
 
-  await page.getByPlaceholder('Search projects, tags, or categories').fill('calculator');
+  await page.getByPlaceholder('Search projects, tags, or categories').fill('keyboard');
   await expect(page.getByText('1 project(s)')).toBeVisible();
 
   const cardBox = await page.locator('.project-card').first().boundingBox();
@@ -170,7 +170,7 @@ test('admin shell keeps chrome fixed while dashboard catalog scrolls', async ({ 
   await page.setViewportSize({ width: 1280, height: 560 });
   await page.goto('/');
   await page.getByRole('button', { name: 'EN', exact: true }).click();
-  await expect(page.getByText('22 project(s)')).toBeVisible();
+  await expect(page.getByText('23 project(s)')).toBeVisible();
 
   const header = page.locator('.app-header');
   const sidebar = page.locator('.app-sidebar');
@@ -204,7 +204,7 @@ test('dashboard keeps the catalog scroll position at the catalog bottom', async 
   await page.setViewportSize({ width: 1280, height: 560 });
   await page.goto('/');
   await page.getByRole('button', { name: 'EN', exact: true }).click();
-  await expect(page.getByText('22 project(s)')).toBeVisible();
+  await expect(page.getByText('23 project(s)')).toBeVisible();
 
   const catalog = page.locator('.project-catalog');
 
@@ -225,7 +225,7 @@ test('desktop catalog and project workspaces fit without nested scrollbars', asy
   await page.setViewportSize({ width: 1920, height: 1080 });
   await page.goto('/');
   await page.getByRole('button', { name: 'EN', exact: true }).click();
-  await expect(page.getByText('22 project(s)')).toBeVisible();
+  await expect(page.getByText('23 project(s)')).toBeVisible();
 
   const routes = [
     'tic-tac-toe',
@@ -249,7 +249,8 @@ test('desktop catalog and project workspaces fit without nested scrollbars', asy
     'recipe-book',
     'flashcards',
     'timer',
-    'digital-clock'
+    'digital-clock',
+    'tip-calculator'
   ];
 
   for (const route of routes) {
@@ -301,7 +302,7 @@ test('project detail remains responsive on compact desktop and mobile viewports'
 test('mini project refinements keep core interactions stable', async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('projects-hub-language', 'en'));
   await page.goto('/');
-  await expect(page.getByText('22 project(s)')).toBeVisible();
+  await expect(page.getByText('23 project(s)')).toBeVisible();
 
   await page.goto('/admin/projects/calculator');
   await page.getByRole('button', { name: '9', exact: true }).click();
@@ -811,4 +812,29 @@ test('Digital Clock supports timezone, 12-hour mode, refresh, and persistence', 
     '"timezone":"Asia/Tokyo"'
   );
   await expect.poll(async () => page.evaluate(() => localStorage.getItem('projects-hub-digital-clock'))).toContain('"mode":"12"');
+});
+
+test('Tip Calculator supports split totals, validation, presets, and reset', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'EN', exact: true }).click();
+  await page.getByRole('link', { name: 'Tip Calculator', exact: true }).click();
+
+  await expect(page.getByRole('heading', { name: 'Tip Calculator', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Payment split' })).toBeVisible();
+  await expect(page.locator('output')).toHaveText('$49.86');
+
+  await page.getByPlaceholder('Example: 84.50').fill('120');
+  await page.getByRole('button', { name: /20%/ }).click();
+  await page.getByPlaceholder('Example: 2').fill('3');
+
+  await expect(page.locator('output')).toHaveText('$48.00');
+  await expect(page.getByText('Tip total').locator('..').getByText('$24.00')).toBeVisible();
+  await expect(page.getByText('Tip / person').locator('..').getByText('$8.00')).toBeVisible();
+
+  await page.getByPlaceholder('Example: 84.50').fill('0');
+  await expect(page.getByText('Enter a bill amount greater than zero.')).toBeVisible();
+  await expect(page.locator('output')).toHaveText('$0.00');
+
+  await page.getByRole('button', { name: 'Reset' }).click();
+  await expect(page.locator('output')).toHaveText('$49.86');
 });

@@ -28,7 +28,7 @@ describe('DashboardComponent', () => {
   });
 
   it('should filter projects by search term', () => {
-    component.updateSearchTerm('calculator');
+    component.updateSearchTerm('keyboard');
 
     expect(component.filteredProjects().map((project) => project.id)).toEqual(['calculator']);
   });

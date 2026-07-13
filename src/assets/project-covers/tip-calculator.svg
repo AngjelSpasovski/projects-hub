@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 320" role="img" aria-labelledby="title desc">
+  <title id="title">Tip Calculator cover</title>
+  <desc id="desc">Illustrated receipt, percent badge, and split payment cards.</desc>
+  <rect width="640" height="320" fill="#eef4ff"/>
+  <rect x="82" y="42" width="220" height="236" rx="18" fill="#ffffff" stroke="#b8c9f4" stroke-width="4"/>
+  <path d="M112 84h148M112 126h112M112 168h148M112 210h96" stroke="#1f2937" stroke-width="10" stroke-linecap="round"/>
+  <path d="M112 250h148" stroke="#f4d35e" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="414" cy="116" r="62" fill="#5b6ee1"/>
+  <path d="M384 142l60-60M385 92h.01M443 134h.01" stroke="#ffffff" stroke-width="16" stroke-linecap="round"/>
+  <rect x="346" y="194" width="170" height="64" rx="14" fill="#f4d35e" stroke="#1f2937" stroke-width="4"/>
+  <path d="M376 226h108" stroke="#1f2937" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="548" cy="70" r="13" fill="#86cda1"/>
+  <circle cx="560" cy="250" r="10" fill="#e6775f"/>
+  <path d="M42 96h24M54 84v24M554 138h24M566 126v24M328 52h20M338 42v20" stroke="#5b6ee1" stroke-width="6" stroke-linecap="round"/>
+</svg>

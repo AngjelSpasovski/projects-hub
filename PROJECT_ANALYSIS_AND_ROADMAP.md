@@ -376,11 +376,19 @@ Encoding:
 
 The low-risk LocalStorage/productivity batch is complete through `Digital Clock`.
 
-Remaining smaller backlog items can still be used for short cycles, but the next stronger portfolio step is likely a larger workflow migration.
+Continue with a stable smaller-project sequence before the next large migration:
+
+1. `Tip Calculator` - complete.
+2. `Memory Game`.
+3. `Math 4 Kids`.
+4. `Music Player`.
+5. `Photo Book`.
+
+Each project should be implemented as a complete portfolio entry: polished UI, validation, empty/error states where relevant, translations, cover, registry entry, README update, unit coverage where useful, Playwright workflow coverage, and full verification.
 
 ### Priority 4: Next Legacy Migration
 
-The next large legacy migration candidate is `Client Panel`.
+The next large legacy migration candidate is `Client Panel`, but it should start after the smaller backlog sequence is stable or when a deliberate portfolio-impact cycle is chosen.
 
 Expected scope:
 
@@ -398,14 +406,10 @@ Expected scope:
 
 Future mini project candidates:
 
-- `Tip Calculator`
-- `Memory Game`
-- `Math 4 Kids`
+- `Chat App`, after choosing Firebase or Socket.io architecture.
 - `Find the Word`, only if it is clearly different from Hang Man.
 - `Square Cards`, only if it demonstrates more than the existing shared cards.
-- `Music Player`
-- `Photo Book`
-- `Chat App`, after choosing Firebase or Socket.io architecture.
+- `Recipe Book variant`, only if it is meaningfully different from the migrated Recipe Book.
 
 Backend-dependent work should remain last so the static portfolio stays deployable without secrets.
 
@@ -430,11 +434,14 @@ When adding any new mini project:
 
 ## 11. Practical Recommendation
 
-The documentation alignment and first UI polish pass are complete.
+The documentation alignment, first UI polish pass, and Tip Calculator cycle are complete.
 
-After that, choose one of two paths:
+Continue with the stable smaller-project path:
 
-- Small, low-risk feature path: continue with another utility or game from `NEW_PROJECTS_BACKLOG.md`.
-- Bigger portfolio-value path: migrate `Client Panel`.
+1. Build `Memory Game`.
+2. Build `Math 4 Kids`.
+3. Build `Music Player`.
+4. Build `Photo Book`.
+5. Start the larger `Client Panel` migration.
 
-For portfolio impact, `Client Panel` is the stronger next feature because it can demonstrate CRUD workflows, route handling, validation, guarded/demo access, confirmations, and richer application state. For momentum and lower risk, choose another small utility or game from the backlog.
+Keep `Client Panel` as the next major portfolio-impact migration after the smaller backlog stays stable.

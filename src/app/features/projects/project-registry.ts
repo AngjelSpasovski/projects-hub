@@ -377,5 +377,22 @@ export const PROJECTS: PortfolioProject[] = [
     layout: 'wide',
     repositoryUrl: `${REPOSITORY_BASE_URL}/digital-clock`,
     demoUrl: null
+  },
+  {
+    order: 230,
+    id: 'tip-calculator',
+    titleKey: 'PROJECTS.TIP_CALCULATOR.TITLE',
+    summaryKey: 'PROJECTS.TIP_CALCULATOR.SUMMARY',
+    categoryKey: 'CATEGORIES.UTILITIES',
+    tags: ['Angular', 'TypeScript', 'Forms', 'Validation'],
+    status: 'ready',
+    image: 'assets/project-covers/tip-calculator.svg',
+    route: '/admin/projects/tip-calculator',
+    updatedAt: '2026-07-13',
+    createdAt: '2026-07-13',
+    difficulty: 'beginner',
+    layout: 'wide',
+    repositoryUrl: `${REPOSITORY_BASE_URL}/tip-calculator`,
+    demoUrl: null
   }
 ];

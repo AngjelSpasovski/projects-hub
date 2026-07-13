@@ -43,7 +43,9 @@ const PROJECT_COMPONENT_LOADERS: Record<string, () => Promise<Type<unknown>>> = 
   flashcards: () => import('../flashcards/flashcards.component').then((component) => component.FlashcardsComponent),
   timer: () => import('../timer/timer.component').then((component) => component.TimerComponent),
   'digital-clock': () =>
-    import('../digital-clock/digital-clock.component').then((component) => component.DigitalClockComponent)
+    import('../digital-clock/digital-clock.component').then((component) => component.DigitalClockComponent),
+  'tip-calculator': () =>
+    import('../tip-calculator/tip-calculator.component').then((component) => component.TipCalculatorComponent)
 };
 
 @Component({

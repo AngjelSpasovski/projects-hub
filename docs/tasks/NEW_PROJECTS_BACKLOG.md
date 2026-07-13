@@ -2,6 +2,24 @@
 
 Duplicate ideas are consolidated. `To-Do List` appears once, and `Find the Word` must be differentiated from Hang Man before implementation.
 
+## Recommended Build Order
+
+Use this order for a stable pace: small, well-scoped projects first; richer interaction projects after the utility baseline is consistent; large migrations only after the smaller backlog stays green.
+
+1. [x] Tip Calculator: utility form with bill amount, percentage, people count, validation, split totals, reset, and polished empty/error states.
+2. [ ] Memory Game: interactive game with shuffled board, matched pairs, moves, timer, reset, difficulty, and completed-state summary.
+3. [ ] Math 4 Kids: learning game with operation and difficulty selection, score, streak, timer, feedback, and restart.
+4. [ ] Music Player: media-style UI with safe playlist handling, current item, search, favorites, and external YouTube link behavior.
+5. [ ] Photo Book: visual gallery with grid/slider views, keyboard navigation, responsive images, and selected-photo detail.
+6. [ ] Client Panel migration: larger workflow migration with list, detail, create, edit, delete, safe demo auth replacement, and full state handling.
+7. [ ] Chat App: backend-dependent project after Firebase or Socket.io architecture is selected.
+
+## Scope Before Build
+
+- [ ] Find the Word: define behavior that is clearly different from Hang Man before implementation.
+- [ ] Square Cards: build only if it demonstrates a reusable playground beyond the existing shared card UI.
+- [ ] Recipe Book variant: do not create a second project unless its scope is meaningfully different from the migrated Recipe Book.
+
 ## Batch 1: Core Portfolio Apps
 
 - [x] JavaScript Quiz: multiple-choice questions, timer, progress, score, review, and restart.
@@ -29,17 +47,17 @@ Duplicate ideas are consolidated. `To-Do List` appears once, and `Find the Word`
 
 ## Batch 4: Utilities And Games
 
-- [ ] Tip Calculator: bill, percentage, people count, validation, and split totals.
+- [x] Tip Calculator: bill, percentage, people count, validation, and split totals.
 - [ ] Memory Game: shuffled board, matched pairs, moves, timer, reset, and difficulty.
 - [ ] Math 4 Kids: operation and difficulty selection, score, streak, timer, and feedback.
-- [ ] Find the Word: define behavior that is clearly different from Hang Man before implementation.
-- [ ] Square Cards: reusable responsive card-template playground, if it demonstrates more than shared UI already does.
+- [ ] Find the Word: scope before build.
+- [ ] Square Cards: scope before build.
 
 ## Batch 5: Media And Rich UI
 
 - [ ] Music Player: YouTube-link playlist, current item, search, favorites, and safe external embedding.
 - [ ] Photo Book: gallery, slider, grid/list views, keyboard navigation, and responsive images.
-- [ ] Recipe Book variant: do not create a second project unless its scope is meaningfully different from the legacy Recipe Book migration.
+- [ ] Recipe Book variant: scope before build.
 
 ## Batch 6: Backend-Dependent
 

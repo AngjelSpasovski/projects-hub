@@ -155,6 +155,10 @@
     "DIGITAL_CLOCK": {
       "TITLE": "Digital Clock",
       "SUMMARY": "Live clock with date display, 12/24-hour mode, timezone selection, and persisted settings."
+    },
+    "TIP_CALCULATOR": {
+      "TITLE": "Tip Calculator",
+      "SUMMARY": "Split-bill calculator with tip presets, custom percentage, people count validation, and per-person totals."
     }
   },
   "PROJECT_PLANNER": {
@@ -1331,6 +1335,49 @@
       "SKOPJE": "Skopje",
       "TOKYO": "Tokyo",
       "UTC": "UTC"
+    }
+  },
+  "TIP_CALCULATOR": {
+    "TITLE": "Tip Calculator",
+    "DESCRIPTION": "A split-bill calculator with tip presets, custom percentage, people count validation, and clear per-person totals.",
+    "ACTIONS": {
+      "RESET": "Reset"
+    },
+    "FEATURES": {
+      "RESET": "Reset restores the demo values for another quick calculation.",
+      "SPLIT": "Per-person totals update immediately when the people count changes.",
+      "VALIDATION": "Validation keeps zero bill amounts and zero people counts from producing misleading totals."
+    },
+    "FORM": {
+      "BILL": "Bill amount",
+      "BILL_ERROR": "Enter a bill amount greater than zero.",
+      "BILL_PLACEHOLDER": "Example: 84.50",
+      "CUSTOM_TIP": "Custom tip %",
+      "EYEBROW": "Bill setup",
+      "PEOPLE": "People",
+      "PEOPLE_ERROR": "Use at least one person.",
+      "PEOPLE_PLACEHOLDER": "Example: 2",
+      "TIP_ERROR": "Tip percentage cannot be negative.",
+      "TIP_PLACEHOLDER": "Example: 18",
+      "TITLE": "Calculate split"
+    },
+    "PRESETS": {
+      "EIGHTEEN": "Great service",
+      "FIFTEEN": "Standard",
+      "TEN": "Light tip",
+      "TITLE": "Tip presets",
+      "TWENTY": "Generous"
+    },
+    "RESULTS": {
+      "BILL_PER_PERSON": "Bill / person",
+      "SPLIT_NOTE": "Split across {{people}} people",
+      "TIP_PER_PERSON": "Tip / person",
+      "TIP_TOTAL": "Tip total",
+      "TOTAL_PER_PERSON": "Total / person"
+    },
+    "STAGE": {
+      "EYEBROW": "Split summary",
+      "TITLE": "Payment split"
     }
   },
   "EXPENSE_TRACKER": {

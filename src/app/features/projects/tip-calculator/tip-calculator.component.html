@@ -1,0 +1,134 @@
+<section class="tip-page">
+  <div class="tip-shell" [attr.aria-label]="'TIP_CALCULATOR.TITLE' | translate">
+    <section class="tip-summary">
+      <div class="stage-heading">
+        <div>
+          <span>{{ 'TIP_CALCULATOR.STAGE.EYEBROW' | translate }}</span>
+          <h3>{{ 'TIP_CALCULATOR.STAGE.TITLE' | translate }}</h3>
+        </div>
+        <strong>{{ effectiveRate() }}</strong>
+      </div>
+
+      <div class="total-card">
+        <span>{{ 'TIP_CALCULATOR.RESULTS.TOTAL_PER_PERSON' | translate }}</span>
+        <output>{{ formatCurrency(totalPerPerson()) }}</output>
+        <p>{{ 'TIP_CALCULATOR.RESULTS.SPLIT_NOTE' | translate:{ people: peopleCount() || 0 } }}</p>
+      </div>
+
+      <div class="stats-grid">
+        <article>
+          <span>{{ 'TIP_CALCULATOR.RESULTS.TIP_TOTAL' | translate }}</span>
+          <strong>{{ formatCurrency(tipAmount()) }}</strong>
+        </article>
+        <article>
+          <span>{{ 'TIP_CALCULATOR.RESULTS.TIP_PER_PERSON' | translate }}</span>
+          <strong>{{ formatCurrency(tipPerPerson()) }}</strong>
+        </article>
+        <article>
+          <span>{{ 'TIP_CALCULATOR.RESULTS.BILL_PER_PERSON' | translate }}</span>
+          <strong>{{ formatCurrency(billPerPerson()) }}</strong>
+        </article>
+      </div>
+
+      <div class="feature-list">
+        <article>
+          <i class="pi pi-check-circle"></i>
+          <p>{{ 'TIP_CALCULATOR.FEATURES.VALIDATION' | translate }}</p>
+        </article>
+        <article>
+          <i class="pi pi-users"></i>
+          <p>{{ 'TIP_CALCULATOR.FEATURES.SPLIT' | translate }}</p>
+        </article>
+        <article>
+          <i class="pi pi-refresh"></i>
+          <p>{{ 'TIP_CALCULATOR.FEATURES.RESET' | translate }}</p>
+        </article>
+      </div>
+    </section>
+
+    <aside class="tip-panel">
+      <div class="panel-heading">
+        <div>
+          <span>{{ 'TIP_CALCULATOR.FORM.EYEBROW' | translate }}</span>
+          <h3>{{ 'TIP_CALCULATOR.FORM.TITLE' | translate }}</h3>
+        </div>
+      </div>
+
+      <form class="calculator-form" novalidate>
+        <label>
+          <span>{{ 'TIP_CALCULATOR.FORM.BILL' | translate }}</span>
+          <input
+            class="form-control"
+            [class.invalid]="isBillInvalid()"
+            inputmode="decimal"
+            type="text"
+            [value]="billInput()"
+            (input)="updateBill($any($event.target).value)"
+            [placeholder]="'TIP_CALCULATOR.FORM.BILL_PLACEHOLDER' | translate"
+          />
+          @if (isBillInvalid()) {
+            <small class="error">{{ 'TIP_CALCULATOR.FORM.BILL_ERROR' | translate }}</small>
+          }
+        </label>
+
+        <fieldset class="preset-panel">
+          <legend>{{ 'TIP_CALCULATOR.PRESETS.TITLE' | translate }}</legend>
+          <div class="preset-grid">
+            @for (preset of presets; track preset.value) {
+              <button
+                type="button"
+                class="preset-button"
+                [class.active]="tipPercent() === preset.value"
+                (click)="selectTip(preset.value)"
+              >
+                <strong>{{ preset.value }}%</strong>
+                <span>{{ preset.labelKey | translate }}</span>
+              </button>
+            }
+          </div>
+        </fieldset>
+
+        <div class="form-grid">
+          <label>
+            <span>{{ 'TIP_CALCULATOR.FORM.CUSTOM_TIP' | translate }}</span>
+            <input
+              class="form-control"
+              [class.invalid]="isTipInvalid()"
+              inputmode="decimal"
+              type="text"
+              [value]="tipInput()"
+              (input)="updateTip($any($event.target).value)"
+              [placeholder]="'TIP_CALCULATOR.FORM.TIP_PLACEHOLDER' | translate"
+            />
+            @if (isTipInvalid()) {
+              <small class="error">{{ 'TIP_CALCULATOR.FORM.TIP_ERROR' | translate }}</small>
+            }
+          </label>
+
+          <label>
+            <span>{{ 'TIP_CALCULATOR.FORM.PEOPLE' | translate }}</span>
+            <input
+              class="form-control"
+              [class.invalid]="isPeopleInvalid()"
+              inputmode="numeric"
+              type="text"
+              [value]="peopleInput()"
+              (input)="updatePeople($any($event.target).value)"
+              [placeholder]="'TIP_CALCULATOR.FORM.PEOPLE_PLACEHOLDER' | translate"
+            />
+            @if (isPeopleInvalid()) {
+              <small class="error">{{ 'TIP_CALCULATOR.FORM.PEOPLE_ERROR' | translate }}</small>
+            }
+          </label>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-primary btn-icon" (click)="reset()">
+            <i class="pi pi-refresh"></i>
+            <span>{{ 'TIP_CALCULATOR.ACTIONS.RESET' | translate }}</span>
+          </button>
+        </div>
+      </form>
+    </aside>
+  </div>
+</section>
