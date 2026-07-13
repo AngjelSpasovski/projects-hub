@@ -379,7 +379,7 @@ The low-risk LocalStorage/productivity batch is complete through `Digital Clock`
 Continue with a stable smaller-project sequence before the next large migration:
 
 1. `Tip Calculator` - complete.
-2. `Memory Game`.
+2. `Memory Game` - complete.
 3. `Math 4 Kids`.
 4. `Music Player`.
 5. `Photo Book`.
@@ -434,14 +434,13 @@ When adding any new mini project:
 
 ## 11. Practical Recommendation
 
-The documentation alignment, first UI polish pass, and Tip Calculator cycle are complete.
+The documentation alignment, first UI polish pass, Tip Calculator cycle, and Memory Game cycle are complete.
 
 Continue with the stable smaller-project path:
 
-1. Build `Memory Game`.
-2. Build `Math 4 Kids`.
-3. Build `Music Player`.
-4. Build `Photo Book`.
-5. Start the larger `Client Panel` migration.
+1. Build `Math 4 Kids`.
+2. Build `Music Player`.
+3. Build `Photo Book`.
+4. Start the larger `Client Panel` migration.
 
 Keep `Client Panel` as the next major portfolio-impact migration after the smaller backlog stays stable.

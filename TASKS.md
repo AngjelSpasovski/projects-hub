@@ -19,6 +19,7 @@ Detailed active work is tracked in [`docs/tasks/`](./docs/tasks/README.md). A pr
 - [x] Add Timer as a countdown productivity mini project.
 - [x] Add Digital Clock as a live timezone utility mini project.
 - [x] Add Tip Calculator as the first stable utility mini project from the recommended backlog order.
+- [x] Add Memory Game as the first stable game mini project from the recommended backlog order.
 
 ## Foundation
 

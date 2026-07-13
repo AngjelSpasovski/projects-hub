@@ -159,6 +159,10 @@
     "TIP_CALCULATOR": {
       "TITLE": "Tip Calculator",
       "SUMMARY": "Split-bill calculator with tip presets, custom percentage, people count validation, and per-person totals."
+    },
+    "MEMORY_GAME": {
+      "TITLE": "Memory Game",
+      "SUMMARY": "Card matching game with shuffled pairs, difficulty levels, moves, timer, reset, and completion summary."
     }
   },
   "PROJECT_PLANNER": {
@@ -1378,6 +1382,45 @@
     "STAGE": {
       "EYEBROW": "Split summary",
       "TITLE": "Payment split"
+    }
+  },
+  "MEMORY_GAME": {
+    "TITLE": "Memory Game",
+    "DESCRIPTION": "A card matching game with shuffled pairs, difficulty levels, move tracking, elapsed time, and completion feedback.",
+    "ACTIONS": {
+      "NEW_ROUND": "New round",
+      "REVEAL": "Reveal all"
+    },
+    "CARD": {
+      "HIDDEN": "Hidden memory card"
+    },
+    "COMPLETE": {
+      "TEXT": "Finished in {{moves}} moves and {{time}}.",
+      "TITLE": "Board complete"
+    },
+    "CONTROLS": {
+      "DIFFICULTY": "Memory game difficulty",
+      "EYEBROW": "Game setup",
+      "TITLE": "Difficulty and actions"
+    },
+    "DIFFICULTY": {
+      "EASY": "Easy",
+      "HARD": "Hard",
+      "STANDARD": "Standard"
+    },
+    "FEATURES": {
+      "DIFFICULTY": "Difficulty changes the number of pairs without changing the core interaction.",
+      "MATCHING": "Cards stay open only when the selected pair matches.",
+      "TIMER": "The timer starts on the first move and stops when the board is complete."
+    },
+    "STAGE": {
+      "EYEBROW": "Matching board",
+      "TITLE": "Find every pair"
+    },
+    "STATS": {
+      "MATCHES": "Matches",
+      "MOVES": "Moves",
+      "TIME": "Time"
     }
   },
   "EXPENSE_TRACKER": {

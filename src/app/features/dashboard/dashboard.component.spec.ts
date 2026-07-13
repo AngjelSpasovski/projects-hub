@@ -39,7 +39,8 @@ describe('DashboardComponent', () => {
     expect(component.filteredProjects().map((project) => project.id)).toEqual([
       'tic-tac-toe',
       'hang-man',
-      'javascript-quiz'
+      'javascript-quiz',
+      'memory-game'
     ]);
   });
 

@@ -45,7 +45,9 @@ const PROJECT_COMPONENT_LOADERS: Record<string, () => Promise<Type<unknown>>> = 
   'digital-clock': () =>
     import('../digital-clock/digital-clock.component').then((component) => component.DigitalClockComponent),
   'tip-calculator': () =>
-    import('../tip-calculator/tip-calculator.component').then((component) => component.TipCalculatorComponent)
+    import('../tip-calculator/tip-calculator.component').then((component) => component.TipCalculatorComponent),
+  'memory-game': () =>
+    import('../memory-game/memory-game.component').then((component) => component.MemoryGameComponent)
 };
 
 @Component({

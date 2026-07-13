@@ -7,7 +7,7 @@ Duplicate ideas are consolidated. `To-Do List` appears once, and `Find the Word`
 Use this order for a stable pace: small, well-scoped projects first; richer interaction projects after the utility baseline is consistent; large migrations only after the smaller backlog stays green.
 
 1. [x] Tip Calculator: utility form with bill amount, percentage, people count, validation, split totals, reset, and polished empty/error states.
-2. [ ] Memory Game: interactive game with shuffled board, matched pairs, moves, timer, reset, difficulty, and completed-state summary.
+2. [x] Memory Game: interactive game with shuffled board, matched pairs, moves, timer, reset, difficulty, and completed-state summary.
 3. [ ] Math 4 Kids: learning game with operation and difficulty selection, score, streak, timer, feedback, and restart.
 4. [ ] Music Player: media-style UI with safe playlist handling, current item, search, favorites, and external YouTube link behavior.
 5. [ ] Photo Book: visual gallery with grid/slider views, keyboard navigation, responsive images, and selected-photo detail.
@@ -48,7 +48,7 @@ Use this order for a stable pace: small, well-scoped projects first; richer inte
 ## Batch 4: Utilities And Games
 
 - [x] Tip Calculator: bill, percentage, people count, validation, and split totals.
-- [ ] Memory Game: shuffled board, matched pairs, moves, timer, reset, and difficulty.
+- [x] Memory Game: shuffled board, matched pairs, moves, timer, reset, and difficulty.
 - [ ] Math 4 Kids: operation and difficulty selection, score, streak, timer, and feedback.
 - [ ] Find the Word: scope before build.
 - [ ] Square Cards: scope before build.

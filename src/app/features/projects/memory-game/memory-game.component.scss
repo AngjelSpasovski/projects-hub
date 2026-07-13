@@ -1,0 +1,300 @@
+:host {
+  display: block;
+  height: calc(100% - 0.75rem);
+  min-height: 0;
+  overflow: hidden;
+  width: 100%;
+}
+
+.memory-page {
+  display: grid;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  width: 100%;
+}
+
+.memory-shell {
+  background:
+    radial-gradient(circle at 15% 12%, color-mix(in srgb, var(--app-accent) 18%, transparent), transparent 18rem),
+    var(--project-bg);
+  border: 1px solid var(--project-border);
+  border-radius: 8px;
+  color: var(--project-text);
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: minmax(18rem, 1.05fr) minmax(0, 0.95fr);
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  padding: 0.7rem;
+}
+
+.memory-stage,
+.memory-panel,
+.control-panel,
+.feature-list article {
+  background: var(--project-shell);
+  border: 1px solid var(--project-border);
+  border-radius: 8px;
+}
+
+.memory-stage,
+.memory-panel,
+.control-panel {
+  display: grid;
+  gap: 0.75rem;
+  min-height: 0;
+  min-width: 0;
+  padding: 0.75rem;
+}
+
+.memory-stage {
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  overflow: hidden;
+}
+
+.memory-panel {
+  align-content: start;
+  overflow: auto;
+}
+
+.stage-heading,
+.panel-heading,
+.memory-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  justify-content: space-between;
+}
+
+.stage-heading span,
+.panel-heading span,
+.stats-grid span,
+.difficulty-button span {
+  color: var(--project-text-muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+.stage-heading h3,
+.panel-heading h3 {
+  font-size: 1.05rem;
+}
+
+.stage-heading strong {
+  background: var(--project-surface-muted);
+  border: 1px solid var(--project-border);
+  border-radius: 999px;
+  padding: 0.22rem 0.58rem;
+}
+
+.memory-board {
+  align-self: center;
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  justify-self: center;
+  max-width: 34rem;
+  min-height: 0;
+  width: min(100%, 34rem);
+}
+
+.memory-board.hard {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  max-width: 40rem;
+  width: min(100%, 40rem);
+}
+
+.memory-card {
+  aspect-ratio: 1;
+  background: var(--project-control);
+  border: 1px solid var(--project-border);
+  border-radius: 8px;
+  color: var(--project-text);
+  cursor: pointer;
+  display: grid;
+  font: inherit;
+  font-weight: 900;
+  min-width: 0;
+  padding: 0;
+  place-items: center;
+  position: relative;
+}
+
+.memory-card span {
+  align-items: center;
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  position: absolute;
+}
+
+.card-back {
+  color: var(--project-text-muted);
+}
+
+.card-front {
+  background: linear-gradient(135deg, var(--app-accent), color-mix(in srgb, var(--app-accent) 45%, #22c55e));
+  border-radius: 7px;
+  color: #fff;
+  font-size: clamp(1rem, 3vw, 1.65rem);
+  opacity: 0;
+}
+
+.memory-card.flipped .card-front,
+.memory-card.matched .card-front {
+  opacity: 1;
+}
+
+.memory-card.flipped .card-back,
+.memory-card.matched .card-back {
+  opacity: 0;
+}
+
+.memory-card.matched {
+  border-color: color-mix(in srgb, #22c55e 48%, var(--project-border));
+}
+
+.complete-state {
+  align-items: center;
+  background: color-mix(in srgb, #22c55e 14%, var(--project-surface));
+  border: 1px solid color-mix(in srgb, #22c55e 38%, var(--project-border));
+  border-radius: 8px;
+  display: flex;
+  gap: 0.65rem;
+  padding: 0.65rem;
+}
+
+.complete-state i {
+  color: #22c55e;
+  font-size: 1.45rem;
+}
+
+.complete-state p,
+.feature-list p {
+  color: var(--project-text-muted);
+}
+
+.stats-grid {
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.stats-grid article {
+  background: linear-gradient(135deg, var(--project-bg), var(--project-surface-muted));
+  border: 1px solid var(--project-border);
+  border-radius: 8px;
+  display: grid;
+  gap: 0.15rem;
+  min-width: 0;
+  padding: 0.6rem 0.7rem;
+}
+
+.stats-grid strong {
+  font-size: 1.05rem;
+  overflow-wrap: anywhere;
+}
+
+.difficulty-grid {
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.difficulty-button {
+  background: var(--project-control);
+  border: 1px solid var(--project-border);
+  border-radius: 8px;
+  color: var(--project-text);
+  cursor: pointer;
+  display: grid;
+  gap: 0.25rem;
+  min-height: 4.4rem;
+  padding: 0.65rem;
+  text-align: left;
+}
+
+.difficulty-button.active {
+  background: var(--app-accent);
+  border-color: var(--app-accent);
+  color: #fff;
+}
+
+.difficulty-button.active span {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.difficulty-button strong {
+  font-size: 1.25rem;
+}
+
+.memory-actions {
+  justify-content: flex-start;
+}
+
+.feature-list {
+  display: grid;
+  gap: 0.55rem;
+  min-height: 0;
+  overflow: auto;
+}
+
+.feature-list article {
+  align-items: center;
+  display: flex;
+  gap: 0.65rem;
+  padding: 0.65rem;
+}
+
+.feature-list i {
+  color: var(--app-accent);
+  font-size: 1.15rem;
+}
+
+@media (max-width: 1100px) {
+  :host {
+    height: auto;
+    overflow: visible;
+  }
+
+  .memory-page,
+  .memory-shell {
+    height: auto;
+    overflow: visible;
+  }
+
+  .memory-shell,
+  .memory-board.hard {
+    grid-template-columns: 1fr;
+  }
+
+  .memory-stage,
+  .memory-panel {
+    overflow: visible;
+  }
+}
+
+@media (max-width: 720px) {
+  .stats-grid,
+  .difficulty-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .memory-board {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .memory-board.hard {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

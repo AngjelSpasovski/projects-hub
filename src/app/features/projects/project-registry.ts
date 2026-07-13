@@ -394,5 +394,22 @@ export const PROJECTS: PortfolioProject[] = [
     layout: 'wide',
     repositoryUrl: `${REPOSITORY_BASE_URL}/tip-calculator`,
     demoUrl: null
+  },
+  {
+    order: 240,
+    id: 'memory-game',
+    titleKey: 'PROJECTS.MEMORY_GAME.TITLE',
+    summaryKey: 'PROJECTS.MEMORY_GAME.SUMMARY',
+    categoryKey: 'CATEGORIES.GAMES',
+    tags: ['Angular', 'TypeScript', 'Signals', 'Game UI'],
+    status: 'ready',
+    image: 'assets/project-covers/memory-game.svg',
+    route: '/admin/projects/memory-game',
+    updatedAt: '2026-07-13',
+    createdAt: '2026-07-13',
+    difficulty: 'beginner',
+    layout: 'wide',
+    repositoryUrl: `${REPOSITORY_BASE_URL}/memory-game`,
+    demoUrl: null
   }
 ];

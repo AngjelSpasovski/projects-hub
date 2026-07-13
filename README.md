@@ -20,7 +20,7 @@ The app opens directly into an admin-style dashboard where projects are browsed 
 - Fixed dashboard clock and weather summary widgets
 - Distinctive illustrated catalog covers with separate live-project screenshots for documentation
 - Unified project workspace containing metadata and the interactive application
-- Lazy-loaded Calculator, Tic Tac Toe, Hang Man, Weather, Music Event, JavaScript Quiz, To-Do List, Expense Tracker, Technical Documentation, Movie Search, REST Countries, Currency Converter, Quotes API, Sticky Notes, Grocery List, Project Planner, Odd/Even Counter, Dev Logger, Recipe Book, Flashcards, Timer, Digital Clock, and Tip Calculator mini projects
+- Lazy-loaded Calculator, Tic Tac Toe, Hang Man, Weather, Music Event, JavaScript Quiz, To-Do List, Expense Tracker, Technical Documentation, Movie Search, REST Countries, Currency Converter, Quotes API, Sticky Notes, Grocery List, Project Planner, Odd/Even Counter, Dev Logger, Recipe Book, Flashcards, Timer, Digital Clock, Tip Calculator, and Memory Game mini projects
 - Unit tests for app shell, dashboard logic, registry metadata, shared services, and mini project behavior
 - Playwright smoke tests for catalog navigation, view switching, and language switching
 
@@ -66,6 +66,7 @@ Exact installed versions are tracked in [DEPENDENCIES.md](./DEPENDENCIES.md).
 | Timer | Ready | Added as a countdown timer with presets, custom duration, pause/resume controls, completion state, and persistence. |
 | Digital Clock | Ready | Added as a live clock with date display, 12/24-hour mode, timezone selection, and persisted settings. |
 | Tip Calculator | Ready | Added as a split-bill utility with tip presets, custom percentage, people count validation, and per-person totals. |
+| Memory Game | Ready | Added as a card matching game with shuffled pairs, difficulty levels, moves, timer, reset, and completion summary. |
 
 The master roadmap is tracked in [TASKS.md](./TASKS.md). Detailed batches, project backlogs, and completion rules live in [docs/tasks](./docs/tasks/README.md). A consolidated project analysis and forward plan is tracked in [PROJECT_ANALYSIS_AND_ROADMAP.md](./PROJECT_ANALYSIS_AND_ROADMAP.md).
 
@@ -73,7 +74,7 @@ The master roadmap is tracked in [TASKS.md](./TASKS.md). Detailed batches, proje
 
 Documentation alignment and the first shared UI polish pass are complete. Continue visual QA as larger features are added, especially across Realm, white, dark, and blue themes.
 
-The current stable build order continues with smaller complete mini projects before the next large migration. Tip Calculator is complete; Memory Game is the next recommended project, followed by Math 4 Kids, Music Player, Photo Book, and then the Client Panel migration.
+The current stable build order continues with smaller complete mini projects before the next large migration. Tip Calculator and Memory Game are complete; Math 4 Kids is the next recommended project, followed by Music Player, Photo Book, and then the Client Panel migration.
 
 ## Migrated Projects
 
@@ -207,6 +208,12 @@ Folder: [`src/app/features/projects/tip-calculator`](./src/app/features/projects
 
 Tip Calculator is a split-bill utility mini project. It includes bill amount validation, tip presets, a custom tip percentage, people count validation, tip totals, bill-per-person totals, and reset behavior.
 
+### Memory Game
+
+Folder: [`src/app/features/projects/memory-game`](./src/app/features/projects/memory-game)
+
+Memory Game is a card matching mini project. It includes shuffled pairs, easy/standard/hard difficulty, card flip and mismatch behavior, moves, elapsed time, matched pair count, reveal/new round controls, and completion feedback.
+
 Angular coverage: standalone component, template-driven controls, signals, computed time/date/offset labels, interval cleanup with `DestroyRef`, `Intl.DateTimeFormat` timezone formatting, LocalStorage persistence, lazy loading, illustrated cover, focused unit tests, and e2e workflow coverage.
 
 ## Getting Started
@@ -270,6 +277,7 @@ src/app/
       flashcards/
       hang-man/
       javascript-quiz/
+      memory-game/
       odd-even/
       recipe-book/
       timer/

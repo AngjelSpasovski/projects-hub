@@ -1,0 +1,106 @@
+<section class="memory-page">
+  <div class="memory-shell" [attr.aria-label]="'MEMORY_GAME.TITLE' | translate">
+    <section class="memory-stage">
+      <div class="stage-heading">
+        <div>
+          <span>{{ 'MEMORY_GAME.STAGE.EYEBROW' | translate }}</span>
+          <h3>{{ 'MEMORY_GAME.STAGE.TITLE' | translate }}</h3>
+        </div>
+        <strong>{{ status() }}</strong>
+      </div>
+
+      <div class="memory-board" [class.hard]="difficulty() === 'hard'">
+        @for (card of cards(); track card.id) {
+          <button
+            type="button"
+            class="memory-card"
+            [class.flipped]="card.isFlipped || card.isMatched"
+            [class.matched]="card.isMatched"
+            [attr.data-pair]="card.pairId"
+            [attr.aria-label]="card.isFlipped || card.isMatched ? card.pairId : ('MEMORY_GAME.CARD.HIDDEN' | translate)"
+            (click)="flipCard(card.id)"
+          >
+            <span class="card-back"><i class="pi pi-question"></i></span>
+            <span class="card-front">{{ card.icon }}</span>
+          </button>
+        }
+      </div>
+
+      @if (isComplete()) {
+        <div class="complete-state">
+          <i class="pi pi-check-circle"></i>
+          <div>
+            <h4>{{ 'MEMORY_GAME.COMPLETE.TITLE' | translate }}</h4>
+            <p>{{ 'MEMORY_GAME.COMPLETE.TEXT' | translate:{ moves: moves(), time: displayTime() } }}</p>
+          </div>
+        </div>
+      }
+    </section>
+
+    <aside class="memory-panel">
+      <div class="stats-grid">
+        <article>
+          <span>{{ 'MEMORY_GAME.STATS.MOVES' | translate }}</span>
+          <strong>{{ moves() }}</strong>
+        </article>
+        <article>
+          <span>{{ 'MEMORY_GAME.STATS.TIME' | translate }}</span>
+          <strong>{{ displayTime() }}</strong>
+        </article>
+        <article>
+          <span>{{ 'MEMORY_GAME.STATS.MATCHES' | translate }}</span>
+          <strong>{{ matchedPairs() }} / {{ pairCount() }}</strong>
+        </article>
+      </div>
+
+      <section class="control-panel">
+        <div class="panel-heading">
+          <div>
+            <span>{{ 'MEMORY_GAME.CONTROLS.EYEBROW' | translate }}</span>
+            <h3>{{ 'MEMORY_GAME.CONTROLS.TITLE' | translate }}</h3>
+          </div>
+        </div>
+
+        <div class="difficulty-grid" role="group" [attr.aria-label]="'MEMORY_GAME.CONTROLS.DIFFICULTY' | translate">
+          @for (option of difficulties; track option.id) {
+            <button
+              type="button"
+              class="difficulty-button"
+              [class.active]="difficulty() === option.id"
+              (click)="selectDifficulty(option.id)"
+            >
+              <strong>{{ option.pairs * 2 }}</strong>
+              <span>{{ option.labelKey | translate }}</span>
+            </button>
+          }
+        </div>
+
+        <div class="memory-actions">
+          <button type="button" class="btn btn-primary btn-icon" (click)="newRound()">
+            <i class="pi pi-refresh"></i>
+            <span>{{ 'MEMORY_GAME.ACTIONS.NEW_ROUND' | translate }}</span>
+          </button>
+          <button type="button" class="btn btn-secondary btn-icon" (click)="revealAll()">
+            <i class="pi pi-eye"></i>
+            <span>{{ 'MEMORY_GAME.ACTIONS.REVEAL' | translate }}</span>
+          </button>
+        </div>
+      </section>
+
+      <div class="feature-list">
+        <article>
+          <i class="pi pi-clone"></i>
+          <p>{{ 'MEMORY_GAME.FEATURES.MATCHING' | translate }}</p>
+        </article>
+        <article>
+          <i class="pi pi-stopwatch"></i>
+          <p>{{ 'MEMORY_GAME.FEATURES.TIMER' | translate }}</p>
+        </article>
+        <article>
+          <i class="pi pi-chart-line"></i>
+          <p>{{ 'MEMORY_GAME.FEATURES.DIFFICULTY' | translate }}</p>
+        </article>
+      </div>
+    </aside>
+  </div>
+</section>
