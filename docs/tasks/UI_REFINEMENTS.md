@@ -40,4 +40,5 @@ Complete this batch before adding a large number of new projects.
 - [x] Check Hang Man physical and on-screen keyboard behavior.
 - [x] Keep Weather as a simulated API-state demo until the OpenWeather upgrade in the API backlog.
 - [x] Check Music Event modal, tag filters, and mobile overflow.
+- [x] Fix Recipe Book sidebar grid so filtered results remain clickable and the recipe form scrolls without overlapping the list.
 - [x] Add e2e smoke coverage for Calculator, Weather, Music Event, Hang Man, and Tic Tac Toe refinement flows.

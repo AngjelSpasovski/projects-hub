@@ -1,6 +1,6 @@
 # Projects Hub - Analysis And Roadmap
 
-Last reviewed: 2026-07-10
+Last reviewed: 2026-07-13
 
 ## 1. Purpose
 
@@ -21,12 +21,12 @@ The project is in a stable portfolio-ready phase.
 - The catalog currently contains 22 ready mini projects.
 - Shared layout, themes, translations, metadata, covers, routing, tests, and docs are in place.
 
-Latest local verification from this review:
+Latest local verification from the stabilization pass:
 
 - `npm run build` passed.
-- `npm run test -- --watch=false --browsers=ChromeHeadless` passed with `155 SUCCESS`.
-- `npm run test:e2e -- --workers=1` passed with `25 passed`.
-- `git status --short` was clean before this document was added.
+- `npm run test -- --watch=false --browsers=ChromeHeadless` passed with `169 SUCCESS`.
+- `npm run test:e2e -- --workers=1` passed with `28 passed`.
+- The Recipe Book sidebar layout was corrected so filtered recipe results stay clickable while the creation form scrolls inside its allocated panel.
 
 ## 3. Core Architecture
 
