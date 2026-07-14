@@ -175,6 +175,10 @@
     "PHOTO_BOOK": {
       "TITLE": "Photo Book",
       "SUMMARY": "Visual gallery with optimized Macedonia assets, filters, selected photo detail, autoplay slider, and keyboard controls."
+    },
+    "CLIENT_PANEL": {
+      "TITLE": "Client Panel",
+      "SUMMARY": "Client workflow demo with list, detail, create, edit, delete, validation, totals, and LocalStorage persistence."
     }
   },
   "PROJECT_PLANNER": {
@@ -1583,6 +1587,82 @@
     "VIEW": {
       "GRID": "Grid",
       "LIST": "List"
+    }
+  },
+  "CLIENT_PANEL": {
+    "ACTIONS": {
+      "ADD": "Add client",
+      "CANCEL": "Cancel",
+      "CLEAR_FILTERS": "Clear filters",
+      "DELETE": "Delete",
+      "EDIT": "Edit",
+      "LIST": "List",
+      "RESET": "Reset demo",
+      "SAVE": "Save client"
+    },
+    "DETAIL": {
+      "BALANCE": "Balance",
+      "CLIENT_ID": "Client ID",
+      "DEMO_NOTE": "This migration uses safe local demo data instead of Firebase credentials or private client records.",
+      "EMAIL": "Email",
+      "EYEBROW": "Client detail",
+      "PHONE": "Phone"
+    },
+    "DELETE": {
+      "EYEBROW": "Confirm delete",
+      "TEXT": "This removes the selected client from the local demo list. You can restore demo data with Reset demo.",
+      "TITLE": "Delete client?"
+    },
+    "EMPTY": {
+      "NO_CLIENTS_TEXT": "Add a client to continue, or restore the original demo records.",
+      "NO_CLIENTS_TITLE": "No clients yet",
+      "NO_RESULTS_TEXT": "Clear the search or status filter to bring matching clients back.",
+      "NO_RESULTS_TITLE": "No clients match this view"
+    },
+    "ERRORS": {
+      "BALANCE": "Balance cannot be negative.",
+      "EMAIL": "Enter a valid email address.",
+      "NAME": "First and last name must have at least two characters.",
+      "PHONE": "Phone must have at least nine characters."
+    },
+    "FILTERS": {
+      "ACTIVE": "Active",
+      "ALL": "All",
+      "LABEL": "Client status",
+      "OVERDUE": "Overdue",
+      "REVIEW": "Review"
+    },
+    "FORM": {
+      "ADD_TITLE": "Create client",
+      "BALANCE": "Balance",
+      "EDIT_TITLE": "Edit client",
+      "EMAIL": "Email",
+      "EYEBROW": "Client form",
+      "FIRST_NAME": "First name",
+      "LAST_NAME": "Last name",
+      "PHONE": "Phone"
+    },
+    "LIST": {
+      "EYEBROW": "Client panel",
+      "TITLE": "Clients"
+    },
+    "OVERVIEW": {
+      "BALANCE": "Balance",
+      "CONTACT": "Contact",
+      "EYEBROW": "List view",
+      "NAME": "Name",
+      "STATUS": "Status",
+      "TITLE": "Client overview"
+    },
+    "SEARCH": {
+      "LABEL": "Search",
+      "PLACEHOLDER": "Search name, email, phone, or status"
+    },
+    "STATS": {
+      "ACTIVE": "Active",
+      "CLIENTS": "Clients",
+      "OPEN_BALANCES": "Open balances",
+      "OWED": "Total owed"
     }
   },
   "EXPENSE_TRACKER": {

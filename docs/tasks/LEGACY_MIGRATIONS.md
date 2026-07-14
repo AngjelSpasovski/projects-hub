@@ -30,9 +30,9 @@ The smaller Client Panel and Odd/Even copies inside `theBigProject` are duplicat
 
 ## Batch 3
 
-- [ ] Migrate Client Panel list, detail, create, edit, and delete workflows.
-- [ ] Replace obsolete authentication/guard code with a safe portfolio demo flow.
-- [ ] Add loading, empty, validation, error, and confirmation states.
-- [ ] Ensure the demo contains no real credentials or private client data.
+- [x] Migrate Client Panel list, detail, create, edit, and delete workflows.
+- [x] Replace obsolete authentication/guard code with a safe portfolio demo flow.
+- [x] Add loading, empty, validation, error, and confirmation states.
+- [x] Ensure the demo contains no real credentials or private client data.
 
 Each checkbox represents a project-level implementation. The project is complete only when the shared [Definition of Done](./DEFINITION_OF_DONE.md) is also satisfied.

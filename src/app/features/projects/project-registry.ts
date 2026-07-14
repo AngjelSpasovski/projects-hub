@@ -462,5 +462,22 @@ export const PROJECTS: PortfolioProject[] = [
     layout: 'wide',
     repositoryUrl: `${REPOSITORY_BASE_URL}/photo-book`,
     demoUrl: null
+  },
+  {
+    order: 280,
+    id: 'client-panel',
+    titleKey: 'PROJECTS.CLIENT_PANEL.TITLE',
+    summaryKey: 'PROJECTS.CLIENT_PANEL.SUMMARY',
+    categoryKey: 'CATEGORIES.UTILITIES',
+    tags: ['Angular', 'TypeScript', 'Signals', 'LocalStorage'],
+    status: 'ready',
+    image: 'assets/project-covers/client-panel.svg',
+    route: '/admin/projects/client-panel',
+    updatedAt: '2026-07-14',
+    createdAt: '2026-07-14',
+    difficulty: 'advanced',
+    layout: 'wide',
+    repositoryUrl: `${REPOSITORY_BASE_URL}/client-panel`,
+    demoUrl: null
   }
 ];

@@ -1,6 +1,6 @@
 # Projects Hub - Analysis And Roadmap
 
-Last reviewed: 2026-07-13
+Last reviewed: 2026-07-14
 
 ## 1. Purpose
 
@@ -28,6 +28,8 @@ Latest local verification from the stabilization pass:
 - `npm run test:e2e -- --workers=1` passed with `33 passed`.
 - Tip Calculator, Memory Game, Math 4 Kids, Music Player, and Photo Book were added from the recommended backlog order.
 - Photo Book was polished with optimized local Macedonia photo assets, People category coverage, and start/stop autoplay controls.
+- Client Panel was migrated as a safe local demo workflow with list, detail, create, edit, delete, validation, totals, and LocalStorage persistence.
+- Chat App architecture was scoped as a static-safe local demo first, with Firebase or Socket.io deferred behind a future adapter.
 
 ## 3. Core Architecture
 
@@ -387,27 +389,31 @@ Continue with a stable smaller-project sequence before the next large migration:
 
 Each project should be implemented as a complete portfolio entry: polished UI, validation, empty/error states where relevant, translations, cover, registry entry, README update, unit coverage where useful, Playwright workflow coverage, and full verification.
 
-### Priority 4: Next Legacy Migration
+### Priority 4: Next Backend-Dependent Project
 
-The next large legacy migration candidate is `Client Panel`, but it should start after the smaller backlog sequence is stable or when a deliberate portfolio-impact cycle is chosen.
+The next larger candidate is `Chat App`, but the first implementation should remain static-safe so the portfolio continues to deploy on GitHub Pages without secrets or a server.
 
-Expected scope:
+Expected first slice:
 
-- Client list.
-- Client detail.
-- Create workflow.
-- Edit workflow.
-- Delete workflow.
-- Safe demo authentication or guard replacement.
-- Loading, empty, validation, error, and confirmation states.
-- No real credentials or private client data.
+- Local demo rooms and messages.
+- Selected room detail.
+- Message timeline.
+- Send-message form with validation.
+- Search or room filter.
+- Demo connection state.
+- Empty and no-results states.
+- Reset demo data action.
+- LocalStorage persistence.
+- Future backend adapter boundary for Firebase or Socket.io.
 - Unit tests and at least one Playwright primary workflow.
+
+See `docs/tasks/CHAT_APP_ARCHITECTURE.md` for the implementation decision.
 
 ### Priority 5: Larger Backlog
 
 Future mini project candidates:
 
-- `Chat App`, after choosing Firebase or Socket.io architecture.
+- `Chat App`, as a static-safe local demo first.
 - `Find the Word`, only if it is clearly different from Hang Man.
 - `Square Cards`, only if it demonstrates more than the existing shared cards.
 - `Recipe Book variant`, only if it is meaningfully different from the migrated Recipe Book.
@@ -435,13 +441,10 @@ When adding any new mini project:
 
 ## 11. Practical Recommendation
 
-The documentation alignment, first UI polish pass, Tip Calculator cycle, and Memory Game cycle are complete.
+The documentation alignment, first UI polish pass, smaller-project sequence, Photo Book cycle, and Client Panel migration are complete.
 
-Continue with the stable smaller-project path:
+Continue with the next controlled backend-dependent candidate:
 
-1. Build `Math 4 Kids`.
-2. Build `Music Player`.
-3. Build `Photo Book`.
-4. Start the larger `Client Panel` migration.
-
-Keep `Client Panel` as the next major portfolio-impact migration after the smaller backlog stays stable.
+1. Build `Chat App` as a static-safe LocalStorage demo.
+2. Keep Firebase or Socket.io behind a future adapter decision.
+3. Add backend setup, limits, security rules, and deployment notes only when a real backend is selected.

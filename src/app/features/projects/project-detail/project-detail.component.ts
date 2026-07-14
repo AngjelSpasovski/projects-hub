@@ -52,7 +52,9 @@ const PROJECT_COMPONENT_LOADERS: Record<string, () => Promise<Type<unknown>>> = 
     import('../math-4-kids/math-4-kids.component').then((component) => component.Math4KidsComponent),
   'music-player': () =>
     import('../music-player/music-player.component').then((component) => component.MusicPlayerComponent),
-  'photo-book': () => import('../photo-book/photo-book.component').then((component) => component.PhotoBookComponent)
+  'photo-book': () => import('../photo-book/photo-book.component').then((component) => component.PhotoBookComponent),
+  'client-panel': () =>
+    import('../client-panel/client-panel.component').then((component) => component.ClientPanelComponent)
 };
 
 @Component({

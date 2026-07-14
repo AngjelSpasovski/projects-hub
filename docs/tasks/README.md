@@ -8,6 +8,7 @@ This folder contains the active product roadmap for Projects Hub. The root [`TAS
 2. [Legacy project migrations](./LEGACY_MIGRATIONS.md)
 3. [New project backlog](./NEW_PROJECTS_BACKLOG.md)
 4. [Dashboard widgets](./DASHBOARD_WIDGETS.md)
+5. [Chat App architecture](./CHAT_APP_ARCHITECTURE.md)
 
 Every project must satisfy the [Definition of Done](./DEFINITION_OF_DONE.md) before its registry status changes to `ready`.
 

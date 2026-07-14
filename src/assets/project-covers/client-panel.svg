@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+  <title id="title">Client Panel cover</title>
+  <desc id="desc">Admin client table and profile panel illustration.</desc>
+  <rect width="640" height="360" fill="#eef4ff"/>
+  <rect x="74" y="66" width="492" height="228" rx="18" fill="#ffffff" stroke="#b9c8f4" stroke-width="6"/>
+  <rect x="96" y="92" width="148" height="176" rx="12" fill="#141c2d"/>
+  <rect x="266" y="92" width="278" height="38" rx="10" fill="#dbe7ff"/>
+  <rect x="286" y="104" width="132" height="14" rx="7" fill="#1d2738"/>
+  <circle cx="514" cy="111" r="10" fill="#f4d35e"/>
+  <g fill="#ffffff">
+    <circle cx="144" cy="134" r="28"/>
+    <rect x="116" y="178" width="96" height="14" rx="7"/>
+    <rect x="116" y="206" width="74" height="12" rx="6" opacity=".72"/>
+  </g>
+  <g fill="#e9efff" stroke="#b9c8f4" stroke-width="3">
+    <rect x="266" y="152" width="278" height="34" rx="9"/>
+    <rect x="266" y="204" width="278" height="34" rx="9"/>
+    <rect x="266" y="256" width="278" height="34" rx="9"/>
+  </g>
+  <g fill="#6377e8">
+    <rect x="286" y="163" width="92" height="10" rx="5"/>
+    <rect x="286" y="215" width="116" height="10" rx="5"/>
+    <rect x="286" y="267" width="82" height="10" rx="5"/>
+  </g>
+  <g fill="#7ac9a7">
+    <rect x="458" y="162" width="58" height="12" rx="6"/>
+    <rect x="458" y="214" width="58" height="12" rx="6"/>
+    <rect x="458" y="266" width="58" height="12" rx="6"/>
+  </g>
+</svg>

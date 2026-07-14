@@ -20,7 +20,7 @@ The app opens directly into an admin-style dashboard where projects are browsed 
 - Fixed dashboard clock and weather summary widgets
 - Distinctive illustrated catalog covers with separate live-project screenshots for documentation
 - Unified project workspace containing metadata and the interactive application
-- Lazy-loaded Calculator, Tic Tac Toe, Hang Man, Weather, Music Event, JavaScript Quiz, To-Do List, Expense Tracker, Technical Documentation, Movie Search, REST Countries, Currency Converter, Quotes API, Sticky Notes, Grocery List, Project Planner, Odd/Even Counter, Dev Logger, Recipe Book, Flashcards, Timer, Digital Clock, Tip Calculator, Memory Game, Math 4 Kids, Music Player, and Photo Book mini projects
+- Lazy-loaded Calculator, Tic Tac Toe, Hang Man, Weather, Music Event, JavaScript Quiz, To-Do List, Expense Tracker, Technical Documentation, Movie Search, REST Countries, Currency Converter, Quotes API, Sticky Notes, Grocery List, Project Planner, Odd/Even Counter, Dev Logger, Recipe Book, Flashcards, Timer, Digital Clock, Tip Calculator, Memory Game, Math 4 Kids, Music Player, Photo Book, and Client Panel mini projects
 - Unit tests for app shell, dashboard logic, registry metadata, shared services, and mini project behavior
 - Playwright smoke tests for catalog navigation, view switching, and language switching
 
@@ -70,6 +70,7 @@ Exact installed versions are tracked in [DEPENDENCIES.md](./DEPENDENCIES.md).
 | Math 4 Kids | Ready | Added as an arithmetic practice game with operation and difficulty selection, score, streak, timer, feedback, and restart. |
 | Music Player | Ready | Added as a media-style playlist UI with current track, search, favorites, playback state, and safe YouTube links. |
 | Photo Book | Ready | Added as a visual gallery with optimized local Macedonia assets, People category photo, grid/list views, filtering, selected-photo detail, slider controls, autoplay, and keyboard navigation. |
+| Client Panel | Ready | Migrated as a safe local demo workflow with client list, detail, create, edit, delete, validation, totals, and LocalStorage persistence. |
 
 The master roadmap is tracked in [TASKS.md](./TASKS.md). Detailed batches, project backlogs, and completion rules live in [docs/tasks](./docs/tasks/README.md). A consolidated project analysis and forward plan is tracked in [PROJECT_ANALYSIS_AND_ROADMAP.md](./PROJECT_ANALYSIS_AND_ROADMAP.md).
 
@@ -77,7 +78,7 @@ The master roadmap is tracked in [TASKS.md](./TASKS.md). Detailed batches, proje
 
 Documentation alignment and the first shared UI polish pass are complete. Continue visual QA as larger features are added, especially across Realm, white, dark, and blue themes.
 
-The current stable build order continues with smaller complete mini projects before the next large migration. Tip Calculator, Memory Game, Math 4 Kids, Music Player, and Photo Book are complete; the Client Panel migration is the next major recommended project.
+The current stable build order has completed Tip Calculator, Memory Game, Math 4 Kids, Music Player, Photo Book, and Client Panel. The next major recommendation is Chat App as a static-safe local demo first, with Firebase or Socket.io deferred behind a future adapter so GitHub Pages deployment stays simple.
 
 ## Migrated Projects
 
@@ -243,6 +244,14 @@ Photo Book is a visual gallery mini project. It includes optimized local Macedon
 
 Angular coverage: standalone component, template-driven search input, signal state, computed filtered/selected photo state, host keyboard listener, lazy loading, illustrated cover, focused unit tests, and e2e workflow coverage.
 
+### Client Panel
+
+Folder: [`src/app/features/projects/client-panel`](./src/app/features/projects/client-panel)
+
+Client Panel is a migrated admin workflow mini project. It includes a client list, selected client detail, create/edit/delete workflows, validation, totals, LocalStorage persistence, reset demo action, and safe local demo data instead of Firebase credentials.
+
+Angular coverage: standalone component, template-driven CRUD form, signal state, computed totals and filtered client state, lazy loading, illustrated cover, focused unit tests, and e2e workflow coverage.
+
 ## Getting Started
 
 Install dependencies:
@@ -326,6 +335,7 @@ src/assets/
   project-screenshots/
 docs/
   tasks/
+    CHAT_APP_ARCHITECTURE.md
     DASHBOARD_WIDGETS.md
     DEFINITION_OF_DONE.md
     LEGACY_MIGRATIONS.md

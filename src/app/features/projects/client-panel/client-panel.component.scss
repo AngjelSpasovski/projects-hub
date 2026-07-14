@@ -1,0 +1,504 @@
+:host {
+  display: block;
+  height: calc(100% - 0.75rem);
+  min-height: 0;
+  overflow: hidden;
+  width: 100%;
+}
+
+.client-panel-page {
+  display: grid;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.client-panel-shell {
+  background: var(--project-bg);
+  border: 1px solid var(--project-border);
+  border-radius: 8px;
+  color: var(--project-text);
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: minmax(17rem, 0.8fr) minmax(0, 1.2fr);
+  min-height: 0;
+  overflow: hidden;
+  padding: 0.75rem;
+}
+
+.client-sidebar,
+.client-workspace,
+.client-form,
+.client-detail,
+.client-overview,
+.client-list,
+.stats-grid article,
+.detail-grid article,
+.demo-note {
+  background: var(--project-shell);
+  border: 1px solid var(--project-border);
+  border-radius: 8px;
+}
+
+.client-sidebar,
+.client-workspace,
+.client-form,
+.client-detail,
+.client-overview {
+  display: grid;
+  gap: 0.75rem;
+  min-height: 0;
+  min-width: 0;
+  padding: 0.75rem;
+}
+
+.client-sidebar {
+  grid-template-rows: auto auto auto minmax(0, 1fr);
+}
+
+.client-workspace {
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.panel-heading,
+.workspace-heading,
+.detail-actions,
+.form-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  justify-content: space-between;
+}
+
+.panel-heading span,
+.workspace-heading span,
+.search-field > span,
+.form-grid span,
+.stats-grid span,
+.detail-grid span {
+  color: var(--project-text-muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.client-panel-shell .btn-primary {
+  background: color-mix(in srgb, var(--app-accent) 88%, var(--project-control));
+  border-color: color-mix(in srgb, var(--app-accent) 82%, var(--project-border));
+  box-shadow: 0 0.35rem 0.85rem color-mix(in srgb, var(--app-accent) 14%, transparent);
+  color: #fff;
+}
+
+.client-panel-shell .btn-primary:not(:disabled):hover,
+.client-panel-shell .btn-primary:not(:disabled):focus-visible {
+  background: color-mix(in srgb, var(--app-accent) 78%, var(--project-control));
+  border-color: color-mix(in srgb, var(--app-accent) 90%, var(--project-border));
+  box-shadow: 0 0.45rem 1rem color-mix(in srgb, var(--app-accent) 18%, transparent);
+  color: #fff;
+  transform: none;
+}
+
+.client-panel-shell .btn-primary i,
+.client-panel-shell .btn-primary span {
+  color: inherit;
+}
+
+h3,
+p {
+  margin: 0;
+}
+
+.search-field,
+.client-list,
+.client-form,
+.client-detail {
+  min-width: 0;
+}
+
+.search-field {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.search-field > div {
+  align-items: center;
+  display: grid;
+  gap: 0.45rem;
+  grid-template-columns: auto minmax(0, 1fr);
+}
+
+.form-control {
+  background-color: var(--project-bg);
+  border-color: var(--project-border);
+  color: var(--project-text);
+}
+
+.status-filter {
+  display: grid;
+  gap: 0.4rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.status-filter button {
+  background: var(--project-control);
+  border: 1px solid var(--project-border);
+  border-radius: 8px;
+  color: var(--project-text);
+  cursor: pointer;
+  font: inherit;
+  min-height: 2.15rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.status-filter button.active {
+  background: var(--app-accent);
+  border-color: var(--app-accent);
+  color: #fff;
+}
+
+.client-list {
+  align-content: start;
+  align-items: start;
+  display: grid;
+  gap: 0.5rem;
+  grid-auto-rows: max-content;
+  overflow: auto;
+  padding: 0.55rem;
+}
+
+.client-list button {
+  align-items: center;
+  background: var(--project-control);
+  border: 1px solid var(--project-border);
+  border-radius: 8px;
+  color: var(--project-text);
+  cursor: pointer;
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  min-height: 4.25rem;
+  padding: 0.65rem 0.75rem;
+  text-align: left;
+}
+
+.client-list button.active {
+  border-color: var(--app-accent);
+  box-shadow: inset 0.25rem 0 0 var(--app-accent);
+}
+
+.client-list span,
+.client-card-copy,
+.detail-grid article {
+  min-width: 0;
+}
+
+.client-list strong,
+.client-list small {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.client-list small,
+.demo-note p,
+.empty-state p {
+  color: var(--project-text-muted);
+}
+
+.balance {
+  color: var(--app-accent);
+  font-weight: 800;
+}
+
+.stats-grid,
+.detail-grid,
+.form-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.stats-grid article,
+.detail-grid article {
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.75rem;
+}
+
+.stats-grid strong {
+  font-size: 1.4rem;
+}
+
+.client-form,
+.client-detail,
+.client-overview {
+  align-content: start;
+  overflow: auto;
+}
+
+.client-table {
+  border: 1px solid var(--project-border);
+  border-radius: 8px;
+  display: grid;
+  overflow: hidden;
+}
+
+.client-table-row {
+  align-items: center;
+  background: var(--project-control);
+  border: 0;
+  border-bottom: 1px solid var(--project-border);
+  color: var(--project-text);
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: minmax(9rem, 1fr) minmax(11rem, 1.3fr) minmax(6rem, 0.6fr) minmax(5rem, 0.5fr);
+  min-height: 3.25rem;
+  padding: 0.65rem 0.75rem;
+  text-align: left;
+  width: 100%;
+}
+
+.client-table-row:last-child {
+  border-bottom: 0;
+}
+
+.client-table-row:not(.client-table-head) {
+  cursor: pointer;
+}
+
+.client-table-row:not(.client-table-head):hover {
+  background: color-mix(in srgb, var(--app-accent) 12%, var(--project-control));
+}
+
+.client-table-head {
+  background: var(--project-shell);
+  color: var(--project-text-muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  min-height: 2.4rem;
+  text-transform: uppercase;
+}
+
+.client-table-row span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.client-table-row small {
+  color: var(--project-text-muted);
+  display: block;
+}
+
+.status-pill {
+  background: color-mix(in srgb, var(--app-accent) 16%, var(--project-shell));
+  border: 1px solid color-mix(in srgb, var(--app-accent) 35%, var(--project-border));
+  border-radius: 999px;
+  color: var(--project-text);
+  display: inline-block;
+  font-weight: 800;
+  padding: 0.18rem 0.55rem;
+  text-transform: capitalize;
+  width: fit-content;
+}
+
+.form-grid label {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.form-error {
+  background: color-mix(in srgb, #ef4444 16%, var(--project-shell));
+  border: 1px solid color-mix(in srgb, #ef4444 42%, var(--project-border));
+  border-radius: 8px;
+  color: var(--project-text);
+  padding: 0.65rem;
+}
+
+.detail-actions {
+  justify-content: flex-end;
+}
+
+.demo-note {
+  align-items: center;
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  padding: 0.75rem;
+}
+
+.demo-note i,
+.empty-state i {
+  color: var(--app-accent);
+  font-size: 1.2rem;
+}
+
+.empty-state {
+  align-content: center;
+  display: grid;
+  gap: 0.6rem;
+  justify-items: center;
+  min-height: 10rem;
+  padding: 1rem;
+  text-align: center;
+}
+
+.empty-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  justify-content: center;
+}
+
+.confirm-backdrop {
+  align-items: center;
+  background: color-mix(in srgb, #020617 58%, transparent);
+  display: grid;
+  inset: 0;
+  justify-items: center;
+  padding: 1rem;
+  position: absolute;
+  z-index: 5;
+}
+
+.confirm-dialog {
+  background: var(--project-shell);
+  border: 1px solid color-mix(in srgb, var(--app-danger) 36%, var(--project-border));
+  border-radius: 8px;
+  box-shadow: 0 1.25rem 3rem rgba(0, 0, 0, 0.34);
+  color: var(--project-text);
+  display: grid;
+  gap: 0.8rem;
+  max-width: 27rem;
+  padding: 1rem;
+  width: min(100%, 27rem);
+}
+
+.confirm-dialog span {
+  color: var(--project-text-muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.confirm-dialog p {
+  color: var(--project-text-muted);
+}
+
+.confirm-icon {
+  align-items: center;
+  background: var(--app-danger-soft);
+  border: 1px solid color-mix(in srgb, var(--app-danger) 36%, var(--project-border));
+  border-radius: 8px;
+  color: var(--app-danger);
+  display: inline-flex;
+  height: 2.6rem;
+  justify-content: center;
+  width: 2.6rem;
+}
+
+.confirm-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  justify-content: flex-end;
+}
+
+@media (max-width: 1100px) {
+  :host,
+  .client-panel-page,
+  .client-panel-shell {
+    height: auto;
+    overflow: visible;
+  }
+
+  .client-panel-shell,
+  .demo-note {
+    grid-template-columns: 1fr;
+  }
+
+  .client-panel-shell {
+    padding: 0.65rem;
+  }
+
+  .client-form,
+  .client-detail,
+  .client-overview {
+    overflow: visible;
+  }
+}
+
+@media (max-width: 900px) {
+  .detail-grid,
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .client-table-row {
+    grid-template-columns: 1fr;
+  }
+
+  .client-table-head {
+    display: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .client-panel-shell,
+  .client-sidebar,
+  .client-workspace,
+  .client-form,
+  .client-detail,
+  .client-overview {
+    padding: 0.55rem;
+  }
+
+  .panel-heading,
+  .workspace-heading,
+  .detail-actions,
+  .form-actions,
+  .empty-actions,
+  .confirm-actions {
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .panel-heading > div,
+  .workspace-heading > div,
+  .detail-actions,
+  .form-actions,
+  .empty-actions,
+  .confirm-actions,
+  .panel-heading .btn,
+  .workspace-heading .btn,
+  .detail-actions .btn,
+  .form-actions .btn,
+  .empty-actions .btn,
+  .confirm-actions .btn {
+    width: 100%;
+  }
+
+  .panel-heading .btn,
+  .workspace-heading .btn,
+  .detail-actions .btn,
+  .form-actions .btn,
+  .empty-actions .btn,
+  .confirm-actions .btn {
+    justify-content: center;
+  }
+
+  .stats-grid,
+  .status-filter {
+    grid-template-columns: 1fr;
+  }
+
+  .client-list button {
+    gap: 0.45rem;
+    grid-template-columns: 1fr;
+  }
+
+  .balance {
+    justify-self: start;
+  }
+}

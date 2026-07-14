@@ -24,6 +24,8 @@ Detailed active work is tracked in [`docs/tasks/`](./docs/tasks/README.md). A pr
 - [x] Add Music Player as the first stable media-style mini project from the recommended backlog order.
 - [x] Add Photo Book as the next visual gallery mini project from the recommended backlog order.
 - [x] Upgrade Photo Book with optimized local Macedonia photo assets, People category coverage, and start/stop autoplay.
+- [x] Add Client Panel as a safe local demo migration with client list, detail, create, edit, delete, validation, totals, and LocalStorage persistence.
+- [x] Define Chat App as a static-safe local demo first, with Firebase or Socket.io deferred behind a future adapter.
 
 ## Foundation
 

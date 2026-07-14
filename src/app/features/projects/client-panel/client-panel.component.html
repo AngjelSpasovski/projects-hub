@@ -1,0 +1,311 @@
+<section class="client-panel-page">
+  <div class="client-panel-shell">
+    <section class="client-sidebar">
+      <div class="panel-heading">
+        <div>
+          <span>{{ 'CLIENT_PANEL.LIST.EYEBROW' | translate }}</span>
+          <h3>{{ 'CLIENT_PANEL.LIST.TITLE' | translate }}</h3>
+        </div>
+        <button type="button" class="btn btn-primary btn-icon" (click)="showCreateForm()">
+          <i class="pi pi-plus"></i>
+          <span>{{ 'CLIENT_PANEL.ACTIONS.ADD' | translate }}</span>
+        </button>
+      </div>
+
+      <label class="search-field">
+        <span>{{ 'CLIENT_PANEL.SEARCH.LABEL' | translate }}</span>
+        <div>
+          <i class="pi pi-search"></i>
+          <input
+            class="form-control"
+            type="search"
+            [value]="searchTerm()"
+            (input)="searchTerm.set($any($event.target).value)"
+            [placeholder]="'CLIENT_PANEL.SEARCH.PLACEHOLDER' | translate"
+          />
+        </div>
+      </label>
+
+      <div class="status-filter" role="group" [attr.aria-label]="'CLIENT_PANEL.FILTERS.LABEL' | translate">
+        @for (filter of statusFilters; track filter.id) {
+          <button type="button" [class.active]="selectedStatus() === filter.id" (click)="selectStatus(filter.id)">
+            {{ filter.labelKey | translate }}
+          </button>
+        }
+      </div>
+
+      <div class="client-list">
+        @for (client of filteredClients(); track client.id) {
+          <button type="button" [class.active]="selectedClientId() === client.id" (click)="selectClient(client.id)">
+            <span>
+              <strong>{{ client.firstName }} {{ client.lastName }}</strong>
+              <small>{{ client.email }}</small>
+            </span>
+            <span class="balance">{{ client.balance | currency: 'USD' : 'symbol' : '1.0-0' }}</span>
+          </button>
+        } @empty {
+          <div class="empty-state">
+            <i class="pi pi-users"></i>
+            <strong>{{ emptyTitleKey() | translate }}</strong>
+            <p>{{ emptyTextKey() | translate }}</p>
+            <div class="empty-actions">
+              @if (hasActiveFilters()) {
+                <button type="button" class="btn btn-secondary btn-icon" (click)="clearFilters()">
+                  <i class="pi pi-filter-slash"></i>
+                  <span>{{ 'CLIENT_PANEL.ACTIONS.CLEAR_FILTERS' | translate }}</span>
+                </button>
+              }
+              <button type="button" class="btn btn-primary btn-icon" (click)="showCreateForm()">
+                <i class="pi pi-plus"></i>
+                <span>{{ 'CLIENT_PANEL.ACTIONS.ADD' | translate }}</span>
+              </button>
+              <button type="button" class="btn btn-secondary btn-icon" (click)="resetDemo()">
+                <i class="pi pi-refresh"></i>
+                <span>{{ 'CLIENT_PANEL.ACTIONS.RESET' | translate }}</span>
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+    </section>
+
+    <section class="client-workspace">
+      <div class="stats-grid">
+        <article>
+          <span>{{ 'CLIENT_PANEL.STATS.CLIENTS' | translate }}</span>
+          <strong>{{ clients().length }}</strong>
+        </article>
+        <article>
+          <span>{{ 'CLIENT_PANEL.STATS.ACTIVE' | translate }}</span>
+          <strong>{{ activeCount() }}</strong>
+        </article>
+        <article>
+          <span>{{ 'CLIENT_PANEL.STATS.OWED' | translate }}</span>
+          <strong>{{ totalBalance() | currency: 'USD' : 'symbol' : '1.0-0' }}</strong>
+        </article>
+        <article>
+          <span>{{ 'CLIENT_PANEL.STATS.OPEN_BALANCES' | translate }}</span>
+          <strong>{{ overdueCount() }}</strong>
+        </article>
+      </div>
+
+      @if (mode() === 'create' || mode() === 'edit') {
+        <form class="client-form" (ngSubmit)="saveForm()">
+          <div class="workspace-heading">
+            <div>
+              <span>{{ 'CLIENT_PANEL.FORM.EYEBROW' | translate }}</span>
+              <h3>
+                {{ (mode() === 'edit' ? 'CLIENT_PANEL.FORM.EDIT_TITLE' : 'CLIENT_PANEL.FORM.ADD_TITLE') | translate }}
+              </h3>
+            </div>
+            <button type="button" class="btn btn-secondary btn-icon" (click)="cancelForm()">
+              <i class="pi pi-times"></i>
+              <span>{{ 'CLIENT_PANEL.ACTIONS.CANCEL' | translate }}</span>
+            </button>
+          </div>
+
+          @if (formError()) {
+            <p class="form-error">{{ formError() | translate }}</p>
+          }
+
+          <div class="form-grid">
+            <label>
+              <span>{{ 'CLIENT_PANEL.FORM.FIRST_NAME' | translate }}</span>
+              <input
+                class="form-control"
+                name="firstName"
+                [ngModel]="form().firstName"
+                (ngModelChange)="updateForm('firstName', $event)"
+              />
+            </label>
+            <label>
+              <span>{{ 'CLIENT_PANEL.FORM.LAST_NAME' | translate }}</span>
+              <input
+                class="form-control"
+                name="lastName"
+                [ngModel]="form().lastName"
+                (ngModelChange)="updateForm('lastName', $event)"
+              />
+            </label>
+            <label>
+              <span>{{ 'CLIENT_PANEL.FORM.EMAIL' | translate }}</span>
+              <input class="form-control" name="email" [ngModel]="form().email" (ngModelChange)="updateForm('email', $event)" />
+            </label>
+            <label>
+              <span>{{ 'CLIENT_PANEL.FORM.PHONE' | translate }}</span>
+              <input class="form-control" name="phone" [ngModel]="form().phone" (ngModelChange)="updateForm('phone', $event)" />
+            </label>
+            <label>
+              <span>{{ 'CLIENT_PANEL.FORM.BALANCE' | translate }}</span>
+              <input
+                class="form-control"
+                min="0"
+                name="balance"
+                type="number"
+                [ngModel]="form().balance"
+                (ngModelChange)="updateForm('balance', $event)"
+              />
+            </label>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary btn-icon">
+              <i class="pi pi-save"></i>
+              <span>{{ 'CLIENT_PANEL.ACTIONS.SAVE' | translate }}</span>
+            </button>
+          </div>
+        </form>
+      } @else if (mode() === 'list') {
+        <div class="client-overview">
+          <div class="workspace-heading">
+            <div>
+              <span>{{ 'CLIENT_PANEL.OVERVIEW.EYEBROW' | translate }}</span>
+              <h3>{{ 'CLIENT_PANEL.OVERVIEW.TITLE' | translate }}</h3>
+            </div>
+            <div class="detail-actions">
+              <button type="button" class="btn btn-secondary btn-icon" (click)="resetDemo()">
+                <i class="pi pi-refresh"></i>
+                <span>{{ 'CLIENT_PANEL.ACTIONS.RESET' | translate }}</span>
+              </button>
+              <button type="button" class="btn btn-primary btn-icon" (click)="showCreateForm()">
+                <i class="pi pi-plus"></i>
+                <span>{{ 'CLIENT_PANEL.ACTIONS.ADD' | translate }}</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="client-table" role="table" [attr.aria-label]="'CLIENT_PANEL.OVERVIEW.TITLE' | translate">
+            <div class="client-table-row client-table-head" role="row">
+              <span role="columnheader">{{ 'CLIENT_PANEL.OVERVIEW.NAME' | translate }}</span>
+              <span role="columnheader">{{ 'CLIENT_PANEL.OVERVIEW.CONTACT' | translate }}</span>
+              <span role="columnheader">{{ 'CLIENT_PANEL.OVERVIEW.STATUS' | translate }}</span>
+              <span role="columnheader">{{ 'CLIENT_PANEL.OVERVIEW.BALANCE' | translate }}</span>
+            </div>
+            @for (client of filteredClients(); track client.id) {
+              <button type="button" class="client-table-row" role="row" (click)="selectClient(client.id)">
+                <span role="cell">
+                  <strong>{{ client.firstName }} {{ client.lastName }}</strong>
+                  <small>{{ client.id }}</small>
+                </span>
+                <span role="cell">
+                  <strong>{{ client.email }}</strong>
+                  <small>{{ client.phone }}</small>
+                </span>
+                <span role="cell">
+                  <small class="status-pill">{{ client.status }}</small>
+                </span>
+                <span role="cell" class="balance">{{ client.balance | currency: 'USD' : 'symbol' : '1.0-0' }}</span>
+              </button>
+            } @empty {
+              <div class="empty-state">
+                <i class="pi pi-users"></i>
+                <strong>{{ emptyTitleKey() | translate }}</strong>
+                <p>{{ emptyTextKey() | translate }}</p>
+                <div class="empty-actions">
+                  @if (hasActiveFilters()) {
+                    <button type="button" class="btn btn-secondary btn-icon" (click)="clearFilters()">
+                      <i class="pi pi-filter-slash"></i>
+                      <span>{{ 'CLIENT_PANEL.ACTIONS.CLEAR_FILTERS' | translate }}</span>
+                    </button>
+                  }
+                  <button type="button" class="btn btn-primary btn-icon" (click)="showCreateForm()">
+                    <i class="pi pi-plus"></i>
+                    <span>{{ 'CLIENT_PANEL.ACTIONS.ADD' | translate }}</span>
+                  </button>
+                  <button type="button" class="btn btn-secondary btn-icon" (click)="resetDemo()">
+                    <i class="pi pi-refresh"></i>
+                    <span>{{ 'CLIENT_PANEL.ACTIONS.RESET' | translate }}</span>
+                  </button>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      } @else {
+        @if (selectedClient(); as client) {
+          <div class="client-detail">
+            <div class="workspace-heading">
+              <div>
+                <span>{{ 'CLIENT_PANEL.DETAIL.EYEBROW' | translate }}</span>
+                <h3>{{ client.firstName }} {{ client.lastName }}</h3>
+              </div>
+              <div class="detail-actions">
+                <button type="button" class="btn btn-secondary btn-icon" (click)="showClientList()">
+                  <i class="pi pi-list"></i>
+                  <span>{{ 'CLIENT_PANEL.ACTIONS.LIST' | translate }}</span>
+                </button>
+                <button type="button" class="btn btn-secondary btn-icon" (click)="showEditForm()">
+                  <i class="pi pi-pencil"></i>
+                  <span>{{ 'CLIENT_PANEL.ACTIONS.EDIT' | translate }}</span>
+                </button>
+                <button type="button" class="btn btn-danger btn-icon" (click)="requestDeleteSelectedClient()">
+                  <i class="pi pi-trash"></i>
+                  <span>{{ 'CLIENT_PANEL.ACTIONS.DELETE' | translate }}</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="detail-grid">
+              <article>
+                <span>{{ 'CLIENT_PANEL.DETAIL.CLIENT_ID' | translate }}</span>
+                <strong>{{ client.id }}</strong>
+              </article>
+              <article>
+                <span>{{ 'CLIENT_PANEL.DETAIL.BALANCE' | translate }}</span>
+                <strong>{{ client.balance | currency: 'USD' : 'symbol' : '1.0-0' }}</strong>
+              </article>
+              <article>
+                <span>{{ 'CLIENT_PANEL.DETAIL.EMAIL' | translate }}</span>
+                <strong>{{ client.email }}</strong>
+              </article>
+              <article>
+                <span>{{ 'CLIENT_PANEL.DETAIL.PHONE' | translate }}</span>
+                <strong>{{ client.phone }}</strong>
+              </article>
+            </div>
+
+            <div class="demo-note">
+              <i class="pi pi-shield"></i>
+              <p>{{ 'CLIENT_PANEL.DETAIL.DEMO_NOTE' | translate }}</p>
+              <button type="button" class="btn btn-secondary btn-icon" (click)="resetDemo()">
+                <i class="pi pi-refresh"></i>
+                <span>{{ 'CLIENT_PANEL.ACTIONS.RESET' | translate }}</span>
+              </button>
+            </div>
+          </div>
+        }
+      }
+    </section>
+  </div>
+
+  @if (pendingDeleteClientId()) {
+    <div class="confirm-backdrop" role="presentation" (click)="cancelDelete()">
+      <section
+        class="confirm-dialog"
+        role="dialog"
+        aria-modal="true"
+        [attr.aria-label]="'CLIENT_PANEL.DELETE.TITLE' | translate"
+        (click)="$event.stopPropagation()"
+      >
+        <div class="confirm-icon">
+          <i class="pi pi-trash"></i>
+        </div>
+        <div>
+          <span>{{ 'CLIENT_PANEL.DELETE.EYEBROW' | translate }}</span>
+          <h3>{{ 'CLIENT_PANEL.DELETE.TITLE' | translate }}</h3>
+          <p>{{ 'CLIENT_PANEL.DELETE.TEXT' | translate }}</p>
+        </div>
+        <div class="confirm-actions">
+          <button type="button" class="btn btn-secondary btn-icon" (click)="cancelDelete()">
+            <i class="pi pi-times"></i>
+            <span>{{ 'CLIENT_PANEL.ACTIONS.CANCEL' | translate }}</span>
+          </button>
+          <button type="button" class="btn btn-danger btn-icon" (click)="confirmDelete()">
+            <i class="pi pi-trash"></i>
+            <span>{{ 'CLIENT_PANEL.ACTIONS.DELETE' | translate }}</span>
+          </button>
+        </div>
+      </section>
+    </div>
+  }
+</section>

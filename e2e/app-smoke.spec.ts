@@ -994,3 +994,63 @@ test('Photo Book supports gallery filtering, view switching, slider, and keyboar
   await page.getByRole('button', { name: 'Reset filters' }).click();
   await expect(page.getByText('7 / 7')).toBeVisible();
 });
+
+test('Client Panel supports local client CRUD workflow', async ({ page }) => {
+  await page.goto('/');
+  await page.evaluate(() => localStorage.removeItem('projects-hub-client-panel'));
+  await page.reload();
+  await page.getByRole('button', { name: 'EN', exact: true }).click();
+  await page.getByRole('link', { name: 'Client Panel', exact: true }).click();
+
+  await expect(page.getByRole('heading', { name: 'Client Panel', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Clients' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Client overview' })).toBeVisible();
+
+  await page.getByRole('button', { name: 'Review' }).click();
+  await expect(page.locator('.client-table-row').filter({ hasText: 'Marko Stojanov' })).toBeVisible();
+  await expect(page.locator('.client-table-row').filter({ hasText: 'Ana Petrova' })).toBeHidden();
+  await page.getByRole('button', { name: 'All' }).click();
+
+  await page.getByPlaceholder('Search name, email, phone, or status').fill('zzzz');
+  await expect(page.locator('.client-overview').getByText('No clients match this view')).toBeVisible();
+  await page.locator('.client-overview').getByRole('button', { name: 'Clear filters' }).click();
+  await expect(page.locator('.client-table-row').filter({ hasText: 'Ana Petrova' })).toBeVisible();
+
+  await page.locator('.client-table-row').filter({ hasText: 'Ana Petrova' }).click();
+  await expect(page.getByRole('heading', { name: 'Ana Petrova' })).toBeVisible();
+
+  await page.getByRole('button', { name: 'List' }).click();
+  await expect(page.getByRole('heading', { name: 'Client overview' })).toBeVisible();
+  await page.locator('.client-table-row').filter({ hasText: 'Ana Petrova' }).click();
+  await expect(page.getByRole('heading', { name: 'Ana Petrova' })).toBeVisible();
+
+  await page.getByRole('button', { name: 'Add client' }).click();
+  await page.locator('input[name="firstName"]').fill('Sara');
+  await page.locator('input[name="lastName"]').fill('Ilievska');
+  await page.locator('input[name="email"]').fill('sara@example.com');
+  await page.locator('input[name="phone"]').fill('+389 71 111 222');
+  await page.locator('input[name="balance"]').fill('300');
+  await page.getByRole('button', { name: 'Save client' }).click();
+
+  await expect(page.getByRole('heading', { name: 'Sara Ilievska' })).toBeVisible();
+
+  await page.getByRole('button', { name: 'Edit' }).click();
+  await page.locator('input[name="balance"]').fill('950');
+  await page.getByRole('button', { name: 'Save client' }).click();
+  await expect(page.locator('.detail-grid')).toContainText('$950');
+
+  await page.getByRole('button', { name: 'Delete' }).click();
+  await expect(page.getByRole('dialog', { name: 'Delete client?' })).toBeVisible();
+  await page.getByRole('dialog', { name: 'Delete client?' }).getByRole('button', { name: 'Delete' }).click();
+  await expect(page.getByRole('heading', { name: 'Sara Ilievska' })).toBeHidden();
+
+  await page.getByRole('button', { name: 'Reset demo' }).click();
+  await expect(page.locator('.client-table-row').filter({ hasText: 'Ana Petrova' })).toBeVisible();
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(page.getByRole('heading', { name: 'Client overview' })).toBeVisible();
+  const hasClientPanelOverflow = await page.locator('.client-panel-page').evaluate((element) => {
+    return element.scrollWidth > element.clientWidth + 1;
+  });
+  expect(hasClientPanelOverflow).toBe(false);
+});
