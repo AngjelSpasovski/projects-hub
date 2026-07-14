@@ -5,6 +5,7 @@ Memory Game is a small matching game built as a stable portfolio mini project.
 ## Features
 
 - Shuffled pair board with easy, standard, and hard difficulty.
+- Selectable card sets: letters, fruits, colors, cars, and mixed.
 - Card flip, match, and mismatch behavior.
 - Move counter, elapsed timer, matched pair counter, and completion summary.
 - New round and reveal controls.

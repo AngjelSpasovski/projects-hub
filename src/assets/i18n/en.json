@@ -163,6 +163,18 @@
     "MEMORY_GAME": {
       "TITLE": "Memory Game",
       "SUMMARY": "Card matching game with shuffled pairs, difficulty levels, moves, timer, reset, and completion summary."
+    },
+    "MATH_4_KIDS": {
+      "TITLE": "Math 4 Kids",
+      "SUMMARY": "Arithmetic practice game with operation and difficulty selection, score, streak, timer, feedback, and restart."
+    },
+    "MUSIC_PLAYER": {
+      "TITLE": "Music Player",
+      "SUMMARY": "Media-style playlist UI with current track, search, favorites, playback state, and safe YouTube links."
+    },
+    "PHOTO_BOOK": {
+      "TITLE": "Photo Book",
+      "SUMMARY": "Visual gallery with grid and list views, filters, selected photo detail, slider navigation, and keyboard controls."
     }
   },
   "PROJECT_PLANNER": {
@@ -1394,11 +1406,25 @@
     "CARD": {
       "HIDDEN": "Hidden memory card"
     },
+    "CARD_SETS": {
+      "CARS": "Cars",
+      "COLORS": "Colors",
+      "FRUITS": "Fruits",
+      "LETTERS": "Letters",
+      "MIXED": "Mixed"
+    },
     "COMPLETE": {
       "TEXT": "Finished in {{moves}} moves and {{time}}.",
       "TITLE": "Board complete"
     },
+    "CONFIRM_SET_CHANGE": {
+      "CONTINUE": "Continue",
+      "TEXT": "Changing the card set will start a new round and reset the timer.",
+      "TITLE": "Restart this round?",
+      "YES": "Yes"
+    },
     "CONTROLS": {
+      "CARD_SET": "Memory card set",
       "DIFFICULTY": "Memory game difficulty",
       "EYEBROW": "Game setup",
       "TITLE": "Difficulty and actions"
@@ -1421,6 +1447,142 @@
       "MATCHES": "Matches",
       "MOVES": "Moves",
       "TIME": "Time"
+    }
+  },
+  "MATH_4_KIDS": {
+    "TITLE": "Math 4 Kids",
+    "DESCRIPTION": "A focused arithmetic game for practicing operations with instant feedback, score, streak, and timer.",
+    "ACTIONS": {
+      "CHECK": "Check",
+      "RESTART": "Restart",
+      "SKIP": "Skip"
+    },
+    "DIFFICULTY": {
+      "CHALLENGE": "Challenge",
+      "EASY": "Easy",
+      "STANDARD": "Standard"
+    },
+    "FEATURES": {
+      "ACCURACY": "Accuracy: {{accuracy}}.",
+      "STREAK": "Best streak this session: {{best}}.",
+      "TIMER": "The timer starts after the first submitted answer."
+    },
+    "FEEDBACK": {
+      "CORRECT": "Correct. A new problem is ready.",
+      "IDLE": "Choose an answer and check it when you are ready.",
+      "WRONG": "Not quite. The correct answer is {{answer}}."
+    },
+    "FORM": {
+      "ANSWER": "Your answer",
+      "PLACEHOLDER": "Type the result"
+    },
+    "OPERATIONS": {
+      "ADDITION": "Addition",
+      "MIXED": "Mixed",
+      "MULTIPLICATION": "Multiplication",
+      "SUBTRACTION": "Subtraction"
+    },
+    "PROBLEM": {
+      "LABEL": "Problem"
+    },
+    "SETUP": {
+      "DIFFICULTY": "Math difficulty",
+      "EYEBROW": "Practice setup",
+      "OPERATION": "Math operation",
+      "TITLE": "Operations and level"
+    },
+    "STAGE": {
+      "EYEBROW": "Practice board",
+      "ROUND": "Round {{round}}",
+      "TITLE": "Solve the problem"
+    },
+    "STATS": {
+      "SCORE": "Score",
+      "STREAK": "Streak",
+      "TIME": "Time"
+    }
+  },
+  "MUSIC_PLAYER": {
+    "TITLE": "Music Player",
+    "DESCRIPTION": "A media-style playlist interface with safe external links, current track state, search, and favorites.",
+    "ACTIONS": {
+      "FAVORITE": "Toggle favorite",
+      "NEXT": "Next track",
+      "OPEN_YOUTUBE": "Open on YouTube",
+      "PAUSE": "Pause",
+      "PLAY": "Play",
+      "PREVIOUS": "Previous track"
+    },
+    "EXTERNAL": {
+      "EYEBROW": "External media",
+      "TEXT": "This demo keeps playback local to the UI and opens YouTube in a new tab."
+    },
+    "FEATURES": {
+      "FAVORITES": "{{count}} favorite track(s) saved locally.",
+      "PLAYLIST": "{{count}} curated demo tracks in the playlist."
+    },
+    "PLAYLIST": {
+      "EYEBROW": "Track browser",
+      "TITLE": "Playlist"
+    },
+    "SEARCH": {
+      "CLEAR": "Clear search",
+      "EMPTY": "No tracks match this search.",
+      "LABEL": "Search",
+      "PLACEHOLDER": "Search title, artist, or mood"
+    },
+    "STAGE": {
+      "EYEBROW": "Now playing",
+      "TITLE": "Current track"
+    },
+    "STATUS": {
+      "PAUSED": "Paused",
+      "PLAYING": "Playing"
+    }
+  },
+  "PHOTO_BOOK": {
+    "TITLE": "Photo Book",
+    "DESCRIPTION": "A responsive gallery with grid and list views, selected photo detail, search, filters, and keyboard navigation.",
+    "ACTIONS": {
+      "NEXT": "Next",
+      "PREVIOUS": "Previous",
+      "RESET": "Reset filters",
+      "SOURCE": "View image source",
+      "START_SLIDES": "Start slideshow",
+      "STOP_SLIDES": "Stop slideshow"
+    },
+    "CATEGORIES": {
+      "ALL": "All",
+      "CITY": "City",
+      "NATURE": "Nature",
+      "PEOPLE": "People",
+      "TRAVEL": "Travel"
+    },
+    "CONTROLS": {
+      "CATEGORY": "Photo category",
+      "EYEBROW": "Gallery controls",
+      "TITLE": "Browse photos",
+      "VIEW": "Gallery view"
+    },
+    "EMPTY": {
+      "TEXT": "Clear the search or category filter to bring photos back.",
+      "TITLE": "No photos found"
+    },
+    "FEATURES": {
+      "GALLERY": "Grid and list views share the same selected-photo detail.",
+      "KEYBOARD": "Use left and right arrow keys to move through the filtered gallery."
+    },
+    "SEARCH": {
+      "LABEL": "Search",
+      "PLACEHOLDER": "Search title, location, or category"
+    },
+    "STAGE": {
+      "EYEBROW": "Selected photo",
+      "TITLE": "Photo detail"
+    },
+    "VIEW": {
+      "GRID": "Grid",
+      "LIST": "List"
     }
   },
   "EXPENSE_TRACKER": {

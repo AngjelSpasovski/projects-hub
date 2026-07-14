@@ -17,6 +17,7 @@
             [class.flipped]="card.isFlipped || card.isMatched"
             [class.matched]="card.isMatched"
             [attr.data-pair]="card.pairId"
+            [style.--card-accent]="card.accent"
             [attr.aria-label]="card.isFlipped || card.isMatched ? card.pairId : ('MEMORY_GAME.CARD.HIDDEN' | translate)"
             (click)="flipCard(card.id)"
           >
@@ -75,6 +76,19 @@
           }
         </div>
 
+        <div class="set-grid" role="group" [attr.aria-label]="'MEMORY_GAME.CONTROLS.CARD_SET' | translate">
+          @for (option of cardSets; track option.id) {
+            <button
+              type="button"
+              class="set-button"
+              [class.active]="cardSet() === option.id"
+              (click)="selectCardSet(option.id)"
+            >
+              <span>{{ option.labelKey | translate }}</span>
+            </button>
+          }
+        </div>
+
         <div class="memory-actions">
           <button type="button" class="btn btn-primary btn-icon" (click)="newRound()">
             <i class="pi pi-refresh"></i>
@@ -102,5 +116,27 @@
         </article>
       </div>
     </aside>
+
+    @if (pendingCardSetOption(); as option) {
+      <div class="modal-backdrop" role="presentation">
+        <section class="confirm-modal" role="dialog" aria-modal="true" [attr.aria-labelledby]="'memory-card-set-title'">
+          <div class="modal-icon">
+            <i class="pi pi-refresh"></i>
+          </div>
+          <div class="modal-copy">
+            <h3 id="memory-card-set-title">{{ 'MEMORY_GAME.CONFIRM_SET_CHANGE.TITLE' | translate }}</h3>
+            <p>{{ 'MEMORY_GAME.CONFIRM_SET_CHANGE.TEXT' | translate }}</p>
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="btn btn-secondary" (click)="continueCurrentRound()">
+              {{ 'MEMORY_GAME.CONFIRM_SET_CHANGE.CONTINUE' | translate }}
+            </button>
+            <button type="button" class="btn btn-primary" (click)="confirmCardSetChange()">
+              {{ 'MEMORY_GAME.CONFIRM_SET_CHANGE.YES' | translate }}
+            </button>
+          </div>
+        </section>
+      </div>
+    }
   </div>
 </section>

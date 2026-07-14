@@ -1,0 +1,122 @@
+<section class="music-page">
+  <div class="music-shell" [attr.aria-label]="'MUSIC_PLAYER.TITLE' | translate">
+    <section class="player-stage">
+      <div class="stage-heading">
+        <div>
+          <span>{{ 'MUSIC_PLAYER.STAGE.EYEBROW' | translate }}</span>
+          <h3>{{ 'MUSIC_PLAYER.STAGE.TITLE' | translate }}</h3>
+        </div>
+        <strong>{{ isPlaying() ? ('MUSIC_PLAYER.STATUS.PLAYING' | translate) : ('MUSIC_PLAYER.STATUS.PAUSED' | translate) }}</strong>
+      </div>
+
+      <div class="now-playing" [style.--track-accent]="currentTrack().accent">
+        <div class="album-art">
+          <i class="pi pi-volume-up"></i>
+        </div>
+        <div class="track-copy">
+          <span>{{ currentTrack().mood }}</span>
+          <h3>{{ currentTrack().title }}</h3>
+          <p>{{ currentTrack().artist }} · {{ currentTrack().duration }}</p>
+        </div>
+      </div>
+
+      <div class="player-controls" [style.--track-accent]="currentTrack().accent">
+        <button type="button" class="icon-button" (click)="previousTrack()" [attr.aria-label]="'MUSIC_PLAYER.ACTIONS.PREVIOUS' | translate">
+          <i class="pi pi-step-backward"></i>
+        </button>
+        <button type="button" class="play-button" (click)="togglePlayback()">
+          <i [class]="isPlaying() ? 'pi pi-pause' : 'pi pi-play'"></i>
+          <span>{{ isPlaying() ? ('MUSIC_PLAYER.ACTIONS.PAUSE' | translate) : ('MUSIC_PLAYER.ACTIONS.PLAY' | translate) }}</span>
+        </button>
+        <button type="button" class="icon-button" (click)="nextTrack()" [attr.aria-label]="'MUSIC_PLAYER.ACTIONS.NEXT' | translate">
+          <i class="pi pi-step-forward"></i>
+        </button>
+        <button
+          type="button"
+          class="icon-button"
+          [class.active]="isCurrentFavorite()"
+          (click)="toggleFavorite()"
+          [attr.aria-label]="'MUSIC_PLAYER.ACTIONS.FAVORITE' | translate"
+        >
+          <i class="pi pi-heart"></i>
+        </button>
+      </div>
+
+      <div class="external-panel">
+        <div>
+          <span>{{ 'MUSIC_PLAYER.EXTERNAL.EYEBROW' | translate }}</span>
+          <p>{{ 'MUSIC_PLAYER.EXTERNAL.TEXT' | translate }}</p>
+        </div>
+        <a class="btn btn-secondary btn-icon" [href]="currentTrack().youtubeUrl" target="_blank" rel="noopener noreferrer">
+          <i class="pi pi-external-link"></i>
+          <span>{{ 'MUSIC_PLAYER.ACTIONS.OPEN_YOUTUBE' | translate }}</span>
+        </a>
+      </div>
+    </section>
+
+    <aside class="playlist-panel">
+      <div class="panel-heading">
+        <div>
+          <span>{{ 'MUSIC_PLAYER.PLAYLIST.EYEBROW' | translate }}</span>
+          <h3>{{ 'MUSIC_PLAYER.PLAYLIST.TITLE' | translate }}</h3>
+        </div>
+      </div>
+
+      <label class="search-field">
+        <span>{{ 'MUSIC_PLAYER.SEARCH.LABEL' | translate }}</span>
+        <div>
+          <i class="pi pi-search"></i>
+          <input
+            class="form-control"
+            type="search"
+            [value]="searchTerm()"
+            (input)="updateSearch($any($event.target).value)"
+            [placeholder]="'MUSIC_PLAYER.SEARCH.PLACEHOLDER' | translate"
+          />
+          @if (searchTerm()) {
+            <button type="button" (click)="resetSearch()" [attr.aria-label]="'MUSIC_PLAYER.SEARCH.CLEAR' | translate">
+              <i class="pi pi-times"></i>
+            </button>
+          }
+        </div>
+      </label>
+
+      <div class="track-list">
+        @for (track of filteredTracks(); track track.id) {
+          <article class="track-row" [class.active]="currentTrack().id === track.id" [style.--track-accent]="track.accent">
+            <button type="button" (click)="selectTrack(track.id)">
+              <span>{{ track.mood }}</span>
+              <strong>{{ track.title }}</strong>
+              <small>{{ track.artist }} · {{ track.duration }}</small>
+            </button>
+            <button
+              type="button"
+              class="favorite-button"
+              [class.active]="favoriteIds().includes(track.id)"
+              (click)="toggleFavorite(track.id)"
+              [attr.aria-label]="'MUSIC_PLAYER.ACTIONS.FAVORITE' | translate"
+            >
+              <i class="pi pi-heart"></i>
+            </button>
+          </article>
+        } @empty {
+          <div class="empty-state">
+            <i class="pi pi-search"></i>
+            <p>{{ 'MUSIC_PLAYER.SEARCH.EMPTY' | translate }}</p>
+          </div>
+        }
+      </div>
+
+      <div class="feature-list">
+        <article>
+          <i class="pi pi-list"></i>
+          <p>{{ 'MUSIC_PLAYER.FEATURES.PLAYLIST' | translate:{ count: tracks.length } }}</p>
+        </article>
+        <article>
+          <i class="pi pi-heart"></i>
+          <p>{{ 'MUSIC_PLAYER.FEATURES.FAVORITES' | translate:{ count: favoriteTracks().length } }}</p>
+        </article>
+      </div>
+    </aside>
+  </div>
+</section>

@@ -20,7 +20,7 @@ The app opens directly into an admin-style dashboard where projects are browsed 
 - Fixed dashboard clock and weather summary widgets
 - Distinctive illustrated catalog covers with separate live-project screenshots for documentation
 - Unified project workspace containing metadata and the interactive application
-- Lazy-loaded Calculator, Tic Tac Toe, Hang Man, Weather, Music Event, JavaScript Quiz, To-Do List, Expense Tracker, Technical Documentation, Movie Search, REST Countries, Currency Converter, Quotes API, Sticky Notes, Grocery List, Project Planner, Odd/Even Counter, Dev Logger, Recipe Book, Flashcards, Timer, Digital Clock, Tip Calculator, and Memory Game mini projects
+- Lazy-loaded Calculator, Tic Tac Toe, Hang Man, Weather, Music Event, JavaScript Quiz, To-Do List, Expense Tracker, Technical Documentation, Movie Search, REST Countries, Currency Converter, Quotes API, Sticky Notes, Grocery List, Project Planner, Odd/Even Counter, Dev Logger, Recipe Book, Flashcards, Timer, Digital Clock, Tip Calculator, Memory Game, Math 4 Kids, Music Player, and Photo Book mini projects
 - Unit tests for app shell, dashboard logic, registry metadata, shared services, and mini project behavior
 - Playwright smoke tests for catalog navigation, view switching, and language switching
 
@@ -67,6 +67,9 @@ Exact installed versions are tracked in [DEPENDENCIES.md](./DEPENDENCIES.md).
 | Digital Clock | Ready | Added as a live clock with date display, 12/24-hour mode, timezone selection, and persisted settings. |
 | Tip Calculator | Ready | Added as a split-bill utility with tip presets, custom percentage, people count validation, and per-person totals. |
 | Memory Game | Ready | Added as a card matching game with shuffled pairs, difficulty levels, moves, timer, reset, and completion summary. |
+| Math 4 Kids | Ready | Added as an arithmetic practice game with operation and difficulty selection, score, streak, timer, feedback, and restart. |
+| Music Player | Ready | Added as a media-style playlist UI with current track, search, favorites, playback state, and safe YouTube links. |
+| Photo Book | Ready | Added as a visual gallery with optimized local Macedonia assets, People category photo, grid/list views, filtering, selected-photo detail, slider controls, autoplay, and keyboard navigation. |
 
 The master roadmap is tracked in [TASKS.md](./TASKS.md). Detailed batches, project backlogs, and completion rules live in [docs/tasks](./docs/tasks/README.md). A consolidated project analysis and forward plan is tracked in [PROJECT_ANALYSIS_AND_ROADMAP.md](./PROJECT_ANALYSIS_AND_ROADMAP.md).
 
@@ -74,7 +77,7 @@ The master roadmap is tracked in [TASKS.md](./TASKS.md). Detailed batches, proje
 
 Documentation alignment and the first shared UI polish pass are complete. Continue visual QA as larger features are added, especially across Realm, white, dark, and blue themes.
 
-The current stable build order continues with smaller complete mini projects before the next large migration. Tip Calculator and Memory Game are complete; Math 4 Kids is the next recommended project, followed by Music Player, Photo Book, and then the Client Panel migration.
+The current stable build order continues with smaller complete mini projects before the next large migration. Tip Calculator, Memory Game, Math 4 Kids, Music Player, and Photo Book are complete; the Client Panel migration is the next major recommended project.
 
 ## Migrated Projects
 
@@ -212,9 +215,33 @@ Tip Calculator is a split-bill utility mini project. It includes bill amount val
 
 Folder: [`src/app/features/projects/memory-game`](./src/app/features/projects/memory-game)
 
-Memory Game is a card matching mini project. It includes shuffled pairs, easy/standard/hard difficulty, card flip and mismatch behavior, moves, elapsed time, matched pair count, reveal/new round controls, and completion feedback.
+Memory Game is a card matching mini project. It includes shuffled pairs, selectable letter/fruit/color/car/mixed card sets, easy/standard/hard difficulty, card flip and mismatch behavior, moves, elapsed time, matched pair count, reveal/new round controls, and completion feedback.
 
 Angular coverage: standalone component, template-driven controls, signals, computed time/date/offset labels, interval cleanup with `DestroyRef`, `Intl.DateTimeFormat` timezone formatting, LocalStorage persistence, lazy loading, illustrated cover, focused unit tests, and e2e workflow coverage.
+
+### Math 4 Kids
+
+Folder: [`src/app/features/projects/math-4-kids`](./src/app/features/projects/math-4-kids)
+
+Math 4 Kids is an arithmetic practice mini project. It includes addition, subtraction, multiplication, mixed mode, easy/standard/challenge difficulty, score, attempts, streak, accuracy, elapsed timer, instant feedback, skip, and restart behavior.
+
+Angular coverage: standalone component, template-driven answer input, signal state, computed accuracy/time labels, interval cleanup with `DestroyRef`, lazy loading, illustrated cover, focused unit tests, and e2e workflow coverage.
+
+### Music Player
+
+Folder: [`src/app/features/projects/music-player`](./src/app/features/projects/music-player)
+
+Music Player is a media-style playlist mini project. It includes a safe local playlist, current track selection, play/pause UI state, previous/next controls, search by title/artist/mood, LocalStorage favorites, and external YouTube links opened with safe link attributes.
+
+Angular coverage: standalone component, template-driven search input, signal state, computed filtered/favorite/current track state, LocalStorage persistence, lazy loading, illustrated cover, focused unit tests, and e2e workflow coverage.
+
+### Photo Book
+
+Folder: [`src/app/features/projects/photo-book`](./src/app/features/projects/photo-book)
+
+Photo Book is a visual gallery mini project. It includes optimized local Macedonia photo assets, grid and list views, search, category filtering, selected-photo detail, previous/next slider controls, start/stop autoplay, keyboard navigation, empty state, and responsive image panels.
+
+Angular coverage: standalone component, template-driven search input, signal state, computed filtered/selected photo state, host keyboard listener, lazy loading, illustrated cover, focused unit tests, and e2e workflow coverage.
 
 ## Getting Started
 

@@ -18,15 +18,16 @@ The project is in a stable portfolio-ready phase.
 - Unit tests pass.
 - Playwright end-to-end smoke tests pass.
 - The repository has a clean project structure.
-- The catalog currently contains 22 ready mini projects.
+- The catalog currently contains 27 ready mini projects.
 - Shared layout, themes, translations, metadata, covers, routing, tests, and docs are in place.
 
 Latest local verification from the stabilization pass:
 
 - `npm run build` passed.
-- `npm run test -- --watch=false --browsers=ChromeHeadless` passed with `169 SUCCESS`.
-- `npm run test:e2e -- --workers=1` passed with `28 passed`.
-- The Recipe Book sidebar layout was corrected so filtered recipe results stay clickable while the creation form scrolls inside its allocated panel.
+- `npm run test -- --watch=false --browsers=ChromeHeadless` passed with `199 SUCCESS`.
+- `npm run test:e2e -- --workers=1` passed with `33 passed`.
+- Tip Calculator, Memory Game, Math 4 Kids, Music Player, and Photo Book were added from the recommended backlog order.
+- Photo Book was polished with optimized local Macedonia photo assets, People category coverage, and start/stop autoplay controls.
 
 ## 3. Core Architecture
 

@@ -1,0 +1,136 @@
+<section class="math-page">
+  <div class="math-shell" [attr.aria-label]="'MATH_4_KIDS.TITLE' | translate">
+    <section class="math-stage">
+      <div class="stage-heading">
+        <div>
+          <span>{{ 'MATH_4_KIDS.STAGE.EYEBROW' | translate }}</span>
+          <h3>{{ 'MATH_4_KIDS.STAGE.TITLE' | translate }}</h3>
+        </div>
+        <strong>{{ 'MATH_4_KIDS.STAGE.ROUND' | translate:{ round: round() } }}</strong>
+      </div>
+
+      <div class="problem-card" [class.correct]="feedback() === 'correct'" [class.wrong]="feedback() === 'wrong'">
+        <span>{{ 'MATH_4_KIDS.PROBLEM.LABEL' | translate }}</span>
+        <div class="problem-line" aria-live="polite">
+          <strong>{{ problem().left }}</strong>
+          <b>{{ problem().operator }}</b>
+          <strong>{{ problem().right }}</strong>
+          <b>=</b>
+          <strong class="answer-slot">?</strong>
+        </div>
+      </div>
+
+      <form class="answer-form" novalidate (ngSubmit)="submitAnswer()">
+        <label>
+          <span>{{ 'MATH_4_KIDS.FORM.ANSWER' | translate }}</span>
+          <input
+            class="form-control"
+            inputmode="numeric"
+            type="text"
+            [value]="answerInput()"
+            (input)="updateAnswer($any($event.target).value)"
+            [placeholder]="'MATH_4_KIDS.FORM.PLACEHOLDER' | translate"
+          />
+        </label>
+
+        <div class="answer-actions">
+          <button type="submit" class="btn btn-primary btn-icon" [disabled]="!canSubmit()">
+            <i class="pi pi-check"></i>
+            <span>{{ 'MATH_4_KIDS.ACTIONS.CHECK' | translate }}</span>
+          </button>
+          <button type="button" class="btn btn-secondary btn-icon" (click)="skipProblem()">
+            <i class="pi pi-forward"></i>
+            <span>{{ 'MATH_4_KIDS.ACTIONS.SKIP' | translate }}</span>
+          </button>
+        </div>
+      </form>
+
+      <div class="feedback-card" [class.correct]="feedback() === 'correct'" [class.wrong]="feedback() === 'wrong'">
+        @if (feedback() === 'correct') {
+          <i class="pi pi-check-circle"></i>
+          <p>{{ 'MATH_4_KIDS.FEEDBACK.CORRECT' | translate }}</p>
+        } @else if (feedback() === 'wrong') {
+          <i class="pi pi-info-circle"></i>
+          <p>{{ 'MATH_4_KIDS.FEEDBACK.WRONG' | translate:{ answer: lastAnswer() } }}</p>
+        } @else {
+          <i class="pi pi-pencil"></i>
+          <p>{{ 'MATH_4_KIDS.FEEDBACK.IDLE' | translate }}</p>
+        }
+      </div>
+    </section>
+
+    <aside class="math-panel">
+      <div class="stats-grid">
+        <article>
+          <span>{{ 'MATH_4_KIDS.STATS.SCORE' | translate }}</span>
+          <strong>{{ score() }} / {{ attempts() }}</strong>
+        </article>
+        <article>
+          <span>{{ 'MATH_4_KIDS.STATS.STREAK' | translate }}</span>
+          <strong>{{ streak() }}</strong>
+        </article>
+        <article>
+          <span>{{ 'MATH_4_KIDS.STATS.TIME' | translate }}</span>
+          <strong>{{ displayTime() }}</strong>
+        </article>
+      </div>
+
+      <section class="setup-panel">
+        <div class="panel-heading">
+          <div>
+            <span>{{ 'MATH_4_KIDS.SETUP.EYEBROW' | translate }}</span>
+            <h3>{{ 'MATH_4_KIDS.SETUP.TITLE' | translate }}</h3>
+          </div>
+        </div>
+
+        <div class="option-grid" role="group" [attr.aria-label]="'MATH_4_KIDS.SETUP.OPERATION' | translate">
+          @for (option of operations; track option.id) {
+            <button
+              type="button"
+              class="option-button"
+              [class.active]="operation() === option.id"
+              (click)="selectOperation(option.id)"
+            >
+              <strong>{{ option.icon }}</strong>
+              <span>{{ option.labelKey | translate }}</span>
+            </button>
+          }
+        </div>
+
+        <div class="difficulty-grid" role="group" [attr.aria-label]="'MATH_4_KIDS.SETUP.DIFFICULTY' | translate">
+          @for (option of difficulties; track option.id) {
+            <button
+              type="button"
+              class="difficulty-button"
+              [class.active]="difficulty() === option.id"
+              (click)="selectDifficulty(option.id)"
+            >
+              <strong>{{ option.max }}</strong>
+              <span>{{ option.labelKey | translate }}</span>
+            </button>
+          }
+        </div>
+
+        <button type="button" class="btn btn-primary btn-icon" (click)="restart()">
+          <i class="pi pi-refresh"></i>
+          <span>{{ 'MATH_4_KIDS.ACTIONS.RESTART' | translate }}</span>
+        </button>
+      </section>
+
+      <div class="feature-list">
+        <article>
+          <i class="pi pi-bolt"></i>
+          <p>{{ 'MATH_4_KIDS.FEATURES.STREAK' | translate:{ best: bestStreak() } }}</p>
+        </article>
+        <article>
+          <i class="pi pi-chart-line"></i>
+          <p>{{ 'MATH_4_KIDS.FEATURES.ACCURACY' | translate:{ accuracy: accuracy() } }}</p>
+        </article>
+        <article>
+          <i class="pi pi-stopwatch"></i>
+          <p>{{ 'MATH_4_KIDS.FEATURES.TIMER' | translate }}</p>
+        </article>
+      </div>
+    </aside>
+  </div>
+</section>

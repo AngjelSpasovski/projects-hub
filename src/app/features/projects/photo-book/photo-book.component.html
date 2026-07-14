@@ -1,0 +1,136 @@
+<section class="photo-page">
+  <div class="photo-shell" [attr.aria-label]="'PHOTO_BOOK.TITLE' | translate">
+    <section class="photo-stage">
+      <div class="stage-heading">
+        <div>
+          <span>{{ 'PHOTO_BOOK.STAGE.EYEBROW' | translate }}</span>
+          <h3>{{ 'PHOTO_BOOK.STAGE.TITLE' | translate }}</h3>
+        </div>
+        <strong>{{ resultLabel() }}</strong>
+      </div>
+
+      <div class="hero-photo" [style.--photo-accent]="selectedPhoto().accent">
+        <div class="generated-photo">
+          <img
+            [src]="selectedPhoto().imageUrl"
+            [alt]="selectedPhoto().title"
+            loading="lazy"
+            decoding="async"
+            referrerpolicy="no-referrer"
+          />
+        </div>
+        <div class="photo-copy">
+          <span>{{ selectedPhoto().category }} · {{ selectedPhoto().year }}</span>
+          <h3>{{ selectedPhoto().title }}</h3>
+          <p>{{ selectedPhoto().location }}</p>
+          <p>{{ selectedPhoto().description }}</p>
+          <a [href]="selectedPhoto().sourceUrl" target="_blank" rel="noopener noreferrer">
+            {{ 'PHOTO_BOOK.ACTIONS.SOURCE' | translate }}
+          </a>
+        </div>
+      </div>
+
+      <div class="slider-actions">
+        <button type="button" class="btn btn-secondary btn-icon" (click)="previousPhoto()">
+          <i class="pi pi-arrow-left"></i>
+          <span>{{ 'PHOTO_BOOK.ACTIONS.PREVIOUS' | translate }}</span>
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary btn-icon"
+          [attr.aria-pressed]="isAutoPlaying()"
+          (click)="toggleAutoSlide()"
+        >
+          <i [class]="isAutoPlaying() ? 'pi pi-pause' : 'pi pi-play'"></i>
+          <span>
+            {{ (isAutoPlaying() ? 'PHOTO_BOOK.ACTIONS.STOP_SLIDES' : 'PHOTO_BOOK.ACTIONS.START_SLIDES') | translate }}
+          </span>
+        </button>
+        <button type="button" class="btn btn-secondary btn-icon" (click)="nextPhoto()">
+          <span>{{ 'PHOTO_BOOK.ACTIONS.NEXT' | translate }}</span>
+          <i class="pi pi-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+
+    <aside class="photo-panel">
+      <section class="control-panel">
+        <div class="panel-heading">
+          <div>
+            <span>{{ 'PHOTO_BOOK.CONTROLS.EYEBROW' | translate }}</span>
+            <h3>{{ 'PHOTO_BOOK.CONTROLS.TITLE' | translate }}</h3>
+          </div>
+          <div class="view-toggle" role="group" [attr.aria-label]="'PHOTO_BOOK.CONTROLS.VIEW' | translate">
+            <button type="button" [class.active]="viewMode() === 'grid'" (click)="setViewMode('grid')">
+              <i class="pi pi-th-large"></i>
+              <span>{{ 'PHOTO_BOOK.VIEW.GRID' | translate }}</span>
+            </button>
+            <button type="button" [class.active]="viewMode() === 'list'" (click)="setViewMode('list')">
+              <i class="pi pi-list"></i>
+              <span>{{ 'PHOTO_BOOK.VIEW.LIST' | translate }}</span>
+            </button>
+          </div>
+        </div>
+
+        <label class="search-field">
+          <span>{{ 'PHOTO_BOOK.SEARCH.LABEL' | translate }}</span>
+          <div>
+            <i class="pi pi-search"></i>
+            <input
+              class="form-control"
+              type="search"
+              [value]="searchTerm()"
+              (input)="updateSearch($any($event.target).value)"
+              [placeholder]="'PHOTO_BOOK.SEARCH.PLACEHOLDER' | translate"
+            />
+          </div>
+        </label>
+
+        <div class="category-grid" role="group" [attr.aria-label]="'PHOTO_BOOK.CONTROLS.CATEGORY' | translate">
+          @for (category of categories; track category.id) {
+            <button type="button" [class.active]="selectedCategory() === category.id" (click)="selectCategory(category.id)">
+              {{ category.labelKey | translate }}
+            </button>
+          }
+        </div>
+      </section>
+
+      <div class="photo-list" [class.list]="viewMode() === 'list'">
+        @for (photo of filteredPhotos(); track photo.id) {
+          <article class="photo-card" [class.active]="selectedPhoto().id === photo.id" [style.--photo-accent]="photo.accent">
+            <button type="button" (click)="selectPhoto(photo.id)">
+              <span class="thumb">
+                <img [src]="photo.imageUrl" [alt]="photo.title" loading="lazy" decoding="async" referrerpolicy="no-referrer" />
+              </span>
+              <span class="photo-card-copy">
+                <strong>{{ photo.title }}</strong>
+                <small>{{ photo.location }} · {{ photo.category }}</small>
+              </span>
+            </button>
+          </article>
+        } @empty {
+          <div class="empty-state">
+            <i class="pi pi-search"></i>
+            <h4>{{ 'PHOTO_BOOK.EMPTY.TITLE' | translate }}</h4>
+            <p>{{ 'PHOTO_BOOK.EMPTY.TEXT' | translate }}</p>
+            <button type="button" class="btn btn-primary btn-icon" (click)="resetFilters()">
+              <i class="pi pi-refresh"></i>
+              <span>{{ 'PHOTO_BOOK.ACTIONS.RESET' | translate }}</span>
+            </button>
+          </div>
+        }
+      </div>
+
+      <div class="feature-list">
+        <article>
+          <i class="pi pi-images"></i>
+          <p>{{ 'PHOTO_BOOK.FEATURES.GALLERY' | translate }}</p>
+        </article>
+        <article>
+          <i class="pi pi-keyboard"></i>
+          <p>{{ 'PHOTO_BOOK.FEATURES.KEYBOARD' | translate }}</p>
+        </article>
+      </div>
+    </aside>
+  </div>
+</section>

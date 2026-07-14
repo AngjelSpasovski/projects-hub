@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 320" role="img" aria-labelledby="title desc">
+  <title id="title">Music Player cover</title>
+  <desc id="desc">Media player card with album art, playlist rows, and playback controls.</desc>
+  <rect width="640" height="320" fill="#eef4ff"/>
+  <rect x="42" y="42" width="556" height="236" rx="22" fill="#f8fbff" stroke="#b8c8f6" stroke-width="4"/>
+  <rect x="82" y="78" width="168" height="168" rx="20" fill="#1f2937"/>
+  <circle cx="166" cy="162" r="54" fill="#6366f1"/>
+  <circle cx="166" cy="162" r="18" fill="#eef4ff"/>
+  <path d="M186 134v42c0 12 12 18 24 10" fill="none" stroke="#facc15" stroke-linecap="round" stroke-width="10"/>
+  <g fill="#263142" font-family="Arial, sans-serif" font-weight="800">
+    <text x="294" y="104" font-size="28">Now Playing</text>
+    <text x="294" y="138" font-size="20" fill="#64748b">Playlist · Favorites</text>
+  </g>
+  <g>
+    <rect x="294" y="164" width="250" height="22" rx="11" fill="#dbeafe"/>
+    <rect x="294" y="164" width="142" height="22" rx="11" fill="#6366f1"/>
+    <circle cx="436" cy="175" r="9" fill="#263142"/>
+  </g>
+  <g fill="#263142">
+    <circle cx="334" cy="222" r="18"/>
+    <circle cx="386" cy="222" r="24" fill="#6366f1"/>
+    <circle cx="446" cy="222" r="18"/>
+  </g>
+  <g fill="#fff">
+    <path d="M328 214v16l12-8z"/>
+    <path d="M378 211v22l18-11z"/>
+    <path d="M452 214v16l-12-8z"/>
+  </g>
+  <g fill="#86efac">
+    <circle cx="544" cy="92" r="12"/>
+    <circle cx="560" cy="238" r="16"/>
+  </g>
+</svg>

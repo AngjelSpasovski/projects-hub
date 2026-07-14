@@ -1,0 +1,365 @@
+:host {
+  display: block;
+  height: calc(100% - 0.75rem);
+  min-height: 0;
+  overflow: hidden;
+  width: 100%;
+}
+
+.photo-page {
+  display: grid;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  width: 100%;
+}
+
+.photo-shell {
+  background:
+    radial-gradient(circle at 18% 14%, color-mix(in srgb, #06b6d4 15%, transparent), transparent 18rem),
+    radial-gradient(circle at 82% 14%, color-mix(in srgb, var(--app-accent) 16%, transparent), transparent 18rem),
+    var(--project-bg);
+  border: 1px solid var(--project-border);
+  border-radius: 8px;
+  color: var(--project-text);
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: minmax(18rem, 1fr) minmax(0, 1fr);
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  padding: 0.7rem;
+}
+
+.photo-stage,
+.photo-panel,
+.control-panel,
+.feature-list article,
+.photo-list {
+  background: var(--project-shell);
+  border: 1px solid var(--project-border);
+  border-radius: 8px;
+}
+
+.photo-stage,
+.photo-panel,
+.control-panel {
+  display: grid;
+  gap: 0.75rem;
+  min-height: 0;
+  min-width: 0;
+  padding: 0.75rem;
+}
+
+.photo-stage {
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  overflow: hidden;
+}
+
+.photo-panel {
+  align-content: start;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  overflow: auto;
+}
+
+.stage-heading,
+.panel-heading,
+.slider-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  justify-content: space-between;
+}
+
+.stage-heading span,
+.panel-heading span,
+.search-field > span,
+.photo-copy span {
+  color: var(--project-text-muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+.stage-heading h3,
+.panel-heading h3 {
+  font-size: 1.05rem;
+}
+
+.stage-heading strong {
+  background: var(--project-surface-muted);
+  border: 1px solid var(--project-border);
+  border-radius: 999px;
+  padding: 0.22rem 0.58rem;
+}
+
+.hero-photo {
+  --photo-accent: var(--app-accent);
+  align-content: center;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--photo-accent) 18%, var(--project-surface)), var(--project-shell));
+  border: 1px solid color-mix(in srgb, var(--photo-accent) 34%, var(--project-border));
+  border-radius: 8px;
+  display: grid;
+  gap: 1rem;
+  grid-template-rows: minmax(12rem, 1fr) auto;
+  min-height: 0;
+  padding: 1rem;
+}
+
+.generated-photo,
+.thumb {
+  --photo-accent: inherit;
+  background: color-mix(in srgb, var(--photo-accent) 18%, #0f172a);
+  border: 1px solid color-mix(in srgb, var(--photo-accent) 42%, var(--project-border));
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.generated-photo {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-height: 16rem;
+  position: relative;
+}
+
+.generated-photo img,
+.thumb img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.photo-copy {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.photo-copy h3 {
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.photo-copy p,
+.photo-copy a,
+.feature-list p,
+.photo-card small,
+.empty-state p {
+  color: var(--project-text-muted);
+}
+
+.photo-copy a {
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.photo-copy a:hover {
+  color: var(--app-accent);
+}
+
+.slider-actions {
+  justify-content: flex-start;
+}
+
+.slider-actions .btn {
+  min-height: 2.4rem;
+}
+
+.view-toggle {
+  display: inline-flex;
+  gap: 0.35rem;
+}
+
+.view-toggle button,
+.category-grid button,
+.photo-card button {
+  background: var(--project-control);
+  border: 1px solid var(--project-border);
+  border-radius: 8px;
+  color: var(--project-text);
+  cursor: pointer;
+  font: inherit;
+}
+
+.view-toggle button {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.35rem;
+  min-height: 2.35rem;
+  padding: 0 0.65rem;
+}
+
+.view-toggle button.active,
+.category-grid button.active {
+  background: var(--app-accent);
+  border-color: var(--app-accent);
+  color: #fff;
+}
+
+.search-field {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.search-field > div {
+  align-items: center;
+  display: grid;
+  gap: 0.45rem;
+  grid-template-columns: auto minmax(0, 1fr);
+}
+
+.search-field i {
+  color: var(--project-text-muted);
+}
+
+.form-control {
+  background-color: var(--project-bg);
+  border-color: var(--project-border);
+  color: var(--project-text);
+}
+
+.category-grid {
+  display: grid;
+  gap: 0.45rem;
+  grid-template-columns: repeat(auto-fit, minmax(5.5rem, 1fr));
+}
+
+.category-grid button {
+  min-height: 2.4rem;
+  padding: 0.35rem 0.55rem;
+}
+
+.photo-list {
+  align-content: start;
+  align-items: start;
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  min-height: 0;
+  overflow: auto;
+  padding: 0.6rem;
+}
+
+.photo-list.list {
+  grid-template-columns: 1fr;
+}
+
+.photo-card {
+  --photo-accent: var(--app-accent);
+  min-width: 0;
+}
+
+.photo-card button {
+  display: grid;
+  gap: 0.55rem;
+  padding: 0.55rem;
+  text-align: left;
+  width: 100%;
+}
+
+.photo-list.list .photo-card button {
+  align-items: center;
+  grid-template-columns: 4rem minmax(0, 1fr);
+}
+
+.photo-card.active button {
+  border-color: color-mix(in srgb, var(--photo-accent) 55%, var(--project-border));
+  box-shadow: inset 0.25rem 0 0 var(--photo-accent);
+}
+
+.thumb {
+  align-items: center;
+  aspect-ratio: 16 / 10;
+  display: flex;
+  justify-content: center;
+  min-width: 0;
+}
+
+.photo-card-copy {
+  display: grid;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.photo-card-copy strong,
+.photo-card-copy small {
+  overflow-wrap: anywhere;
+}
+
+.empty-state {
+  align-content: center;
+  display: grid;
+  gap: 0.65rem;
+  grid-column: 1 / -1;
+  justify-items: center;
+  min-height: 14rem;
+  text-align: center;
+}
+
+.empty-state i {
+  color: var(--app-accent);
+  font-size: 1.6rem;
+}
+
+.feature-list {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.feature-list article {
+  align-items: center;
+  display: flex;
+  gap: 0.65rem;
+  padding: 0.65rem;
+}
+
+.feature-list i {
+  color: var(--app-accent);
+  font-size: 1.15rem;
+}
+
+@media (max-width: 1100px) {
+  :host {
+    height: auto;
+    overflow: visible;
+  }
+
+  .photo-page,
+  .photo-shell {
+    height: auto;
+    overflow: visible;
+  }
+
+  .photo-shell,
+  .photo-list {
+    grid-template-columns: 1fr;
+  }
+
+  .photo-stage,
+  .photo-panel,
+  .photo-list {
+    overflow: visible;
+  }
+}
+
+@media (max-width: 720px) {
+  .panel-heading,
+  .view-toggle,
+  .view-toggle button {
+    width: 100%;
+  }
+
+  .view-toggle button {
+    justify-content: center;
+  }
+}

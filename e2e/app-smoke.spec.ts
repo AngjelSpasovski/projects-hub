@@ -12,7 +12,7 @@ test('dashboard catalog supports view switching and project navigation', async (
   await page.getByRole('button', { name: 'EN' }).click();
 
   await expect(page.getByText('Overview of the small apps that will be migrated and added to this repo.')).toBeVisible();
-  await expect(page.getByText('24 project(s)')).toBeVisible();
+  await expect(page.getByText('27 project(s)')).toBeVisible();
 
   await page.getByRole('button', { name: /Detailed/ }).click();
   await expect(page.getByText('Difficulty').first()).toBeVisible();
@@ -28,14 +28,14 @@ test('dashboard catalog supports view switching and project navigation', async (
   await expect(page.locator('.project-workspace .project-live .surface-panel')).toHaveCount(0);
 
   await page.getByRole('link', { name: /Dashboard/ }).click();
-  await expect(page.getByText('24 project(s)')).toBeVisible();
+  await expect(page.getByText('27 project(s)')).toBeVisible();
 });
 
 test('theme switcher applies every theme without layout overflow', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 820 });
   await page.goto('/');
   await page.getByRole('button', { name: 'EN', exact: true }).click();
-  await expect(page.getByText('24 project(s)')).toBeVisible();
+  await expect(page.getByText('27 project(s)')).toBeVisible();
 
   const themes = [
     { label: 'Realm', value: 'realm' },
@@ -86,7 +86,7 @@ test('language switch renders Macedonian catalog labels', async ({ page }) => {
   await page.getByRole('button', { name: 'MK' }).click();
 
   await expect(page.getByRole('button', { name: /Детално/ })).toBeVisible();
-  await expect(page.getByText('24 проект(и)')).toBeVisible();
+  await expect(page.getByText('27 проект(и)')).toBeVisible();
   await expect(page.getByText('Калкулатор').first()).toBeVisible();
 });
 
@@ -112,7 +112,7 @@ test('catalog keeps filtered cards compact and tag overlay above cards', async (
   await page.goto('/');
   await page.getByRole('button', { name: 'EN', exact: true }).click();
 
-  await page.getByPlaceholder('Search projects, tags, or categories').fill('keyboard');
+  await page.getByPlaceholder('Search projects, tags, or categories').fill('keyboard events');
   await expect(page.getByText('1 project(s)')).toBeVisible();
 
   const cardBox = await page.locator('.project-card').first().boundingBox();
@@ -170,7 +170,7 @@ test('admin shell keeps chrome fixed while dashboard catalog scrolls', async ({ 
   await page.setViewportSize({ width: 1280, height: 560 });
   await page.goto('/');
   await page.getByRole('button', { name: 'EN', exact: true }).click();
-  await expect(page.getByText('24 project(s)')).toBeVisible();
+  await expect(page.getByText('27 project(s)')).toBeVisible();
 
   const header = page.locator('.app-header');
   const sidebar = page.locator('.app-sidebar');
@@ -204,7 +204,7 @@ test('dashboard keeps the catalog scroll position at the catalog bottom', async 
   await page.setViewportSize({ width: 1280, height: 560 });
   await page.goto('/');
   await page.getByRole('button', { name: 'EN', exact: true }).click();
-  await expect(page.getByText('24 project(s)')).toBeVisible();
+  await expect(page.getByText('27 project(s)')).toBeVisible();
 
   const catalog = page.locator('.project-catalog');
 
@@ -225,7 +225,7 @@ test('desktop catalog and project workspaces fit without nested scrollbars', asy
   await page.setViewportSize({ width: 1920, height: 1080 });
   await page.goto('/');
   await page.getByRole('button', { name: 'EN', exact: true }).click();
-  await expect(page.getByText('24 project(s)')).toBeVisible();
+  await expect(page.getByText('27 project(s)')).toBeVisible();
 
   const routes = [
     'tic-tac-toe',
@@ -251,7 +251,10 @@ test('desktop catalog and project workspaces fit without nested scrollbars', asy
     'timer',
     'digital-clock',
     'tip-calculator',
-    'memory-game'
+    'memory-game',
+    'math-4-kids',
+    'music-player',
+    'photo-book'
   ];
 
   for (const route of routes) {
@@ -303,7 +306,7 @@ test('project detail remains responsive on compact desktop and mobile viewports'
 test('mini project refinements keep core interactions stable', async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('projects-hub-language', 'en'));
   await page.goto('/');
-  await expect(page.getByText('24 project(s)')).toBeVisible();
+  await expect(page.getByText('27 project(s)')).toBeVisible();
 
   await page.goto('/admin/projects/calculator');
   await page.getByRole('button', { name: '9', exact: true }).click();
@@ -849,6 +852,22 @@ test('Memory Game supports difficulty, matching, completion, and reset', async (
   await expect(page.getByRole('heading', { name: 'Find every pair' })).toBeVisible();
   await expect(page.locator('.memory-card')).toHaveCount(16);
 
+  await page.getByRole('button', { name: 'Fruits' }).click();
+  await expect(page.getByRole('dialog', { name: 'Restart this round?' })).toBeVisible();
+  await expect(page.getByText('Changing the card set will start a new round and reset the timer.')).toBeVisible();
+  await page.getByRole('button', { name: 'Continue' }).click();
+  await expect(page.locator('.memory-card[data-pair="apple"]')).toHaveCount(0);
+
+  await page.getByRole('button', { name: 'Fruits' }).click();
+  await page.getByRole('button', { name: 'Yes' }).click();
+  await expect(page.locator('.memory-card[data-pair="apple"]')).toHaveCount(2);
+
+  await page.getByRole('button', { name: 'Mixed' }).click();
+  await page.getByRole('button', { name: 'Yes' }).click();
+  await expect(page.locator('.memory-card[data-pair="red-car"]')).toHaveCount(2);
+
+  await page.getByRole('button', { name: 'Letters' }).click();
+  await page.getByRole('button', { name: 'Yes' }).click();
   await page.getByRole('button', { name: /12 Easy/ }).click();
   await expect(page.locator('.memory-card')).toHaveCount(12);
 
@@ -867,4 +886,111 @@ test('Memory Game supports difficulty, matching, completion, and reset', async (
   await page.getByRole('button', { name: 'New round' }).click();
   await expect(page.getByText('Board complete')).toBeHidden();
   await expect(page.locator('.memory-card.matched')).toHaveCount(0);
+});
+
+test('Math 4 Kids supports operations, scoring, feedback, and restart', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'EN', exact: true }).click();
+  await page.getByRole('link', { name: 'Math 4 Kids', exact: true }).click();
+
+  await expect(page.getByRole('heading', { name: 'Math 4 Kids', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Solve the problem' })).toBeVisible();
+  await expect(page.locator('.problem-line strong').nth(0)).toHaveText('5');
+  await expect(page.locator('.problem-line b').nth(0)).toHaveText('+');
+  await expect(page.locator('.problem-line strong').nth(1)).toHaveText('7');
+
+  await page.getByPlaceholder('Type the result').fill('12');
+  await page.getByRole('button', { name: 'Check' }).click();
+  await expect(page.getByText('Correct. A new problem is ready.')).toBeVisible();
+  await expect(page.getByText('1 / 1')).toBeVisible();
+
+  await page.getByPlaceholder('Type the result').fill('999');
+  await page.getByRole('button', { name: 'Check' }).click();
+  await expect(page.getByText('Not quite. The correct answer is 6.')).toBeVisible();
+  await expect(page.getByText('1 / 2')).toBeVisible();
+
+  await page.getByRole('button', { name: 'Multiplication' }).click();
+  await expect(page.locator('.problem-line strong').nth(0)).toHaveText('3');
+  await expect(page.locator('.problem-line b').nth(0)).toHaveText('x');
+  await expect(page.locator('.problem-line strong').nth(1)).toHaveText('1');
+  await expect(page.getByText('0 / 0')).toBeVisible();
+
+  await page.getByRole('button', { name: 'Challenge' }).click();
+  await expect(page.getByRole('button', { name: /50 Challenge/ })).toHaveClass(/active/);
+
+  await page.getByRole('button', { name: 'Restart' }).click();
+  await expect(page.getByText('Round 1')).toBeVisible();
+  await expect(page.getByText('0 / 0')).toBeVisible();
+});
+
+test('Music Player supports playlist search, playback state, favorites, and external link', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'EN', exact: true }).click();
+  await page.getByRole('link', { name: 'Music Player', exact: true }).click();
+
+  await expect(page.getByRole('heading', { name: 'Music Player', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Current track' })).toBeVisible();
+  await expect(page.locator('.now-playing')).toContainText('Midnight Focus');
+  await expect(page.getByText('Paused')).toBeVisible();
+
+  await page.getByRole('button', { name: 'Play' }).click();
+  await expect(page.getByText('Playing')).toBeVisible();
+
+  await page.getByPlaceholder('Search title, artist, or mood').fill('coding');
+  await expect(page.getByText('Quiet Code')).toBeVisible();
+  await expect(page.getByText('Sunrise Drive')).toBeHidden();
+
+  await page.getByText('Quiet Code').click();
+  await expect(page.locator('.now-playing')).toContainText('Quiet Code');
+
+  await page.locator('.track-row.active .favorite-button').click();
+  await expect(page.getByText('1 favorite track(s) saved locally.')).toBeVisible();
+
+  await page.getByRole('button', { name: 'Clear search' }).click();
+  await expect(page.getByText('Sunrise Drive')).toBeVisible();
+
+  await expect(page.getByRole('link', { name: 'Open on YouTube' })).toHaveAttribute('target', '_blank');
+});
+
+test('Photo Book supports gallery filtering, view switching, slider, and keyboard navigation', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'EN', exact: true }).click();
+  await page.getByRole('link', { name: 'Photo Book', exact: true }).click();
+
+  await expect(page.getByRole('heading', { name: 'Photo Book', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Photo detail' })).toBeVisible();
+  await expect(page.locator('.hero-photo')).toContainText('Mountain Light');
+  await expect(page.getByText('7 / 7')).toBeVisible();
+
+  await page.locator('.category-grid').getByRole('button', { name: 'City', exact: true }).click();
+  await expect(page.getByText('2 / 7')).toBeVisible();
+  await expect(page.locator('.hero-photo')).toContainText('Old Bazaar Walk');
+
+  await page.getByRole('button', { name: 'Next' }).click();
+  await expect(page.locator('.hero-photo')).toContainText('Stone Bridge');
+
+  await page.keyboard.press('ArrowLeft');
+  await expect(page.locator('.hero-photo')).toContainText('Old Bazaar Walk');
+
+  await page.getByRole('button', { name: 'Start slideshow' }).click();
+  await expect(page.getByRole('button', { name: 'Stop slideshow' })).toBeVisible();
+  await page.getByRole('button', { name: 'Stop slideshow' }).click();
+  await expect(page.getByRole('button', { name: 'Start slideshow' })).toBeVisible();
+
+  await page.locator('.category-grid').getByRole('button', { name: 'People', exact: true }).click();
+  await expect(page.getByText('1 / 7')).toBeVisible();
+  await expect(page.locator('.hero-photo')).toContainText('Macedonia Basketball 2011');
+
+  await page.locator('.category-grid').getByRole('button', { name: 'All', exact: true }).click();
+  await page.getByPlaceholder('Search title, location, or category').fill('center');
+  await expect(page.locator('.hero-photo')).toContainText('Stone Bridge');
+
+  await page.getByRole('button', { name: /List/ }).click();
+  await expect(page.locator('.photo-list')).toHaveClass(/list/);
+
+  await page.getByPlaceholder('Search title, location, or category').fill('missing');
+  await expect(page.getByText('No photos found')).toBeVisible();
+
+  await page.getByRole('button', { name: 'Reset filters' }).click();
+  await expect(page.getByText('7 / 7')).toBeVisible();
 });

@@ -1,0 +1,324 @@
+:host {
+  display: block;
+  height: calc(100% - 0.75rem);
+  min-height: 0;
+  overflow: hidden;
+  width: 100%;
+}
+
+.music-page {
+  display: grid;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  width: 100%;
+}
+
+.music-shell {
+  background:
+    radial-gradient(circle at 16% 18%, color-mix(in srgb, #ec4899 16%, transparent), transparent 18rem),
+    radial-gradient(circle at 82% 12%, color-mix(in srgb, var(--app-accent) 18%, transparent), transparent 17rem),
+    var(--project-bg);
+  border: 1px solid var(--project-border);
+  border-radius: 8px;
+  color: var(--project-text);
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: minmax(18rem, 0.95fr) minmax(0, 1.05fr);
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  padding: 0.7rem;
+}
+
+.player-stage,
+.playlist-panel,
+.external-panel,
+.feature-list article,
+.track-list,
+.search-field {
+  background: var(--project-shell);
+  border: 1px solid var(--project-border);
+  border-radius: 8px;
+}
+
+.player-stage,
+.playlist-panel {
+  align-content: start;
+  display: grid;
+  gap: 0.75rem;
+  min-height: 0;
+  min-width: 0;
+  overflow: auto;
+  padding: 0.75rem;
+}
+
+.stage-heading,
+.panel-heading,
+.external-panel,
+.player-controls {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  justify-content: space-between;
+}
+
+.stage-heading span,
+.panel-heading span,
+.external-panel span,
+.search-field > span,
+.track-row span {
+  color: var(--project-text-muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+h3,
+p {
+  margin: 0;
+}
+
+.stage-heading h3,
+.panel-heading h3 {
+  font-size: 1.05rem;
+}
+
+.stage-heading strong {
+  background: var(--project-surface-muted);
+  border: 1px solid var(--project-border);
+  border-radius: 999px;
+  padding: 0.22rem 0.58rem;
+}
+
+.now-playing {
+  --track-accent: var(--app-accent);
+  align-items: center;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--track-accent) 28%, var(--project-surface)), var(--project-shell));
+  border: 1px solid color-mix(in srgb, var(--track-accent) 36%, var(--project-border));
+  border-radius: 8px;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: auto minmax(0, 1fr);
+  min-height: 16rem;
+  padding: clamp(1rem, 3vw, 2rem);
+}
+
+.album-art {
+  align-items: center;
+  aspect-ratio: 1;
+  background:
+    radial-gradient(circle, color-mix(in srgb, var(--track-accent) 34%, transparent) 0 28%, transparent 29%),
+    linear-gradient(135deg, var(--track-accent), color-mix(in srgb, var(--track-accent) 45%, #111827));
+  border: 1px solid color-mix(in srgb, var(--track-accent) 48%, var(--project-border));
+  border-radius: 8px;
+  color: #fff;
+  display: flex;
+  font-size: clamp(2rem, 6vw, 4rem);
+  justify-content: center;
+  width: clamp(8rem, 20vw, 13rem);
+}
+
+.track-copy {
+  display: grid;
+  gap: 0.45rem;
+  min-width: 0;
+}
+
+.track-copy span {
+  color: color-mix(in srgb, var(--track-accent) 55%, var(--project-text));
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.track-copy h3 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.track-copy p,
+.external-panel p,
+.feature-list p,
+.track-row small,
+.empty-state p {
+  color: var(--project-text-muted);
+}
+
+.player-controls {
+  --track-accent: var(--app-accent);
+  justify-content: flex-start;
+}
+
+.icon-button,
+.play-button,
+.favorite-button,
+.search-field button {
+  align-items: center;
+  background: var(--project-control);
+  border: 1px solid var(--project-border);
+  border-radius: 8px;
+  color: var(--project-text);
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  justify-content: center;
+}
+
+.icon-button {
+  height: 2.75rem;
+  width: 2.75rem;
+}
+
+.icon-button.active,
+.favorite-button.active {
+  background: color-mix(in srgb, #ef4444 18%, var(--project-control));
+  border-color: color-mix(in srgb, #ef4444 46%, var(--project-border));
+  color: #fca5a5;
+}
+
+.play-button {
+  background: var(--track-accent);
+  border-color: var(--track-accent);
+  color: #fff;
+  gap: 0.45rem;
+  min-height: 2.75rem;
+  padding: 0 1rem;
+}
+
+.external-panel {
+  padding: 0.75rem;
+}
+
+.search-field {
+  display: grid;
+  gap: 0.4rem;
+  padding: 0.75rem;
+}
+
+.search-field > div {
+  align-items: center;
+  display: grid;
+  gap: 0.45rem;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+}
+
+.search-field i {
+  color: var(--project-text-muted);
+}
+
+.search-field button {
+  height: 2.25rem;
+  width: 2.25rem;
+}
+
+.form-control {
+  background-color: var(--project-bg);
+  border-color: var(--project-border);
+  color: var(--project-text);
+}
+
+.track-list {
+  display: grid;
+  gap: 0.55rem;
+  min-height: 0;
+  overflow: auto;
+  padding: 0.6rem;
+}
+
+.track-row {
+  --track-accent: var(--app-accent);
+  align-items: stretch;
+  display: grid;
+  gap: 0.45rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.track-row > button:first-child {
+  background: var(--project-control);
+  border: 1px solid var(--project-border);
+  border-radius: 8px;
+  color: var(--project-text);
+  cursor: pointer;
+  display: grid;
+  gap: 0.2rem;
+  min-width: 0;
+  padding: 0.65rem;
+  text-align: left;
+}
+
+.track-row.active > button:first-child {
+  border-color: color-mix(in srgb, var(--track-accent) 50%, var(--project-border));
+  box-shadow: inset 0.25rem 0 0 var(--track-accent);
+}
+
+.track-row strong {
+  overflow-wrap: anywhere;
+}
+
+.favorite-button {
+  width: 2.75rem;
+}
+
+.empty-state {
+  align-items: center;
+  display: grid;
+  gap: 0.45rem;
+  justify-items: center;
+  padding: 2rem;
+  text-align: center;
+}
+
+.empty-state i {
+  color: var(--app-accent);
+  font-size: 1.5rem;
+}
+
+.feature-list {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.feature-list article {
+  align-items: center;
+  display: flex;
+  gap: 0.65rem;
+  padding: 0.65rem;
+}
+
+.feature-list i {
+  color: var(--app-accent);
+  font-size: 1.15rem;
+}
+
+@media (max-width: 1100px) {
+  :host {
+    height: auto;
+    overflow: visible;
+  }
+
+  .music-page,
+  .music-shell {
+    height: auto;
+    overflow: visible;
+  }
+
+  .music-shell,
+  .now-playing {
+    grid-template-columns: 1fr;
+  }
+
+  .player-stage,
+  .playlist-panel,
+  .track-list {
+    overflow: visible;
+  }
+}
+
+@media (max-width: 720px) {
+  .album-art {
+    width: 100%;
+  }
+}

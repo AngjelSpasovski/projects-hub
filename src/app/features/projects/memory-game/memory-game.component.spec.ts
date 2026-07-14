@@ -35,6 +35,50 @@ describe('MemoryGameComponent', () => {
     expect(component.seconds()).toBe(0);
   });
 
+  it('asks for confirmation before changing the card set', () => {
+    component.flipCard(component.cards()[0].id);
+    component.selectCardSet('fruits');
+
+    expect(component.cardSet()).toBe('letters');
+    expect(component.pendingCardSet()).toBe('fruits');
+    expect(component.status()).toBe('playing');
+  });
+
+  it('keeps the current round when the card set change is cancelled', () => {
+    component.flipCard(component.cards()[0].id);
+    component.selectCardSet('fruits');
+    component.continueCurrentRound();
+
+    expect(component.cardSet()).toBe('letters');
+    expect(component.pendingCardSet()).toBeNull();
+    expect(component.status()).toBe('playing');
+  });
+
+  it('changes the card set after confirmation and starts a fresh board', () => {
+    component.flipCard(component.cards()[0].id);
+    component.selectCardSet('fruits');
+    component.confirmCardSetChange();
+
+    expect(component.cardSet()).toBe('fruits');
+    expect(component.pendingCardSet()).toBeNull();
+    expect(component.status()).toBe('ready');
+    expect(component.moves()).toBe(0);
+    expect(component.cards().length).toBe(16);
+    expect(component.cards().some((card) => card.pairId === 'apple')).toBeTrue();
+  });
+
+  it('supports mixed cards from multiple visual sets', () => {
+    component.selectCardSet('mixed');
+    component.confirmCardSetChange();
+
+    const pairIds = component.cards().map((card) => card.pairId);
+
+    expect(pairIds).toContain('angular');
+    expect(pairIds).toContain('apple');
+    expect(pairIds).toContain('blue');
+    expect(pairIds).toContain('red-car');
+  });
+
   it('matches a selected pair and counts one move', () => {
     const [firstCard, secondCard] = findPair(component);
 

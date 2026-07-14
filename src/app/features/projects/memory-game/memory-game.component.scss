@@ -56,7 +56,14 @@
 
 .memory-panel {
   align-content: start;
+  grid-template-rows: auto auto auto;
   overflow: auto;
+}
+
+.control-panel {
+  align-content: start;
+  position: relative;
+  z-index: 1;
 }
 
 .stage-heading,
@@ -72,7 +79,8 @@
 .stage-heading span,
 .panel-heading span,
 .stats-grid span,
-.difficulty-button span {
+.difficulty-button span,
+.set-button span {
   color: var(--project-text-muted);
   font-size: 0.72rem;
   font-weight: 800;
@@ -115,6 +123,7 @@ p {
 }
 
 .memory-card {
+  --card-accent: var(--app-accent);
   aspect-ratio: 1;
   background: var(--project-control);
   border: 1px solid var(--project-border);
@@ -143,7 +152,7 @@ p {
 }
 
 .card-front {
-  background: linear-gradient(135deg, var(--app-accent), color-mix(in srgb, var(--app-accent) 45%, #22c55e));
+  background: linear-gradient(135deg, var(--card-accent), color-mix(in srgb, var(--card-accent) 45%, #111827));
   border-radius: 7px;
   color: #fff;
   font-size: clamp(1rem, 3vw, 1.65rem);
@@ -211,7 +220,14 @@ p {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.difficulty-button {
+.set-grid {
+  display: grid;
+  gap: 0.45rem;
+  grid-template-columns: repeat(auto-fit, minmax(5.6rem, 1fr));
+}
+
+.difficulty-button,
+.set-button {
   background: var(--project-control);
   border: 1px solid var(--project-border);
   border-radius: 8px;
@@ -224,13 +240,26 @@ p {
   text-align: left;
 }
 
-.difficulty-button.active {
+.set-button {
+  min-height: 2.75rem;
+  min-width: 0;
+  place-items: center;
+  text-align: center;
+}
+
+.set-button span {
+  overflow-wrap: anywhere;
+}
+
+.difficulty-button.active,
+.set-button.active {
   background: var(--app-accent);
   border-color: var(--app-accent);
   color: #fff;
 }
 
-.difficulty-button.active span {
+.difficulty-button.active span,
+.set-button.active span {
   color: rgba(255, 255, 255, 0.78);
 }
 
@@ -247,6 +276,8 @@ p {
   gap: 0.55rem;
   min-height: 0;
   overflow: auto;
+  position: relative;
+  z-index: 0;
 }
 
 .feature-list article {
@@ -259,6 +290,63 @@ p {
 .feature-list i {
   color: var(--app-accent);
   font-size: 1.15rem;
+}
+
+.modal-backdrop {
+  align-items: center;
+  background: rgba(3, 7, 18, 0.68);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  padding: 1rem;
+  position: absolute;
+  z-index: 10;
+}
+
+.confirm-modal {
+  background: var(--project-shell);
+  border: 1px solid color-mix(in srgb, var(--app-accent) 34%, var(--project-border));
+  border-radius: 8px;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.35);
+  color: var(--project-text);
+  display: grid;
+  gap: 0.85rem;
+  max-width: 28rem;
+  padding: 1rem;
+  width: min(100%, 28rem);
+}
+
+.modal-icon {
+  align-items: center;
+  background: color-mix(in srgb, var(--app-accent) 15%, var(--project-surface));
+  border: 1px solid color-mix(in srgb, var(--app-accent) 32%, var(--project-border));
+  border-radius: 8px;
+  color: var(--app-accent);
+  display: flex;
+  height: 2.5rem;
+  justify-content: center;
+  width: 2.5rem;
+}
+
+.modal-copy {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.modal-copy h3 {
+  font-size: 1.05rem;
+}
+
+.modal-copy p {
+  color: var(--project-text-muted);
+  line-height: 1.5;
+}
+
+.modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  justify-content: flex-end;
 }
 
 @media (max-width: 1100px) {
@@ -286,7 +374,8 @@ p {
 
 @media (max-width: 720px) {
   .stats-grid,
-  .difficulty-grid {
+  .difficulty-grid,
+  .set-grid {
     grid-template-columns: 1fr;
   }
 
@@ -296,5 +385,13 @@ p {
 
   .memory-board.hard {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .modal-actions {
+    justify-content: stretch;
+  }
+
+  .modal-actions .btn {
+    flex: 1 1 9rem;
   }
 }

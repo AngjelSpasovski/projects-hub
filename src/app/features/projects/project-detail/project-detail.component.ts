@@ -47,7 +47,12 @@ const PROJECT_COMPONENT_LOADERS: Record<string, () => Promise<Type<unknown>>> = 
   'tip-calculator': () =>
     import('../tip-calculator/tip-calculator.component').then((component) => component.TipCalculatorComponent),
   'memory-game': () =>
-    import('../memory-game/memory-game.component').then((component) => component.MemoryGameComponent)
+    import('../memory-game/memory-game.component').then((component) => component.MemoryGameComponent),
+  'math-4-kids': () =>
+    import('../math-4-kids/math-4-kids.component').then((component) => component.Math4KidsComponent),
+  'music-player': () =>
+    import('../music-player/music-player.component').then((component) => component.MusicPlayerComponent),
+  'photo-book': () => import('../photo-book/photo-book.component').then((component) => component.PhotoBookComponent)
 };
 
 @Component({

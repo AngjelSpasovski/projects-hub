@@ -20,6 +20,10 @@ Detailed active work is tracked in [`docs/tasks/`](./docs/tasks/README.md). A pr
 - [x] Add Digital Clock as a live timezone utility mini project.
 - [x] Add Tip Calculator as the first stable utility mini project from the recommended backlog order.
 - [x] Add Memory Game as the first stable game mini project from the recommended backlog order.
+- [x] Add Math 4 Kids as the next stable learning game from the recommended backlog order.
+- [x] Add Music Player as the first stable media-style mini project from the recommended backlog order.
+- [x] Add Photo Book as the next visual gallery mini project from the recommended backlog order.
+- [x] Upgrade Photo Book with optimized local Macedonia photo assets, People category coverage, and start/stop autoplay.
 
 ## Foundation
 

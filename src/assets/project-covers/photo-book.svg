@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 320" role="img" aria-labelledby="title desc">
+  <title id="title">Photo Book cover</title>
+  <desc id="desc">Gallery layout with selected photo and image thumbnails.</desc>
+  <rect width="640" height="320" fill="#eef4ff"/>
+  <rect x="42" y="42" width="556" height="236" rx="22" fill="#f8fbff" stroke="#b8c8f6" stroke-width="4"/>
+  <rect x="78" y="78" width="300" height="172" rx="18" fill="#0f172a"/>
+  <path d="M78 206l86-72 66 52 44-38 104 86v16H78z" fill="#22c55e"/>
+  <circle cx="318" cy="112" r="24" fill="#facc15"/>
+  <g fill="#ffffff" stroke="#b8c8f6" stroke-width="4">
+    <rect x="414" y="78" width="66" height="58" rx="12"/>
+    <rect x="498" y="78" width="66" height="58" rx="12"/>
+    <rect x="414" y="158" width="66" height="58" rx="12"/>
+    <rect x="498" y="158" width="66" height="58" rx="12"/>
+  </g>
+  <g fill="#6366f1">
+    <path d="M424 126l18-18 14 12 14-16 10 22z"/>
+    <path d="M508 126l18-18 14 12 14-16 10 22z"/>
+    <path d="M424 206l18-18 14 12 14-16 10 22z"/>
+    <path d="M508 206l18-18 14 12 14-16 10 22z"/>
+  </g>
+  <g fill="#263142" font-family="Arial, sans-serif" font-weight="800">
+    <text x="78" y="276" font-size="22">Grid · Slider · Detail</text>
+  </g>
+</svg>

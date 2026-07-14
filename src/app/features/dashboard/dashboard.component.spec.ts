@@ -40,7 +40,8 @@ describe('DashboardComponent', () => {
       'tic-tac-toe',
       'hang-man',
       'javascript-quiz',
-      'memory-game'
+      'memory-game',
+      'math-4-kids'
     ]);
   });
 

@@ -1,0 +1,338 @@
+:host {
+  display: block;
+  height: calc(100% - 0.75rem);
+  min-height: 0;
+  overflow: hidden;
+  width: 100%;
+}
+
+.math-page {
+  display: grid;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  width: 100%;
+}
+
+.math-shell {
+  background:
+    radial-gradient(circle at 18% 12%, color-mix(in srgb, #22c55e 17%, transparent), transparent 18rem),
+    radial-gradient(circle at 82% 22%, color-mix(in srgb, var(--app-accent) 18%, transparent), transparent 17rem),
+    var(--project-bg);
+  border: 1px solid var(--project-border);
+  border-radius: 8px;
+  color: var(--project-text);
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: minmax(18rem, 1fr) minmax(0, 0.95fr);
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  padding: 0.7rem;
+}
+
+.math-stage,
+.math-panel,
+.setup-panel,
+.feature-list article {
+  background: var(--project-shell);
+  border: 1px solid var(--project-border);
+  border-radius: 8px;
+}
+
+.math-stage,
+.math-panel,
+.setup-panel {
+  display: grid;
+  gap: 0.75rem;
+  min-height: 0;
+  min-width: 0;
+  padding: 0.75rem;
+}
+
+.math-stage {
+  grid-template-rows: auto minmax(10rem, 1fr) auto auto;
+  overflow: hidden;
+}
+
+.math-panel {
+  align-content: start;
+  grid-template-rows: auto auto auto;
+  overflow: auto;
+}
+
+.setup-panel {
+  position: relative;
+  z-index: 1;
+}
+
+.stage-heading,
+.panel-heading,
+.answer-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  justify-content: space-between;
+}
+
+.stage-heading span,
+.panel-heading span,
+label > span,
+.problem-card > span,
+.stats-grid span,
+.option-button span,
+.difficulty-button span {
+  color: var(--project-text-muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+h3,
+p {
+  margin: 0;
+}
+
+.stage-heading h3,
+.panel-heading h3 {
+  font-size: 1.05rem;
+}
+
+.stage-heading strong {
+  background: var(--project-surface-muted);
+  border: 1px solid var(--project-border);
+  border-radius: 999px;
+  padding: 0.22rem 0.58rem;
+}
+
+.problem-card {
+  align-content: center;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--app-accent-soft) 58%, var(--project-surface)), var(--project-shell));
+  border: 1px solid color-mix(in srgb, var(--app-accent) 32%, var(--project-border));
+  border-radius: 8px;
+  display: grid;
+  gap: 0.9rem;
+  min-height: 14rem;
+  padding: clamp(1rem, 3vw, 2rem);
+}
+
+.problem-card.correct {
+  border-color: color-mix(in srgb, #22c55e 46%, var(--project-border));
+}
+
+.problem-card.wrong {
+  border-color: color-mix(in srgb, #f97316 48%, var(--project-border));
+}
+
+.problem-line {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(0.45rem, 2vw, 0.85rem);
+  justify-content: center;
+}
+
+.problem-line strong,
+.problem-line b {
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.problem-line b {
+  color: var(--app-accent);
+}
+
+.answer-slot {
+  background: var(--project-control);
+  border: 1px dashed color-mix(in srgb, var(--app-accent) 45%, var(--project-border));
+  border-radius: 8px;
+  min-width: 4.5rem;
+  padding: 0.35rem 0.65rem;
+  text-align: center;
+}
+
+.answer-form {
+  background: var(--project-shell);
+  border: 1px solid var(--project-border);
+  border-radius: 8px;
+  display: grid;
+  gap: 0.65rem;
+  padding: 0.75rem;
+}
+
+label {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.form-control {
+  background-color: var(--project-bg);
+  border-color: var(--project-border);
+  color: var(--project-text);
+  font-size: 1.2rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+}
+
+.answer-actions {
+  justify-content: flex-start;
+}
+
+.feedback-card {
+  align-items: center;
+  background: var(--project-surface);
+  border: 1px solid var(--project-border);
+  border-radius: 8px;
+  display: flex;
+  gap: 0.65rem;
+  padding: 0.7rem;
+}
+
+.feedback-card i {
+  color: var(--app-accent);
+  font-size: 1.25rem;
+}
+
+.feedback-card.correct {
+  border-color: color-mix(in srgb, #22c55e 44%, var(--project-border));
+}
+
+.feedback-card.correct i {
+  color: #22c55e;
+}
+
+.feedback-card.wrong {
+  border-color: color-mix(in srgb, #f97316 44%, var(--project-border));
+}
+
+.feedback-card.wrong i {
+  color: #f97316;
+}
+
+.feedback-card p,
+.feature-list p {
+  color: var(--project-text-muted);
+}
+
+.stats-grid {
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.stats-grid article {
+  background: linear-gradient(135deg, var(--project-bg), var(--project-surface-muted));
+  border: 1px solid var(--project-border);
+  border-radius: 8px;
+  display: grid;
+  gap: 0.15rem;
+  min-width: 0;
+  padding: 0.6rem 0.7rem;
+}
+
+.stats-grid strong {
+  font-size: 1.05rem;
+  overflow-wrap: anywhere;
+}
+
+.option-grid,
+.difficulty-grid {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.option-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.difficulty-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.option-button,
+.difficulty-button {
+  background: var(--project-control);
+  border: 1px solid var(--project-border);
+  border-radius: 8px;
+  color: var(--project-text);
+  cursor: pointer;
+  display: grid;
+  gap: 0.25rem;
+  min-height: 4.4rem;
+  padding: 0.65rem;
+  text-align: left;
+}
+
+.option-button.active,
+.difficulty-button.active {
+  background: var(--app-accent);
+  border-color: var(--app-accent);
+  color: #fff;
+}
+
+.option-button.active span,
+.difficulty-button.active span {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.option-button strong,
+.difficulty-button strong {
+  font-size: 1.25rem;
+}
+
+.feature-list {
+  display: grid;
+  gap: 0.55rem;
+  position: relative;
+  z-index: 0;
+}
+
+.feature-list article {
+  align-items: center;
+  display: flex;
+  gap: 0.65rem;
+  padding: 0.65rem;
+}
+
+.feature-list i {
+  color: var(--app-accent);
+  font-size: 1.15rem;
+}
+
+@media (max-width: 1100px) {
+  :host {
+    height: auto;
+    overflow: visible;
+  }
+
+  .math-page,
+  .math-shell {
+    height: auto;
+    overflow: visible;
+  }
+
+  .math-shell,
+  .option-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .math-stage,
+  .math-panel {
+    overflow: visible;
+  }
+}
+
+@media (max-width: 720px) {
+  .stats-grid,
+  .difficulty-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .problem-card {
+    min-height: 12rem;
+  }
+}
