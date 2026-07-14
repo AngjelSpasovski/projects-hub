@@ -10,6 +10,7 @@ Photo Book is a visual gallery mini project for the Projects Hub portfolio.
 - Selected photo detail panel.
 - Previous and next slider controls.
 - Start/stop automatic slideshow.
+- Automatic slideshow pauses when the user changes the selected photo, search term, category, or resets filters.
 - Left and right keyboard navigation.
 - Empty state with reset action.
 

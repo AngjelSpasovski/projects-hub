@@ -169,20 +169,24 @@ export class PhotoBookComponent {
   }
 
   selectPhoto(photoId: string): void {
+    this.stopAutoSlide();
     this.selectedPhotoId.set(photoId);
   }
 
   selectCategory(category: PhotoCategory): void {
+    this.stopAutoSlide();
     this.selectedCategory.set(category);
     this.ensureSelectionInFilter();
   }
 
   updateSearch(value: string): void {
+    this.stopAutoSlide();
     this.searchTerm.set(value);
     this.ensureSelectionInFilter();
   }
 
   resetFilters(): void {
+    this.stopAutoSlide();
     this.selectedCategory.set('all');
     this.searchTerm.set('');
     this.selectedPhotoId.set(this.photos[0].id);

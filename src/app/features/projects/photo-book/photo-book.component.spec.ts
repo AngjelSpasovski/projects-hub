@@ -79,4 +79,14 @@ describe('PhotoBookComponent', () => {
     expect(component.isAutoPlaying()).toBeFalse();
     expect(component.selectedPhoto().id).toBe('old-bazaar');
   }));
+
+  it('stops the automatic slideshow when the user changes filters', fakeAsync(() => {
+    component.toggleAutoSlide();
+
+    component.selectCategory('people');
+    tick(3500);
+
+    expect(component.isAutoPlaying()).toBeFalse();
+    expect(component.selectedPhoto().id).toBe('basketball-2011');
+  }));
 });
