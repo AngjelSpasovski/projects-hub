@@ -28,6 +28,7 @@ Detailed active work is tracked in [`docs/tasks/`](./docs/tasks/README.md). A pr
 - [x] Define Chat App as a static-safe local demo first, with Firebase or Socket.io deferred behind a future adapter.
 - [x] Add Chat App as a static-safe local demo with rooms, messages, search, connection state, validation, and LocalStorage persistence.
 - [x] Complete Chat App visual QA across Realm, White, Dark, Blue, and mobile layout.
+- [x] Close the current target project list and defer duplicate-prone ideas or backend integration until explicitly needed.
 
 ## Foundation
 
@@ -109,3 +110,11 @@ Detailed active work is tracked in [`docs/tasks/`](./docs/tasks/README.md). A pr
 - [x] Add a polished root README.
 - [x] Add deployment workflow when hosting is chosen.
 - [x] Add the final repository link to the portfolio.
+
+## Deferred After Current Release
+
+- [x] Defer optional backend integration until Firebase or Socket.io is deliberately chosen.
+- [x] Defer Find the Word unless it becomes meaningfully different from Hang Man.
+- [x] Defer Square Cards unless it becomes a distinct reusable playground.
+- [x] Defer Recipe Book variant unless it differs from the migrated Recipe Book.
+- [x] Keep future work limited to UI polish and bug fixes as issues are found.

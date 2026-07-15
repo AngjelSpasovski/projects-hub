@@ -398,6 +398,8 @@ Encoding:
 
 ## 9. Current Roadmap
 
+Current release status: the target project list is complete. The portfolio should now stay in stabilization mode unless a new project idea is clearly different from the existing catalog.
+
 ### Priority 1: Documentation Alignment
 
 - Keep `TASKS.md`, `README.md`, `PROJECT_ANALYSIS_AND_ROADMAP.md`, and `docs/tasks/*` aligned as work progresses.
@@ -444,10 +446,10 @@ See `docs/tasks/CHAT_APP_ARCHITECTURE.md` for the implementation decision.
 
 Future mini project candidates:
 
-- `Find the Word`, only if it is clearly different from Hang Man.
-- `Square Cards`, only if it demonstrates more than the existing shared cards.
-- `Recipe Book variant`, only if it is meaningfully different from the migrated Recipe Book.
-- Chat App backend adapter, only after choosing Firebase or Socket.io deliberately.
+- `Find the Word`, deferred unless it becomes clearly different from Hang Man.
+- `Square Cards`, deferred unless it demonstrates more than the existing shared cards.
+- `Recipe Book variant`, deferred unless it is meaningfully different from the migrated Recipe Book.
+- Chat App backend adapter, deferred until Firebase or Socket.io is deliberately selected.
 
 Backend-dependent work should remain last so the static portfolio stays deployable without secrets.
 
@@ -478,4 +480,5 @@ Continue with a controlled stabilization pass:
 
 1. Keep Firebase or Socket.io behind a future adapter decision.
 2. Add backend setup, limits, security rules, and deployment notes only when a real backend is selected.
-3. Continue with the next scoped backlog item or a small UI polish pass.
+3. Polish UI and fix component-level issues as they are found.
+4. Complete GitHub repository metadata and final deployment checks.

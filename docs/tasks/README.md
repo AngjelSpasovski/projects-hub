@@ -2,6 +2,10 @@
 
 This folder contains the active product roadmap for Projects Hub. The root [`TASKS.md`](../../TASKS.md) remains the master checklist; detailed work is tracked here.
 
+## Current Release Status
+
+The target project list for the current static portfolio release is complete. New duplicate-prone ideas are deferred unless they prove a clearly different user experience. Backend integration is also deferred so the app remains deployable as a static GitHub Pages portfolio without secrets.
+
 ## Work Order
 
 1. [UI refinements](./UI_REFINEMENTS.md)
@@ -19,6 +23,7 @@ Every project must satisfy the [Definition of Done](./DEFINITION_OF_DONE.md) bef
 - `planned`: visible in the catalog only when a placeholder is intentionally useful.
 - `migration`: implementation is active but does not yet satisfy the Definition of Done.
 - `ready`: feature, translations, tests, documentation, and responsive checks are complete.
+- `deferred`: intentionally not part of the current release.
 
 ## Working Method
 

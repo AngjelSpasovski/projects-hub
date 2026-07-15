@@ -77,9 +77,9 @@ The master roadmap is tracked in [TASKS.md](./TASKS.md). Detailed batches, proje
 
 ## Next Work
 
-Documentation alignment and the first shared UI polish pass are complete. Continue visual QA as larger features are added, especially across Realm, white, dark, and blue themes.
+The target project list for the current static portfolio release is complete. Documentation alignment, the shared UI polish pass, and the planned mini project sequence are complete.
 
-The current stable build order has completed Tip Calculator, Memory Game, Math 4 Kids, Music Player, Photo Book, Client Panel, and Chat App. The next major recommendation is a visual QA pass for Chat App before choosing any real Firebase or Socket.io backend work.
+Next work should stay in stabilization mode: final QA, GitHub repository metadata, deployment checks, UI polish, and bug fixes as they are found. Backend integration remains deferred until Firebase or Socket.io is deliberately selected.
 
 ## Migrated Projects
 

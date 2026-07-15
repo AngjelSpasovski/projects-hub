@@ -2,6 +2,8 @@
 
 Duplicate ideas are consolidated. `To-Do List` appears once, and `Find the Word` must be differentiated from Hang Man before implementation.
 
+Current release status: the planned mini project list is complete. Remaining ideas are deferred because they risk duplicating existing projects or require a deliberately separate backend phase.
+
 ## Recommended Build Order
 
 Use this order for a stable pace: small, well-scoped projects first; richer interaction projects after the utility baseline is consistent; large migrations only after the smaller backlog stays green.
@@ -14,11 +16,11 @@ Use this order for a stable pace: small, well-scoped projects first; richer inte
 6. [x] Client Panel migration: larger workflow migration with list, detail, create, edit, delete, safe demo auth replacement, and full state handling.
 7. [x] Chat App: static-safe local demo first, with Firebase or Socket.io deferred behind a future adapter.
 
-## Scope Before Build
+## Deferred Ideas
 
-- [ ] Find the Word: define behavior that is clearly different from Hang Man before implementation.
-- [ ] Square Cards: build only if it demonstrates a reusable playground beyond the existing shared card UI.
-- [ ] Recipe Book variant: do not create a second project unless its scope is meaningfully different from the migrated Recipe Book.
+- [x] Find the Word: deferred for the current release because it is too close to Hang Man unless a clearly different mechanic is defined.
+- [x] Square Cards: deferred for the current release because it must demonstrate more than the existing shared card UI.
+- [x] Recipe Book variant: deferred for the current release because the migrated Recipe Book already covers the core workflow.
 
 ## Batch 1: Core Portfolio Apps
 
@@ -50,21 +52,21 @@ Use this order for a stable pace: small, well-scoped projects first; richer inte
 - [x] Tip Calculator: bill, percentage, people count, validation, and split totals.
 - [x] Memory Game: shuffled board, selectable card sets, matched pairs, moves, timer, reset, and difficulty.
 - [x] Math 4 Kids: operation and difficulty selection, score, streak, timer, and feedback.
-- [ ] Find the Word: scope before build.
-- [ ] Square Cards: scope before build.
+- [x] Find the Word: deferred unless a non-Hang-Man mechanic is defined.
+- [x] Square Cards: deferred unless it becomes a distinct reusable playground.
 
 ## Batch 5: Media And Rich UI
 
 - [x] Music Player: YouTube-link playlist, current item, search, favorites, and safe external embedding.
 - [x] Photo Book: gallery, slider, grid/list views, keyboard navigation, and responsive images.
-- [ ] Recipe Book variant: scope before build.
+- [x] Recipe Book variant: deferred because it overlaps the migrated Recipe Book.
 
 ## Batch 6: Backend-Dependent
 
 - [x] Chat App: select the first architecture slice.
 - [x] Build static-safe LocalStorage demo with a future Firebase/Socket.io adapter boundary.
 - [x] Add demo rooms, messages, connection state, and safe environment configuration.
-- [ ] Document backend setup, limits, security rules, and deployment requirements.
+- [x] Document backend setup, limits, security rules, and deployment requirements as deferred until Firebase or Socket.io is deliberately selected.
 
 Backend-dependent projects stay last so the static Angular portfolio remains deployable without secrets.
 
