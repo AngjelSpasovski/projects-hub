@@ -179,6 +179,10 @@
     "CLIENT_PANEL": {
       "TITLE": "Client Panel",
       "SUMMARY": "Client workflow demo with list, detail, create, edit, delete, validation, totals, and LocalStorage persistence."
+    },
+    "CHAT_APP": {
+      "TITLE": "Chat App",
+      "SUMMARY": "Static-safe chat demo with rooms, message timeline, search, connection state, validation, and LocalStorage persistence."
     }
   },
   "PROJECT_PLANNER": {
@@ -1663,6 +1667,48 @@
       "CLIENTS": "Clients",
       "OPEN_BALANCES": "Open balances",
       "OWED": "Total owed"
+    }
+  },
+  "CHAT_APP": {
+    "ACTIONS": {
+      "CLEAR_SEARCH": "Clear search",
+      "RESET": "Reset demo",
+      "SEND": "Send message"
+    },
+    "CONNECTION": {
+      "OFFLINE": "Offline demo",
+      "ONLINE": "Online demo"
+    },
+    "CONVERSATION": {
+      "EYEBROW": "Conversation"
+    },
+    "EMPTY": {
+      "NO_MESSAGES_TEXT": "Send a message to start this local conversation.",
+      "NO_MESSAGES_TITLE": "No messages yet",
+      "NO_ROOMS_TEXT": "Clear the search to bring demo rooms back.",
+      "NO_ROOMS_TITLE": "No rooms found"
+    },
+    "ERRORS": {
+      "MESSAGE": "Write at least two characters before sending.",
+      "OFFLINE": "Turn the demo connection online before sending."
+    },
+    "FORM": {
+      "DEMO_NOTE": "Local demo only. No backend, credentials, or private data.",
+      "MESSAGE": "Message",
+      "PLACEHOLDER": "Write a message for this room"
+    },
+    "ROOMS": {
+      "EYEBROW": "Chat app",
+      "TITLE": "Rooms"
+    },
+    "SEARCH": {
+      "LABEL": "Search",
+      "PLACEHOLDER": "Search rooms or topics"
+    },
+    "STATS": {
+      "ONLINE": "Online rooms",
+      "ROOMS": "Rooms",
+      "UNREAD": "Unread"
     }
   },
   "EXPENSE_TRACKER": {

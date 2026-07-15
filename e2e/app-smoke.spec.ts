@@ -12,7 +12,7 @@ test('dashboard catalog supports view switching and project navigation', async (
   await page.getByRole('button', { name: 'EN' }).click();
 
   await expect(page.getByText('Overview of the small apps that will be migrated and added to this repo.')).toBeVisible();
-  await expect(page.getByText('27 project(s)')).toBeVisible();
+  await expect(page.getByText('29 project(s)')).toBeVisible();
 
   await page.getByRole('button', { name: /Detailed/ }).click();
   await expect(page.getByText('Difficulty').first()).toBeVisible();
@@ -28,14 +28,14 @@ test('dashboard catalog supports view switching and project navigation', async (
   await expect(page.locator('.project-workspace .project-live .surface-panel')).toHaveCount(0);
 
   await page.getByRole('link', { name: /Dashboard/ }).click();
-  await expect(page.getByText('27 project(s)')).toBeVisible();
+  await expect(page.getByText('29 project(s)')).toBeVisible();
 });
 
 test('theme switcher applies every theme without layout overflow', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 820 });
   await page.goto('/');
   await page.getByRole('button', { name: 'EN', exact: true }).click();
-  await expect(page.getByText('27 project(s)')).toBeVisible();
+  await expect(page.getByText('29 project(s)')).toBeVisible();
 
   const themes = [
     { label: 'Realm', value: 'realm' },
@@ -86,7 +86,7 @@ test('language switch renders Macedonian catalog labels', async ({ page }) => {
   await page.getByRole('button', { name: 'MK' }).click();
 
   await expect(page.getByRole('button', { name: /Детално/ })).toBeVisible();
-  await expect(page.getByText('27 проект(и)')).toBeVisible();
+  await expect(page.getByText('29 проект(и)')).toBeVisible();
   await expect(page.getByText('Калкулатор').first()).toBeVisible();
 });
 
@@ -170,7 +170,7 @@ test('admin shell keeps chrome fixed while dashboard catalog scrolls', async ({ 
   await page.setViewportSize({ width: 1280, height: 560 });
   await page.goto('/');
   await page.getByRole('button', { name: 'EN', exact: true }).click();
-  await expect(page.getByText('27 project(s)')).toBeVisible();
+  await expect(page.getByText('29 project(s)')).toBeVisible();
 
   const header = page.locator('.app-header');
   const sidebar = page.locator('.app-sidebar');
@@ -204,7 +204,7 @@ test('dashboard keeps the catalog scroll position at the catalog bottom', async 
   await page.setViewportSize({ width: 1280, height: 560 });
   await page.goto('/');
   await page.getByRole('button', { name: 'EN', exact: true }).click();
-  await expect(page.getByText('27 project(s)')).toBeVisible();
+  await expect(page.getByText('29 project(s)')).toBeVisible();
 
   const catalog = page.locator('.project-catalog');
 
@@ -225,7 +225,7 @@ test('desktop catalog and project workspaces fit without nested scrollbars', asy
   await page.setViewportSize({ width: 1920, height: 1080 });
   await page.goto('/');
   await page.getByRole('button', { name: 'EN', exact: true }).click();
-  await expect(page.getByText('27 project(s)')).toBeVisible();
+  await expect(page.getByText('29 project(s)')).toBeVisible();
 
   const routes = [
     'tic-tac-toe',
@@ -254,7 +254,9 @@ test('desktop catalog and project workspaces fit without nested scrollbars', asy
     'memory-game',
     'math-4-kids',
     'music-player',
-    'photo-book'
+    'photo-book',
+    'client-panel',
+    'chat-app'
   ];
 
   for (const route of routes) {
@@ -306,7 +308,7 @@ test('project detail remains responsive on compact desktop and mobile viewports'
 test('mini project refinements keep core interactions stable', async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('projects-hub-language', 'en'));
   await page.goto('/');
-  await expect(page.getByText('27 project(s)')).toBeVisible();
+  await expect(page.getByText('29 project(s)')).toBeVisible();
 
   await page.goto('/admin/projects/calculator');
   await page.getByRole('button', { name: '9', exact: true }).click();
@@ -1053,4 +1055,109 @@ test('Client Panel supports local client CRUD workflow', async ({ page }) => {
     return element.scrollWidth > element.clientWidth + 1;
   });
   expect(hasClientPanelOverflow).toBe(false);
+});
+
+test('Chat App supports room search, sending, offline state, and persistence', async ({ page }) => {
+  await page.goto('/');
+  await page.evaluate(() => localStorage.removeItem('projects-hub-chat-app'));
+  await page.reload();
+  await page.getByRole('button', { name: 'EN', exact: true }).click();
+  await page.getByRole('link', { name: 'Chat App', exact: true }).click();
+
+  await expect(page.getByRole('heading', { name: 'Chat App', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Rooms' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Product Team' })).toBeVisible();
+
+  await page.getByPlaceholder('Search rooms or topics').fill('support');
+  await expect(page.getByRole('button', { name: /Support Desk/ })).toBeVisible();
+  await expect(page.getByRole('button', { name: /Product Team/ })).toBeHidden();
+
+  await page.getByRole('button', { name: /Support Desk/ }).click();
+  await expect(page.getByRole('heading', { name: 'Support Desk' })).toBeVisible();
+
+  await page.getByPlaceholder('Write a message for this room').fill('Local chat demo is working.');
+  await page.getByRole('button', { name: 'Send message' }).click();
+  await expect(page.locator('.message-bubble.mine').filter({ hasText: 'Local chat demo is working.' })).toBeVisible();
+  await expect.poll(async () => page.evaluate(() => localStorage.getItem('projects-hub-chat-app'))).toContain(
+    'Local chat demo is working.'
+  );
+
+  await page.getByRole('button', { name: 'Online demo' }).click();
+  await expect(page.getByRole('button', { name: 'Offline demo' })).toBeVisible();
+  await page.getByPlaceholder('Write a message for this room').fill('Should not send while offline.');
+  await page.getByRole('button', { name: 'Send message' }).click();
+  await expect(page.getByText('Turn the demo connection online before sending.')).toBeVisible();
+
+  await page.getByRole('button', { name: 'Clear search' }).click();
+  await expect(page.getByRole('button', { name: /Product Team/ })).toBeVisible();
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(page.locator('.chat-page')).toBeVisible();
+  const hasChatOverflow = await page.locator('.chat-page').evaluate((element) => {
+    return element.scrollWidth > element.clientWidth + 1;
+  });
+  expect(hasChatOverflow).toBe(false);
+});
+
+test('Chat App stays visually stable across themes and mobile layout', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 820 });
+  await page.goto('/');
+  await page.getByRole('button', { name: 'EN', exact: true }).click();
+  await page.getByRole('link', { name: 'Chat App', exact: true }).click();
+
+  await expect(page.getByRole('heading', { name: 'Chat App', exact: true })).toBeVisible();
+  await expect(page.locator('.chat-shell')).toBeVisible();
+
+  const themes = [
+    { label: 'Realm', value: 'realm' },
+    { label: 'White', value: 'light' },
+    { label: 'Dark', value: 'dark' },
+    { label: 'Blue', value: 'blue' }
+  ];
+
+  for (const theme of themes) {
+    await page.getByRole('button', { name: new RegExp(theme.label) }).click();
+    await expect(page.locator('html')).toHaveAttribute('data-theme', theme.value);
+    await expect(page.locator('.room-panel')).toBeVisible();
+    await expect(page.locator('.conversation')).toBeVisible();
+    await expect(page.locator('.message-bubble').first()).toBeVisible();
+
+    const metrics = await page.locator('.chat-page').evaluate((element) => ({
+      bodyOverflowX: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+      pageOverflowX: element.scrollWidth - element.clientWidth,
+      roomRowHeights: Array.from(element.querySelectorAll('.room-row')).map((row) =>
+        Math.round((row as HTMLElement).getBoundingClientRect().height)
+      ),
+      searchHeight: Math.round((element.querySelector('.search-field') as HTMLElement).getBoundingClientRect().height),
+      shellHeight: element.querySelector('.chat-shell')?.clientHeight ?? 0,
+      shellScrollHeight: element.querySelector('.chat-shell')?.scrollHeight ?? 0
+    }));
+
+    expect(metrics.bodyOverflowX).toBeLessThanOrEqual(1);
+    expect(metrics.pageOverflowX).toBeLessThanOrEqual(1);
+    expect(metrics.searchHeight).toBeLessThanOrEqual(100);
+    expect(Math.max(...metrics.roomRowHeights)).toBeLessThanOrEqual(96);
+    expect(Math.max(...metrics.roomRowHeights) - Math.min(...metrics.roomRowHeights)).toBeLessThanOrEqual(8);
+    expect(metrics.shellScrollHeight).toBeLessThanOrEqual(metrics.shellHeight + 1);
+  }
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(page.locator('.chat-shell')).toBeVisible();
+
+  const mobileMetrics = await page.locator('.chat-page').evaluate((element) => ({
+    bodyOverflowX: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+    pageOverflowX: element.scrollWidth - element.clientWidth,
+    shellColumns: getComputedStyle(element.querySelector('.chat-shell') as HTMLElement).gridTemplateColumns,
+    sendButtonWidth: (element.querySelector('.message-form .btn') as HTMLElement).getBoundingClientRect().width,
+    formContentWidth: (() => {
+      const form = element.querySelector('.message-form') as HTMLElement;
+      const styles = getComputedStyle(form);
+      return form.clientWidth - Number.parseFloat(styles.paddingLeft) - Number.parseFloat(styles.paddingRight);
+    })()
+  }));
+
+  expect(mobileMetrics.bodyOverflowX).toBeLessThanOrEqual(1);
+  expect(mobileMetrics.pageOverflowX).toBeLessThanOrEqual(1);
+  expect(mobileMetrics.shellColumns.split(' ').length).toBe(1);
+  expect(mobileMetrics.sendButtonWidth).toBeGreaterThan(mobileMetrics.formContentWidth - 2);
 });

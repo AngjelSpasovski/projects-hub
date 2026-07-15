@@ -179,6 +179,10 @@
     "CLIENT_PANEL": {
       "TITLE": "Клиент панел",
       "SUMMARY": "Демо workflow за клиенти со листа, детал, креирање, уредување, бришење, валидација, тотали и LocalStorage."
+    },
+    "CHAT_APP": {
+      "TITLE": "Чет апликација",
+      "SUMMARY": "Безбедно локално chat демо со соби, пораки, пребарување, connection state, валидација и LocalStorage."
     }
   },
   "PROJECT_PLANNER": {
@@ -1606,6 +1610,48 @@
       "CLIENTS": "Клиенти",
       "OPEN_BALANCES": "Отворени баланси",
       "OWED": "Вкупно долг"
+    }
+  },
+  "CHAT_APP": {
+    "ACTIONS": {
+      "CLEAR_SEARCH": "Исчисти пребарување",
+      "RESET": "Ресетирај демо",
+      "SEND": "Испрати порака"
+    },
+    "CONNECTION": {
+      "OFFLINE": "Offline демо",
+      "ONLINE": "Online демо"
+    },
+    "CONVERSATION": {
+      "EYEBROW": "Разговор"
+    },
+    "EMPTY": {
+      "NO_MESSAGES_TEXT": "Испрати порака за да започне овој локален разговор.",
+      "NO_MESSAGES_TITLE": "Се уште нема пораки",
+      "NO_ROOMS_TEXT": "Исчисти го пребарувањето за повторно да се прикажат демо собите.",
+      "NO_ROOMS_TITLE": "Нема пронајдени соби"
+    },
+    "ERRORS": {
+      "MESSAGE": "Напиши барем два знаци пред испраќање.",
+      "OFFLINE": "Вклучи ја demo конекцијата пред испраќање."
+    },
+    "FORM": {
+      "DEMO_NOTE": "Само локално демо. Без backend, credentials или приватни податоци.",
+      "MESSAGE": "Порака",
+      "PLACEHOLDER": "Напиши порака за оваа соба"
+    },
+    "ROOMS": {
+      "EYEBROW": "Чет апликација",
+      "TITLE": "Соби"
+    },
+    "SEARCH": {
+      "LABEL": "Пребарување",
+      "PLACEHOLDER": "Пребарај соби или теми"
+    },
+    "STATS": {
+      "ONLINE": "Online соби",
+      "ROOMS": "Соби",
+      "UNREAD": "Непрочитани"
     }
   },
   "TODO_LIST": {

@@ -12,7 +12,7 @@ Use this order for a stable pace: small, well-scoped projects first; richer inte
 4. [x] Music Player: media-style UI with safe playlist handling, current item, search, favorites, and external YouTube link behavior.
 5. [x] Photo Book: visual gallery with grid/slider views, keyboard navigation, responsive images, and selected-photo detail.
 6. [x] Client Panel migration: larger workflow migration with list, detail, create, edit, delete, safe demo auth replacement, and full state handling.
-7. [ ] Chat App: static-safe local demo first, with Firebase or Socket.io deferred behind a future adapter.
+7. [x] Chat App: static-safe local demo first, with Firebase or Socket.io deferred behind a future adapter.
 
 ## Scope Before Build
 
@@ -62,8 +62,8 @@ Use this order for a stable pace: small, well-scoped projects first; richer inte
 ## Batch 6: Backend-Dependent
 
 - [x] Chat App: select the first architecture slice.
-- [ ] Build static-safe LocalStorage demo with a future Firebase/Socket.io adapter boundary.
-- [ ] Add demo authentication, room list, messages, connection state, and safe environment configuration.
+- [x] Build static-safe LocalStorage demo with a future Firebase/Socket.io adapter boundary.
+- [x] Add demo rooms, messages, connection state, and safe environment configuration.
 - [ ] Document backend setup, limits, security rules, and deployment requirements.
 
 Backend-dependent projects stay last so the static Angular portfolio remains deployable without secrets.

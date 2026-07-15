@@ -20,7 +20,7 @@ The app opens directly into an admin-style dashboard where projects are browsed 
 - Fixed dashboard clock and weather summary widgets
 - Distinctive illustrated catalog covers with separate live-project screenshots for documentation
 - Unified project workspace containing metadata and the interactive application
-- Lazy-loaded Calculator, Tic Tac Toe, Hang Man, Weather, Music Event, JavaScript Quiz, To-Do List, Expense Tracker, Technical Documentation, Movie Search, REST Countries, Currency Converter, Quotes API, Sticky Notes, Grocery List, Project Planner, Odd/Even Counter, Dev Logger, Recipe Book, Flashcards, Timer, Digital Clock, Tip Calculator, Memory Game, Math 4 Kids, Music Player, Photo Book, and Client Panel mini projects
+- Lazy-loaded Calculator, Tic Tac Toe, Hang Man, Weather, Music Event, JavaScript Quiz, To-Do List, Expense Tracker, Technical Documentation, Movie Search, REST Countries, Currency Converter, Quotes API, Sticky Notes, Grocery List, Project Planner, Odd/Even Counter, Dev Logger, Recipe Book, Flashcards, Timer, Digital Clock, Tip Calculator, Memory Game, Math 4 Kids, Music Player, Photo Book, Client Panel, and Chat App mini projects
 - Unit tests for app shell, dashboard logic, registry metadata, shared services, and mini project behavior
 - Playwright smoke tests for catalog navigation, view switching, and language switching
 
@@ -71,6 +71,7 @@ Exact installed versions are tracked in [DEPENDENCIES.md](./DEPENDENCIES.md).
 | Music Player | Ready | Added as a media-style playlist UI with current track, search, favorites, playback state, and safe YouTube links. |
 | Photo Book | Ready | Added as a visual gallery with optimized local Macedonia assets, People category photo, grid/list views, filtering, selected-photo detail, slider controls, autoplay, and keyboard navigation. |
 | Client Panel | Ready | Migrated as a safe local demo workflow with client list, detail, create, edit, delete, validation, totals, and LocalStorage persistence. |
+| Chat App | Ready | Added as a static-safe local chat demo with rooms, messages, search, connection state, validation, and LocalStorage persistence. |
 
 The master roadmap is tracked in [TASKS.md](./TASKS.md). Detailed batches, project backlogs, and completion rules live in [docs/tasks](./docs/tasks/README.md). A consolidated project analysis and forward plan is tracked in [PROJECT_ANALYSIS_AND_ROADMAP.md](./PROJECT_ANALYSIS_AND_ROADMAP.md).
 
@@ -78,7 +79,7 @@ The master roadmap is tracked in [TASKS.md](./TASKS.md). Detailed batches, proje
 
 Documentation alignment and the first shared UI polish pass are complete. Continue visual QA as larger features are added, especially across Realm, white, dark, and blue themes.
 
-The current stable build order has completed Tip Calculator, Memory Game, Math 4 Kids, Music Player, Photo Book, and Client Panel. The next major recommendation is Chat App as a static-safe local demo first, with Firebase or Socket.io deferred behind a future adapter so GitHub Pages deployment stays simple.
+The current stable build order has completed Tip Calculator, Memory Game, Math 4 Kids, Music Player, Photo Book, Client Panel, and Chat App. The next major recommendation is a visual QA pass for Chat App before choosing any real Firebase or Socket.io backend work.
 
 ## Migrated Projects
 
@@ -252,6 +253,14 @@ Client Panel is a migrated admin workflow mini project. It includes a client lis
 
 Angular coverage: standalone component, template-driven CRUD form, signal state, computed totals and filtered client state, lazy loading, illustrated cover, focused unit tests, and e2e workflow coverage.
 
+### Chat App
+
+Folder: [`src/app/features/projects/chat-app`](./src/app/features/projects/chat-app)
+
+Chat App is a static-safe realtime-style demo. It includes demo rooms, unread counts, selected-room conversations, current-user message alignment, room search, send-message validation, connection state, reset demo action, and LocalStorage persistence.
+
+Angular coverage: standalone component, template-driven message form, signal state, computed room/message filters, LocalStorage persistence, lazy loading, illustrated cover, focused unit tests, and e2e workflow coverage.
+
 ## Getting Started
 
 Install dependencies:
@@ -307,6 +316,7 @@ src/app/
     dashboard/
     projects/
       calculator/
+      chat-app/
       dev-logger/
       digital-clock/
       expense-tracker/

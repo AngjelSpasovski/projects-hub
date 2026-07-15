@@ -479,5 +479,22 @@ export const PROJECTS: PortfolioProject[] = [
     layout: 'wide',
     repositoryUrl: `${REPOSITORY_BASE_URL}/client-panel`,
     demoUrl: null
+  },
+  {
+    order: 290,
+    id: 'chat-app',
+    titleKey: 'PROJECTS.CHAT_APP.TITLE',
+    summaryKey: 'PROJECTS.CHAT_APP.SUMMARY',
+    categoryKey: 'CATEGORIES.UTILITIES',
+    tags: ['Angular', 'TypeScript', 'Signals', 'LocalStorage'],
+    status: 'ready',
+    image: 'assets/project-covers/chat-app.svg',
+    route: '/admin/projects/chat-app',
+    updatedAt: '2026-07-14',
+    createdAt: '2026-07-14',
+    difficulty: 'advanced',
+    layout: 'wide',
+    repositoryUrl: `${REPOSITORY_BASE_URL}/chat-app`,
+    demoUrl: null
   }
 ];

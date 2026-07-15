@@ -54,7 +54,8 @@ const PROJECT_COMPONENT_LOADERS: Record<string, () => Promise<Type<unknown>>> = 
     import('../music-player/music-player.component').then((component) => component.MusicPlayerComponent),
   'photo-book': () => import('../photo-book/photo-book.component').then((component) => component.PhotoBookComponent),
   'client-panel': () =>
-    import('../client-panel/client-panel.component').then((component) => component.ClientPanelComponent)
+    import('../client-panel/client-panel.component').then((component) => component.ClientPanelComponent),
+  'chat-app': () => import('../chat-app/chat-app.component').then((component) => component.ChatAppComponent)
 };
 
 @Component({

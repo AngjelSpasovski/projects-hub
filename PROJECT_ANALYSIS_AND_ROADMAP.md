@@ -18,7 +18,7 @@ The project is in a stable portfolio-ready phase.
 - Unit tests pass.
 - Playwright end-to-end smoke tests pass.
 - The repository has a clean project structure.
-- The catalog currently contains 27 ready mini projects.
+- The catalog currently contains 29 ready mini projects.
 - Shared layout, themes, translations, metadata, covers, routing, tests, and docs are in place.
 
 Latest local verification from the stabilization pass:
@@ -29,7 +29,7 @@ Latest local verification from the stabilization pass:
 - Tip Calculator, Memory Game, Math 4 Kids, Music Player, and Photo Book were added from the recommended backlog order.
 - Photo Book was polished with optimized local Macedonia photo assets, People category coverage, and start/stop autoplay controls.
 - Client Panel was migrated as a safe local demo workflow with list, detail, create, edit, delete, validation, totals, and LocalStorage persistence.
-- Chat App architecture was scoped as a static-safe local demo first, with Firebase or Socket.io deferred behind a future adapter.
+- Chat App was added as a static-safe local demo with rooms, messages, search, connection state, validation, LocalStorage persistence, and theme/mobile visual QA coverage.
 
 ## 3. Core Architecture
 
@@ -287,6 +287,43 @@ The catalog currently contains these ready projects:
     - Timezone selection and UTC offset display.
     - LocalStorage persistence for selected settings.
 
+23. `Tip Calculator`
+    - Split-bill utility.
+    - Tip presets and custom percentage.
+    - People-count validation.
+    - Per-person totals and reset behavior.
+
+24. `Memory Game`
+    - Card matching game.
+    - Selectable card sets.
+    - Difficulty levels.
+    - Moves, timer, reset, and completion summary.
+
+25. `Math 4 Kids`
+    - Arithmetic practice game.
+    - Operation and difficulty selection.
+    - Score, streak, timer, feedback, and restart.
+
+26. `Music Player`
+    - Media-style playlist UI.
+    - Current track selection.
+    - Search, favorites, playback state, and safe external links.
+
+27. `Photo Book`
+    - Visual gallery with optimized Macedonia image assets.
+    - Grid/list views.
+    - Filtering, selected-photo detail, autoplay, and keyboard navigation.
+
+28. `Client Panel`
+    - Safe local demo workflow.
+    - Client list, overview, detail, create, edit, delete, validation, and totals.
+    - LocalStorage persistence instead of real Firebase credentials.
+
+29. `Chat App`
+    - Static-safe realtime-style demo.
+    - Room list, message timeline, search, connection state, send validation, and reset demo flow.
+    - LocalStorage persistence with Firebase or Socket.io deferred behind a future adapter.
+
 ## 7. Important Resolved Problems
 
 Layout and scrolling:
@@ -375,37 +412,31 @@ Encoding:
 - Review logo/favicon usage.
 - Keep repo/demo actions consistent: local live workspaces stay in-app, external demo links render only when `demoUrl` exists, and repository links stay separate.
 
-### Priority 3: Next Small Mini Project
+### Priority 3: Current Mini Project Sequence
 
-The low-risk LocalStorage/productivity batch is complete through `Digital Clock`.
+The low-risk LocalStorage/productivity batch and recommended smaller-project sequence are complete through `Chat App`.
 
-Continue with a stable smaller-project sequence before the next large migration:
+Completed sequence:
 
 1. `Tip Calculator` - complete.
 2. `Memory Game` - complete.
-3. `Math 4 Kids`.
-4. `Music Player`.
-5. `Photo Book`.
+3. `Math 4 Kids` - complete.
+4. `Music Player` - complete.
+5. `Photo Book` - complete.
+6. `Client Panel` - complete.
+7. `Chat App` - complete as a static-safe demo.
 
 Each project should be implemented as a complete portfolio entry: polished UI, validation, empty/error states where relevant, translations, cover, registry entry, README update, unit coverage where useful, Playwright workflow coverage, and full verification.
 
-### Priority 4: Next Backend-Dependent Project
+### Priority 4: Backend-Dependent Follow-Up
 
-The next larger candidate is `Chat App`, but the first implementation should remain static-safe so the portfolio continues to deploy on GitHub Pages without secrets or a server.
+`Chat App` now has a static-safe first slice. A real backend should remain a separate future phase so the portfolio continues to deploy on GitHub Pages without secrets or a server.
 
-Expected first slice:
+Future backend scope:
 
-- Local demo rooms and messages.
-- Selected room detail.
-- Message timeline.
-- Send-message form with validation.
-- Search or room filter.
-- Demo connection state.
-- Empty and no-results states.
-- Reset demo data action.
-- LocalStorage persistence.
 - Future backend adapter boundary for Firebase or Socket.io.
-- Unit tests and at least one Playwright primary workflow.
+- Backend setup, limits, security rules, and deployment notes.
+- Optional demo authentication if a real backend is selected.
 
 See `docs/tasks/CHAT_APP_ARCHITECTURE.md` for the implementation decision.
 
@@ -413,10 +444,10 @@ See `docs/tasks/CHAT_APP_ARCHITECTURE.md` for the implementation decision.
 
 Future mini project candidates:
 
-- `Chat App`, as a static-safe local demo first.
 - `Find the Word`, only if it is clearly different from Hang Man.
 - `Square Cards`, only if it demonstrates more than the existing shared cards.
 - `Recipe Book variant`, only if it is meaningfully different from the migrated Recipe Book.
+- Chat App backend adapter, only after choosing Firebase or Socket.io deliberately.
 
 Backend-dependent work should remain last so the static portfolio stays deployable without secrets.
 
@@ -441,10 +472,10 @@ When adding any new mini project:
 
 ## 11. Practical Recommendation
 
-The documentation alignment, first UI polish pass, smaller-project sequence, Photo Book cycle, and Client Panel migration are complete.
+The documentation alignment, first UI polish pass, smaller-project sequence, Photo Book cycle, Client Panel migration, and static-safe Chat App slice are complete.
 
-Continue with the next controlled backend-dependent candidate:
+Continue with a controlled stabilization pass:
 
-1. Build `Chat App` as a static-safe LocalStorage demo.
-2. Keep Firebase or Socket.io behind a future adapter decision.
-3. Add backend setup, limits, security rules, and deployment notes only when a real backend is selected.
+1. Keep Firebase or Socket.io behind a future adapter decision.
+2. Add backend setup, limits, security rules, and deployment notes only when a real backend is selected.
+3. Continue with the next scoped backlog item or a small UI polish pass.

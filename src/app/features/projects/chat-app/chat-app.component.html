@@ -1,0 +1,138 @@
+<section class="chat-page">
+  <div class="chat-shell">
+    <aside class="room-panel">
+      <div class="panel-heading">
+        <div>
+          <span>{{ 'CHAT_APP.ROOMS.EYEBROW' | translate }}</span>
+          <h3>{{ 'CHAT_APP.ROOMS.TITLE' | translate }}</h3>
+        </div>
+        <button type="button" class="icon-button" (click)="resetDemo()" [attr.aria-label]="'CHAT_APP.ACTIONS.RESET' | translate">
+          <i class="pi pi-refresh"></i>
+        </button>
+      </div>
+
+      <label class="search-field">
+        <span>{{ 'CHAT_APP.SEARCH.LABEL' | translate }}</span>
+        <div>
+          <i class="pi pi-search"></i>
+          <input
+            class="form-control"
+            type="search"
+            [value]="searchTerm()"
+            (input)="updateSearch($any($event.target).value)"
+            [placeholder]="'CHAT_APP.SEARCH.PLACEHOLDER' | translate"
+          />
+          @if (hasActiveSearch()) {
+            <button type="button" (click)="clearSearch()" [attr.aria-label]="'CHAT_APP.ACTIONS.CLEAR_SEARCH' | translate">
+              <i class="pi pi-times"></i>
+            </button>
+          }
+        </div>
+      </label>
+
+      <div class="room-list">
+        @for (room of filteredRooms(); track room.id) {
+          <button type="button" class="room-row" [class.active]="selectedRoomId() === room.id" (click)="selectRoom(room.id)">
+            <span>
+              <strong>{{ room.name }}</strong>
+              <small>{{ room.topic }}</small>
+            </span>
+            <span class="room-meta">
+              <i class="pi" [class.pi-wifi]="room.online" [class.pi-ban]="!room.online"></i>
+              @if (room.unread > 0) {
+                <b>{{ room.unread }}</b>
+              }
+            </span>
+          </button>
+        } @empty {
+          <div class="empty-state">
+            <i class="pi pi-search"></i>
+            <strong>{{ 'CHAT_APP.EMPTY.NO_ROOMS_TITLE' | translate }}</strong>
+            <p>{{ 'CHAT_APP.EMPTY.NO_ROOMS_TEXT' | translate }}</p>
+            <button type="button" class="btn btn-secondary btn-icon" (click)="clearSearch()">
+              <i class="pi pi-filter-slash"></i>
+              <span>{{ 'CHAT_APP.ACTIONS.CLEAR_SEARCH' | translate }}</span>
+            </button>
+          </div>
+        }
+      </div>
+    </aside>
+
+    <main class="chat-workspace">
+      <div class="stats-grid">
+        <article>
+          <span>{{ 'CHAT_APP.STATS.ROOMS' | translate }}</span>
+          <strong>{{ rooms().length }}</strong>
+        </article>
+        <article>
+          <span>{{ 'CHAT_APP.STATS.ONLINE' | translate }}</span>
+          <strong>{{ onlineRooms() }}</strong>
+        </article>
+        <article>
+          <span>{{ 'CHAT_APP.STATS.UNREAD' | translate }}</span>
+          <strong>{{ unreadTotal() }}</strong>
+        </article>
+      </div>
+
+      @if (selectedRoom(); as room) {
+        <section class="conversation">
+          <header class="conversation-heading">
+            <div>
+              <span>{{ 'CHAT_APP.CONVERSATION.EYEBROW' | translate }}</span>
+              <h3>{{ room.name }}</h3>
+              <p>{{ room.topic }}</p>
+            </div>
+            <button type="button" class="connection-toggle" [class.offline]="!isConnected()" (click)="toggleConnection()">
+              <i class="pi" [class.pi-wifi]="isConnected()" [class.pi-ban]="!isConnected()"></i>
+              <span>{{ (isConnected() ? 'CHAT_APP.CONNECTION.ONLINE' : 'CHAT_APP.CONNECTION.OFFLINE') | translate }}</span>
+            </button>
+          </header>
+
+          <div class="message-list" aria-live="polite">
+            @for (message of roomMessages(); track message.id) {
+              <article class="message-bubble" [class.mine]="message.author === 'me'">
+                <div>
+                  <strong>{{ message.authorName }}</strong>
+                  <time>{{ message.createdAt | date: 'HH:mm' }}</time>
+                </div>
+                <p>{{ message.text }}</p>
+              </article>
+            } @empty {
+              <div class="empty-state">
+                <i class="pi pi-comments"></i>
+                <strong>{{ 'CHAT_APP.EMPTY.NO_MESSAGES_TITLE' | translate }}</strong>
+                <p>{{ 'CHAT_APP.EMPTY.NO_MESSAGES_TEXT' | translate }}</p>
+              </div>
+            }
+          </div>
+
+          <form class="message-form" (ngSubmit)="sendMessage()">
+            @if (formError()) {
+              <p class="form-error">{{ formError() | translate }}</p>
+            }
+            <label>
+              <span>{{ 'CHAT_APP.FORM.MESSAGE' | translate }}</span>
+              <textarea
+                name="message"
+                rows="3"
+                [ngModel]="draftMessage()"
+                (ngModelChange)="updateDraft($event)"
+                [placeholder]="'CHAT_APP.FORM.PLACEHOLDER' | translate"
+              ></textarea>
+            </label>
+            <div class="form-actions">
+              <p>
+                <i class="pi pi-shield"></i>
+                {{ 'CHAT_APP.FORM.DEMO_NOTE' | translate }}
+              </p>
+              <button type="submit" class="btn btn-primary btn-icon">
+                <i class="pi pi-send"></i>
+                <span>{{ 'CHAT_APP.ACTIONS.SEND' | translate }}</span>
+              </button>
+            </div>
+          </form>
+        </section>
+      }
+    </main>
+  </div>
+</section>

@@ -26,6 +26,8 @@ Detailed active work is tracked in [`docs/tasks/`](./docs/tasks/README.md). A pr
 - [x] Upgrade Photo Book with optimized local Macedonia photo assets, People category coverage, and start/stop autoplay.
 - [x] Add Client Panel as a safe local demo migration with client list, detail, create, edit, delete, validation, totals, and LocalStorage persistence.
 - [x] Define Chat App as a static-safe local demo first, with Firebase or Socket.io deferred behind a future adapter.
+- [x] Add Chat App as a static-safe local demo with rooms, messages, search, connection state, validation, and LocalStorage persistence.
+- [x] Complete Chat App visual QA across Realm, White, Dark, Blue, and mobile layout.
 
 ## Foundation
 
