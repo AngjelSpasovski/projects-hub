@@ -1,0 +1,245 @@
+<section class="docs-page">
+  <div class="docs-shell" [attr.aria-label]="'DOCUMENTATION.TITLE' | translate">
+    <aside class="docs-sidebar">
+      <div class="docs-heading">
+        <span>{{ 'DOCUMENTATION.EYEBROW' | translate }}</span>
+        <h2>{{ 'DOCUMENTATION.TITLE' | translate }}</h2>
+        <p>{{ 'DOCUMENTATION.DESCRIPTION' | translate }}</p>
+      </div>
+
+      <label class="search-field">
+        <span>{{ 'DOCUMENTATION.SEARCH.LABEL' | translate }}</span>
+        <span class="search-shell">
+          <i class="pi pi-search"></i>
+          <input
+            type="search"
+            class="form-control"
+            [ngModel]="query()"
+            (ngModelChange)="updateQuery($event)"
+            [placeholder]="'DOCUMENTATION.SEARCH.PLACEHOLDER' | translate"
+          />
+          @if (query()) {
+            <button type="button" class="search-clear" (click)="clearSearch()" [attr.aria-label]="'FILTERS.CLEAR_SEARCH_FIELD' | translate">
+              <i class="pi pi-times"></i>
+            </button>
+          }
+        </span>
+      </label>
+
+      <nav class="section-nav" [attr.aria-label]="'DOCUMENTATION.SECTION_NAV' | translate">
+        @for (section of filteredSections(); track section.id) {
+          <button
+            type="button"
+            class="section-button"
+            [class.active]="activeSectionId() === section.id"
+            (click)="selectSection(section.id)"
+          >
+            <i [class]="section.icon"></i>
+            <span>{{ section.titleKey | translate }}</span>
+          </button>
+        } @empty {
+          <div class="docs-empty compact">
+            <i class="pi pi-search"></i>
+            <span>{{ 'DOCUMENTATION.EMPTY.COMPACT' | translate }}</span>
+          </div>
+        }
+      </nav>
+    </aside>
+
+    <main class="docs-content">
+      <div class="docs-stats">
+        <div>
+          <span>{{ 'DOCUMENTATION.STATS.SECTIONS' | translate }}</span>
+          <strong>{{ sections.length }}</strong>
+        </div>
+        <div>
+          <span>{{ 'DOCUMENTATION.STATS.FILTERED' | translate }}</span>
+          <strong>{{ filteredSections().length }}</strong>
+        </div>
+        <div>
+          <span>{{ 'DOCUMENTATION.STATS.REFERENCES' | translate }}</span>
+          <strong>{{ totalReferences }}</strong>
+        </div>
+      </div>
+
+      @if (selectedSection(); as section) {
+        <article class="docs-panel">
+          <div class="panel-title">
+            <div class="panel-icon"><i [class]="section.icon"></i></div>
+            <div>
+              <span>{{ 'DOCUMENTATION.SELECTED' | translate }}</span>
+              <h3>{{ section.titleKey | translate }}</h3>
+              <p>{{ section.summaryKey | translate }}</p>
+            </div>
+          </div>
+
+          @if (section.id === 'projects') {
+            <div class="project-doc-browser">
+              <aside class="project-doc-list" [attr.aria-label]="'DOCUMENTATION.PROJECT_TEMPLATE.PROJECT_LIST' | translate">
+                <div class="project-list-heading">
+                  <span>{{ 'DOCUMENTATION.PROJECT_TEMPLATE.DOCUMENTED' | translate }}</span>
+                  <strong>{{ filteredProjectDocumentation().length }} / {{ projectDocumentation.length }}</strong>
+                </div>
+
+                <div class="project-list-items">
+                  @for (entry of filteredProjectDocumentation(); track entry.project.id) {
+                    <button
+                      type="button"
+                      class="project-doc-trigger"
+                      [class.active]="isProjectSelected(entry.project.id)"
+                      (click)="selectProject(entry.project.id)"
+                    >
+                      <img [src]="entry.project.image" alt="" aria-hidden="true" />
+                      <span>
+                        <strong>{{ entry.project.titleKey | translate }}</strong>
+                        <small>{{ entry.project.categoryKey | translate }} &middot; {{ entry.project.difficulty }}</small>
+                      </span>
+                    </button>
+                  } @empty {
+                    <div class="project-list-empty">{{ 'DOCUMENTATION.PROJECT_TEMPLATE.NO_PROJECTS' | translate }}</div>
+                  }
+                </div>
+              </aside>
+
+              @if (selectedProjectDocumentation(); as entry) {
+                <article class="project-doc-detail">
+                  <header class="project-doc-header">
+                    <img [src]="entry.project.image" alt="" aria-hidden="true" />
+                    <div>
+                      <span>{{ entry.project.categoryKey | translate }}</span>
+                      <h4>{{ entry.project.titleKey | translate }}</h4>
+                      <div class="project-doc-badges">
+                        <span>{{ entry.project.status }}</span>
+                        <span>{{ entry.project.difficulty }}</span>
+                      </div>
+                    </div>
+                    <a class="btn btn-secondary" [routerLink]="entry.project.route">
+                      <i class="pi pi-external-link"></i>
+                      {{ 'DOCUMENTATION.PROJECT_TEMPLATE.OPEN_PROJECT' | translate }}
+                    </a>
+                  </header>
+
+                  <section class="project-doc-section purpose-section">
+                    <h5>{{ 'DOCUMENTATION.PROJECT_TEMPLATE.PURPOSE' | translate }}</h5>
+                    <p>{{ entry.project.summaryKey | translate }}</p>
+                  </section>
+
+                  <section class="project-doc-section">
+                    <h5>{{ 'DOCUMENTATION.PROJECT_TEMPLATE.FEATURES' | translate }}</h5>
+                    <ul>
+                      @for (featureKey of entry.documentation.featureKeys; track featureKey) {
+                        <li><i class="pi pi-check"></i><span>{{ featureKey | translate }}</span></li>
+                      }
+                    </ul>
+                  </section>
+
+                  <div class="project-doc-meta-grid">
+                    <section>
+                      <h5>{{ 'DOCUMENTATION.PROJECT_TEMPLATE.STATE_STORAGE' | translate }}</h5>
+                      <p>
+                        {{
+                          (entry.documentation.storage === 'local-storage'
+                            ? 'DOCUMENTATION.PROJECT_GUIDANCE.STORAGE.LOCAL_STORAGE'
+                            : 'DOCUMENTATION.PROJECT_GUIDANCE.STORAGE.MEMORY') | translate
+                        }}
+                      </p>
+                      <p>
+                        {{
+                          (entry.documentation.integration === 'api-style'
+                            ? 'DOCUMENTATION.PROJECT_GUIDANCE.INTEGRATION.API_STYLE'
+                            : entry.documentation.integration === 'external-links'
+                              ? 'DOCUMENTATION.PROJECT_GUIDANCE.INTEGRATION.EXTERNAL_LINKS'
+                              : 'DOCUMENTATION.PROJECT_GUIDANCE.INTEGRATION.LOCAL') | translate
+                        }}
+                      </p>
+                    </section>
+                    <section>
+                      <h5>{{ 'DOCUMENTATION.PROJECT_TEMPLATE.TESTS' | translate }}</h5>
+                      <p><i class="pi pi-check-circle"></i> {{ 'DOCUMENTATION.PROJECT_GUIDANCE.TESTS.UNIT' | translate }}</p>
+                      <p><i class="pi pi-check-circle"></i> {{ 'DOCUMENTATION.PROJECT_GUIDANCE.TESTS.E2E' | translate }}</p>
+                    </section>
+                    <section>
+                      <h5>{{ 'DOCUMENTATION.PROJECT_TEMPLATE.LIMITATIONS' | translate }}</h5>
+                      <p>{{ entry.documentation.limitationKey | translate }}</p>
+                    </section>
+                    <section>
+                      <h5>{{ 'DOCUMENTATION.PROJECT_TEMPLATE.FUTURE' | translate }}</h5>
+                      <p>{{ entry.documentation.futureKey | translate }}</p>
+                    </section>
+                  </div>
+
+                  <footer class="project-doc-footer">
+                    <span><i class="pi pi-tags"></i> {{ entry.project.tags.join(', ') }}</span>
+                    @if (entry.project.repositoryUrl) {
+                      <a [href]="entry.project.repositoryUrl" target="_blank" rel="noopener noreferrer">
+                        <i class="pi pi-github"></i>
+                        {{ 'DOCUMENTATION.PROJECT_TEMPLATE.REPOSITORY' | translate }}
+                      </a>
+                    }
+                  </footer>
+                </article>
+              }
+            </div>
+          } @else if (section.id === 'status-matrix') {
+            <app-project-status-matrix />
+          } @else {
+            <div class="standard-doc-content">
+              <div class="docs-grid">
+                <section>
+                  <h4>{{ 'DOCUMENTATION.GUIDANCE' | translate }}</h4>
+                  <div class="topic-list">
+                    @for (topic of section.topics; track topic.id) {
+                      <article class="topic-item">
+                        <i class="pi pi-check-circle"></i>
+                        <div>
+                          <h5>{{ topic.titleKey | translate }}</h5>
+                          <p>{{ topic.bodyKey | translate }}</p>
+                        </div>
+                      </article>
+                    }
+                  </div>
+                </section>
+
+                <section>
+                  <h4>{{ 'DOCUMENTATION.CODE_REFERENCES' | translate }}</h4>
+                  <div class="code-list">
+                    @for (codeRef of section.codeRefs; track codeRef.path) {
+                      <div class="code-reference">
+                        <span>{{ 'DOCUMENTATION.REFERENCE_TYPES.' + codeRef.kind.toUpperCase() | translate }}</span>
+                        <code>{{ codeRef.path }}</code>
+                      </div>
+                    }
+                  </div>
+                </section>
+              </div>
+
+              @if (section.id === 'technical-guide') {
+                <section class="code-examples-section">
+                  <div class="code-examples-heading">
+                    <span>{{ 'DOCUMENTATION.CODE_EXAMPLES.EYEBROW' | translate }}</span>
+                    <h4>{{ 'DOCUMENTATION.CODE_EXAMPLES.TITLE' | translate }}</h4>
+                    <p>{{ 'DOCUMENTATION.CODE_EXAMPLES.DESCRIPTION' | translate }}</p>
+                  </div>
+                  <div class="code-examples-list">
+                    @for (example of codeExamples; track example.id) {
+                      <app-documentation-code-block [example]="example" />
+                    }
+                  </div>
+                </section>
+              }
+            </div>
+          }
+        </article>
+      } @else {
+        <section class="docs-empty">
+          <i class="pi pi-file-search"></i>
+          <h3>{{ 'DOCUMENTATION.EMPTY.TITLE' | translate }}</h3>
+          <p>{{ 'DOCUMENTATION.EMPTY.TEXT' | translate }}</p>
+          <button type="button" class="btn btn-primary" (click)="clearSearch()">
+            {{ 'DOCUMENTATION.EMPTY.ACTION' | translate }}
+          </button>
+        </section>
+      }
+    </main>
+  </div>
+</section>

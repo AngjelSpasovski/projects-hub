@@ -18,9 +18,10 @@ The app opens directly into an admin-style dashboard where projects are browsed 
 - Macedonian and English translations with `ngx-translate`
 - Project metadata: status, difficulty, dates, repository link, live demo link
 - Fixed dashboard clock and weather summary widgets
+- First-class searchable Documentation Hub with user, technical, project, and status sections
 - Distinctive illustrated catalog covers with separate live-project screenshots for documentation
 - Unified project workspace containing metadata and the interactive application
-- Lazy-loaded Calculator, Tic Tac Toe, Hang Man, Weather, Music Event, JavaScript Quiz, To-Do List, Expense Tracker, Technical Documentation, Movie Search, REST Countries, Currency Converter, Quotes API, Sticky Notes, Grocery List, Project Planner, Odd/Even Counter, Dev Logger, Recipe Book, Flashcards, Timer, Digital Clock, Tip Calculator, Memory Game, Math 4 Kids, Music Player, Photo Book, Client Panel, and Chat App mini projects
+- 28 lazy-loaded mini projects, including Calculator, Tic Tac Toe, Hang Man, Weather, Music Event, JavaScript Quiz, To-Do List, Expense Tracker, Movie Search, REST Countries, Currency Converter, Quotes API, Sticky Notes, Grocery List, Project Planner, Odd/Even Counter, Dev Logger, Recipe Book, Flashcards, Timer, Digital Clock, Tip Calculator, Memory Game, Math 4 Kids, Music Player, Photo Book, Client Panel, and Chat App
 - Unit tests for app shell, dashboard logic, registry metadata, shared services, and mini project behavior
 - Playwright smoke tests for catalog navigation, view switching, and language switching
 
@@ -51,7 +52,6 @@ Exact installed versions are tracked in [DEPENDENCIES.md](./DEPENDENCIES.md).
 | JavaScript Quiz | Ready | Six randomized questions per round from a reviewed 26-question bank, with timer, review, translations, and tests. |
 | To-Do List | Ready | Migrated as a standalone Angular component with task CRUD, validation, filters, priority labels, and LocalStorage persistence. |
 | Expense Tracker | Ready | Migrated as a standalone Angular component with income/expense entries, totals, validation, LocalStorage persistence, and Chart.js summaries. |
-| Technical Documentation | Ready | Added as a searchable standalone documentation component for architecture, contribution flow, translations, and quality checks. |
 | Movie Search | Ready | Added as an API-style movie catalog with search, pagination, selected details, and retry states. |
 | REST Countries | Ready | Added as a country explorer with search, region filters, detail cards, favorites, and persistence. |
 | Currency Converter | Ready | Added as an exchange-rate demo with validation, currency swap, stale-data handling, and retry states. |
@@ -80,6 +80,12 @@ The master roadmap is tracked in [TASKS.md](./TASKS.md). Detailed batches, proje
 The target project list for the current static portfolio release is complete. Documentation alignment, the shared UI polish pass, and the planned mini project sequence are complete.
 
 Next work should stay in stabilization mode: final QA, GitHub repository metadata, deployment checks, UI polish, and bug fixes as they are found. Backend integration remains deferred until Firebase or Socket.io is deliberately selected.
+
+## Documentation Hub
+
+Folder: [`src/app/features/documentation`](./src/app/features/documentation)
+
+Documentation is a first-class application feature at `/admin/documentation`, separate from the mini-project catalog. Its typed content architecture includes searchable Overview, User Guide, Technical Guide, Project Documentation, Project Status Matrix, Maintenance, and Release sections in English and Macedonian. All 28 mini projects use one registry-aligned documentation template covering purpose, features, state and storage, tests, limitations, and future notes. The completed responsive status matrix derives all rows from registry-aligned metadata, supports project/category/status filters, and uses a desktop table with mobile stacked rows without requiring DevExpress. The Technical Guide also includes lightweight code examples with filenames, language badges, copy fallback, wrapping, and optional line numbers without Monaco. Progress remains tracked in [`docs/tasks/DOCUMENTATION_HUB.md`](./docs/tasks/DOCUMENTATION_HUB.md).
 
 ## Migrated Projects
 
@@ -146,12 +152,6 @@ Folder: [`src/app/features/projects/expense-tracker`](./src/app/features/project
 Expense Tracker is a local finance mini project for tracking income and expenses. It includes title and amount validation, entry type and category fields, date metadata, edit and delete actions, income/expense filters, balance calculation, LocalStorage persistence, and a Chart.js doughnut summary.
 
 Angular coverage: standalone component, template-driven forms, signals, computed finance totals, Chart.js canvas integration, LocalStorage persistence, translated labels, lazy loading, and focused unit tests.
-
-### Technical Documentation
-
-Folder: [`src/app/features/projects/technical-documentation`](./src/app/features/projects/technical-documentation)
-
-Technical Documentation is a searchable guide for the current Projects Hub architecture and contribution flow. It includes documentation sections for application architecture, adding a project, translation rules, and quality checks, with relevant code references for each section.
 
 ### Project Planner
 

@@ -12,7 +12,7 @@ test('dashboard catalog supports view switching and project navigation', async (
   await page.getByRole('button', { name: 'EN' }).click();
 
   await expect(page.getByText('Overview of the small apps that will be migrated and added to this repo.')).toBeVisible();
-  await expect(page.getByText('29 project(s)')).toBeVisible();
+  await expect(page.getByText('28 project(s)')).toBeVisible();
 
   await page.getByRole('button', { name: /Detailed/ }).click();
   await expect(page.getByText('Difficulty').first()).toBeVisible();
@@ -28,14 +28,14 @@ test('dashboard catalog supports view switching and project navigation', async (
   await expect(page.locator('.project-workspace .project-live .surface-panel')).toHaveCount(0);
 
   await page.getByRole('link', { name: /Dashboard/ }).click();
-  await expect(page.getByText('29 project(s)')).toBeVisible();
+  await expect(page.getByText('28 project(s)')).toBeVisible();
 });
 
 test('theme switcher applies every theme without layout overflow', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 820 });
   await page.goto('/');
   await page.getByRole('button', { name: 'EN', exact: true }).click();
-  await expect(page.getByText('29 project(s)')).toBeVisible();
+  await expect(page.getByText('28 project(s)')).toBeVisible();
 
   const themes = [
     { label: 'Realm', value: 'realm' },
@@ -86,7 +86,7 @@ test('language switch renders Macedonian catalog labels', async ({ page }) => {
   await page.getByRole('button', { name: 'MK' }).click();
 
   await expect(page.getByRole('button', { name: /Детално/ })).toBeVisible();
-  await expect(page.getByText('29 проект(и)')).toBeVisible();
+  await expect(page.getByText('28 проект(и)')).toBeVisible();
   await expect(page.getByText('Калкулатор').first()).toBeVisible();
 });
 
@@ -102,6 +102,7 @@ test('mobile sidebar opens and closes after navigation', async ({ page }) => {
   await menuButton.click();
   await expect(menuButton).toHaveAttribute('aria-expanded', 'true');
 
+  await page.getByRole('button', { name: /Intermediate/ }).click();
   await page.getByRole('complementary').getByRole('link', { name: /Weather App/ }).click();
 
   await expect(page.getByRole('heading', { name: 'Weather App', exact: true })).toBeVisible();
@@ -170,7 +171,7 @@ test('admin shell keeps chrome fixed while dashboard catalog scrolls', async ({ 
   await page.setViewportSize({ width: 1280, height: 560 });
   await page.goto('/');
   await page.getByRole('button', { name: 'EN', exact: true }).click();
-  await expect(page.getByText('29 project(s)')).toBeVisible();
+  await expect(page.getByText('28 project(s)')).toBeVisible();
 
   const header = page.locator('.app-header');
   const sidebar = page.locator('.app-sidebar');
@@ -204,7 +205,7 @@ test('dashboard keeps the catalog scroll position at the catalog bottom', async 
   await page.setViewportSize({ width: 1280, height: 560 });
   await page.goto('/');
   await page.getByRole('button', { name: 'EN', exact: true }).click();
-  await expect(page.getByText('29 project(s)')).toBeVisible();
+  await expect(page.getByText('28 project(s)')).toBeVisible();
 
   const catalog = page.locator('.project-catalog');
 
@@ -225,7 +226,7 @@ test('desktop catalog and project workspaces fit without nested scrollbars', asy
   await page.setViewportSize({ width: 1920, height: 1080 });
   await page.goto('/');
   await page.getByRole('button', { name: 'EN', exact: true }).click();
-  await expect(page.getByText('29 project(s)')).toBeVisible();
+  await expect(page.getByText('28 project(s)')).toBeVisible();
 
   const routes = [
     'tic-tac-toe',
@@ -236,7 +237,6 @@ test('desktop catalog and project workspaces fit without nested scrollbars', asy
     'javascript-quiz',
     'todo-list',
     'expense-tracker',
-    'technical-documentation',
     'movie-search',
     'rest-countries',
     'currency-converter',
@@ -308,7 +308,7 @@ test('project detail remains responsive on compact desktop and mobile viewports'
 test('mini project refinements keep core interactions stable', async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('projects-hub-language', 'en'));
   await page.goto('/');
-  await expect(page.getByText('29 project(s)')).toBeVisible();
+  await expect(page.getByText('28 project(s)')).toBeVisible();
 
   await page.goto('/admin/projects/calculator');
   await page.getByRole('button', { name: '9', exact: true }).click();
@@ -441,22 +441,104 @@ test('Expense Tracker supports entries, filters, chart, and persistence', async 
   );
 });
 
-test('Technical Documentation filters architecture guidance', async ({ page }) => {
+test('Documentation is a top-level searchable guide with a compatible legacy redirect', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('projects-hub-language', 'en'));
   await page.goto('/');
-  await page.getByRole('button', { name: 'EN', exact: true }).click();
-  await page.getByRole('link', { name: 'Technical Documentation', exact: true }).click();
+  await expect(page.locator('.group-trigger[aria-expanded="false"]')).toHaveCount(3);
+  const documentationLink = page.locator('a[href="/admin/documentation"]');
+  await expect(documentationLink).toContainText('Documentation');
+  await expect(page.locator('a[href="/admin/projects/technical-documentation"]')).toHaveCount(0);
+  await documentationLink.click();
 
-  await expect(page.getByRole('heading', { name: 'Technical Documentation', exact: true })).toBeVisible();
-  await expect(page.getByRole('heading', { name: 'Application architecture' })).toBeVisible();
+  await expect(page).toHaveURL(/\/admin\/documentation$/);
+  await expect(page.getByRole('heading', { name: 'Documentation', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Overview', exact: true })).toBeVisible();
+  await page.getByRole('button', { name: /Maintenance and contribution/ }).click();
+  await expect(page.getByRole('heading', { name: 'Maintenance and contribution', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Verification workflow', exact: true })).toBeVisible();
 
-  await page.getByPlaceholder('Search architecture, i18n, tests, or files').fill('i18n');
-  await expect(page.getByRole('button', { name: /Translations/ })).toBeVisible();
-  await expect(page.getByText('src/assets/i18n/en.json')).toBeVisible();
+  await page.getByRole('button', { name: /Project documentation/ }).click();
+  await expect(page.getByText('28 / 28')).toBeVisible();
+  await page.locator('.project-doc-trigger').filter({ hasText: 'Chat App' }).click();
+  await expect(page.getByRole('heading', { name: 'Chat App', exact: true })).toBeVisible();
+  await expect(page.getByText('This is a static-safe local demo without authentication')).toBeVisible();
 
-  await page.getByPlaceholder('Search architecture, i18n, tests, or files').fill('no-match');
+  await page.getByRole('button', { name: /Project status matrix/ }).click();
+  await expect(page.locator('.status-matrix-table tbody tr')).toHaveCount(28);
+  await page.getByPlaceholder('Search project, category, runtime, or notes').fill('chat');
+  await expect(page.locator('.status-matrix-table tbody tr')).toHaveCount(1);
+  await expect(page.locator('.status-matrix-table')).toContainText('Chat App');
+  await page.getByLabel('Project search').fill('');
+  await page.getByLabel('Category').selectOption('CATEGORIES.GAMES');
+  await expect(page.locator('.status-matrix-table tbody tr')).not.toHaveCount(28);
+  await page.getByLabel('Status', { exact: true }).selectOption('planned');
+  await expect(page.getByText('No projects match the current filters')).toBeVisible();
+  await page.getByRole('button', { name: 'Reset filters', exact: true }).click();
+  await expect(page.locator('.status-matrix-table tbody tr')).toHaveCount(28);
+
+  for (const theme of [
+    { label: 'Realm', value: 'realm' },
+    { label: 'White', value: 'light' },
+    { label: 'Dark', value: 'dark' },
+    { label: 'Blue', value: 'blue' }
+  ]) {
+    await page.getByRole('button', { name: new RegExp(theme.label) }).click();
+    await expect(page.locator('html')).toHaveAttribute('data-theme', theme.value);
+    await expect(page.locator('.docs-shell')).toBeVisible();
+  }
+
+  await page.getByRole('button', { name: /Technical guide/ }).click();
+  await expect(page.locator('.code-example')).toHaveCount(3);
+  const routeExample = page.locator('.code-example').filter({ hasText: 'Lazy standalone route' });
+  await routeExample.getByRole('button', { name: 'Toggle line wrapping' }).click();
+  await expect(routeExample.locator('pre')).toHaveClass(/wrap-lines/);
+  await routeExample.getByRole('button', { name: 'Toggle line numbers' }).click();
+  await expect(routeExample.locator('pre')).toHaveClass(/hide-line-numbers/);
+  await routeExample.getByRole('button', { name: 'Copy code' }).click();
+  await expect(routeExample.getByText('Copied', { exact: true })).toBeVisible();
+
+  await page.getByPlaceholder('Search guides, projects, architecture, or files').fill('i18n');
+  await expect(page.getByRole('button', { name: /Technical guide/ })).toBeVisible();
+  await expect(page.getByText('src/assets/i18n')).toBeVisible();
+
+  await page.getByPlaceholder('Search guides, projects, architecture, or files').fill('no-match');
   await expect(page.getByText('No documentation sections found')).toBeVisible();
   await page.getByRole('button', { name: 'Clear search' }).click();
-  await expect(page.getByRole('heading', { name: 'Application architecture' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Overview', exact: true })).toBeVisible();
+
+  await page.goto('/admin/projects/technical-documentation');
+  await expect(page).toHaveURL(/\/admin\/documentation$/);
+  await expect(page.getByRole('heading', { name: 'Documentation', exact: true })).toBeVisible();
+});
+
+test('Documentation stays readable without horizontal overflow on mobile', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.addInitScript(() => localStorage.setItem('projects-hub-language', 'en'));
+  await page.goto('/admin/documentation');
+
+  await expect(page.getByRole('heading', { name: 'Documentation', exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: /Project status matrix/ })).toBeVisible();
+  await page.getByRole('button', { name: /Project status matrix/ }).click();
+  await expect(page.locator('.status-matrix-table tbody tr')).toHaveCount(28);
+
+  const overflow = await page.evaluate(() => ({
+    page: document.documentElement.scrollWidth > document.documentElement.clientWidth,
+    projectBrowser: (() => {
+      const element = document.querySelector('.status-matrix-browser');
+      return element ? element.scrollWidth > element.clientWidth : true;
+    })()
+  }));
+  expect(overflow).toEqual({ page: false, projectBrowser: false });
+
+  await page.getByRole('button', { name: /Technical guide/ }).click();
+  await expect(page.locator('.code-example')).toHaveCount(3);
+  const codeOverflow = await page.evaluate(() => ({
+    page: document.documentElement.scrollWidth > document.documentElement.clientWidth,
+    examples: Array.from(document.querySelectorAll('.code-example')).some(
+      (element) => element.scrollWidth > element.clientWidth
+    )
+  }));
+  expect(codeOverflow).toEqual({ page: false, examples: false });
 });
 
 test('Project Planner supports creation, selection, and lane movement', async ({ page }) => {

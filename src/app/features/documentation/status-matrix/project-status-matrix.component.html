@@ -1,0 +1,87 @@
+<section class="status-matrix-browser">
+  <div class="matrix-summary" [attr.aria-label]="'DOCUMENTATION.STATUS_MATRIX.SUMMARY.LABEL' | translate">
+    <div><span>{{ 'DOCUMENTATION.STATUS_MATRIX.SUMMARY.TOTAL' | translate }}</span><strong>{{ rows.length }}</strong></div>
+    <div><span>{{ 'DOCUMENTATION.STATUS_MATRIX.SUMMARY.VISIBLE' | translate }}</span><strong>{{ filteredRows().length }}</strong></div>
+    <div><span>{{ 'DOCUMENTATION.STATUS_MATRIX.BADGES.LOCAL_STORAGE' | translate }}</span><strong>{{ localStorageCount }}</strong></div>
+    <div><span>{{ 'DOCUMENTATION.STATUS_MATRIX.BADGES.API_STYLE' | translate }}</span><strong>{{ apiStyleCount }}</strong></div>
+  </div>
+
+  <div class="matrix-filters">
+    <label class="matrix-search">
+      <span>{{ 'DOCUMENTATION.STATUS_MATRIX.FILTERS.SEARCH_LABEL' | translate }}</span>
+      <span class="search-shell">
+        <i class="pi pi-search"></i>
+        <input type="search" class="form-control" [ngModel]="query()" (ngModelChange)="updateQuery($event)"
+          [placeholder]="'DOCUMENTATION.STATUS_MATRIX.FILTERS.SEARCH_PLACEHOLDER' | translate" />
+      </span>
+    </label>
+    <label>
+      <span>{{ 'DOCUMENTATION.STATUS_MATRIX.FILTERS.CATEGORY' | translate }}</span>
+      <select class="form-select" [attr.aria-label]="'DOCUMENTATION.STATUS_MATRIX.FILTERS.CATEGORY' | translate" [ngModel]="category()" (ngModelChange)="updateCategory($event)">
+        <option value="all">{{ 'DOCUMENTATION.STATUS_MATRIX.FILTERS.ALL_CATEGORIES' | translate }}</option>
+        @for (categoryKey of categories; track categoryKey) {
+          <option [value]="categoryKey">{{ categoryKey | translate }}</option>
+        }
+      </select>
+    </label>
+    <label>
+      <span>{{ 'DOCUMENTATION.STATUS_MATRIX.FILTERS.STATUS' | translate }}</span>
+      <select class="form-select" [attr.aria-label]="'DOCUMENTATION.STATUS_MATRIX.FILTERS.STATUS' | translate" [ngModel]="status()" (ngModelChange)="updateStatus($event)">
+        @for (statusOption of statusOptions; track statusOption) {
+          <option [value]="statusOption">
+            {{ statusOption === 'all' ? ('DOCUMENTATION.STATUS_MATRIX.FILTERS.ALL_STATUSES' | translate) : ('PROJECT.STATUS.' + statusOption.toUpperCase() | translate) }}
+          </option>
+        }
+      </select>
+    </label>
+    <button type="button" class="btn btn-secondary matrix-reset" (click)="clearFilters()">
+      <i class="pi pi-filter-slash"></i>{{ 'DOCUMENTATION.STATUS_MATRIX.FILTERS.RESET' | translate }}
+    </button>
+  </div>
+
+  <div class="matrix-table-shell">
+    <table class="status-matrix-table">
+      <thead><tr>
+        <th scope="col">{{ 'DOCUMENTATION.STATUS_MATRIX.COLUMNS.PROJECT' | translate }}</th>
+        <th scope="col">{{ 'DOCUMENTATION.STATUS_MATRIX.COLUMNS.CATEGORY' | translate }}</th>
+        <th scope="col">{{ 'DOCUMENTATION.STATUS_MATRIX.COLUMNS.DIFFICULTY' | translate }}</th>
+        <th scope="col">{{ 'DOCUMENTATION.STATUS_MATRIX.COLUMNS.STATUS' | translate }}</th>
+        <th scope="col">{{ 'DOCUMENTATION.STATUS_MATRIX.COLUMNS.RUNTIME' | translate }}</th>
+        <th scope="col">{{ 'DOCUMENTATION.STATUS_MATRIX.COLUMNS.TESTS' | translate }}</th>
+        <th scope="col">{{ 'DOCUMENTATION.STATUS_MATRIX.COLUMNS.NOTES' | translate }}</th>
+      </tr></thead>
+      <tbody>
+        @for (entry of filteredRows(); track entry.projectId) {
+          <tr>
+            <td [attr.data-label]="'DOCUMENTATION.STATUS_MATRIX.COLUMNS.PROJECT' | translate"><a [routerLink]="entry.project.route">{{ entry.project.titleKey | translate }}</a></td>
+            <td [attr.data-label]="'DOCUMENTATION.STATUS_MATRIX.COLUMNS.CATEGORY' | translate">{{ entry.categoryKey | translate }}</td>
+            <td [attr.data-label]="'DOCUMENTATION.STATUS_MATRIX.COLUMNS.DIFFICULTY' | translate">{{ 'PROJECT.DIFFICULTY.' + entry.difficulty.toUpperCase() | translate }}</td>
+            <td [attr.data-label]="'DOCUMENTATION.STATUS_MATRIX.COLUMNS.STATUS' | translate">
+              <span class="matrix-badge ready"><i class="pi pi-check-circle"></i>{{ 'PROJECT.STATUS.' + entry.status.toUpperCase() | translate }}</span>
+            </td>
+            <td [attr.data-label]="'DOCUMENTATION.STATUS_MATRIX.COLUMNS.RUNTIME' | translate">
+              <span class="matrix-badge runtime" [class.api]="entry.runtime === 'api-style'" [class.storage]="entry.runtime === 'local-storage'">
+                {{ (entry.runtime === 'api-style' ? 'DOCUMENTATION.STATUS_MATRIX.BADGES.API_STYLE' : entry.runtime === 'local-storage' ? 'DOCUMENTATION.STATUS_MATRIX.BADGES.LOCAL_STORAGE' : 'DOCUMENTATION.STATUS_MATRIX.BADGES.STATIC_DEMO') | translate }}
+              </span>
+            </td>
+            <td [attr.data-label]="'DOCUMENTATION.STATUS_MATRIX.COLUMNS.TESTS' | translate">
+              <span class="test-flags">
+                <span [title]="'DOCUMENTATION.STATUS_MATRIX.TESTS.UNIT' | translate"><i class="pi pi-check"></i> Unit</span>
+                <span [title]="'DOCUMENTATION.STATUS_MATRIX.TESTS.E2E' | translate"><i class="pi pi-check"></i> E2E</span>
+              </span>
+            </td>
+            <td [attr.data-label]="'DOCUMENTATION.STATUS_MATRIX.COLUMNS.NOTES' | translate">
+              <span class="matrix-note"><span class="matrix-badge deferred">{{ 'DOCUMENTATION.STATUS_MATRIX.BADGES.DEFERRED' | translate }}</span><span>{{ entry.notesKey | translate }}</span></span>
+            </td>
+          </tr>
+        } @empty {
+          <tr class="matrix-empty-row"><td colspan="7">
+            <i class="pi pi-search"></i><strong>{{ 'DOCUMENTATION.STATUS_MATRIX.EMPTY.TITLE' | translate }}</strong>
+            <span>{{ 'DOCUMENTATION.STATUS_MATRIX.EMPTY.TEXT' | translate }}</span>
+            <button type="button" class="btn btn-secondary" (click)="clearFilters()">{{ 'DOCUMENTATION.STATUS_MATRIX.FILTERS.RESET' | translate }}</button>
+          </td></tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</section>

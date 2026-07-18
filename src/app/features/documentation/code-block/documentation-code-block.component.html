@@ -1,0 +1,57 @@
+<article class="code-example">
+  <div class="example-copy">
+    <h5>{{ example().titleKey | translate }}</h5>
+    <p>{{ example().descriptionKey | translate }}</p>
+  </div>
+
+  <div class="code-frame">
+    <header class="code-toolbar">
+      <div class="file-meta">
+        <i class="pi pi-file"></i>
+        <strong>{{ example().filename }}</strong>
+        <span>{{ example().language }}</span>
+      </div>
+
+      <div class="code-actions">
+        <span class="copy-feedback" aria-live="polite">
+          @if (copyState() === 'copied') {
+            {{ 'DOCUMENTATION.CODE_EXAMPLES.COPIED' | translate }}
+          } @else if (copyState() === 'failed') {
+            {{ 'DOCUMENTATION.CODE_EXAMPLES.COPY_FAILED' | translate }}
+          }
+        </span>
+        <button
+          type="button"
+          class="icon-button"
+          [class.active]="showLineNumbers()"
+          (click)="toggleLineNumbers()"
+          [attr.aria-label]="'DOCUMENTATION.CODE_EXAMPLES.TOGGLE_LINES' | translate"
+          [title]="'DOCUMENTATION.CODE_EXAMPLES.TOGGLE_LINES' | translate"
+        >
+          <i class="pi pi-list"></i>
+        </button>
+        <button
+          type="button"
+          class="icon-button"
+          [class.active]="wrapLines()"
+          (click)="toggleWrap()"
+          [attr.aria-label]="'DOCUMENTATION.CODE_EXAMPLES.TOGGLE_WRAP' | translate"
+          [title]="'DOCUMENTATION.CODE_EXAMPLES.TOGGLE_WRAP' | translate"
+        >
+          <i class="pi pi-align-left"></i>
+        </button>
+        <button
+          type="button"
+          class="icon-button"
+          (click)="copyCode()"
+          [attr.aria-label]="'DOCUMENTATION.CODE_EXAMPLES.COPY' | translate"
+          [title]="'DOCUMENTATION.CODE_EXAMPLES.COPY' | translate"
+        >
+          <i [class]="copyState() === 'copied' ? 'pi pi-check' : 'pi pi-copy'"></i>
+        </button>
+      </div>
+    </header>
+
+    <pre [class.wrap-lines]="wrapLines()" [class.hide-line-numbers]="!showLineNumbers()"><code>@for (line of lines(); track $index) {<span class="code-line" [attr.data-line]="$index + 1">{{ line || ' ' }}</span>}</code></pre>
+  </div>
+</article>

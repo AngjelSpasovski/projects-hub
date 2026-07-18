@@ -35,8 +35,8 @@ export class SidebarComponent implements AfterViewInit {
   readonly totalProjects = PROJECTS.length;
   readonly activeUrl = signal(this.router.url);
   readonly openGroups = signal<Record<ProjectDifficulty, boolean>>({
-    beginner: true,
-    intermediate: true,
+    beginner: false,
+    intermediate: false,
     advanced: false
   });
 
@@ -49,11 +49,8 @@ export class SidebarComponent implements AfterViewInit {
   );
 
   constructor() {
-    this.openActiveProjectGroup(this.router.url);
-
     this.router.events.pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd)).subscribe((event) => {
       this.activeUrl.set(event.urlAfterRedirects);
-      this.openActiveProjectGroup(event.urlAfterRedirects);
       this.scrollActiveProjectIntoView();
     });
   }
@@ -76,19 +73,6 @@ export class SidebarComponent implements AfterViewInit {
 
   isProjectActive(project: PortfolioProject): boolean {
     return this.activeUrl().startsWith(project.route);
-  }
-
-  private openActiveProjectGroup(url: string): void {
-    const activeProject = this.projects.find((project) => url.startsWith(project.route));
-
-    if (!activeProject) {
-      return;
-    }
-
-    this.openGroups.update((groups) => ({
-      ...groups,
-      [activeProject.difficulty]: true
-    }));
   }
 
   private scrollActiveProjectIntoView(): void {

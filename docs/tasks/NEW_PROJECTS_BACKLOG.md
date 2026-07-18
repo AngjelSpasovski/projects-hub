@@ -29,7 +29,7 @@ Use this order for a stable pace: small, well-scoped projects first; richer inte
 - [x] Randomize six questions and their answer positions on every quiz start.
 - [x] To-Do List: add, edit, complete, delete, filter, and LocalStorage persistence.
 - [x] Expense Tracker: income/expense entries, totals, categories, validation, persistence, and Chart.js summaries.
-- [x] Technical Documentation: searchable documentation for Projects Hub architecture and contribution flow.
+- [x] Documentation foundation: migrated from the mini-project catalog into a first-class application feature. Detailed expansion continues in `DOCUMENTATION_HUB.md`.
 
 ## Batch 2: API Projects
 

@@ -18,10 +18,6 @@ const PROJECT_COMPONENT_LOADERS: Record<string, () => Promise<Type<unknown>>> = 
   'todo-list': () => import('../todo-list/todo-list.component').then((component) => component.TodoListComponent),
   'expense-tracker': () =>
     import('../expense-tracker/expense-tracker.component').then((component) => component.ExpenseTrackerComponent),
-  'technical-documentation': () =>
-    import('../technical-documentation/technical-documentation.component').then(
-      (component) => component.TechnicalDocumentationComponent
-    ),
   'movie-search': () => import('../movie-search/movie-search.component').then((component) => component.MovieSearchComponent),
   'rest-countries': () =>
     import('../rest-countries/rest-countries.component').then((component) => component.RestCountriesComponent),

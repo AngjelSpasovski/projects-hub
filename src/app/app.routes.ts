@@ -23,6 +23,18 @@ export const routes: Routes = [
           import('./features/dashboard/dashboard.component').then((component) => component.DashboardComponent)
       },
       {
+        path: 'documentation',
+        loadComponent: () =>
+          import('./features/documentation/documentation.component').then(
+            (component) => component.DocumentationComponent
+          )
+      },
+      {
+        path: 'projects/technical-documentation',
+        pathMatch: 'full',
+        redirectTo: 'documentation'
+      },
+      {
         path: 'projects/:projectId',
         loadComponent: () =>
           import('./features/projects/project-detail/project-detail.component').then(

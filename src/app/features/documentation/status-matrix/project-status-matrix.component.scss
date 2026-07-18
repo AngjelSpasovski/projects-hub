@@ -1,0 +1,280 @@
+:host,
+.status-matrix-browser {
+  display: block;
+  height: 100%;
+  min-height: 0;
+}
+
+.status-matrix-browser {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  overflow: hidden;
+}
+
+.matrix-summary {
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.matrix-summary div {
+  background: var(--project-surface-muted);
+  border: 1px solid var(--project-border);
+  border-radius: 6px;
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.45rem 0.6rem;
+}
+
+.matrix-summary span,
+.matrix-filters label > span:first-child {
+  color: var(--project-text-muted);
+  font-size: 0.66rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.matrix-summary strong { font-size: 1rem; }
+
+.matrix-filters {
+  align-items: end;
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 0.8fr) minmax(0, 0.8fr) auto;
+}
+
+.matrix-filters label {
+  display: grid;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+.matrix-filters .search-shell {
+  --app-control-bg: var(--project-bg);
+  --app-control-border: var(--project-border);
+  --app-control-hover: var(--project-control-hover);
+  --app-text: var(--project-text);
+  --app-text-muted: var(--project-text-muted);
+}
+
+.matrix-filters .form-control,
+.matrix-filters .form-select {
+  background-color: var(--project-bg);
+  border-color: var(--project-border);
+  color: var(--project-text);
+  min-height: 2.5rem;
+}
+
+.matrix-filters .form-control {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.matrix-reset {
+  min-height: 2.5rem;
+  white-space: nowrap;
+}
+
+.matrix-table-shell {
+  border: 1px solid var(--project-border);
+  border-radius: 6px;
+  min-height: 0;
+  overflow: auto;
+}
+
+.status-matrix-table {
+  border-collapse: collapse;
+  font-size: 0.75rem;
+  min-width: 58rem;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.status-matrix-table th,
+.status-matrix-table td {
+  border-bottom: 1px solid var(--project-border);
+  padding: 0.48rem 0.55rem;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.status-matrix-table th {
+  background: var(--project-surface-muted);
+  color: var(--project-text-muted);
+  font-size: 0.64rem;
+  font-weight: 800;
+  position: sticky;
+  text-transform: uppercase;
+  top: 0;
+  z-index: 1;
+}
+
+.status-matrix-table th:nth-child(1) { width: 13%; }
+.status-matrix-table th:nth-child(2) { width: 10%; }
+.status-matrix-table th:nth-child(3) { width: 10%; }
+.status-matrix-table th:nth-child(4) { width: 9%; }
+.status-matrix-table th:nth-child(5) { width: 11%; }
+.status-matrix-table th:nth-child(6) { width: 11%; }
+.status-matrix-table th:nth-child(7) { width: 36%; }
+
+.status-matrix-table tbody tr:last-child td { border-bottom: 0; }
+.status-matrix-table tbody tr:hover { background: var(--project-control-hover); }
+
+.status-matrix-table a {
+  color: var(--project-text);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.status-matrix-table a:hover { color: var(--app-accent); }
+
+.matrix-badge {
+  align-items: center;
+  background: var(--project-control);
+  border: 1px solid var(--project-border);
+  border-radius: 999px;
+  display: inline-flex;
+  font-size: 0.63rem;
+  font-weight: 800;
+  gap: 0.25rem;
+  line-height: 1.2;
+  padding: 0.18rem 0.4rem;
+  white-space: nowrap;
+}
+
+.matrix-badge.ready {
+  border-color: color-mix(in srgb, var(--app-success, #22c55e) 55%, var(--project-border));
+  color: var(--app-success, #22c55e);
+}
+
+.matrix-badge.runtime.storage {
+  border-color: color-mix(in srgb, var(--app-accent) 55%, var(--project-border));
+  color: var(--app-accent);
+}
+
+.matrix-badge.runtime.api {
+  border-color: color-mix(in srgb, #3b82f6 55%, var(--project-border));
+  color: #60a5fa;
+}
+
+.matrix-badge.deferred {
+  color: var(--project-text-muted);
+  flex: 0 0 auto;
+}
+
+.test-flags,
+.matrix-note {
+  align-items: center;
+  display: flex;
+  gap: 0.35rem;
+}
+
+.test-flags span { white-space: nowrap; }
+.test-flags i { color: var(--app-success, #22c55e); }
+
+.matrix-note > span:last-child {
+  color: var(--project-text-muted);
+  line-height: 1.3;
+}
+
+.matrix-empty-row td {
+  height: 12rem;
+  text-align: center;
+}
+
+.matrix-empty-row i,
+.matrix-empty-row strong,
+.matrix-empty-row span,
+.matrix-empty-row button { margin: 0.25rem; }
+
+.matrix-empty-row i { color: var(--app-accent); }
+.matrix-empty-row span { color: var(--project-text-muted); }
+
+@media (max-width: 980px) {
+  :host,
+  .status-matrix-browser { height: auto; }
+  .status-matrix-browser { overflow: visible; }
+  .matrix-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .matrix-reset { justify-self: stretch; }
+}
+
+@media (max-width: 640px) {
+  .matrix-summary,
+  .matrix-filters { grid-template-columns: 1fr 1fr; }
+
+  .matrix-search,
+  .matrix-reset { grid-column: 1 / -1; }
+
+  .matrix-table-shell {
+    border: 0;
+    overflow: visible;
+  }
+
+  .status-matrix-table,
+  .status-matrix-table tbody,
+  .status-matrix-table tr,
+  .status-matrix-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .status-matrix-table {
+    min-width: 0;
+    table-layout: auto;
+  }
+
+  .status-matrix-table thead {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  .status-matrix-table tr {
+    background: var(--project-surface);
+    border: 1px solid var(--project-border);
+    border-radius: 6px;
+    margin-bottom: 0.55rem;
+    padding: 0.35rem 0.55rem;
+  }
+
+  .status-matrix-table td {
+    align-items: start;
+    border-bottom: 1px solid var(--project-border);
+    display: grid;
+    gap: 0.6rem;
+    grid-template-columns: minmax(5.5rem, 0.35fr) minmax(0, 1fr);
+    padding: 0.45rem 0;
+  }
+
+  .status-matrix-table td::before {
+    color: var(--project-text-muted);
+    content: attr(data-label);
+    font-size: 0.62rem;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .status-matrix-table td:last-child { border-bottom: 0; }
+
+  .matrix-note {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .matrix-empty-row td {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    padding: 1.5rem 0.5rem;
+  }
+
+  .matrix-empty-row td::before { display: none; }
+}

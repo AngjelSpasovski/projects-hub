@@ -4,7 +4,7 @@ This folder contains the active product roadmap for Projects Hub. The root [`TAS
 
 ## Current Release Status
 
-The target project list for the current static portfolio release is complete. New duplicate-prone ideas are deferred unless they prove a clearly different user experience. Backend integration is also deferred so the app remains deployable as a static GitHub Pages portfolio without secrets.
+The target project list and first-class Documentation Hub for the current static portfolio release are complete. New duplicate-prone ideas are deferred unless they prove a clearly different user experience. Backend integration is also deferred so the app remains deployable as a static GitHub Pages portfolio without secrets.
 
 ## Work Order
 
@@ -13,6 +13,7 @@ The target project list for the current static portfolio release is complete. Ne
 3. [New project backlog](./NEW_PROJECTS_BACKLOG.md)
 4. [Dashboard widgets](./DASHBOARD_WIDGETS.md)
 5. [Chat App architecture](./CHAT_APP_ARCHITECTURE.md)
+6. [Documentation Hub](./DOCUMENTATION_HUB.md)
 
 Every project must satisfy the [Definition of Done](./DEFINITION_OF_DONE.md) before its registry status changes to `ready`.
 

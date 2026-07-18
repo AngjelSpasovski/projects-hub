@@ -6,6 +6,7 @@ Detailed active work is tracked in [`docs/tasks/`](./docs/tasks/README.md). A pr
 
 ## Next Product Cycle
 
+- [x] Complete the first-class Documentation Hub migration tracked in [`docs/tasks/DOCUMENTATION_HUB.md`](./docs/tasks/DOCUMENTATION_HUB.md).
 - [x] Complete the catalog cover redesign.
 - [x] Merge project detail and live application into one workspace surface.
 - [x] Remove duplicated project headers and nested surfaces.

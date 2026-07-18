@@ -18,6 +18,18 @@
     <p>{{ 'NAV.PROJECTS' | translate }}</p>
     <nav class="project-tree" [attr.aria-label]="'NAV.PROJECTS' | translate">
       <a
+        class="tree-all-link documentation-link"
+        routerLink="/admin/documentation"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <span class="tree-link-main">
+          <i class="pi pi-book"></i>
+          <span>{{ 'NAV.DOCUMENTATION' | translate }}</span>
+        </span>
+      </a>
+
+      <a
         class="tree-all-link"
         routerLink="/admin/dashboard"
         routerLinkActive="active"

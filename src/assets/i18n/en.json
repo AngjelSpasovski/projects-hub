@@ -13,6 +13,7 @@
     "ALL_PROJECTS": "All projects",
     "BEGINNER": "Beginner",
     "DASHBOARD": "Dashboard",
+    "DOCUMENTATION": "Documentation",
     "INTERMEDIATE": "Intermediate",
     "MAIN": "Main navigation",
     "NO_PROJECTS": "No projects yet",
@@ -99,10 +100,6 @@
     "EXPENSE_TRACKER": {
       "TITLE": "Expense Tracker",
       "SUMMARY": "Income and expense tracker with validation, filters, LocalStorage persistence, and Chart.js summaries."
-    },
-    "TECHNICAL_DOCUMENTATION": {
-      "TITLE": "Technical Documentation",
-      "SUMMARY": "Searchable guide for the Projects Hub architecture, contribution flow, translations, and quality checks."
     },
     "MOVIE_SEARCH": {
       "TITLE": "Movie Search",
@@ -306,10 +303,11 @@
     },
     "TITLE": "Dev Logger"
   },
-  "TECHNICAL_DOCS": {
+  "DOCUMENTATION": {
     "CHECKLIST": "Checklist",
     "CODE_REFERENCES": "Code references",
     "DESCRIPTION": "Use this documentation hub as the first stop before adding or changing a mini project.",
+    "GUIDANCE": "Guidance",
     "EMPTY": {
       "ACTION": "Clear search",
       "COMPACT": "No sections found",
@@ -317,12 +315,311 @@
       "TITLE": "No documentation sections found"
     },
     "EYEBROW": "Documentation",
+    "CODE_EXAMPLES": {
+      "COPIED": "Copied",
+      "COPY": "Copy code",
+      "COPY_FAILED": "Copy failed",
+      "DESCRIPTION": "Short examples show the same routing, reactive state, and translation patterns used by Projects Hub.",
+      "EYEBROW": "Implementation patterns",
+      "ITEMS": {
+        "ROUTE": {
+          "DESCRIPTION": "Feature routes load standalone components only when their workspace is opened.",
+          "TITLE": "Lazy standalone route"
+        },
+        "SIGNALS": {
+          "DESCRIPTION": "Signals hold filter input while computed state derives the visible rows.",
+          "TITLE": "Reactive filtering"
+        },
+        "TRANSLATION": {
+          "DESCRIPTION": "Templates keep visible labels in paired English and Macedonian translation files.",
+          "TITLE": "Translated template control"
+        }
+      },
+      "TITLE": "Code examples",
+      "TOGGLE_LINES": "Toggle line numbers",
+      "TOGGLE_WRAP": "Toggle line wrapping"
+    },
+    "REFERENCE_TYPES": {
+      "DOCUMENTATION": "Documentation",
+      "SOURCE": "Source",
+      "TEST": "Test"
+    },
+    "PROJECT_TEMPLATE": {
+      "DOCUMENTED": "Documented projects",
+      "FEATURES": "Main features",
+      "FUTURE": "Future notes",
+      "LIMITATIONS": "Current limitations",
+      "NO_PROJECTS": "No project documentation matches this search.",
+      "OPEN_PROJECT": "Open project",
+      "PROJECT_LIST": "Documented projects",
+      "PURPOSE": "Purpose",
+      "REPOSITORY": "Repository",
+      "STATE_STORAGE": "State and storage",
+      "TESTS": "Tests"
+    },
+    "PROJECT_GUIDANCE": {
+      "FUTURE": {
+        "BACKEND_ADAPTER": "A real backend can be added later behind an adapter without replacing the current local demo contract.",
+        "CONTENT_EXPANSION": "Additional content, modes, or datasets can be added after the current interaction remains stable.",
+        "LIVE_API": "A live API can replace the simulated adapter when hosting, credentials, quotas, and fallback behavior are deliberately defined.",
+        "OPTIONAL_ENHANCEMENTS": "Future work is limited to targeted accessibility, UX, and feature improvements discovered during stabilization."
+      },
+      "INTEGRATION": {
+        "API_STYLE": "API-style adapter with explicit loading, empty, stale, error, and retry states.",
+        "EXTERNAL_LINKS": "Uses safe external media links without embedding private credentials or licensed streams.",
+        "LOCAL": "Runs locally without a backend or remote service dependency."
+      },
+      "LIMITATIONS": {
+        "BUNDLED_ASSETS": "The gallery uses optimized bundled assets, so adding new media currently requires a source update and rebuild.",
+        "EXTERNAL_MEDIA": "Playback is represented locally and full media opens through safe external links.",
+        "LOCAL_BROWSER": "Persisted data belongs to the current browser and is not synchronized across devices or accounts.",
+        "LOCAL_SESSION": "Interactive state is local to the current session and resets when the workspace is reloaded.",
+        "NO_BACKEND": "This is a static-safe local demo without authentication, shared records, realtime transport, or private data.",
+        "SIMULATED_API": "The project uses a deterministic local dataset and does not currently request live third-party data."
+      },
+      "STORAGE": {
+        "LOCAL_STORAGE": "Signals manage reactive state and LocalStorage preserves supported demo data or preferences.",
+        "MEMORY": "Signals or component state manage the current session without persistent application records."
+      },
+      "TESTS": {
+        "E2E": "Playwright route and workspace coverage",
+        "UNIT": "Focused component unit tests"
+      }
+    },
+    "PROJECT_FEATURES": {
+      "CHAT_APP": {
+        "MESSAGES": "Message timeline, validated sending, unread counts, and online/offline demo states.",
+        "ROOMS": "Searchable room selection with stable conversation rows and selected-room context.",
+        "STORAGE": "LocalStorage persistence and reset behavior keep the static demo repeatable."
+      },
+      "CLIENT_PANEL": {
+        "CRUD": "Client list, detail, create, edit, delete, search, and validation workflows.",
+        "STORAGE": "LocalStorage persistence with a safe reset path instead of private Firebase records.",
+        "TOTALS": "Derived client, active-account, owed-balance, and open-balance summaries."
+      },
+      "DEV_LOGGER": {
+        "CRUD": "Validated log creation, editing, deletion, and reset behavior.",
+        "FILTERS": "Search and severity filters with focused empty states.",
+        "STATE": "Typed signal state and computed counts for each log level."
+      },
+      "JAVASCRIPT_QUIZ": {
+        "QUESTIONS": "Randomized six-question rounds from a reviewed 26-question JavaScript bank.",
+        "REVIEW": "Score summary and answer review with translated explanations.",
+        "TIMER": "Per-round timer, progress tracking, and restart behavior."
+      },
+      "MUSIC_PLAYER": {
+        "SAFE_LINKS": "Current-track actions use safe YouTube links rather than embedded or licensed audio."
+      },
+      "PHOTO_BOOK": {
+        "AUTOPLAY": "Start and stop slideshow controls advance the selected local Macedonia photo set."
+      },
+      "PROJECT_PLANNER": {
+        "CREATION": "Validated project creation with selected-project context.",
+        "LANES": "Active and finished project lanes with clear empty states.",
+        "MOVEMENT": "Button and drag-and-drop movement between workflow lanes."
+      },
+      "RECIPE_BOOK": {
+        "FORMS": "Typed reactive forms validate recipe and ingredient input.",
+        "RECIPES": "Searchable recipe list, selected detail, and recipe creation workflow.",
+        "SHOPPING": "Ingredient transfer and manual shopping-list management."
+      }
+    },
+    "STATUS_MATRIX": {
+      "BADGES": {
+        "API_STYLE": "API-style",
+        "DEFERRED": "Deferred",
+        "LOCAL_STORAGE": "LocalStorage",
+        "STATIC_DEMO": "Static demo"
+      },
+      "COLUMNS": {
+        "CATEGORY": "Category",
+        "DIFFICULTY": "Difficulty",
+        "NOTES": "Notes",
+        "PROJECT": "Project",
+        "RUNTIME": "Storage / API",
+        "STATUS": "Status",
+        "TESTS": "Tests"
+      },
+      "EMPTY": {
+        "TEXT": "Clear the search or filters to restore matching projects.",
+        "TITLE": "No projects match the current filters"
+      },
+      "FILTERS": {
+        "ALL_CATEGORIES": "All categories",
+        "ALL_STATUSES": "All statuses",
+        "CATEGORY": "Category",
+        "RESET": "Reset filters",
+        "SEARCH_LABEL": "Project search",
+        "SEARCH_PLACEHOLDER": "Search project, category, runtime, or notes",
+        "STATUS": "Status"
+      },
+      "SUMMARY": {
+        "LABEL": "Project status summary",
+        "TOTAL": "Total projects",
+        "VISIBLE": "Visible rows"
+      },
+      "TESTS": {
+        "E2E": "End-to-end workflow coverage",
+        "UNIT": "Focused unit test coverage"
+      }
+    },
     "SEARCH": {
       "LABEL": "Search",
-      "PLACEHOLDER": "Search architecture, i18n, tests, or files"
+      "PLACEHOLDER": "Search guides, projects, architecture, or files"
     },
     "SECTION_NAV": "Documentation sections",
     "SECTIONS": {
+      "OVERVIEW": {
+        "ITEMS": {
+          "PURPOSE": "Projects Hub keeps independent frontend projects in one consistent Angular portfolio workspace.",
+          "SCOPE": "The current static release contains 28 ready mini projects without backend dependencies.",
+          "STATUS": "Future work focuses on documentation, stability, accessibility, visual polish, and targeted fixes."
+        },
+        "TOPICS": {
+          "NAVIGATION": {
+            "BODY": "Dashboard opens the catalog, Documentation is a separate platform destination, and each catalog item opens a dedicated project workspace.",
+            "TITLE": "Navigation model"
+          },
+          "PURPOSE": {
+            "BODY": "Projects Hub keeps independent frontend exercises and portfolio applications inside one maintainable Angular workspace with shared navigation, themes, translations, and quality rules.",
+            "TITLE": "Application purpose"
+          },
+          "SCOPE": {
+            "BODY": "The current release contains 28 ready frontend mini projects. Backend services are deliberately deferred, while LocalStorage and API-style demo states keep the deployed application safe and usable.",
+            "TITLE": "Current release scope"
+          }
+        },
+        "SUMMARY": "Start here for the purpose, scope, and current release state of Projects Hub.",
+        "TITLE": "Overview"
+      },
+      "USER_GUIDE": {
+        "ITEMS": {
+          "CATALOG": "Use search, category, tag, sort, and view controls to browse the project catalog.",
+          "PREFERENCES": "Theme, language, and supported project preferences are stored locally in the browser.",
+          "WORKSPACES": "Open a project to use its live workspace and return through the shared navigation."
+        },
+        "TOPICS": {
+          "CATALOG": {
+            "BODY": "Use search, category and tag filters, sorting, and the Big, List, or Detailed view modes to narrow the 28-project catalog.",
+            "TITLE": "Browse the catalog"
+          },
+          "PREFERENCES": {
+            "BODY": "Switch between Realm, White, Dark, and Blue themes and between Macedonian and English. Supported choices are kept locally in the browser.",
+            "TITLE": "Themes and language"
+          },
+          "WORKSPACES": {
+            "BODY": "Open a project from the catalog or sidebar to use its live workspace. The shared header, back action, metadata, repository link, and responsive shell remain consistent.",
+            "TITLE": "Use mini-project workspaces"
+          }
+        },
+        "SUMMARY": "Learn how to navigate the catalog, adjust preferences, and use the mini-project workspaces.",
+        "TITLE": "User guide"
+      },
+      "TECHNICAL_GUIDE": {
+        "ITEMS": {
+          "ARCHITECTURE": "Standalone Angular features are lazy-loaded inside a shared responsive admin shell.",
+          "I18N": "English and Macedonian translation keys keep visible application text aligned.",
+          "QUALITY": "Focused unit tests, Playwright workflows, and production builds protect core behavior."
+        },
+        "TOPICS": {
+          "ARCHITECTURE": {
+            "BODY": "Angular standalone features are lazy-loaded through route boundaries. The admin shell owns the header, sidebar, main workspace, footer, and responsive navigation.",
+            "TITLE": "Routing and application shell"
+          },
+          "QUALITY": {
+            "BODY": "Visible text uses paired EN/MK translation keys. Jasmine unit tests cover focused state behavior, Playwright covers user workflows, and the production build is the final integration check.",
+            "TITLE": "Translations and testing"
+          },
+          "STATE": {
+            "BODY": "Signals and computed values manage local reactive state. LocalStorage is used only when persistence improves the demo, while API-style projects expose loading, empty, stale, error, and retry states without secrets.",
+            "TITLE": "State, storage, and API safety"
+          }
+        },
+        "SUMMARY": "Review the application architecture, state patterns, translations, and quality workflow.",
+        "TITLE": "Technical guide"
+      },
+      "PROJECTS": {
+        "ITEMS": {
+          "TEMPLATE": "Every project page will document purpose, features, state, storage, tests, and limitations.",
+          "REGISTRY": "The typed registry remains the source of truth for project order, metadata, status, and routes.",
+          "COVERAGE": "Project documentation will be completed in catalog order and checked against the registry."
+        },
+        "TOPICS": {
+          "DONE": {
+            "BODY": "A project is ready only after behavior, responsive layout, themes, translations, focused tests, metadata, cover assets, and documentation satisfy the shared Definition of Done.",
+            "TITLE": "Definition of Done"
+          },
+          "REGISTRY": {
+            "BODY": "The typed project registry is the source of truth for catalog order, route, category, tags, difficulty, status, dates, cover, repository, and demo metadata.",
+            "TITLE": "Registry ownership"
+          },
+          "TEMPLATE": {
+            "BODY": "Every project page follows one structure: purpose, main features, state and storage, tests, limitations, and deliberately deferred improvements.",
+            "TITLE": "Project documentation template"
+          }
+        },
+        "SUMMARY": "Find implementation and usage notes for each mini project in the catalog.",
+        "TITLE": "Project documentation"
+      },
+      "STATUS_MATRIX": {
+        "ITEMS": {
+          "COUNT": "The catalog currently contains 28 completed mini projects.",
+          "FIELDS": "The matrix tracks category, difficulty, storage/API style, tests, status, and notes.",
+          "NEXT": "The responsive searchable matrix derives its rows from registry-aligned documentation data."
+        },
+        "TOPICS": {
+          "CURRENT": {
+            "BODY": "All 28 catalog projects are currently ready. Documentation remains a platform feature and is not included in that count.",
+            "TITLE": "Current project state"
+          },
+          "FIELDS": {
+            "BODY": "The matrix model tracks project, category, difficulty, readiness, runtime style, unit coverage, end-to-end coverage, and maintenance notes.",
+            "TITLE": "Tracked fields"
+          },
+          "NEXT": {
+            "BODY": "The responsive matrix derives its searchable rows from registry-aligned documentation data without adding DevExpress.",
+            "TITLE": "Registry-derived matrix view"
+          }
+        },
+        "SUMMARY": "Track completion, technical characteristics, testing, and deferred work in one view.",
+        "TITLE": "Project status matrix"
+      },
+      "MAINTENANCE": {
+        "SUMMARY": "Keep code, tests, task tracking, and user-facing documentation aligned after every meaningful change.",
+        "TITLE": "Maintenance and contribution",
+        "TOPICS": {
+          "ALIGNMENT": {
+            "BODY": "Update the relevant project README, task checklist, root README, roadmap, translations, and registry dates whenever the release state changes.",
+            "TITLE": "Documentation alignment"
+          },
+          "CHANGES": {
+            "BODY": "Keep each change scoped to one project or shared concern, follow existing Angular and styling patterns, and avoid introducing dependencies without a demonstrated need.",
+            "TITLE": "Change workflow"
+          },
+          "VERIFICATION": {
+            "BODY": "Run focused tests while developing, then verify translations, the production build, relevant Playwright workflows, mobile layout, and all four themes before marking work complete.",
+            "TITLE": "Verification workflow"
+          }
+        }
+      },
+      "RELEASE": {
+        "SUMMARY": "Understand what is complete, what is intentionally deferred, and which decisions require a future product need.",
+        "TITLE": "Release and deferred work",
+        "TOPICS": {
+          "DECISIONS": {
+            "BODY": "Future dependencies should be selected only when requirements justify them. DevExpress, Monaco, Firebase, and Socket.io are not current release requirements.",
+            "TITLE": "Future technology decisions"
+          },
+          "DEFERRED": {
+            "BODY": "Backend integration and duplicate-prone project ideas remain deferred. Current work is documentation, stability, accessibility, visual consistency, deployment checks, and targeted bug fixes.",
+            "TITLE": "Deferred work"
+          },
+          "STATE": {
+            "BODY": "The static portfolio release contains 28 ready mini projects and a completed first-class Documentation Hub. Ongoing work is limited to stabilization and targeted improvements.",
+            "TITLE": "Current release state"
+          }
+        }
+      },
       "ARCHITECTURE": {
         "ITEMS": {
           "LAZY": "Project screens are lazy-loaded from the project detail workspace.",
@@ -366,7 +663,7 @@
       "REFERENCES": "References",
       "SECTIONS": "Sections"
     },
-    "TITLE": "Technical Documentation"
+    "TITLE": "Documentation"
   },
   "TIC_TAC_TOE": {
     "BOARD": "Tic Tac Toe board",

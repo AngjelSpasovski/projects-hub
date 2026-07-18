@@ -1,6 +1,6 @@
 # Projects Hub - Analysis And Roadmap
 
-Last reviewed: 2026-07-14
+Last reviewed: 2026-07-18
 
 ## 1. Purpose
 
@@ -18,14 +18,19 @@ The project is in a stable portfolio-ready phase.
 - Unit tests pass.
 - Playwright end-to-end smoke tests pass.
 - The repository has a clean project structure.
-- The catalog currently contains 29 ready mini projects.
+- The catalog currently contains 28 ready mini projects.
+- Documentation is a first-class platform feature and is not included in the mini-project count.
+- The Documentation Hub uses a typed, searchable content model for user, technical, maintenance, release, project, and status guidance.
+- All 28 mini projects have registry-aligned in-app documentation for purpose, features, state/storage, tests, limitations, and future notes.
+- The responsive project status matrix covers all 28 projects with registry-derived metadata, search, category/status filters, runtime and test badges, desktop table behavior, and mobile stacked rows.
+- Technical documentation includes typed routing, signals, and translated-template code examples with responsive copy, wrap, and line-number controls, without requiring Monaco.
 - Shared layout, themes, translations, metadata, covers, routing, tests, and docs are in place.
 
 Latest local verification from the stabilization pass:
 
 - `npm run build` passed.
-- `npm run test -- --watch=false --browsers=ChromeHeadless` passed with `199 SUCCESS`.
-- `npm run test:e2e -- --workers=1` passed with `33 passed`.
+- `npm run test -- --watch=false` passed with `226 SUCCESS`.
+- `npm run test:e2e -- --workers=1` passed with `37 passed`.
 - Tip Calculator, Memory Game, Math 4 Kids, Music Player, and Photo Book were added from the recommended backlog order.
 - Photo Book was polished with optimized local Macedonia photo assets, People category coverage, and start/stop autoplay controls.
 - Client Panel was migrated as a safe local demo workflow with list, detail, create, edit, delete, validation, totals, and LocalStorage persistence.
@@ -200,126 +205,122 @@ The catalog currently contains these ready projects:
    - LocalStorage persistence.
    - Chart.js doughnut summary.
 
-9. `Technical Documentation`
-   - Searchable in-app documentation.
-   - Architecture, contribution, i18n, and quality guidance.
-
-10. `Movie Search`
+9. `Movie Search`
     - Search and pagination.
     - Selected movie details.
     - Loading, empty, error, and retry states.
 
-11. `REST Countries`
+10. `REST Countries`
     - Search and region filtering.
     - Country detail display.
     - Favorites.
     - LocalStorage persistence.
 
-12. `Currency Converter`
+11. `Currency Converter`
     - Amount validation.
     - Currency selection and swap.
     - Stale-data state.
     - Error and retry states.
 
-13. `Quotes API`
+12. `Quotes API`
     - Quote loading.
     - Next quote flow.
     - Favorites.
     - Retry state.
     - Reduced-motion-aware typewriter behavior.
 
-14. `Sticky Notes`
+13. `Sticky Notes`
     - Create, edit, delete, search, pin, and color notes.
     - LocalStorage persistence.
 
-15. `Grocery List`
+14. `Grocery List`
     - Quantities.
     - Categories.
     - Purchased state.
     - Filtering.
     - LocalStorage persistence.
 
-16. `Project Planner`
+15. `Project Planner`
     - Migrated from a legacy JavaScript project board.
     - Active and finished lanes.
     - Project creation with validation.
     - Button and drag-and-drop movement.
     - Contextual project details.
 
-17. `Odd/Even Counter`
+16. `Odd/Even Counter`
     - Migrated compact Angular interaction demo.
     - Timed and manual number generation.
     - Computed odd/even lanes.
     - Pause and reset controls.
 
-18. `Dev Logger`
+17. `Dev Logger`
     - Migrated CRUD logger.
     - Severity levels.
     - Search and filters.
     - Validated log creation and editing.
     - Signal-based state.
 
-19. `Recipe Book`
+18. `Recipe Book`
     - Migrated recipe and shopping-list workflow.
     - Recipe search and selection.
     - Reactive recipe creation form.
     - Ingredient transfer to shopping list.
     - Manual shopping item creation and deletion.
 
-20. `Flashcards`
+19. `Flashcards`
     - Study deck filters.
     - Reveal answer flow.
     - Known/study-again review tracking.
     - Card creation, editing, deletion, shuffle, and reset actions.
     - LocalStorage persistence.
 
-21. `Timer`
+20. `Timer`
     - Countdown presets.
     - Custom minutes and seconds.
     - Start, pause, resume, reset, and restart controls.
     - Completion state and completed-session count.
     - LocalStorage persistence for selected duration.
 
-22. `Digital Clock`
+21. `Digital Clock`
     - Live ticking time display.
     - Full date display.
     - 12-hour and 24-hour modes.
     - Timezone selection and UTC offset display.
     - LocalStorage persistence for selected settings.
 
-23. `Tip Calculator`
+22. `Tip Calculator`
     - Split-bill utility.
     - Tip presets and custom percentage.
     - People-count validation.
     - Per-person totals and reset behavior.
 
-24. `Memory Game`
+23. `Memory Game`
     - Card matching game.
     - Selectable card sets.
     - Difficulty levels.
     - Moves, timer, reset, and completion summary.
 
-25. `Math 4 Kids`
+24. `Math 4 Kids`
     - Arithmetic practice game.
     - Operation and difficulty selection.
     - Score, streak, timer, feedback, and restart.
 
-26. `Music Player`
+25. `Music Player`
     - Media-style playlist UI.
     - Current track selection.
     - Search, favorites, playback state, and safe external links.
 
-27. `Photo Book`
+26. `Photo Book`
     - Visual gallery with optimized Macedonia image assets.
     - Grid/list views.
     - Filtering, selected-photo detail, autoplay, and keyboard navigation.
 
-28. `Client Panel`
+27. `Client Panel`
     - Safe local demo workflow.
     - Client list, overview, detail, create, edit, delete, validation, and totals.
     - LocalStorage persistence instead of real Firebase credentials.
 
-29. `Chat App`
+28. `Chat App`
     - Static-safe realtime-style demo.
     - Room list, message timeline, search, connection state, send validation, and reset demo flow.
     - LocalStorage persistence with Firebase or Socket.io deferred behind a future adapter.

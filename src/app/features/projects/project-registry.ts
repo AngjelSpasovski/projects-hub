@@ -141,23 +141,6 @@ export const PROJECTS: PortfolioProject[] = [
     demoUrl: null
   },
   {
-    order: 90,
-    id: 'technical-documentation',
-    titleKey: 'PROJECTS.TECHNICAL_DOCUMENTATION.TITLE',
-    summaryKey: 'PROJECTS.TECHNICAL_DOCUMENTATION.SUMMARY',
-    categoryKey: 'CATEGORIES.DOCUMENTATION',
-    tags: ['Angular', 'TypeScript', 'Docs', 'Architecture'],
-    status: 'ready',
-    image: 'assets/project-covers/technical-documentation.svg',
-    route: '/admin/projects/technical-documentation',
-    updatedAt: '2026-06-25',
-    createdAt: '2026-06-25',
-    difficulty: 'beginner',
-    layout: 'wide',
-    repositoryUrl: `${REPOSITORY_BASE_URL}/technical-documentation`,
-    demoUrl: null
-  },
-  {
     order: 100,
     id: 'movie-search',
     titleKey: 'PROJECTS.MOVIE_SEARCH.TITLE',
