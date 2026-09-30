@@ -8,11 +8,11 @@ const STORAGE_KEY = 'projects-hub-theme';
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
   readonly themes: AppTheme[] = ['realm', 'light', 'dark', 'blue'];
-  readonly activeTheme = signal<AppTheme>('realm');
+  readonly activeTheme = signal<AppTheme>('dark');
 
   constructor(@Inject(DOCUMENT) private readonly document: Document) {
     const savedTheme = localStorage.getItem(STORAGE_KEY) as AppTheme | null;
-    this.setTheme(savedTheme && this.themes.includes(savedTheme) ? savedTheme : 'realm');
+    this.setTheme(savedTheme && this.themes.includes(savedTheme) ? savedTheme : 'dark');
   }
 
   setTheme(theme: AppTheme): void {

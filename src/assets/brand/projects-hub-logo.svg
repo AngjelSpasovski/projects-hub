@@ -1,17 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="Projects Hub logo">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="Projects Hub">
   <defs>
-    <linearGradient id="stone" x1="18" y1="8" x2="82" y2="88" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#8fb2ff"/>
-      <stop offset="1" stop-color="#4f6fd6"/>
+    <linearGradient id="night" x1="12" y1="8" x2="84" y2="90" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#17283a"/>
+      <stop offset="1" stop-color="#080f18"/>
     </linearGradient>
-    <linearGradient id="gold" x1="22" y1="20" x2="76" y2="78" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#f8df8f"/>
-      <stop offset="1" stop-color="#b8892f"/>
+    <linearGradient id="silver" x1="26" y1="18" x2="70" y2="78" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#effbff"/>
+      <stop offset="1" stop-color="#8abdd2"/>
     </linearGradient>
+    <radialGradient id="portal" cx="0" cy="0" r="1" gradientTransform="matrix(0 31 -21 0 48 49)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#66cbea" stop-opacity=".44"/>
+      <stop offset="1" stop-color="#2f8caf" stop-opacity="0"/>
+    </radialGradient>
   </defs>
-  <rect width="96" height="96" rx="22" fill="#101512"/>
-  <path d="M18 76V20h28c13 0 21 7 21 18s-8 18-21 18H34v20H18Zm16-33h11c5 0 8-2 8-5s-3-5-8-5H34v10Z" fill="url(#stone)"/>
-  <path d="M66 76V55H45v21H30V20h15v21h21V20h15v56H66Z" fill="url(#gold)" opacity=".95"/>
-  <path d="M14 15h68M14 81h68" fill="none" stroke="#7d8d64" stroke-linecap="round" stroke-width="3" opacity=".72"/>
-  <path d="M74 26c5 1 8 4 10 9M76 70c5-1 8-4 10-9" fill="none" stroke="#f8df8f" stroke-linecap="round" stroke-width="3" opacity=".78"/>
+  <rect x="2" y="2" width="92" height="92" rx="25" fill="url(#night)"/>
+  <rect x="2.75" y="2.75" width="90.5" height="90.5" rx="24.25" fill="none" stroke="#d9f4ff" stroke-opacity=".14" stroke-width="1.5"/>
+  <path d="M23 78V49a25 25 0 0 1 50 0v29" fill="url(#portal)"/>
+  <path d="M19 79V49a29 29 0 0 1 58 0v30" fill="none" stroke="url(#silver)" stroke-linecap="round" stroke-width="4"/>
+  <path d="M26 78V50a22 22 0 0 1 44 0v28" fill="none" stroke="#8abdd2" stroke-linecap="round" stroke-opacity=".7" stroke-width="2"/>
+  <path d="M18 79h60M25 84h46" fill="none" stroke="#8abdd2" stroke-linecap="round" stroke-width="3"/>
+  <path d="m48 19 3.2 9.8L61 32l-9.8 3.2L48 45l-3.2-9.8L35 32l9.8-3.2L48 19Z" fill="url(#silver)"/>
+  <circle cx="48" cy="56" r="3.3" fill="#bcefff"/>
+  <path d="M48 60v10" stroke="#8ce6ff" stroke-linecap="round" stroke-width="2.5"/>
 </svg>

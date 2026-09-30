@@ -1,0 +1,365 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.visually-hidden {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.gate-screen {
+  --glow: #a4e8ff;
+  align-items: center;
+  background: #07101a;
+  color: #f3f7fb;
+  display: flex;
+  isolation: isolate;
+  justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+  padding: 2rem 1.25rem;
+  position: relative;
+}
+
+.gate-background,
+.gate-shade {
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+}
+
+.gate-background {
+  background: url('/assets/brand/moria-gate-desktop.png') center center / cover no-repeat;
+  transform: scale(1.015);
+  transition: transform 1.8s cubic-bezier(.2, .7, .2, 1), filter 1.2s ease;
+}
+
+.gate-shade {
+  background:
+    linear-gradient(180deg, rgba(3, 8, 15, .12), transparent 24%, transparent 70%, rgba(3, 8, 15, .5)),
+    linear-gradient(90deg, rgba(3, 8, 15, .18), transparent 25%, transparent 75%, rgba(3, 8, 15, .18));
+}
+
+.language-switch {
+  align-items: center;
+  backdrop-filter: blur(14px);
+  background: rgba(7, 15, 23, .45);
+  border: 1px solid rgba(220, 239, 255, .2);
+  border-radius: 999px;
+  display: flex;
+  gap: .2rem;
+  padding: .25rem;
+  position: absolute;
+  right: clamp(1rem, 4vw, 3.5rem);
+  top: clamp(1rem, 4vh, 2.25rem);
+}
+
+.language-switch button {
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+  color: rgba(239, 246, 255, .72);
+  cursor: pointer;
+  font: inherit;
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  padding: .55rem .72rem;
+}
+
+.language-switch button.active {
+  background: rgba(174, 224, 255, .18);
+  color: #fff;
+}
+
+.gate-inscription {
+  fill: #e6f9ff;
+  filter: drop-shadow(0 0 .45rem rgba(105, 215, 255, .85)) drop-shadow(0 0 1.1rem rgba(67, 177, 226, .55));
+  height: auto;
+  left: 50%;
+  overflow: visible;
+  position: absolute;
+  top: clamp(7rem, 15vh, 11.5rem);
+  transform: translateX(-50%);
+  width: min(43vw, 38rem);
+  z-index: 1;
+}
+
+.gate-inscription text {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 19px;
+  font-variant: small-caps;
+  font-weight: 700;
+  letter-spacing: 1.7px;
+  paint-order: stroke;
+  stroke: rgba(18, 56, 75, .7);
+  stroke-width: 1.3px;
+  transition: filter .35s ease, fill .35s ease;
+}
+
+.inscription-lit .gate-inscription {
+  filter: drop-shadow(0 0 .7rem rgba(178, 244, 255, .95)) drop-shadow(0 0 1.8rem rgba(75, 201, 245, .85));
+}
+
+.opening .gate-inscription {
+  animation: runic-flare .9s ease-in forwards;
+}
+
+.gate-content {
+  isolation: isolate;
+  margin: 1rem auto 0;
+  max-width: 26rem;
+  padding: 1rem 1.25rem;
+  position: relative;
+  text-align: center;
+  width: min(100%, 26rem);
+}
+
+.gate-content::before {
+  background: radial-gradient(ellipse, rgba(114, 201, 245, .16), rgba(32, 80, 116, .08) 48%, transparent 76%);
+  content: '';
+  inset: 0 -12%;
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+}
+
+.brand {
+  align-items: center;
+  color: #f1f6fa;
+  display: inline-flex;
+  font-size: .77rem;
+  font-weight: 700;
+  gap: .6rem;
+  letter-spacing: .2em;
+  margin-bottom: 1rem;
+  text-shadow: 0 1px 8px #06101c, 0 0 16px #06101c;
+  text-decoration: none;
+}
+
+.brand b {
+  color: var(--glow);
+  font-weight: 800;
+}
+
+.brand img {
+  filter: drop-shadow(0 0 .75rem rgba(164, 232, 255, .25));
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+.entry-form {
+  margin: 0 auto;
+  max-width: 27rem;
+  text-shadow: 0 1px 8px #06101c, 0 0 16px #06101c;
+  text-align: left;
+}
+
+.entry-form label {
+  color: rgba(235, 243, 250, .82);
+  display: block;
+  font-size: .83rem;
+  font-weight: 650;
+  margin: 0 0 .55rem .15rem;
+  text-shadow: 0 1px 8px #06101c, 0 0 16px #06101c;
+}
+
+.entry-field {
+  align-items: center;
+  background: linear-gradient(110deg, rgba(3, 12, 20, .82), rgba(7, 19, 30, .72));
+  border: 1px solid rgba(162, 223, 255, .5);
+  border-radius: .65rem;
+  box-shadow: 0 0 1.2rem rgba(83, 191, 255, .13), inset 0 1px 6px rgba(0, 0, 0, .48);
+  display: flex;
+  gap: .7rem;
+  min-height: 3.25rem;
+  padding: .35rem;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.entry-field:focus-within {
+  border-color: var(--glow);
+  box-shadow: 0 0 0 3px rgba(164, 232, 255, .15), 0 0 1.5rem rgba(164, 232, 255, .14);
+}
+
+.entry-field.invalid {
+  border-color: #ff9b9b;
+  box-shadow: 0 0 0 3px rgba(255, 111, 111, .13);
+}
+
+.entry-field > i {
+  color: var(--glow);
+  flex: 0 0 auto;
+  margin-left: .8rem;
+}
+
+.entry-field input {
+  background: transparent;
+  border: 0;
+  color: #fff;
+  flex: 1 1 auto;
+  font: inherit;
+  font-size: 1rem;
+  min-width: 0;
+  outline: none;
+  padding: .6rem 0;
+}
+
+.entry-field button {
+  align-items: center;
+  background: linear-gradient(135deg, #d3f3ff, #85caea);
+  border: 0;
+  border-radius: .58rem;
+  color: #10212e;
+  cursor: pointer;
+  display: inline-flex;
+  flex: 0 0 auto;
+  font: inherit;
+  font-size: .84rem;
+  font-weight: 800;
+  gap: .65rem;
+  justify-content: center;
+  min-height: 2.6rem;
+  padding: 0 .95rem;
+  transition: filter .2s ease, transform .2s ease;
+}
+
+.entry-field button:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.entry-field button:disabled {
+  cursor: wait;
+}
+
+.form-message {
+  color: #ffc2c2;
+  font-size: .8rem;
+  min-height: 1.25rem;
+  margin: .48rem .15rem 0;
+  opacity: 0;
+  text-shadow: 0 1px 8px #06101c, 0 0 16px #06101c;
+}
+
+.form-message.visible {
+  opacity: 1;
+}
+
+.whisper {
+  align-items: center;
+  color: rgba(220, 234, 246, .62);
+  display: flex;
+  font-size: .77rem;
+  gap: .5rem;
+  justify-content: center;
+  margin: .7rem 0 0;
+  text-shadow: 0 1px 8px #06101c, 0 0 16px #06101c;
+}
+
+.whisper i {
+  color: var(--glow);
+}
+
+.gate-footer {
+  bottom: 1.15rem;
+  color: rgba(228, 237, 246, .55);
+  font-size: .72rem;
+  left: 0;
+  letter-spacing: .04em;
+  position: absolute;
+  right: 0;
+  text-align: center;
+}
+
+.opening .gate-background {
+  filter: brightness(1.4) saturate(1.2);
+  transform: scale(1.12);
+}
+
+.opening .gate-content {
+  animation: enter-realm .9s ease-in forwards;
+}
+
+@keyframes runic-flare {
+  60% { fill: #fff; filter: brightness(1.5); }
+  100% { fill: #c5f5ff; opacity: 0; }
+}
+
+@keyframes enter-realm {
+  55% { opacity: 1; transform: scale(1.025); }
+  100% { opacity: 0; transform: scale(1.06); }
+}
+
+@media (max-width: 600px) {
+  .gate-screen {
+    align-items: center;
+    height: 100svh;
+    min-height: 100svh;
+    padding: 1rem;
+  }
+
+  .gate-background {
+    background-image: url('/assets/brand/moria-gate-mobile.png');
+    background-position: 50% center;
+  }
+
+  .gate-inscription {
+    top: 19vh;
+    width: min(88vw, 25rem);
+  }
+
+  .gate-inscription text {
+    font-size: 20px;
+    letter-spacing: 1.5px;
+  }
+
+  .gate-content {
+    margin: 2rem auto 0;
+    padding: .9rem 0;
+    width: min(70vw, 24rem);
+  }
+
+  .brand {
+    font-size: .68rem;
+    gap: .45rem;
+    margin-bottom: .9rem;
+  }
+
+  .brand img {
+    height: 2rem;
+    width: 2rem;
+  }
+
+  .entry-field {
+    gap: .45rem;
+  }
+
+  .entry-field button {
+    gap: .45rem;
+    padding: 0 .7rem;
+  }
+
+  .gate-footer {
+    bottom: .45rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}

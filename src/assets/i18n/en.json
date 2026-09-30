@@ -8,6 +8,18 @@
     "THEME": "Theme",
     "TITLE": "Projects Hub"
   },
+  "GATE": {
+    "BRAND": "Projects Hub",
+    "INSCRIPTION": "Write FRIEND and enter",
+    "INPUT_LABEL": "Write FRIEND and enter",
+    "ENTER": "Enter",
+    "OPENING": "Opening the gate",
+    "ERROR": "The gate remains closed. Try again.",
+    "FOOTNOTE": "Letter case does not matter.",
+    "FOOTER": "Projects Hub · A portfolio of projects",
+    "EXIT": "Leave through the gate",
+    "EXIT_LABEL": "Leave Projects Hub and return to the gate"
+  },
   "NAV": {
     "ADVANCED": "Advanced",
     "ALL_PROJECTS": "All projects",

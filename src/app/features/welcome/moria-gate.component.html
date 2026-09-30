@@ -1,0 +1,67 @@
+<main class="gate-screen" [class.opening]="opening()" [class.inscription-lit]="inputFocused()">
+  <div class="gate-background" aria-hidden="true"></div>
+  <div class="gate-shade" aria-hidden="true"></div>
+
+  <nav class="language-switch" [attr.aria-label]="'APP.LANGUAGE' | translate">
+    @for (language of languageService.languages; track language) {
+      <button
+        type="button"
+        [class.active]="languageService.activeLanguage() === language"
+        [attr.aria-pressed]="languageService.activeLanguage() === language"
+        (click)="languageService.setLanguage(language)"
+      >{{ language.toUpperCase() }}</button>
+    }
+  </nav>
+
+  <svg class="gate-inscription" viewBox="0 0 500 205" role="img" [attr.aria-label]="'GATE.INSCRIPTION' | translate">
+    <defs>
+      <path id="gate-inscription-curve" d="M 24 186 A 226 164 0 0 1 476 186" />
+    </defs>
+    <text>
+      <textPath href="#gate-inscription-curve" startOffset="50%" text-anchor="middle">
+        {{ 'GATE.INSCRIPTION' | translate }}
+      </textPath>
+    </text>
+  </svg>
+
+  <section class="gate-content" aria-labelledby="gate-title">
+    <a class="brand" href="/" aria-label="Projects Hub">
+      <img src="assets/brand/projects-hub-logo.svg" alt="" />
+      <span>{{ 'GATE.BRAND' | translate }}</span>
+    </a>
+
+    <h1 id="gate-title" class="visually-hidden">{{ 'GATE.BRAND' | translate }}</h1>
+
+    <form class="entry-form" (submit)="$event.preventDefault(); enter()">
+      <label class="visually-hidden" for="gate-word">{{ 'GATE.INPUT_LABEL' | translate }}</label>
+      <div class="entry-field" [class.invalid]="error()" [class.disabled]="opening()">
+        <i class="pi pi-key" aria-hidden="true"></i>
+        <input
+          id="gate-word"
+          type="text"
+          name="gate-word"
+          autocomplete="off"
+          autocapitalize="none"
+          spellcheck="false"
+          [value]="answer()"
+          [disabled]="opening()"
+          [attr.aria-invalid]="error()"
+          [attr.aria-describedby]="error() ? 'gate-error' : null"
+          (focus)="inputFocused.set(true)"
+          (blur)="inputFocused.set(false)"
+          (input)="updateAnswer($any($event.target).value)"
+        />
+        <button type="submit" [disabled]="opening()">
+          <span>{{ (opening() ? 'GATE.OPENING' : 'GATE.ENTER') | translate }}</span>
+          <i class="pi" [class.pi-arrow-right]="!opening()" [class.pi-spin]="opening()" [class.pi-spinner]="opening()" aria-hidden="true"></i>
+        </button>
+      </div>
+      <p class="form-message" id="gate-error" [class.visible]="error()" aria-live="polite">
+        {{ error() ? ('GATE.ERROR' | translate) : ' ' }}
+      </p>
+    </form>
+
+    <p class="whisper"><i class="pi pi-sparkles" aria-hidden="true"></i>{{ 'GATE.FOOTNOTE' | translate }}</p>
+  </section>
+  <footer class="gate-footer">© {{ 'GATE.FOOTER' | translate }}</footer>
+</main>

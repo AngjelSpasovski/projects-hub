@@ -110,6 +110,8 @@ p {
   display: grid;
   gap: 0.55rem;
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: repeat(4, minmax(0, 1fr));
+  height: 100%;
   justify-self: center;
   max-width: 34rem;
   min-height: 0;
@@ -118,13 +120,13 @@ p {
 
 .memory-board.hard {
   grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-rows: repeat(4, minmax(0, 1fr));
   max-width: 40rem;
   width: min(100%, 40rem);
 }
 
 .memory-card {
   --card-accent: var(--app-accent);
-  aspect-ratio: 1;
   background: var(--project-control);
   border: 1px solid var(--project-border);
   border-radius: 8px;
@@ -134,6 +136,7 @@ p {
   font: inherit;
   font-weight: 900;
   min-width: 0;
+  min-height: 0;
   padding: 0;
   place-items: center;
   position: relative;
@@ -381,10 +384,17 @@ p {
 
   .memory-board {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: repeat(4, minmax(0, 1fr));
+    height: auto;
   }
 
   .memory-board.hard {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: repeat(5, minmax(0, 1fr));
+  }
+
+  .memory-card {
+    aspect-ratio: 1;
   }
 
   .modal-actions {

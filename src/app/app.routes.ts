@@ -1,16 +1,24 @@
 import { Routes } from '@angular/router';
 
 import { AdminShellComponent } from './layout/admin-shell/admin-shell.component';
+import { gateAccessGuard, gateWelcomeGuard } from './core/services/gate-access.service';
 
 export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'admin/dashboard'
+    redirectTo: 'welcome'
+  },
+  {
+    path: 'welcome',
+    canActivate: [gateWelcomeGuard],
+    loadComponent: () =>
+      import('./features/welcome/moria-gate.component').then((component) => component.MoriaGateComponent)
   },
   {
     path: 'admin',
     component: AdminShellComponent,
+    canActivate: [gateAccessGuard],
     children: [
       {
         path: '',
@@ -45,6 +53,6 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'admin/dashboard'
+    redirectTo: 'welcome'
   }
 ];

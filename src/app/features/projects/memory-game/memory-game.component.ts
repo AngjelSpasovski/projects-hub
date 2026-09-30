@@ -288,16 +288,14 @@ export class MemoryGameComponent {
       { ...template, id: `${template.pairId}-b-${round}`, isFlipped: false, isMatched: false }
     ]);
 
-    return this.shuffle(cards, round);
+    return this.shuffle(cards);
   }
 
-  private shuffle(cards: MemoryCard[], seed: number): MemoryCard[] {
+  private shuffle(cards: MemoryCard[]): MemoryCard[] {
     const shuffledCards = [...cards];
-    let randomSeed = seed * 97;
 
     for (let index = shuffledCards.length - 1; index > 0; index--) {
-      randomSeed = (randomSeed * 9301 + 49297) % 233280;
-      const nextIndex = Math.floor((randomSeed / 233280) * (index + 1));
+      const nextIndex = Math.floor(Math.random() * (index + 1));
       [shuffledCards[index], shuffledCards[nextIndex]] = [shuffledCards[nextIndex], shuffledCards[index]];
     }
 

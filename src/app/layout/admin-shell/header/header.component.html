@@ -26,5 +26,15 @@
         </button>
       }
     </div>
+
+    <button
+      type="button"
+      class="btn btn-secondary btn-sm btn-icon leave-button"
+      [attr.aria-label]="'GATE.EXIT_LABEL' | translate"
+      (click)="leaveMoria()"
+    >
+      <i class="pi pi-sign-out" aria-hidden="true"></i>
+      <span>{{ 'GATE.EXIT' | translate }}</span>
+    </button>
   </div>
 </header>
