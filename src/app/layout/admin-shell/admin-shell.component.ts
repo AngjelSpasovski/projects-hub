@@ -19,6 +19,7 @@ export class AdminShellComponent {
   private readonly router = inject(Router);
 
   readonly isSidebarOpen = signal(false);
+  readonly isSidebarCollapsed = signal(false);
 
   constructor() {
     this.router.events
@@ -36,5 +37,9 @@ export class AdminShellComponent {
 
   openSidebar(): void {
     this.isSidebarOpen.set(true);
+  }
+
+  toggleSidebarCollapsed(): void {
+    this.isSidebarCollapsed.update((collapsed) => !collapsed);
   }
 }

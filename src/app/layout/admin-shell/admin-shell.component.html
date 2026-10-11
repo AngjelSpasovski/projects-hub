@@ -1,4 +1,4 @@
-<div class="admin-shell" [class.sidebar-open]="isSidebarOpen()">
+<div class="admin-shell" [class.sidebar-open]="isSidebarOpen()" [class.sidebar-collapsed]="isSidebarCollapsed()">
   <button
     type="button"
     class="mobile-menu-button"
@@ -16,7 +16,11 @@
     (click)="closeSidebar()"
   ></button>
 
-  <app-sidebar class="sidebar-panel" />
+  <app-sidebar
+    class="sidebar-panel"
+    [collapsed]="isSidebarCollapsed()"
+    (collapseToggle)="toggleSidebarCollapsed()"
+  />
 
   <section class="admin-workspace">
     <app-header />

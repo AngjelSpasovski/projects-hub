@@ -1,14 +1,26 @@
-<aside class="app-sidebar">
-  <a class="brand" routerLink="/admin/dashboard">
-    <img class="brand-mark" src="assets/brand/projects-hub-logo.svg" alt="" aria-hidden="true" />
-    <span>
-      <strong>Projects Hub</strong>
-      <small>{{ 'APP.PORTFOLIO_REPO' | translate }}</small>
-    </span>
-  </a>
+<aside class="app-sidebar" [class.is-collapsed]="collapsed">
+  <div class="sidebar-brand-row">
+    <a class="brand" routerLink="/admin/dashboard" [attr.title]="collapsed ? 'Projects Hub' : null">
+      <img class="brand-mark" src="assets/brand/projects-hub-emblem.png" alt="" aria-hidden="true" />
+      <span class="brand-copy">
+        <strong>Projects Hub</strong>
+        <small>{{ 'APP.PORTFOLIO_REPO' | translate }}</small>
+      </span>
+    </a>
+    <button
+      type="button"
+      class="sidebar-collapse-button"
+      [attr.aria-label]="(collapsed ? 'APP.EXPAND_SIDEBAR' : 'APP.COLLAPSE_SIDEBAR') | translate"
+      [attr.aria-expanded]="!collapsed"
+      [attr.title]="(collapsed ? 'APP.EXPAND_SIDEBAR' : 'APP.COLLAPSE_SIDEBAR') | translate"
+      (click)="collapseToggle.emit()"
+    >
+      <i class="pi" [class.pi-angle-double-right]="collapsed" [class.pi-angle-double-left]="!collapsed" aria-hidden="true"></i>
+    </button>
+  </div>
 
   <nav class="sidebar-nav main-nav" [attr.aria-label]="'NAV.MAIN' | translate">
-    <a routerLink="/admin/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+    <a routerLink="/admin/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" [attr.title]="collapsed ? ('NAV.DASHBOARD' | translate) : null">
       <i class="pi pi-th-large"></i>
       <span>{{ 'NAV.DASHBOARD' | translate }}</span>
     </a>
@@ -22,6 +34,7 @@
         routerLink="/admin/documentation"
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
+        [attr.title]="collapsed ? ('NAV.DOCUMENTATION' | translate) : null"
       >
         <span class="tree-link-main">
           <i class="pi pi-book"></i>
@@ -34,6 +47,7 @@
         routerLink="/admin/dashboard"
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
+        [attr.title]="collapsed ? ('NAV.ALL_PROJECTS' | translate) : null"
       >
         <span class="tree-link-main">
           <i class="pi pi-folder-open"></i>

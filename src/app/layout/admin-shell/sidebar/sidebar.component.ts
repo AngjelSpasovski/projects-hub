@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, computed, inject, signal } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, computed, inject, signal } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, NavigationEnd } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { filter } from 'rxjs';
@@ -33,6 +33,8 @@ export class SidebarComponent implements AfterViewInit {
 
   readonly projects = PROJECTS;
   readonly totalProjects = PROJECTS.length;
+  @Input() collapsed = false;
+  @Output() readonly collapseToggle = new EventEmitter<void>();
   readonly activeUrl = signal(this.router.url);
   readonly openGroups = signal<Record<ProjectDifficulty, boolean>>({
     beginner: false,

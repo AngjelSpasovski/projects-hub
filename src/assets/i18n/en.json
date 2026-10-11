@@ -4,6 +4,8 @@
     "LANGUAGE": "Language",
     "CLOSE_MENU": "Close navigation",
     "OPEN_MENU": "Open navigation",
+    "COLLAPSE_SIDEBAR": "Collapse sidebar",
+    "EXPAND_SIDEBAR": "Expand sidebar",
     "PORTFOLIO_REPO": "Portfolio repository",
     "THEME": "Theme",
     "TITLE": "Projects Hub"
@@ -17,6 +19,7 @@
     "ERROR": "The gate remains closed. Try again.",
     "FOOTNOTE": "Letter case does not matter.",
     "FOOTER": "Projects Hub · A portfolio of projects",
+    "CREATOR": "Created by",
     "EXIT": "Leave through the gate",
     "EXIT_LABEL": "Leave Projects Hub and return to the gate"
   },

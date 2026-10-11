@@ -137,25 +137,27 @@
 .brand {
   align-items: center;
   color: #f1f6fa;
-  display: inline-flex;
-  font-size: .77rem;
+  display: flex;
+  flex-direction: column;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1rem;
   font-weight: 700;
-  gap: .6rem;
-  letter-spacing: .2em;
-  margin-bottom: 1rem;
+  gap: .35rem;
+  letter-spacing: .24em;
+  margin: 0 auto 1.1rem;
   text-shadow: 0 1px 8px #06101c, 0 0 16px #06101c;
   text-decoration: none;
 }
 
-.brand b {
-  color: var(--glow);
-  font-weight: 800;
+.brand-name {
+  text-transform: uppercase;
 }
 
 .brand img {
-  filter: drop-shadow(0 0 .75rem rgba(164, 232, 255, .25));
-  height: 2.5rem;
-  width: 2.5rem;
+  filter: drop-shadow(0 0 .75rem rgba(164, 232, 255, .4));
+  height: clamp(4.5rem, 8vw, 6rem);
+  object-fit: contain;
+  width: clamp(4.5rem, 8vw, 6rem);
 }
 
 .entry-form {
@@ -272,14 +274,29 @@
 }
 
 .gate-footer {
-  bottom: 1.15rem;
+  align-items: center;
   color: rgba(228, 237, 246, .55);
-  font-size: .72rem;
+  display: flex;
+  flex-direction: column;
+  font-size: .68rem;
+  gap: .22rem;
   left: 0;
   letter-spacing: .04em;
   position: absolute;
   right: 0;
   text-align: center;
+  bottom: 1rem;
+}
+
+.gate-footer a {
+  color: rgba(193, 230, 248, .78);
+  text-decoration-color: rgba(193, 230, 248, .35);
+  text-underline-offset: .18em;
+}
+
+.gate-footer a:hover,
+.gate-footer a:focus-visible {
+  color: #e8f8ff;
 }
 
 .opening .gate-background {
@@ -325,20 +342,20 @@
   }
 
   .gate-content {
-    margin: 2rem auto 0;
-    padding: .9rem 0;
-    width: min(70vw, 24rem);
+    margin: 1rem auto 0;
+    padding: .6rem 0;
+    width: min(84vw, 24rem);
   }
 
   .brand {
-    font-size: .68rem;
-    gap: .45rem;
-    margin-bottom: .9rem;
+    font-size: .82rem;
+    gap: .2rem;
+    margin-bottom: .75rem;
   }
 
   .brand img {
-    height: 2rem;
-    width: 2rem;
+    height: 4.25rem;
+    width: 4.25rem;
   }
 
   .entry-field {
@@ -351,7 +368,10 @@
   }
 
   .gate-footer {
-    bottom: .45rem;
+    bottom: .4rem;
+    font-size: .58rem;
+    gap: .12rem;
+    padding: 0 .5rem;
   }
 }
 

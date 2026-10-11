@@ -5,7 +5,10 @@
 }
 
 .app-sidebar {
-  background: var(--app-sidebar);
+  background:
+    radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--app-accent) 11%, transparent), transparent 34%),
+    linear-gradient(180deg, color-mix(in srgb, var(--app-sidebar) 96%, var(--app-accent) 4%), var(--app-sidebar));
+  border-right: 1px solid color-mix(in srgb, var(--app-accent) 22%, transparent);
   color: var(--app-sidebar-text);
   display: grid;
   grid-template-rows: auto auto minmax(0, 1fr);
@@ -19,19 +22,50 @@
 .brand {
   align-items: center;
   display: flex;
+  flex: 1 1 auto;
   gap: var(--app-space-3);
   min-width: 0;
   text-decoration: none;
 }
 
-.brand-mark {
+.sidebar-brand-row {
+  align-items: center;
+  display: flex;
+  gap: 0.4rem;
+  min-width: 0;
+  width: 100%;
+}
+
+.sidebar-collapse-button {
+  align-items: center;
   background: var(--app-surface);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--app-radius-md);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: var(--app-sidebar-text);
+  cursor: pointer;
+  display: inline-flex;
+  flex: 0 0 auto;
+  height: 2.5rem;
+  justify-content: center;
+  width: 2.5rem;
+}
+
+.sidebar-collapse-button:hover,
+.sidebar-collapse-button:focus-visible {
+  background: rgba(255, 255, 255, 0.12);
+  outline-color: var(--app-accent);
+}
+
+.brand-mark {
+  background: radial-gradient(circle at 50% 42%, #1d3040 0%, #0a1118 76%);
+  border-radius: var(--app-radius-md);
+  border: 1px solid color-mix(in srgb, var(--app-accent) 34%, rgba(255, 255, 255, 0.16));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 0.35rem 1rem rgba(0, 0, 0, 0.18);
   display: block;
   flex: 0 0 auto;
   height: 2.75rem;
-  object-fit: cover;
+  object-fit: contain;
+  padding: 0.16rem;
   width: 2.75rem;
 }
 
@@ -39,6 +73,10 @@
 .brand small {
   display: block;
   overflow-wrap: anywhere;
+}
+
+.brand-copy {
+  min-width: 0;
 }
 
 .brand small,
@@ -287,11 +325,91 @@
     min-height: 0;
   }
 
+  .sidebar-collapse-button {
+    display: none;
+  }
+
   .project-tree {
     align-content: start;
     display: grid;
     min-height: 0;
     overflow-x: hidden;
     overflow-y: auto;
+  }
+}
+
+@media (min-width: 901px) {
+  .app-sidebar.is-collapsed {
+    gap: 0.8rem;
+    padding: 0.65rem 0.45rem;
+  }
+
+  .is-collapsed .sidebar-brand-row {
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .is-collapsed .brand {
+    flex: 0 0 auto;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .is-collapsed .brand-copy,
+  .is-collapsed .sidebar-nav a > span,
+  .is-collapsed .sidebar-section > p,
+  .is-collapsed .project-group,
+  .is-collapsed .tree-count {
+    display: none;
+  }
+
+  .is-collapsed .tree-link-main > span {
+    display: none;
+  }
+
+  .is-collapsed .sidebar-collapse-button {
+    background: rgba(255, 255, 255, 0.06);
+    height: 2.65rem;
+    width: 2.65rem;
+  }
+
+  .is-collapsed .sidebar-nav,
+  .is-collapsed .project-tree {
+    gap: 0.45rem;
+    padding-right: 0;
+  }
+
+  .is-collapsed .sidebar-nav a,
+  .is-collapsed .tree-all-link {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--app-radius-md);
+    height: 2.75rem;
+    min-height: 2.75rem;
+    justify-content: center;
+    padding: 0;
+    transition: background 140ms ease, border-color 140ms ease, color 140ms ease;
+    width: 100%;
+  }
+
+  .is-collapsed .sidebar-nav a:hover,
+  .is-collapsed .tree-all-link:hover {
+    background: rgba(255, 255, 255, 0.09);
+    border-color: rgba(255, 255, 255, 0.16);
+  }
+
+  .is-collapsed .sidebar-nav a.active,
+  .is-collapsed .tree-all-link.active {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .is-collapsed .sidebar-nav a i,
+  .is-collapsed .tree-all-link i {
+    font-size: 1.12rem;
+  }
+
+  .is-collapsed .tree-link-main {
+    justify-content: center;
   }
 }
