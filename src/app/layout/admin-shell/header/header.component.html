@@ -1,4 +1,41 @@
 <header class="app-header">
+  <div class="header-dashboard-tools">
+    <div class="view-switcher" role="group" [attr.aria-label]="'DASHBOARD.VIEW_MODE' | translate">
+      <button type="button" class="btn btn-ghost btn-icon" [attr.aria-label]="'DASHBOARD.BIG' | translate" [attr.title]="'DASHBOARD.BIG' | translate" [class.active]="dashboardToolbar.viewMode() === 'big'" (click)="dashboardToolbar.setViewMode('big')">
+        <i class="pi pi-table" aria-hidden="true"></i>
+        <span>{{ 'DASHBOARD.BIG' | translate }}</span>
+      </button>
+      <button type="button" class="btn btn-ghost btn-icon" [attr.aria-label]="'DASHBOARD.LIST' | translate" [attr.title]="'DASHBOARD.LIST' | translate" [class.active]="dashboardToolbar.viewMode() === 'list'" (click)="dashboardToolbar.setViewMode('list')">
+        <i class="pi pi-list" aria-hidden="true"></i>
+        <span>{{ 'DASHBOARD.LIST' | translate }}</span>
+      </button>
+      <button type="button" class="btn btn-ghost btn-icon" [attr.aria-label]="'DASHBOARD.DETAILED' | translate" [attr.title]="'DASHBOARD.DETAILED' | translate" [class.active]="dashboardToolbar.viewMode() === 'detailed'" (click)="dashboardToolbar.setViewMode('detailed')">
+        <i class="pi pi-align-left" aria-hidden="true"></i>
+        <span>{{ 'DASHBOARD.DETAILED' | translate }}</span>
+      </button>
+    </div>
+
+    <div class="dashboard-widgets" [attr.aria-label]="'DASHBOARD.WIDGETS.TITLE' | translate">
+      <article class="dashboard-widget clock-widget">
+        <i class="pi pi-clock" aria-hidden="true"></i>
+        <div>
+          <span>{{ 'DASHBOARD.WIDGETS.CLOCK' | translate }}</span>
+          <strong>{{ dashboardToolbar.clockTime() }}</strong>
+          <small>{{ dashboardToolbar.clockDate() }}</small>
+        </div>
+      </article>
+
+      <article class="dashboard-widget weather-widget">
+        <i [class]="dashboardToolbar.dashboardWeather.icon" aria-hidden="true"></i>
+        <div>
+          <span>{{ dashboardToolbar.dashboardWeather.city }}</span>
+          <strong>{{ dashboardToolbar.dashboardWeather.temperature }}°C</strong>
+          <small>{{ dashboardToolbar.dashboardWeather.conditionKey | translate }}</small>
+        </div>
+      </article>
+    </div>
+  </div>
+
   <div class="header-actions">
     <div class="btn-group" role="group" [attr.aria-label]="'APP.THEME' | translate">
       @for (theme of themeService.themes; track theme) {

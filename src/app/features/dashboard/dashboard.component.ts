@@ -6,6 +6,7 @@ import { MultiSelect } from 'primeng/multiselect';
 import { Select } from 'primeng/select';
 
 import { LanguageService } from '../../core/services/language.service';
+import { DashboardToolbarService } from '../../core/services/dashboard-toolbar.service';
 import { PortfolioProject } from '../../core/models/project.model';
 import { PROJECTS } from '../projects/project-registry';
 import { ProjectCardComponent, ProjectCardViewMode } from '../../shared/ui/project-card/project-card.component';
@@ -23,7 +24,6 @@ interface TagOption {
   value: string;
 }
 
-const VIEW_MODE_STORAGE_KEY = 'projects-hub-dashboard-view-mode';
 const DIFFICULTY_ORDER: Record<PortfolioProject['difficulty'], number> = {
   beginner: 0,
   intermediate: 1,
@@ -40,8 +40,8 @@ const DIFFICULTY_ORDER: Record<PortfolioProject['difficulty'], number> = {
 export class DashboardComponent implements OnInit, OnDestroy {
   private readonly languageService = inject(LanguageService);
   private readonly translate = inject(TranslateService);
+  private readonly dashboardToolbar = inject(DashboardToolbarService);
   private loadingTimer: number | undefined;
-  private clockTimer: number | undefined;
 
   readonly projects = PROJECTS;
   readonly skeletonCards = Array.from({ length: 5 }, (_, index) => index);
@@ -50,34 +50,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
   readonly selectedCategory = signal('all');
   readonly selectedTags = signal<string[]>([]);
   readonly sortMode = signal<DashboardSortMode>('order');
-  readonly viewMode = signal<ProjectCardViewMode>(this.getInitialViewMode());
+  readonly viewMode = this.dashboardToolbar.viewMode;
   readonly previewProject = signal<PortfolioProject | null>(null);
   readonly filterOverlayOptions = {
     hideTransitionOptions: '0ms',
     showTransitionOptions: '80ms ease-out'
   };
-  readonly now = signal(new Date());
-  readonly dashboardWeather = {
-    city: 'Skopje',
-    conditionKey: 'WEATHER.CONDITION.SUNNY',
-    temperature: 31,
-    icon: 'pi pi-sun'
-  };
-
-  readonly clockTime = computed(() =>
-    new Intl.DateTimeFormat(this.activeLocale(), {
-      hour: '2-digit',
-      minute: '2-digit'
-    }).format(this.now())
-  );
-
-  readonly clockDate = computed(() =>
-    new Intl.DateTimeFormat(this.activeLocale(), {
-      day: '2-digit',
-      month: 'short',
-      weekday: 'short'
-    }).format(this.now())
-  );
+  readonly now = this.dashboardToolbar.now;
+  readonly dashboardWeather = this.dashboardToolbar.dashboardWeather;
+  readonly clockTime = this.dashboardToolbar.clockTime;
+  readonly clockDate = this.dashboardToolbar.clockDate;
 
   readonly categoryOptions = computed<FilterOption[]>(() => {
     this.languageService.activeLanguage();
@@ -125,17 +107,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadingTimer = window.setTimeout(() => this.isCatalogLoading.set(false), 250);
-    this.clockTimer = window.setInterval(() => this.now.set(new Date()), 1000);
   }
 
   ngOnDestroy(): void {
     window.clearTimeout(this.loadingTimer);
-    window.clearInterval(this.clockTimer);
   }
 
   setViewMode(viewMode: ProjectCardViewMode): void {
-    this.viewMode.set(viewMode);
-    localStorage.setItem(VIEW_MODE_STORAGE_KEY, viewMode);
+    this.dashboardToolbar.setViewMode(viewMode);
   }
 
   updateSearchTerm(value: string): void {
@@ -167,11 +146,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   closePreview(): void {
     this.previewProject.set(null);
-  }
-
-  private getInitialViewMode(): ProjectCardViewMode {
-    const savedViewMode = localStorage.getItem(VIEW_MODE_STORAGE_KEY);
-    return savedViewMode === 'big' || savedViewMode === 'list' || savedViewMode === 'detailed' ? savedViewMode : 'big';
   }
 
   private matchesSearch(project: PortfolioProject, query: string): boolean {
@@ -215,7 +189,4 @@ export class DashboardComponent implements OnInit, OnDestroy {
     return String(this.translate.instant(key));
   }
 
-  private activeLocale(): string {
-    return this.languageService.activeLanguage() === 'mk' ? 'mk-MK' : 'en-US';
-  }
 }

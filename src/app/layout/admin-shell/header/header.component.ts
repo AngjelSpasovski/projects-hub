@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 
 import { GateAccessService } from '../../../core/services/gate-access.service';
+import { DashboardToolbarService } from '../../../core/services/dashboard-toolbar.service';
 import { LanguageService } from '../../../core/services/language.service';
 import { ThemeService } from '../../../core/services/theme.service';
 
@@ -18,6 +19,7 @@ export class HeaderComponent {
   private readonly gateAccess = inject(GateAccessService);
   readonly languageService = inject(LanguageService);
   readonly themeService = inject(ThemeService);
+  readonly dashboardToolbar = inject(DashboardToolbarService);
 
   leaveMoria(): void {
     this.gateAccess.leave();

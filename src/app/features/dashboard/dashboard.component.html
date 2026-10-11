@@ -1,44 +1,6 @@
 <section class="dashboard" [attr.aria-label]="'DASHBOARD.TITLE' | translate">
   <div class="dashboard-header">
     <h2 class="visually-hidden">{{ 'DASHBOARD.TITLE' | translate }}</h2>
-
-    <div class="dashboard-toolbar">
-      <div class="view-switcher" role="group" [attr.aria-label]="'DASHBOARD.VIEW_MODE' | translate">
-        <button type="button" class="btn btn-ghost btn-icon" [class.active]="viewMode() === 'big'" (click)="setViewMode('big')">
-          <i class="pi pi-table"></i>
-          <span>{{ 'DASHBOARD.BIG' | translate }}</span>
-        </button>
-        <button type="button" class="btn btn-ghost btn-icon" [class.active]="viewMode() === 'list'" (click)="setViewMode('list')">
-          <i class="pi pi-list"></i>
-          <span>{{ 'DASHBOARD.LIST' | translate }}</span>
-        </button>
-        <button type="button" class="btn btn-ghost btn-icon" [class.active]="viewMode() === 'detailed'" (click)="setViewMode('detailed')">
-          <i class="pi pi-align-left"></i>
-          <span>{{ 'DASHBOARD.DETAILED' | translate }}</span>
-        </button>
-      </div>
-
-      <div class="dashboard-widgets" [attr.aria-label]="'DASHBOARD.WIDGETS.TITLE' | translate">
-        <article class="dashboard-widget clock-widget">
-          <i class="pi pi-clock"></i>
-          <div>
-            <span>{{ 'DASHBOARD.WIDGETS.CLOCK' | translate }}</span>
-            <strong>{{ clockTime() }}</strong>
-            <small>{{ clockDate() }}</small>
-          </div>
-        </article>
-
-        <article class="dashboard-widget weather-widget">
-          <i [class]="dashboardWeather.icon"></i>
-          <div>
-            <span>{{ dashboardWeather.city }}</span>
-            <strong>{{ dashboardWeather.temperature }}°C</strong>
-            <small>{{ dashboardWeather.conditionKey | translate }}</small>
-          </div>
-        </article>
-      </div>
-    </div>
-
     <p>{{ 'DASHBOARD.SUBTITLE' | translate }}</p>
   </div>
 
