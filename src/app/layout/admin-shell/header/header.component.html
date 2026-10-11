@@ -1,5 +1,6 @@
 <header class="app-header">
   <div class="header-dashboard-tools">
+    @if (!isDocumentationRoute()) {
     <div class="view-switcher" role="group" [attr.aria-label]="'DASHBOARD.VIEW_MODE' | translate">
       <button type="button" class="btn btn-ghost btn-icon" [attr.aria-label]="'DASHBOARD.BIG' | translate" [attr.title]="'DASHBOARD.BIG' | translate" [class.active]="dashboardToolbar.viewMode() === 'big'" (click)="dashboardToolbar.setViewMode('big')">
         <i class="pi pi-table" aria-hidden="true"></i>
@@ -14,6 +15,7 @@
         <span>{{ 'DASHBOARD.DETAILED' | translate }}</span>
       </button>
     </div>
+    }
 
     <div class="dashboard-widgets" [attr.aria-label]="'DASHBOARD.WIDGETS.TITLE' | translate">
       <article class="dashboard-widget clock-widget">

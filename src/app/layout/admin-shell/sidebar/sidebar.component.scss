@@ -11,7 +11,7 @@
   border-right: 1px solid color-mix(in srgb, var(--app-accent) 22%, transparent);
   color: var(--app-sidebar-text);
   display: grid;
-  grid-template-rows: auto auto minmax(0, 1fr);
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
   gap: var(--app-space-3);
   height: 100vh;
   min-height: 0;
@@ -151,6 +151,42 @@
   grid-template-rows: auto minmax(0, 1fr);
   min-height: 0;
   overflow: hidden;
+}
+
+.sidebar-signature {
+  align-items: center;
+  display: grid;
+  gap: 0.25rem;
+  justify-items: center;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 0.25rem 0.35rem 0.4rem;
+  position: relative;
+}
+
+.sidebar-signature::before {
+  background: radial-gradient(ellipse, color-mix(in srgb, var(--app-accent) 13%, transparent), transparent 70%);
+  content: '';
+  inset: 0 -10%;
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+}
+
+.sidebar-signature-mark {
+  display: block;
+  filter: invert(1) sepia(0.25) saturate(1.7) hue-rotate(155deg);
+  mix-blend-mode: screen;
+  opacity: 0.14;
+  width: min(8.5rem, 76%);
+}
+
+.sidebar-signature-name {
+  display: block;
+  filter: drop-shadow(0 0 0.35rem color-mix(in srgb, var(--app-accent) 24%, transparent));
+  max-width: 100%;
+  opacity: 0.72;
+  width: min(11rem, 88%);
 }
 
 .project-tree {
@@ -358,6 +394,7 @@
   .is-collapsed .brand-copy,
   .is-collapsed .sidebar-nav a > span,
   .is-collapsed .sidebar-section > p,
+  .is-collapsed .sidebar-signature,
   .is-collapsed .project-group,
   .is-collapsed .tree-count {
     display: none;

@@ -1,6 +1,8 @@
-import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, inject, signal } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslatePipe } from '@ngx-translate/core';
+import { filter } from 'rxjs';
 
 import { GateAccessService } from '../../../core/services/gate-access.service';
 import { DashboardToolbarService } from '../../../core/services/dashboard-toolbar.service';
@@ -20,6 +22,18 @@ export class HeaderComponent {
   readonly languageService = inject(LanguageService);
   readonly themeService = inject(ThemeService);
   readonly dashboardToolbar = inject(DashboardToolbarService);
+  readonly isDocumentationRoute = signal(this.router.url.startsWith('/admin/documentation'));
+
+  constructor() {
+    this.router.events
+      .pipe(
+        filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+        takeUntilDestroyed()
+      )
+      .subscribe((event) => {
+        this.isDocumentationRoute.set(event.urlAfterRedirects.startsWith('/admin/documentation'));
+      });
+  }
 
   leaveMoria(): void {
     this.gateAccess.leave();
