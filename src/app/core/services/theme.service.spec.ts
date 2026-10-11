@@ -9,12 +9,12 @@ describe('ThemeService', () => {
     TestBed.resetTestingModule();
   });
 
-  it('should default to realm theme', () => {
+  it('should default to dark theme', () => {
     const service = TestBed.inject(ThemeService);
 
-    expect(service.activeTheme()).toBe('realm');
-    expect(document.documentElement.dataset['theme']).toBe('realm');
-    expect(localStorage.getItem('projects-hub-theme')).toBe('realm');
+    expect(service.activeTheme()).toBe('dark');
+    expect(document.documentElement.dataset['theme']).toBe('dark');
+    expect(localStorage.getItem('projects-hub-theme')).toBe('dark');
   });
 
   it('should restore a saved valid theme', () => {
@@ -31,8 +31,8 @@ describe('ThemeService', () => {
 
     const service = TestBed.inject(ThemeService);
 
-    expect(service.activeTheme()).toBe('realm');
-    expect(document.documentElement.dataset['theme']).toBe('realm');
+    expect(service.activeTheme()).toBe('dark');
+    expect(document.documentElement.dataset['theme']).toBe('dark');
   });
 
   it('should update the active theme and persist it', () => {
