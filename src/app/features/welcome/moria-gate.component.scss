@@ -274,41 +274,31 @@
 }
 
 .gate-footer {
-  display: flex;
-  justify-content: center;
-  left: 0;
-  position: absolute;
-  right: 0;
-  bottom: clamp(.75rem, 2.5vh, 1.5rem);
-  padding: 0 1rem;
-}
-
-.creator-card {
   align-items: center;
-  backdrop-filter: blur(12px);
-  background: linear-gradient(135deg, rgba(5, 14, 23, .76), rgba(12, 27, 40, .62));
-  border: 1px solid rgba(190, 227, 248, .25);
-  border-radius: .8rem;
-  box-shadow: 0 .5rem 1.8rem rgba(0, 0, 0, .24), inset 0 1px rgba(255, 255, 255, .06);
-  color: rgba(239, 247, 255, .86);
+  color: rgba(239, 247, 255, .9);
   display: flex;
   flex-direction: column;
   font-size: .75rem;
   gap: .28rem;
   letter-spacing: .035em;
-  max-width: min(100%, 28rem);
-  padding: .8rem 1.35rem;
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  right: 0;
+  bottom: clamp(4.5rem, 10vh, 7rem);
+  padding: 0 1rem;
   text-align: center;
+  text-shadow: 0 1px 3px #020810, 0 0 9px rgba(2, 8, 16, .95), 0 0 18px rgba(2, 8, 16, .8);
 }
 
-.creator-card a {
+.gate-footer a {
   color: #c1e6f8;
   text-decoration-color: rgba(193, 230, 248, .58);
   text-underline-offset: .18em;
 }
 
-.creator-card a:hover,
-.creator-card a:focus-visible {
+.gate-footer a:hover,
+.gate-footer a:focus-visible {
   color: #e8f8ff;
 }
 
@@ -381,14 +371,10 @@
   }
 
   .gate-footer {
-    bottom: .55rem;
-    padding: 0 .65rem;
-  }
-
-  .creator-card {
+    bottom: clamp(3.6rem, 8vh, 4.5rem);
     font-size: .62rem;
     gap: .18rem;
-    padding: .58rem .85rem;
+    padding: 0 .65rem;
   }
 }
 
