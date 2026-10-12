@@ -155,9 +155,9 @@
 
 .brand img {
   filter: drop-shadow(0 0 .75rem rgba(164, 232, 255, .4));
-  height: clamp(6.5rem, 10vw, 8rem);
+  height: clamp(7rem, 9vw, 11rem);
   object-fit: contain;
-  width: clamp(6.5rem, 10vw, 8rem);
+  width: clamp(7rem, 9vw, 11rem);
 }
 
 .entry-form {
@@ -357,8 +357,8 @@
   }
 
   .brand img {
-    height: 5.5rem;
-    width: 5.5rem;
+    height: 6rem;
+    width: 6rem;
   }
 
   .entry-field {
