@@ -144,7 +144,7 @@
   font-weight: 700;
   gap: .35rem;
   letter-spacing: .24em;
-  margin: 0 auto 1.1rem;
+  margin: 0 auto 1.35rem;
   text-shadow: 0 1px 8px #06101c, 0 0 16px #06101c;
   text-decoration: none;
 }
@@ -155,9 +155,9 @@
 
 .brand img {
   filter: drop-shadow(0 0 .75rem rgba(164, 232, 255, .4));
-  height: clamp(4.5rem, 8vw, 6rem);
+  height: clamp(6.5rem, 10vw, 8rem);
   object-fit: contain;
-  width: clamp(4.5rem, 8vw, 6rem);
+  width: clamp(6.5rem, 10vw, 8rem);
 }
 
 .entry-form {
@@ -274,28 +274,41 @@
 }
 
 .gate-footer {
-  align-items: center;
-  color: rgba(228, 237, 246, .55);
   display: flex;
-  flex-direction: column;
-  font-size: .68rem;
-  gap: .22rem;
+  justify-content: center;
   left: 0;
-  letter-spacing: .04em;
   position: absolute;
   right: 0;
-  text-align: center;
-  bottom: 1rem;
+  bottom: clamp(.75rem, 2.5vh, 1.5rem);
+  padding: 0 1rem;
 }
 
-.gate-footer a {
-  color: rgba(193, 230, 248, .78);
-  text-decoration-color: rgba(193, 230, 248, .35);
+.creator-card {
+  align-items: center;
+  backdrop-filter: blur(12px);
+  background: linear-gradient(135deg, rgba(5, 14, 23, .76), rgba(12, 27, 40, .62));
+  border: 1px solid rgba(190, 227, 248, .25);
+  border-radius: .8rem;
+  box-shadow: 0 .5rem 1.8rem rgba(0, 0, 0, .24), inset 0 1px rgba(255, 255, 255, .06);
+  color: rgba(239, 247, 255, .86);
+  display: flex;
+  flex-direction: column;
+  font-size: .75rem;
+  gap: .28rem;
+  letter-spacing: .035em;
+  max-width: min(100%, 28rem);
+  padding: .8rem 1.35rem;
+  text-align: center;
+}
+
+.creator-card a {
+  color: #c1e6f8;
+  text-decoration-color: rgba(193, 230, 248, .58);
   text-underline-offset: .18em;
 }
 
-.gate-footer a:hover,
-.gate-footer a:focus-visible {
+.creator-card a:hover,
+.creator-card a:focus-visible {
   color: #e8f8ff;
 }
 
@@ -350,12 +363,12 @@
   .brand {
     font-size: .82rem;
     gap: .2rem;
-    margin-bottom: .75rem;
+    margin-bottom: .9rem;
   }
 
   .brand img {
-    height: 4.25rem;
-    width: 4.25rem;
+    height: 5.5rem;
+    width: 5.5rem;
   }
 
   .entry-field {
@@ -368,10 +381,14 @@
   }
 
   .gate-footer {
-    bottom: .4rem;
-    font-size: .58rem;
-    gap: .12rem;
-    padding: 0 .5rem;
+    bottom: .55rem;
+    padding: 0 .65rem;
+  }
+
+  .creator-card {
+    font-size: .62rem;
+    gap: .18rem;
+    padding: .58rem .85rem;
   }
 }
 
