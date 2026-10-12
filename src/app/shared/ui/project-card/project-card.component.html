@@ -1,4 +1,9 @@
-<article class="project-card surface-panel" [class.horizontal]="viewMode() !== 'big'">
+<article
+  class="project-card surface-panel"
+  [class.horizontal]="viewMode() !== 'big'"
+  [class.list-card]="viewMode() === 'list'"
+  [class.detailed-card]="viewMode() === 'detailed'"
+>
   <a [routerLink]="project().route" class="cover" [attr.aria-label]="project().titleKey | translate">
     <img [src]="project().image" [alt]="project().titleKey | translate" loading="eager" decoding="async" />
   </a>
@@ -7,23 +12,23 @@
     <header class="project-title-block">
       <div class="project-meta-row">
         <p class="category">{{ project().categoryKey | translate }}</p>
-        <app-project-status-badge [difficulty]="project().difficulty" />
+        @if (viewMode() !== 'detailed') {
+          <app-project-status-badge [difficulty]="project().difficulty" />
+        }
       </div>
       <h3>{{ project().titleKey | translate }}</h3>
     </header>
 
-    @if (viewMode() !== 'list') {
-      <div class="summary-block">
-        <p class="summary">{{ translatedSummary() }}</p>
-        <div class="summary-more-slot">
-          @if (hasLongSummary()) {
-            <button type="button" class="summary-more" (click)="openSummary()">
-              {{ 'PROJECT.SHOW_MORE' | translate }}
-            </button>
-          }
-        </div>
+    <div class="summary-block">
+      <p class="summary">{{ translatedSummary() }}</p>
+      <div class="summary-more-slot">
+        @if (hasLongSummary() && viewMode() !== 'list') {
+          <button type="button" class="summary-more" (click)="openSummary()">
+            {{ 'PROJECT.SHOW_MORE' | translate }}
+          </button>
+        }
       </div>
-    }
+    </div>
 
     @if (viewMode() === 'detailed') {
       <dl class="project-meta">
